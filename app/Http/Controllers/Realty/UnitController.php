@@ -64,6 +64,7 @@ class UnitController extends Controller
             'price' => ['nullable', 'numeric', 'min:0'],
             'status' => ['nullable', 'in:available,reserved,sold'],
             'notes' => ['nullable', 'string', 'max:2000'],
+            'buyer_notes' => ['nullable', 'string', 'max:1000'],
             'floor_plan' => ['nullable', 'image', 'max:6144'],
         ]);
     }

@@ -125,7 +125,7 @@ class Offer extends Model
                 'floor' => $unit->floor,
                 'area_sqm' => $unit->area_sqm !== null ? (float) $unit->area_sqm : null,
                 'floor_plan_url' => $unit->floor_plan_url,
-                'notes' => $unit->notes,
+                'highlights' => $unit->buyer_notes,
             ],
             'model' => $model ? ['name' => $model->name, 'specs' => $model->specs, 'images' => $model->images] : null,
             'agent' => $this->agent ? ['name' => $this->agent->name, 'email' => $this->agent->email] : null,
