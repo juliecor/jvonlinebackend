@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
 #[Fillable(['realty_id', 'project_id', 'name', 'unit_type', 'category', 'floor', 'area_sqm', 'price', 'status', 'floor_plan_path', 'notes'])]
@@ -37,6 +38,11 @@ class Unit extends Model
     protected function floorPlanUrl(): Attribute
     {
         return Attribute::get(fn () => self::publicUrl($this->floor_plan_path));
+    }
+
+    public function offers(): HasMany
+    {
+        return $this->hasMany(Offer::class);
     }
 
     public function project(): BelongsTo

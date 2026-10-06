@@ -66,8 +66,10 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/projects/{project}', [ProjectController::class, 'update']); // POST, not PATCH: multipart cover upload
             Route::post('/projects/{project}/units', [UnitController::class, 'store']);
             Route::post('/units/{unit}', [UnitController::class, 'update']);
+            Route::delete('/units/{unit}', [UnitController::class, 'destroy']);
             Route::post('/projects/{project}/plans', [PaymentPlanController::class, 'store']);
             Route::post('/plans/{plan}', [PaymentPlanController::class, 'update']);
+            Route::delete('/plans/{plan}', [PaymentPlanController::class, 'destroy']);
         });
     });
 });

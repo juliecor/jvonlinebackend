@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Unit;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /** Units inside a project — what is actually for sale. Staff only. */
 class UnitController extends Controller
@@ -34,6 +35,22 @@ class UnitController extends Controller
         $unit->update($data);
 
         return response()->json($unit->fresh());
+    }
+
+    /** Units with offers can't be deleted (the offers point at them) — mark them sold instead. */
+    public function destroy(Request $request, Unit $unit): JsonResponse
+    {
+        abort_unless($unit->realty_id === $request->user()->realty_id, 404);
+        $offers = $unit->offers()->count();
+        if ($offers > 0) {
+            return response()->json(['message' => "This unit has {$offers} offer".($offers === 1 ? '' : 's')." and can't be deleted. Mark it sold or reserved instead."], 409);
+        }
+        if ($unit->floor_plan_path && ! str_starts_with($unit->floor_plan_path, '/') && ! str_starts_with($unit->floor_plan_path, 'http')) {
+            Storage::disk(config('filesystems.uploads'))->delete($unit->floor_plan_path);
+        }
+        $unit->delete();
+
+        return response()->json(['deleted' => $unit->id]);
     }
 
     private function validated(Request $request): array

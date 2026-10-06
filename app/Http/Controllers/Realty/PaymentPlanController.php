@@ -28,6 +28,15 @@ class PaymentPlanController extends Controller
         return response()->json($plan->fresh());
     }
 
+    /** Existing offers keep their own copy of the schedule, so a plan can always go. */
+    public function destroy(Request $request, PaymentPlan $plan): JsonResponse
+    {
+        abort_unless($plan->realty_id === $request->user()->realty_id, 404);
+        $plan->delete();
+
+        return response()->json(['deleted' => $plan->id]);
+    }
+
     private function validated(Request $request): array
     {
         $data = $request->validate([
