@@ -56,6 +56,8 @@ class ProjectController extends Controller
         return $request->validate([
             'name' => ['required', 'string', 'max:150'],
             'location' => ['nullable', 'string', 'max:200'],
+            'lat' => ['nullable', 'numeric', 'between:-90,90'],
+            'lng' => ['nullable', 'numeric', 'between:-180,180'],
             'description' => ['nullable', 'string', 'max:3000'],
             'fee_notes' => ['nullable', 'string', 'max:2000'],
             'completion_date' => ['nullable', 'date'],

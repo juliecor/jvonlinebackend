@@ -19,7 +19,9 @@
         "notes": "64.85 sqm usable floor area, 3 bedrooms, 2 T&B, 2 floors, 2 parking. No price published online; ask Johndorf for the current price list."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/arvesa-village/"
+    "official_url": "https://sitedev.johndorfventures.com/project/arvesa-village/",
+    "lat": null,
+    "lng": null
   },
   {
     "name": "Astana Davao",
@@ -41,7 +43,9 @@
         "notes": "48 sqm usable floor area, 3* bedrooms, 1 T&B, 2 floors, 1 parking. Listed ₱3.3M–₱4.5M (davaohomes.ph)."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/astana-davao/"
+    "official_url": "https://sitedev.johndorfventures.com/project/astana-davao/",
+    "lat": 7.074495,
+    "lng": 125.569115
   },
   {
     "name": "Coral Village",
@@ -63,7 +67,9 @@
         "notes": "76 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. Middle unit about ₱3,068,800, end unit about ₱3,589,600 (ceburealhomes.com)."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/coral-village/"
+    "official_url": "https://sitedev.johndorfventures.com/project/coral-village/",
+    "lat": 10.267427,
+    "lng": 123.97309
   },
   {
     "name": "Evissa Davao",
@@ -85,7 +91,9 @@
         "notes": "63 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. 391 two-storey townhouses launched at ₱1.4M–₱1.7M (SunStar); ₱1.4M selling price (realestateindavao.com)."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/evissa-davao/"
+    "official_url": "https://sitedev.johndorfventures.com/project/evissa-davao/",
+    "lat": null,
+    "lng": null
   },
   {
     "name": "Evissa Lapu-Lapu",
@@ -107,7 +115,9 @@
         "notes": "61 sqm usable floor area, 3* bedrooms, 1 T&B, 2 floors, 1 parking. Sold out. Initial units were ₱1.8M–₱1.86M (irealtee.com); 391 townhouses launched at ₱1.4M–₱1.7M (SunStar)."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/evissa-lapu-lapu/"
+    "official_url": "https://sitedev.johndorfventures.com/project/evissa-lapu-lapu/",
+    "lat": 10.2819414,
+    "lng": 123.939206
   },
   {
     "name": "Mimosa Cebu",
@@ -129,7 +139,9 @@
         "notes": "64 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/mimosa-cebu/"
+    "official_url": "https://sitedev.johndorfventures.com/project/mimosa-cebu/",
+    "lat": 10.30341,
+    "lng": 123.8816254
   },
   {
     "name": "Mimosa Minglanilla",
@@ -151,7 +163,9 @@
         "notes": "85 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. Listed at ₱3,434,000 (inner unit) and ₱4,518,080 (filipinohomes.com / cebuhomesfinder.com); launched at ₱3.8M (Philstar, 2018)."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/mimosa-minglanilla/"
+    "official_url": "https://sitedev.johndorfventures.com/project/mimosa-minglanilla/",
+    "lat": null,
+    "lng": null
   },
   {
     "name": "Montierra",
@@ -193,7 +207,9 @@
         "notes": "64 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/montierra/"
+    "official_url": "https://sitedev.johndorfventures.com/project/montierra/",
+    "lat": 8.4292355,
+    "lng": 124.6203083
   },
   {
     "name": "Navona Court",
@@ -215,7 +231,9 @@
         "notes": "58.49 sqm usable floor area, 3 bedrooms, 2 T&B, 2 floors, 1 parking. Listed at ₱3,775,000 total contract price (cdorealty.com); other listings ₱3.53M–₱3.60M (onepropertee.com)."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/navona-court/"
+    "official_url": "https://sitedev.johndorfventures.com/project/navona-court/",
+    "lat": 8.3987303,
+    "lng": 124.6102897
   },
   {
     "name": "Navona Davao",
@@ -237,7 +255,9 @@
         "notes": "63 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. Listed from ₱2,300,000 (lionunion.com)."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/navona-davao/"
+    "official_url": "https://sitedev.johndorfventures.com/project/navona-davao/",
+    "lat": 7.074685,
+    "lng": 125.569736
   },
   {
     "name": "Navona Lumbia",
@@ -259,7 +279,9 @@
         "notes": "63 sqm usable floor area, 3 bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/navona-lumbia/"
+    "official_url": "https://sitedev.johndorfventures.com/project/navona-lumbia/",
+    "lat": 8.3973495,
+    "lng": 124.6099222
   },
   {
     "name": "Pich 4B",
@@ -281,7 +303,9 @@
         "notes": "38 sqm usable floor area, 2 bedrooms, 1 T&B, 1 floor, 1 parking. No price published online; ask Johndorf for the current price list."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/pich-4b/"
+    "official_url": "https://sitedev.johndorfventures.com/project/pich-4b/",
+    "lat": 8.489345,
+    "lng": 124.570182
   },
   {
     "name": "Plumera Mactan",
@@ -313,7 +337,9 @@
         "notes": "36 sqm usable floor area, 1 bedroom, 1 T&B. 1-bedroom units listed from ₱4.4M to ₱5.2M depending on building (myhouse.ph, 2026 update)."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/plumera/"
+    "official_url": "https://sitedev.johndorfventures.com/project/plumera/",
+    "lat": 10.2959595,
+    "lng": 123.97544
   },
   {
     "name": "TierraNava Carcar",
@@ -335,7 +361,9 @@
         "notes": "54 sqm usable floor area, 2* bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-carcar/"
+    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-carcar/",
+    "lat": null,
+    "lng": null
   },
   {
     "name": "TierraNava Lumbia",
@@ -357,7 +385,9 @@
         "notes": "36 sqm usable floor area, 2* bedrooms, 1 T&B, 2 floors, 1 parking. Listed at ₱1,900,000 (highlandsrealtyph.com); a 2021 promo quoted ₱1.4M TCP with ₱10,000 reservation."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-lumbia/"
+    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-lumbia/",
+    "lat": null,
+    "lng": null
   },
   {
     "name": "TierraNava Opol",
@@ -379,7 +409,9 @@
         "notes": "36 sqm usable floor area, 2 bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-opol/"
+    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-opol/",
+    "lat": null,
+    "lng": null
   },
   {
     "name": "TierraNava Tagoloan",
@@ -401,7 +433,9 @@
         "notes": "36 sqm usable floor area, 2 bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-tagoloan/"
+    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-tagoloan/",
+    "lat": null,
+    "lng": null
   },
   {
     "name": "Villa Castena",
@@ -433,6 +467,8 @@
         "notes": "29 sqm usable floor area, 2 bedrooms, 1 T&B, 1 floor, 1 parking. Listings from ₱1.5M (lionunion.com); no exact price published."
       }
     ],
-    "official_url": "https://sitedev.johndorfventures.com/project/villa-castena/"
+    "official_url": "https://sitedev.johndorfventures.com/project/villa-castena/",
+    "lat": 8.299862,
+    "lng": 124.260761
   }
 ]

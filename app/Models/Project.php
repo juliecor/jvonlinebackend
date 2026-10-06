@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['realty_id', 'name', 'location', 'description', 'cover_path', 'fee_notes', 'completion_date', 'status'])]
+#[Fillable(['realty_id', 'name', 'location', 'lat', 'lng', 'description', 'cover_path', 'fee_notes', 'completion_date', 'status'])]
 class Project extends Model
 {
     protected $appends = ['cover_url'];
 
     protected function casts(): array
     {
-        return ['completion_date' => 'date:Y-m-d'];
+        return ['completion_date' => 'date:Y-m-d', 'lat' => 'float', 'lng' => 'float'];
     }
 
 

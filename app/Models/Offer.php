@@ -97,7 +97,7 @@ class Offer extends Model
             'fee_notes' => $this->fee_notes,
             'created_at' => $this->created_at,
             'realty' => $this->realty->publicArray() + ['phone' => $this->realty->phone, 'email' => $this->realty->email, 'address' => $this->realty->address],
-            'project' => ['name' => $this->project->name, 'location' => $this->project->location, 'description' => $this->project->description, 'cover_url' => $this->project->cover_url, 'completion_date' => $this->project->completion_date?->toDateString()],
+            'project' => ['name' => $this->project->name, 'location' => $this->project->location, 'lat' => $this->project->lat, 'lng' => $this->project->lng, 'description' => $this->project->description, 'cover_url' => $this->project->cover_url, 'completion_date' => $this->project->completion_date?->toDateString()],
             'unit' => ['name' => $this->unit->name, 'unit_type' => $this->unit->unit_type, 'category' => $this->unit->category, 'floor' => $this->unit->floor, 'area_sqm' => $this->unit->area_sqm !== null ? (float) $this->unit->area_sqm : null, 'floor_plan_url' => $this->unit->floor_plan_url, 'notes' => $this->unit->notes],
             'agent' => $this->agent ? ['name' => $this->agent->name, 'email' => $this->agent->email] : null,
         ];

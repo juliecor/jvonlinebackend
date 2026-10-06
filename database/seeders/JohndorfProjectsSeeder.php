@@ -32,6 +32,8 @@ class JohndorfProjectsSeeder extends Seeder
                 ['realty_id' => $realty->id, 'name' => $row['name']],
                 [
                     'location' => $row['location'],
+                    'lat' => $row['lat'] ?? null,
+                    'lng' => $row['lng'] ?? null,
                     'description' => $row['description'],
                     'cover_path' => $row['cover_path'],
                     'fee_notes' => $row['fee_notes'],
