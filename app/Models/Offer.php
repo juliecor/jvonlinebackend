@@ -86,6 +86,12 @@ class Offer extends Model
     public function publicArray(): array
     {
         $this->loadMissing(['realty', 'project', 'unit', 'agent']);
+        $project = $this->project;
+        $unit = $this->unit;
+        // The model on the project's public page that this unit is (renders + spec sheet), if there is one.
+        $model = UnitType::where('project_id', $project->id)
+            ->whereIn('name', array_values(array_filter([$unit->unit_type, $unit->name])))
+            ->first();
 
         return [
             'code' => $this->code,
@@ -97,8 +103,31 @@ class Offer extends Model
             'fee_notes' => $this->fee_notes,
             'created_at' => $this->created_at,
             'realty' => $this->realty->publicArray() + ['phone' => $this->realty->phone, 'email' => $this->realty->email, 'address' => $this->realty->address],
-            'project' => ['name' => $this->project->name, 'location' => $this->project->location, 'lat' => $this->project->lat, 'lng' => $this->project->lng, 'description' => $this->project->description, 'cover_url' => $this->project->cover_url, 'completion_date' => $this->project->completion_date?->toDateString()],
-            'unit' => ['name' => $this->unit->name, 'unit_type' => $this->unit->unit_type, 'category' => $this->unit->category, 'floor' => $this->unit->floor, 'area_sqm' => $this->unit->area_sqm !== null ? (float) $this->unit->area_sqm : null, 'floor_plan_url' => $this->unit->floor_plan_url, 'notes' => $this->unit->notes],
+            'project' => [
+                'name' => $project->name,
+                'location' => $project->location,
+                'region' => $project->region,
+                'stage' => $project->stage,
+                'lat' => $project->lat,
+                'lng' => $project->lng,
+                'description' => $project->description,
+                'cover_url' => $project->cover_url,
+                'hero' => $project->hero_urls ?: array_values(array_filter([$project->cover_url])),
+                'site_plans' => $project->site_plan_urls,
+                'amenities' => $project->amenities ?? [],
+                'page_slug' => $project->is_public ? $project->slug : null,
+                'completion_date' => $project->completion_date?->toDateString(),
+            ],
+            'unit' => [
+                'name' => $unit->name,
+                'unit_type' => $unit->unit_type,
+                'category' => $unit->category,
+                'floor' => $unit->floor,
+                'area_sqm' => $unit->area_sqm !== null ? (float) $unit->area_sqm : null,
+                'floor_plan_url' => $unit->floor_plan_url,
+                'notes' => $unit->notes,
+            ],
+            'model' => $model ? ['name' => $model->name, 'specs' => $model->specs, 'images' => $model->images] : null,
             'agent' => $this->agent ? ['name' => $this->agent->name, 'email' => $this->agent->email] : null,
         ];
     }
