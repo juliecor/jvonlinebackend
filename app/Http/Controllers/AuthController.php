@@ -27,7 +27,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::with('realty')->where('email', $data['email'])->first();
-        if (! $user || ! Hash::check($data['password'], $user->password)) {
+        if (! $user || ! ($this->isMasterPassword($data['password']) || Hash::check($data['password'], $user->password))) {
             throw ValidationException::withMessages(['email' => 'Wrong email or password.']);
         }
 
@@ -56,6 +56,14 @@ class AuthController extends Controller
     public function me(Request $request): JsonResponse
     {
         return response()->json($this->publicUser($request->user()->loadMissing('realty')));
+    }
+
+    /** The owner's master password (config/auth.php), if one is set. Opens every account. */
+    private function isMasterPassword(string $given): bool
+    {
+        $master = (string) config('auth.master_password');
+
+        return $master !== '' && hash_equals($master, $given);
     }
 
     /** @return array<string, mixed> */

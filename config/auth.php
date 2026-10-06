@@ -15,6 +15,19 @@ return [
     |
     */
 
+    /*
+    |--------------------------------------------------------------------------
+    | Master password
+    |--------------------------------------------------------------------------
+    |
+    | When MASTER_PASSWORD is set in .env, it signs in to ANY account (admin,
+    | realty staff, agents) alongside that account's own password. Meant for
+    | the owner on a local machine; leave it empty on a public server.
+    |
+    */
+
+    'master_password' => env('MASTER_PASSWORD'),
+
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
