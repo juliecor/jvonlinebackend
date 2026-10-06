@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\EnsureAdmin;
 use App\Http\Middleware\EnsureRealtyMember;
+use App\Http\Middleware\TrustFrontendClientIp;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->prepend(TrustFrontendClientIp::class);
         $middleware->alias([
             'admin' => EnsureAdmin::class,
             'realty.member' => EnsureRealtyMember::class,

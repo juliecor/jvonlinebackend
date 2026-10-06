@@ -6,6 +6,7 @@ use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 /** One unit + one payment plan, prepared by an agent for one buyer. The code is the public link. */
@@ -14,7 +15,7 @@ class Offer extends Model
 {
     protected function casts(): array
     {
-        return ['purchase_date' => 'date:Y-m-d', 'price' => 'decimal:2', 'schedule' => 'array'];
+        return ['purchase_date' => 'date:Y-m-d', 'price' => 'decimal:2', 'schedule' => 'array', 'first_viewed_at' => 'datetime', 'last_viewed_at' => 'datetime'];
     }
 
     public function realty(): BelongsTo
@@ -35,6 +36,11 @@ class Offer extends Model
     public function paymentPlan(): BelongsTo
     {
         return $this->belongsTo(PaymentPlan::class);
+    }
+
+    public function responses(): HasMany
+    {
+        return $this->hasMany(OfferResponse::class);
     }
 
     public function agent(): BelongsTo

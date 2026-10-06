@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
+use App\Models\OfferResponse;
 use App\Models\Project;
 use App\Models\Realty;
 use App\Models\Unit;
@@ -31,6 +32,10 @@ class StatsController extends Controller
             ->concat(Offer::with(['realty', 'agent', 'unit'])->latest()->take(15)->get()->map(fn (Offer $o) => [
                 'kind' => 'offer_created', 'at' => $o->created_at, 'realty' => $o->realty?->name, 'realty_id' => $o->realty_id, 'text' => ($o->agent?->name ?? 'Someone')." sent {$o->buyer_name} an offer for ".($o->unit?->name ?? 'a unit').' ('.($o->realty?->name ?? '').')', 'code' => $o->code,
             ]))
+            ->concat(OfferResponse::with(['offer.unit', 'offer.realty'])->latest()->take(15)->get()->map(fn ($r) => [
+                'kind' => 'offer_response', 'at' => $r->created_at, 'realty' => $r->offer?->realty?->name, 'realty_id' => $r->realty_id,
+                'text' => "{$r->name}: ".(OfferResponse::LABELS[$r->kind] ?? $r->kind).' — '.($r->offer?->unit?->name ?? 'a unit').' ('.($r->offer?->realty?->name ?? '').')', 'code' => $r->offer?->code,
+            ]))
             ->sortByDesc('at')
             ->take(20)
             ->values();
@@ -46,6 +51,7 @@ class StatsController extends Controller
             'offers_active' => Offer::where('status', 'active')->count(),
             'offers_total' => Offer::count(),
             'offer_views' => (int) Offer::sum('views'),
+            'offer_responses' => OfferResponse::count(),
             'recent' => $recent,
         ]);
     }

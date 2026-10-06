@@ -57,6 +57,9 @@ return [
     // The Next.js site — where emailed links point.
     'frontend_url' => env('FRONTEND_URL', 'http://localhost:3000'),
 
+    // Shared with the Next.js server (API_INTERNAL_KEY there) so it may pass on the visitor's IP.
+    'internal_key' => env('INTERNAL_API_KEY', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

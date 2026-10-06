@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
+use App\Models\OfferResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class OfferController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $offers = Offer::with(['realty:id,name,slug', 'project:id,name', 'unit:id,name,unit_type', 'agent:id,name'])
+        $offers = Offer::with(['realty:id,name,slug', 'project:id,name', 'unit:id,name,unit_type', 'agent:id,name', 'responses'])
             ->when($request->integer('realty_id'), fn ($q, $id) => $q->where('realty_id', $id))
             ->latest()
             ->take(200)
@@ -31,6 +32,8 @@ class OfferController extends Controller
                 'unit' => $o->unit ? trim($o->unit->name.' · '.($o->unit->unit_type ?? ''), ' ·') : null,
                 'agent' => $o->agent?->name,
                 'url' => Offer::url($o->code),
+                'responses_count' => $o->responses->count(),
+                'latest_response' => ($r = $o->responses->sortByDesc('created_at')->first()) ? ['kind' => $r->kind, 'label' => OfferResponse::LABELS[$r->kind] ?? $r->kind] : null,
             ]);
 
         return response()->json($offers);

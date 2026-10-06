@@ -27,11 +27,12 @@ Route::get('/realties', [PublicRealtyController::class, 'index']);
 Route::get('/realties/{slug}', [PublicRealtyController::class, 'show']);
 Route::get('/realties/{slug}/projects', [PublicRealtyController::class, 'projects']);
 Route::get('/realties/{slug}/projects/{projectSlug}', [PublicRealtyController::class, 'project']);
-Route::get('/offers/{code}', [PublicOfferController::class, 'show'])->middleware('throttle:60,1');
-Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:10,1');
+Route::get('/offers/{code}', [PublicOfferController::class, 'show'])->middleware('throttle:offer-view');
+Route::post('/offers/{code}/respond', [PublicOfferController::class, 'respond'])->middleware('throttle:offer-respond');
+Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
 
 // Invite links (the token is the credential)
-Route::middleware('throttle:20,1')->group(function () {
+Route::middleware('throttle:invite-link')->group(function () {
     Route::get('/register/{token}', [RegistrationController::class, 'show']);
     Route::post('/register/{token}', [RegistrationController::class, 'store']);
     Route::get('/join/{token}', [AgentJoinController::class, 'show']);
@@ -60,6 +61,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/projects', [ProjectController::class, 'index']);
             Route::get('/projects/{project}', [ProjectController::class, 'show']);
             Route::get('/offers', [OfferController::class, 'index']);
+            Route::get('/offers/responses', [OfferController::class, 'responses']);
+            Route::get('/offers/{id}', [OfferController::class, 'show'])->whereNumber('id');
             Route::post('/offers', [OfferController::class, 'store']);
             Route::post('/offers/{offer}/void', [OfferController::class, 'void']);
         });

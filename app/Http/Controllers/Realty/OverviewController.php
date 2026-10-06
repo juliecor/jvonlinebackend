@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Realty;
 
 use App\Http\Controllers\Controller;
+use App\Models\OfferResponse;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ class OverviewController extends Controller
                 'staff' => $realty->users()->where('role', User::ROLE_REALTY)->count(),
                 'projects' => $realty->projects()->count(),
                 'public_projects' => $realty->projects()->where('is_public', true)->count(),
+                'new_responses' => OfferResponse::where('realty_id', $realty->id)->whereNull('seen_at')
+                    ->when($user->role === User::ROLE_AGENT, fn ($q) => $q->whereHas('offer', fn ($o) => $o->where('agent_id', $user->id)))->count(),
                 'units' => $realty->projects()->withCount('units')->get()->sum('units_count'),
                 // Agents see their own offers; staff the whole realty's.
                 'offers' => $realty->offers()->where('status', 'active')->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id))->count(),

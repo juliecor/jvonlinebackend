@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Realty;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
+use App\Models\OfferResponse;
 use App\Models\PaymentPlan;
 use App\Models\Unit;
 use App\Models\User;
@@ -17,28 +18,85 @@ class OfferController extends Controller
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();
-        $offers = Offer::with(['project:id,name', 'unit:id,name,unit_type', 'agent:id,name'])
-            ->where('realty_id', $user->realty_id)
-            ->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id))
+        $offers = $this->visible($request)
+            ->with(['project:id,name', 'unit:id,name,unit_type', 'agent:id,name', 'responses'])
             ->latest()
             ->get()
-            ->map(fn (Offer $o) => [
-                'id' => $o->id,
-                'code' => $o->code,
-                'status' => $o->status,
-                'buyer_name' => $o->buyer_name,
-                'buyer_email' => $o->buyer_email,
-                'purchase_date' => $o->purchase_date?->toDateString(),
-                'price' => (float) $o->price,
-                'views' => $o->views,
-                'created_at' => $o->created_at,
-                'project' => $o->project?->name,
-                'unit' => $o->unit ? trim($o->unit->name.' · '.($o->unit->unit_type ?? ''), ' ·') : null,
-                'agent' => $o->agent?->name,
-                'url' => Offer::url($o->code),
-            ]);
+            ->map(fn (Offer $o) => $this->row($o));
 
         return response()->json($offers);
+    }
+
+    /** One offer with everything the agent needs to follow up. Opening it marks its responses as seen. */
+    public function show(Request $request, int $id): JsonResponse
+    {
+        $offer = $this->visible($request)->with(['project', 'unit', 'agent:id,name,email', 'responses'])->findOrFail($id);
+        $leads = $offer->responses->sortByDesc('created_at')->values()->map(fn (OfferResponse $r) => $r->toLead());
+        $offer->responses()->whereNull('seen_at')->update(['seen_at' => now()]);
+
+        return response()->json($this->row($offer) + [
+            'schedule' => $offer->schedule,
+            'fee_notes' => $offer->fee_notes,
+            'first_viewed_at' => $offer->first_viewed_at,
+            'last_viewed_at' => $offer->last_viewed_at,
+            'unit_detail' => ['name' => $offer->unit?->name, 'unit_type' => $offer->unit?->unit_type, 'area_sqm' => $offer->unit?->area_sqm !== null ? (float) $offer->unit->area_sqm : null, 'status' => $offer->unit?->status],
+            'responses' => $leads,
+        ]);
+    }
+
+    /** Newest buyer responses across the offers this person can see (Overview panel). */
+    public function responses(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $rows = OfferResponse::with(['offer:id,code,buyer_name,unit_id,project_id,agent_id', 'offer.unit:id,name', 'offer.project:id,name'])
+            ->where('realty_id', $user->realty_id)
+            ->when($user->role === User::ROLE_AGENT, fn ($q) => $q->whereHas('offer', fn ($o) => $o->where('agent_id', $user->id)))
+            ->latest()
+            ->take(min(max($request->integer('limit', 8), 1), 50))
+            ->get()
+            ->map(fn (OfferResponse $r) => $r->toLead() + [
+                'offer_id' => $r->offer_id,
+                'offer_code' => $r->offer?->code,
+                'unit' => $r->offer?->unit?->name,
+                'project' => $r->offer?->project?->name,
+            ]);
+
+        return response()->json($rows);
+    }
+
+    /** Offers this user may see: their own for agents, the realty's for staff. */
+    private function visible(Request $request)
+    {
+        $user = $request->user();
+
+        return Offer::where('realty_id', $user->realty_id)
+            ->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id));
+    }
+
+    private function row(Offer $o): array
+    {
+        $latest = $o->responses->sortByDesc('created_at')->first();
+
+        return [
+            'id' => $o->id,
+            'code' => $o->code,
+            'status' => $o->status,
+            'buyer_name' => $o->buyer_name,
+            'buyer_email' => $o->buyer_email,
+            'purchase_date' => $o->purchase_date?->toDateString(),
+            'price' => (float) $o->price,
+            'views' => $o->views,
+            'created_at' => $o->created_at,
+            'project' => $o->project?->name,
+            'unit' => $o->unit ? trim($o->unit->name.' · '.($o->unit->unit_type ?? ''), ' ·') : null,
+            'agent' => $o->agent?->name,
+            'url' => Offer::url($o->code),
+            'first_viewed_at' => $o->first_viewed_at,
+            'last_viewed_at' => $o->last_viewed_at,
+            'responses_count' => $o->responses->count(),
+            'new_responses' => $o->responses->whereNull('seen_at')->count(),
+            'latest_response' => $latest ? ['kind' => $latest->kind, 'label' => OfferResponse::LABELS[$latest->kind] ?? $latest->kind, 'at' => $latest->created_at] : null,
+        ];
     }
 
     public function store(Request $request): JsonResponse
