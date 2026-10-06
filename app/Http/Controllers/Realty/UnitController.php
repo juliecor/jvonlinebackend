@@ -18,7 +18,7 @@ class UnitController extends Controller
         $data['realty_id'] = $project->realty_id;
         $data['project_id'] = $project->id;
         if ($request->hasFile('floor_plan')) {
-            $data['floor_plan_path'] = $request->file('floor_plan')->store('floor-plans', 'public');
+            $data['floor_plan_path'] = $request->file('floor_plan')->store('floor-plans', config('filesystems.uploads'));
         }
 
         return response()->json(Unit::create($data), 201);
@@ -29,7 +29,7 @@ class UnitController extends Controller
         abort_unless($unit->realty_id === $request->user()->realty_id, 404);
         $data = $this->validated($request);
         if ($request->hasFile('floor_plan')) {
-            $data['floor_plan_path'] = $request->file('floor_plan')->store('floor-plans', 'public');
+            $data['floor_plan_path'] = $request->file('floor_plan')->store('floor-plans', config('filesystems.uploads'));
         }
         $unit->update($data);
 

@@ -43,7 +43,7 @@ class RegistrationController extends Controller
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
-        $logoPath = $request->hasFile('logo') ? $request->file('logo')->store('logos', 'public') : null;
+        $logoPath = $request->hasFile('logo') ? $request->file('logo')->store('logos', config('filesystems.uploads')) : null;
 
         $user = DB::transaction(function () use ($data, $realty, $invitation, $logoPath) {
             $realty->update([

@@ -20,7 +20,7 @@ class Project extends Model
     }
 
 
-    /** Uploads live on the public disk; a path starting with "/" or "http" (images shipped with the frontend) is used as-is. */
+    /** Uploads live on the uploads disk (local or S3); a path starting with "/" or "http" (images shipped with the frontend) is used as-is. */
     public static function publicUrl(?string $path): ?string
     {
         if (! $path) {
@@ -30,7 +30,7 @@ class Project extends Model
             return $path;
         }
 
-        return Storage::disk('public')->url($path);
+        return Storage::disk(config('filesystems.uploads'))->url($path);
     }
 
     protected function coverUrl(): Attribute

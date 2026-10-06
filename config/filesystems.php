@@ -15,6 +15,9 @@ return [
 
     'default' => env('FILESYSTEM_DISK', 'local'),
 
+    // Where dashboard uploads (logos, project photos, floor plans) go: 'public' locally, 's3' on the server.
+    'uploads' => env('UPLOADS_DISK', 'public'),
+
     /*
     |--------------------------------------------------------------------------
     | Filesystem Disks
@@ -56,7 +59,10 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            'throw' => false,
+            // Everything jvconline writes sits in one folder of the shared bucket, readable by anyone with the link.
+            'root' => env('AWS_ROOT', 'jvconline'),
+            'visibility' => 'public',
+            'throw' => true,
             'report' => false,
         ],
 

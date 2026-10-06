@@ -32,7 +32,7 @@ class ProjectController extends Controller
         $data = $this->validated($request);
         $data['realty_id'] = $request->user()->realty_id;
         if ($request->hasFile('cover')) {
-            $data['cover_path'] = $request->file('cover')->store('projects', 'public');
+            $data['cover_path'] = $request->file('cover')->store('projects', config('filesystems.uploads'));
         }
         $project = Project::create($data);
 
@@ -44,7 +44,7 @@ class ProjectController extends Controller
         $this->own($request, $project);
         $data = $this->validated($request);
         if ($request->hasFile('cover')) {
-            $data['cover_path'] = $request->file('cover')->store('projects', 'public');
+            $data['cover_path'] = $request->file('cover')->store('projects', config('filesystems.uploads'));
         }
         $project->update($data);
 

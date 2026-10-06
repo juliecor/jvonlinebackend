@@ -28,7 +28,7 @@ class Realty extends Model
     }
 
     /**
-     * Uploaded logos sit on the public disk; a path starting with "/" or "http"
+     * Uploaded logos sit on the uploads disk (local or S3); a path starting with "/" or "http"
      * is used as-is (Johndorf's logo ships with the frontend).
      */
     protected function logoUrl(): Attribute
@@ -42,7 +42,7 @@ class Realty extends Model
                 return $path;
             }
 
-            return Storage::disk('public')->url($path);
+            return Storage::disk(config('filesystems.uploads'))->url($path);
         });
     }
 
