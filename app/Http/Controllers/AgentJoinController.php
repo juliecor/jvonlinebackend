@@ -21,6 +21,9 @@ class AgentJoinController extends Controller
             'realty' => $invitation->realty->publicArray(),
             'name' => $invitation->name,
             'email' => $invitation->email,
+            // Shown on the join page so the agent knows who sent it and until when.
+            'invited_by' => $invitation->inviter?->name,
+            'expires_at' => $invitation->expires_at,
         ]);
     }
 
@@ -51,7 +54,7 @@ class AgentJoinController extends Controller
 
     private function usable(string $token): AgentInvitation
     {
-        $invitation = AgentInvitation::with('realty')->where('token_hash', hash('sha256', $token))->first();
+        $invitation = AgentInvitation::with(['realty', 'inviter:id,name'])->where('token_hash', hash('sha256', $token))->first();
         if (! $invitation) {
             abort(404, 'This invitation link is not valid.');
         }
