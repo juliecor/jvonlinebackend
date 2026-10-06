@@ -44,7 +44,7 @@ class UnitController extends Controller
             'category' => ['nullable', 'string', 'max:60'],
             'floor' => ['nullable', 'string', 'max:120'],
             'area_sqm' => ['nullable', 'numeric', 'min:0'],
-            'price' => ['required', 'numeric', 'min:0'],
+            'price' => ['nullable', 'numeric', 'min:0'],
             'status' => ['nullable', 'in:available,reserved,sold'],
             'notes' => ['nullable', 'string', 'max:2000'],
             'floor_plan' => ['nullable', 'image', 'max:6144'],

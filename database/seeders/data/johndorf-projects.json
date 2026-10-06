@@ -1,0 +1,438 @@
+[
+  {
+    "name": "Arvesa Village",
+    "slug": "arvesa-village",
+    "location": "Lumbia, Cagayan de Oro",
+    "description": "Arvesa Village by Johndorf Ventures Corporation in Lumbia, Cagayan de Oro. House models: Two-Storey Townhouse. Amenities: Power Distribution, Park, Concrete Roads, Guard House, Sewage with Lagoon, Clubhouse, Basketball Court, Perimeter Fence, Water System, Jogging Trail, Cistern Tank, CEPALCO Power, 24 Hour Security, Open Spaces, Street Lights, Commercial Area, Swimming Pool. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/arvesa.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 64.85,
+        "price": null,
+        "status": "available",
+        "notes": "64.85 sqm usable floor area, 3 bedrooms, 2 T&B, 2 floors, 2 parking. No price published online; ask Johndorf for the current price list."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/arvesa-village/"
+  },
+  {
+    "name": "Astana Davao",
+    "slug": "astana-davao",
+    "location": "Davao",
+    "description": "Astana Davao by Johndorf Ventures Corporation in Davao. House models: Two-Storey Townhouse. Amenities: Park and Playgrounds, 14-M Wide Entrance, Gate and Guardhouse, Clubhouse and Multi-Purpose Area, Basketball Court, Perimeter Fence. Johndorf published 4 construction updates (March 2023 to Jan 2024). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/projects/astana-davao/main.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 48,
+        "price": 3300000,
+        "status": "available",
+        "notes": "48 sqm usable floor area, 3* bedrooms, 1 T&B, 2 floors, 1 parking. Listed ₱3.3M–₱4.5M (davaohomes.ph)."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/astana-davao/"
+  },
+  {
+    "name": "Coral Village",
+    "slug": "coral-village",
+    "location": "Suba-Basbas, Lapu-Lapu City",
+    "description": "Coral Village by Johndorf Ventures Corporation in Suba-Basbas, Lapu-Lapu City. House models: Two-Storey Townhouse. Amenities: Underground Drainage and Sewer, Power Distribution, Park, Sewage Treatment Facility, Clubhouse, Basketball Court, Water System, Jogging Trail, Landscape Open Spaces. Johndorf published 3 construction updates (March 2023 to 2024). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/projects/coral-village/main.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 76,
+        "price": 3068800,
+        "status": "available",
+        "notes": "76 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. Middle unit about ₱3,068,800, end unit about ₱3,589,600 (ceburealhomes.com)."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/coral-village/"
+  },
+  {
+    "name": "Evissa Davao",
+    "slug": "evissa-davao",
+    "location": "Davao",
+    "description": "Evissa Davao by Johndorf Ventures Corporation in Davao. House models: Two-Storey Townhouse. Amenities: MECO Power, Park and Playgrounds, 14-M Wide Entrance, Gate and Guardhouse, Sewage Treatment Facility, Clubhouse and Multi-Purpose Area, Multi-Purpose Court, Perimeter Fence, Water Supply, Swimming Pool, Centralized Rainwater Catchment/Lagoon. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/projects/evissa-davao/main.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 63,
+        "price": 1400000,
+        "status": "available",
+        "notes": "63 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. 391 two-storey townhouses launched at ₱1.4M–₱1.7M (SunStar); ₱1.4M selling price (realestateindavao.com)."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/evissa-davao/"
+  },
+  {
+    "name": "Evissa Lapu-Lapu",
+    "slug": "evissa-lapu-lapu",
+    "location": "Lapu-Lapu City",
+    "description": "Evissa Lapu-Lapu by Johndorf Ventures Corporation in Lapu-Lapu City. House models: Two-Storey Townhouse. Amenities: Underground Drainage and Sewer, MECO Power, Pocket Park, Clubhouse and Multi-Purpose Area, Multi-Purpose Court, Perimeter Fence, Water System (MCWD), 24 Hour Security. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/projects/evissa-lapu-lapu/main.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "archived",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 61,
+        "price": 1850000,
+        "status": "sold",
+        "notes": "61 sqm usable floor area, 3* bedrooms, 1 T&B, 2 floors, 1 parking. Sold out. Initial units were ₱1.8M–₱1.86M (irealtee.com); 391 townhouses launched at ₱1.4M–₱1.7M (SunStar)."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/evissa-lapu-lapu/"
+  },
+  {
+    "name": "Mimosa Cebu",
+    "slug": "mimosa-cebu",
+    "location": "Labangon, Cebu City",
+    "description": "Mimosa Cebu by Johndorf Ventures Corporation in Labangon, Cebu City. House models: Two-Storey Townhouse. Amenities: VECO Power Distribution, Clubhouse and Multi-Purpose Area, Multi-Purpose Court, Perimeter Fence, Water System (MCWD), Overhead Water Tank, Sewage Treatment Plant/Lagoon. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/projects/mimosa-cebu/main.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 64,
+        "price": null,
+        "status": "available",
+        "notes": "64 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/mimosa-cebu/"
+  },
+  {
+    "name": "Mimosa Minglanilla",
+    "slug": "mimosa-minglanilla",
+    "location": "Minglanilla, Cebu",
+    "description": "Mimosa Minglanilla by Johndorf Ventures Corporation in Minglanilla, Cebu. House models: Two-Storey Townhouse. Amenities: Underground Drainage and Sewer, VECO Power, Parks and Playgrounds, Clubhouse and Multi-Purpose Area, Basketball Court, Perimeter Fence, Water System (MCWD), Swimming Pool, 10-M Wide Entrance, Gate and Guardhouse, Lagoon. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/projects/mimosa-minglanilla/main.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 85,
+        "price": 3434000,
+        "status": "available",
+        "notes": "85 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. Listed at ₱3,434,000 (inner unit) and ₱4,518,080 (filipinohomes.com / cebuhomesfinder.com); launched at ₱3.8M (Philstar, 2018)."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/mimosa-minglanilla/"
+  },
+  {
+    "name": "Montierra",
+    "slug": "montierra",
+    "location": "Cagayan de Oro",
+    "description": "Montierra by Johndorf Ventures Corporation in Cagayan de Oro. House models: Two-Storey Townhouse, Two-Storey Single Attached, Two-Storey Duplex. Amenities: Clubhouse and Multi-Purpose Hall, Gate and Guardhouse, Basketball Court, Parks and Playgrounds, Sewage Treatment Facility, Water System, CEPALCO Power Distribution, Swimming Pool, Jogging Trail, 24 Hour Security, 15-M Entrance, Perimeter Fence, Future Retail Area. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/montierra.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 64,
+        "price": 2800000,
+        "status": "available",
+        "notes": "64 sqm usable floor area, 3* bedrooms, 2 floors, 1 parking. Listed at ₱2,800,000 total contract price, ₱15,000 reservation, equity over 18–24 months (lionunion.com); other listings ₱2.4M–₱3.0M (dotproperty.com.ph)."
+      },
+      {
+        "name": "Two-Storey Single Attached",
+        "unit_type": "Two-Storey Single Attached",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 64,
+        "price": null,
+        "status": "available",
+        "notes": "64 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
+      },
+      {
+        "name": "Two-Storey Duplex",
+        "unit_type": "Two-Storey Duplex",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 64,
+        "price": null,
+        "status": "available",
+        "notes": "64 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/montierra/"
+  },
+  {
+    "name": "Navona Court",
+    "slug": "navona-court",
+    "location": "Lumbia, Cagayan de Oro",
+    "description": "Navona Court by Johndorf Ventures Corporation in Lumbia, Cagayan de Oro. House models: Two-Storey Townhouse. Amenities: Underground Drainage and Sewer, Power Distribution, Parks and Playgrounds, Concrete Road, Gate and Guardhouse, Lagoon, Sewage Treatment Facility, Clubhouse and Multi-Purpose Area, Basketball Court, Perimeter Fence, Cistern Tank, Water System, Open Spaces, Jogging Trail, Street Lights, Material Recovery Facility. Johndorf published 16 construction updates (2022 to June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/projects/navona-court/main.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 58.49,
+        "price": 3775000,
+        "status": "available",
+        "notes": "58.49 sqm usable floor area, 3 bedrooms, 2 T&B, 2 floors, 1 parking. Listed at ₱3,775,000 total contract price (cdorealty.com); other listings ₱3.53M–₱3.60M (onepropertee.com)."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/navona-court/"
+  },
+  {
+    "name": "Navona Davao",
+    "slug": "navona-davao",
+    "location": "Davao",
+    "description": "Navona Davao by Johndorf Ventures Corporation in Davao. House models: Two-Storey Townhouse. Amenities: MECO Power, Park and Playgrounds, 14-M Wide Entrance, Gate and Guardhouse, Sewage Treatment Facility, Clubhouse and Multi-Purpose Area, Multi-Purpose Court, Perimeter Fence, Water Supply, Swimming Pool, Centralized Rainwater Catchment/Lagoon. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/projects/navona-davao/main.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 63,
+        "price": 2300000,
+        "status": "available",
+        "notes": "63 sqm usable floor area, 3* bedrooms, 2 T&B, 2 floors, 1 parking. Listed from ₱2,300,000 (lionunion.com)."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/navona-davao/"
+  },
+  {
+    "name": "Navona Lumbia",
+    "slug": "navona-lumbia",
+    "location": "Lumbia, Cagayan de Oro",
+    "description": "Navona Lumbia by Johndorf Ventures Corporation in Lumbia, Cagayan de Oro. House models: Two-Storey Townhouse. Amenities: Power Distribution, Grand Clubhouse, Underground Drainage, Landscape Gate and Guardhouse, Basketball Court, Sewage Treatment Plant, Water System, Jogging Trail, Park. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/navona-lumbia.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 63,
+        "price": null,
+        "status": "available",
+        "notes": "63 sqm usable floor area, 3 bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/navona-lumbia/"
+  },
+  {
+    "name": "Pich 4B",
+    "slug": "pich-4b",
+    "location": "Opol, Misamis Oriental",
+    "description": "Pich 4B by Johndorf Ventures Corporation in Opol, Misamis Oriental. House models: Duplex. Amenities: Multi-Purpose Hall, Landscape Gate and Guardhouse, Multi-Purpose Play Court, Recreational Park. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/pich-4b.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Duplex",
+        "unit_type": "Duplex",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 38,
+        "price": null,
+        "status": "available",
+        "notes": "38 sqm usable floor area, 2 bedrooms, 1 T&B, 1 floor, 1 parking. No price published online; ask Johndorf for the current price list."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/pich-4b/"
+  },
+  {
+    "name": "Plumera Mactan",
+    "slug": "plumera",
+    "location": "Basak, Lapu-Lapu City",
+    "description": "Plumera Mactan by Johndorf Ventures Corporation in Basak, Lapu-Lapu City. House models: Studio Unit, 1BR Unit. Amenities: Underground Drainage and Sewer, MECO Power, Pocket Park, Wide Entrance, Gate and Guardhouse, Lagoon, Sewage Treatment Facility, Clubhouse and Multi-Purpose Area, Multi-Purpose Court, Perimeter Fence, Future Retail Area, Mailbox Area, Water System (MCWD), Swimming Pool, Jogging Trail, Fire Protection System, Material Recovery Facility. Johndorf published 21 construction updates (2023 to June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/plumera.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Studio Unit",
+        "unit_type": "Studio Unit",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 24,
+        "price": 2600000,
+        "status": "available",
+        "notes": "24 sqm usable floor area, 1 T&B. Studio units listed from ₱2.6M to ₱3.1M depending on building (myhouse.ph, 2026 update)."
+      },
+      {
+        "name": "1BR Unit",
+        "unit_type": "1BR Unit",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 36,
+        "price": 4400000,
+        "status": "available",
+        "notes": "36 sqm usable floor area, 1 bedroom, 1 T&B. 1-bedroom units listed from ₱4.4M to ₱5.2M depending on building (myhouse.ph, 2026 update)."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/plumera/"
+  },
+  {
+    "name": "TierraNava Carcar",
+    "slug": "tierranava-carcar",
+    "location": "Poblacion I, Carcar City",
+    "description": "TierraNava Carcar by Johndorf Ventures Corporation in Poblacion I, Carcar City. House models: Two-Storey Townhouse. Amenities: Underground Drainage, CEBECO, Clubhouse, Multi-Purpose Court, Perimeter Fence, Water System (MCWD), Cistern Tank, Sewage Treatment Plant Facility, Gate and Guardhouse, Lagoon. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/tierranava-carcar.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "archived",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 54,
+        "price": null,
+        "status": "available",
+        "notes": "54 sqm usable floor area, 2* bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-carcar/"
+  },
+  {
+    "name": "TierraNava Lumbia",
+    "slug": "tierranava-lumbia",
+    "location": "Lumbia, Cagayan de Oro",
+    "description": "TierraNava Lumbia by Johndorf Ventures Corporation in Lumbia, Cagayan de Oro. House models: Two-Storey Townhouse. Amenities: Parks and Playground, Gate and Guardhouse, Clubhouse, 24 Hour Security. Johndorf published 12 construction updates (Jan 2024 to June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/tierranava-lumbia.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 36,
+        "price": 1900000,
+        "status": "available",
+        "notes": "36 sqm usable floor area, 2* bedrooms, 1 T&B, 2 floors, 1 parking. Listed at ₱1,900,000 (highlandsrealtyph.com); a 2021 promo quoted ₱1.4M TCP with ₱10,000 reservation."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-lumbia/"
+  },
+  {
+    "name": "TierraNava Opol",
+    "slug": "tierranava-opol",
+    "location": "Opol, Misamis Oriental",
+    "description": "TierraNava Opol by Johndorf Ventures Corporation in Opol, Misamis Oriental. House models: Two-Storey Townhouse. Amenities: Moresco, Wide Road, Gate and Guardhouse, Clubhouse, Basketball Court, Perimeter Fence, Street Lights. Johndorf published 14 construction updates (Jan 2024 to June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/tierranava-opol.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 36,
+        "price": null,
+        "status": "available",
+        "notes": "36 sqm usable floor area, 2 bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-opol/"
+  },
+  {
+    "name": "TierraNava Tagoloan",
+    "slug": "tierranava-tagoloan",
+    "location": "Tagoloan, Misamis Oriental",
+    "description": "TierraNava Tagoloan by Johndorf Ventures Corporation in Tagoloan, Misamis Oriental. House models: Two-Storey Townhouse. Amenities: Moresco, Clubhouse, Wide Road, Gate and Guardhouse, Basketball Court, Perimeter Fence, Street Lights. Johndorf published 5 construction updates (Jan 2025 to June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/tierranava-tagoloan.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Townhouse",
+        "unit_type": "Two-Storey Townhouse",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 36,
+        "price": null,
+        "status": "available",
+        "notes": "36 sqm usable floor area, 2 bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/tierranava-tagoloan/"
+  },
+  {
+    "name": "Villa Castena",
+    "slug": "villa-castena",
+    "location": "Dalipuga, Iligan City",
+    "description": "Villa Castena by Johndorf Ventures Corporation in Dalipuga, Iligan City. House models: Two-Storey Single Attached, One-Storey Duplex. Amenities: Clubhouse and Multi-Purpose Hall, Gate and Guardhouse, Basketball Court, Parks and Playgrounds, Sewage Treatment Facility, Water System, CEPALCO Power Distribution, Swimming Pool, Jogging Trail, 24 Hour Security, 15-M Entrance, Perimeter Fence, Future Retail Area. Johndorf published 18 construction updates (March 2023 to June 2025). Details from Johndorf's project page, read October 2025.",
+    "cover_path": "/johndorf/site/villa-castena.jpg",
+    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "status": "active",
+    "units": [
+      {
+        "name": "Two-Storey Single Attached",
+        "unit_type": "Two-Storey Single Attached",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 44,
+        "price": 3900000,
+        "status": "available",
+        "notes": "44 sqm usable floor area, 2 bedrooms, 2 T&B, 2 floors, 2 parking. Listed at ₱3,900,000, lot 80 sqm (loveprimeestate.com)."
+      },
+      {
+        "name": "One-Storey Duplex",
+        "unit_type": "One-Storey Duplex",
+        "category": "Residential",
+        "floor": null,
+        "area_sqm": 29,
+        "price": null,
+        "status": "available",
+        "notes": "29 sqm usable floor area, 2 bedrooms, 1 T&B, 1 floor, 1 parking. Listings from ₱1.5M (lionunion.com); no exact price published."
+      }
+    ],
+    "official_url": "https://sitedev.johndorfventures.com/project/villa-castena/"
+  }
+]

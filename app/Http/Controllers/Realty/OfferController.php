@@ -53,6 +53,9 @@ class OfferController extends Controller
         ]);
 
         $unit = Unit::with('project')->where('realty_id', $user->realty_id)->findOrFail($data['unit_id']);
+        if ($unit->price === null) {
+            return response()->json(['message' => 'This unit has no price yet, so it cannot be offered.', 'errors' => ['unit_id' => ['This unit has no price yet.']]], 422);
+        }
         $plan = null;
         if (! empty($data['payment_plan_id'])) {
             $plan = PaymentPlan::where('realty_id', $user->realty_id)->where('project_id', $unit->project_id)->findOrFail($data['payment_plan_id']);

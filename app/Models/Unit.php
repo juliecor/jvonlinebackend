@@ -20,9 +20,23 @@ class Unit extends Model
         return ['area_sqm' => 'decimal:2', 'price' => 'decimal:2'];
     }
 
+
+    /** Uploads live on the public disk; a path starting with "/" or "http" (images shipped with the frontend) is used as-is. */
+    public static function publicUrl(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+        if (str_starts_with($path, '/') || str_starts_with($path, 'http')) {
+            return $path;
+        }
+
+        return Storage::disk('public')->url($path);
+    }
+
     protected function floorPlanUrl(): Attribute
     {
-        return Attribute::get(fn () => $this->floor_plan_path ? Storage::disk('public')->url($this->floor_plan_path) : null);
+        return Attribute::get(fn () => self::publicUrl($this->floor_plan_path));
     }
 
     public function project(): BelongsTo

@@ -19,9 +19,23 @@ class Project extends Model
         return ['completion_date' => 'date:Y-m-d'];
     }
 
+
+    /** Uploads live on the public disk; a path starting with "/" or "http" (images shipped with the frontend) is used as-is. */
+    public static function publicUrl(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+        if (str_starts_with($path, '/') || str_starts_with($path, 'http')) {
+            return $path;
+        }
+
+        return Storage::disk('public')->url($path);
+    }
+
     protected function coverUrl(): Attribute
     {
-        return Attribute::get(fn () => $this->cover_path ? Storage::disk('public')->url($this->cover_path) : null);
+        return Attribute::get(fn () => self::publicUrl($this->cover_path));
     }
 
     public function realty(): BelongsTo
