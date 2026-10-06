@@ -29,6 +29,7 @@ class OverviewController extends Controller
                 'agents_invited' => $realty->agentInvitations()->whereNull('accepted_at')->where('expires_at', '>', now())->count(),
                 'staff' => $realty->users()->where('role', User::ROLE_REALTY)->count(),
                 'projects' => $realty->projects()->count(),
+                'public_projects' => $realty->projects()->where('is_public', true)->count(),
                 'units' => $realty->projects()->withCount('units')->get()->sum('units_count'),
                 // Agents see their own offers; staff the whole realty's.
                 'offers' => $realty->offers()->where('status', 'active')->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id))->count(),
