@@ -24,7 +24,7 @@ class ProjectController extends Controller
     {
         $this->own($request, $project);
 
-        return response()->json($project->load(['units', 'paymentPlans'])->loadCount('offers'));
+        return response()->json($project->load(['units', 'paymentPlans', 'unitTypes', 'updates'])->loadCount('offers'));
     }
 
     public function store(Request $request): JsonResponse

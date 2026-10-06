@@ -1,0 +1,1983 @@
+[
+ {
+  "slug": "arvesa-village",
+  "name": "Arvesa Village",
+  "location": "Lumbia, Cagayan de Oro",
+  "region": "Cagayan de Oro",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/arvesa-village/unit-1-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/arvesa-village/plan-1.jpg"
+  ],
+  "amenities": [
+   "Power Distribution",
+   "Park",
+   "Concrete Roads",
+   "Guard House",
+   "Sewage with Lagoon",
+   "Clubhouse",
+   "Basketball Court",
+   "Perimeter Fence",
+   "Water System",
+   "Jogging Trail",
+   "Cistern Tank",
+   "CEPALCO Power",
+   "24 Hour Security",
+   "Open Spaces",
+   "Street Lights",
+   "Commercial Area",
+   "Swimming Pool"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/arvesa-village/",
+  "map": null,
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "64.85",
+     "typical_floor_area": null,
+     "bedrooms": "3",
+     "baths": "2",
+     "floors": "2",
+     "parking": "2"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/arvesa-village/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "astana-davao",
+  "name": "Astana Davao",
+  "location": "Davao",
+  "region": "Davao",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/plan-1.jpg"
+  ],
+  "amenities": [
+   "Park and Playgrounds",
+   "14-M Wide Entrance",
+   "Gate and Guardhouse",
+   "Clubhouse and Multi-Purpose Area",
+   "Basketball Court",
+   "Perimeter Fence"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/astana-davao/",
+  "map": {
+   "lat": 7.074495,
+   "lng": 125.569115
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "48",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "1",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/unit-1-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/unit-1-2.jpg"
+    ]
+   }
+  ],
+  "updates": [
+   {
+    "month": "2023-03",
+    "label": "March 2023",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-03-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-03-5.jpg"
+    ]
+   },
+   {
+    "month": "2023-04",
+    "label": "April 2023",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-04-10.jpg"
+    ]
+   },
+   {
+    "month": "2023-05",
+    "label": "May 2023",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-05-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-05-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2023-05-3.jpg"
+    ]
+   },
+   {
+    "month": "2024-01",
+    "label": "January 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/updates/2024-01-11.jpg"
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "coral-village",
+  "name": "Coral Village",
+  "location": "Suba-Basbas, Lapu-Lapu City",
+  "region": "Cebu",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/plan-1.jpg"
+  ],
+  "amenities": [
+   "Underground Drainage and Sewer",
+   "Power Distribution",
+   "Park",
+   "Sewage Treatment Facility",
+   "Clubhouse",
+   "Basketball Court",
+   "Water System",
+   "Jogging Trail",
+   "Landscape Open Spaces"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/coral-village/",
+  "map": {
+   "lat": 10.267427,
+   "lng": 123.97309
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "76",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "2",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/unit-1-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/unit-1-2.jpg"
+    ]
+   }
+  ],
+  "updates": [
+   {
+    "month": "2023-03",
+    "label": "March 2023",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-11.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-12.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-13.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-14.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-15.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-16.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-17.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-18.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-19.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-20.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-21.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-22.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-03-23.jpg"
+    ]
+   },
+   {
+    "month": "2023-04",
+    "label": "April 2023",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2023-04-9.jpg"
+    ]
+   },
+   {
+    "month": "2024",
+    "label": "2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-11.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-12.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-13.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-14.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-15.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/updates/2024-16.jpg"
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "evissa-davao",
+  "name": "Evissa Davao",
+  "location": "Davao",
+  "region": "Davao",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/evissa-davao/hero-1.jpg"
+  ],
+  "site_plans": [],
+  "amenities": [
+   "MECO Power",
+   "Park and Playgrounds",
+   "14-M Wide Entrance",
+   "Gate and Guardhouse",
+   "Sewage Treatment Facility",
+   "Clubhouse and Multi-Purpose Area",
+   "Multi-Purpose Court",
+   "Perimeter Fence",
+   "Water Supply",
+   "Swimming Pool",
+   "Centralized Rainwater Catchment/Lagoon"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/evissa-davao/",
+  "map": null,
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "63",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "2",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/evissa-davao/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "evissa-lapu-lapu",
+  "name": "Evissa Lapu-Lapu",
+  "location": "Lapu-Lapu City",
+  "region": "Cebu",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/evissa-lapu-lapu/hero-1.jpg"
+  ],
+  "site_plans": [],
+  "amenities": [
+   "Underground Drainage and Sewer",
+   "MECO Power",
+   "Pocket Park",
+   "Clubhouse and Multi-Purpose Area",
+   "Multi-Purpose Court",
+   "Perimeter Fence",
+   "Water System (MCWD)",
+   "24 Hour Security"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/evissa-lapu-lapu/",
+  "map": {
+   "lat": 10.2819414,
+   "lng": 123.939206
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "61",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "1",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/evissa-lapu-lapu/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "mimosa-cebu",
+  "name": "Mimosa Cebu",
+  "location": "Labangon, Cebu City",
+  "region": "Cebu",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-cebu/hero-1.jpg",
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-cebu/unit-1-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-cebu/plan-1.jpg"
+  ],
+  "amenities": [
+   "VECO Power Distribution",
+   "Clubhouse and Multi-Purpose Area",
+   "Multi-Purpose Court",
+   "Perimeter Fence",
+   "Water System (MCWD)",
+   "Overhead Water Tank",
+   "Sewage Treatment Plant/Lagoon"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/mimosa-cebu/",
+  "map": {
+   "lat": 10.30341,
+   "lng": 123.8816254
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "64",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "2",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-cebu/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "mimosa-minglanilla",
+  "name": "Mimosa Minglanilla",
+  "location": "Minglanilla, Cebu",
+  "region": "Cebu",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-minglanilla/hero-1.jpg",
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-minglanilla/unit-1-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-minglanilla/plan-1.jpg"
+  ],
+  "amenities": [
+   "Underground Drainage and Sewer",
+   "VECO Power",
+   "Parks and Playgrounds",
+   "Clubhouse and Multi-Purpose Area",
+   "Basketball Court",
+   "Perimeter Fence",
+   "Water System (MCWD)",
+   "Swimming Pool",
+   "10-M Wide Entrance",
+   "Gate and Guardhouse",
+   "Lagoon"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/mimosa-minglanilla/",
+  "map": null,
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "85",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "2",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-minglanilla/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "montierra",
+  "name": "Montierra",
+  "location": "Cagayan de Oro",
+  "region": "Cagayan de Oro",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/plan-1.jpg"
+  ],
+  "amenities": [
+   "Clubhouse and Multi-Purpose Hall",
+   "Gate and Guardhouse",
+   "Basketball Court",
+   "Parks and Playgrounds",
+   "Sewage Treatment Facility",
+   "Water System",
+   "CEPALCO Power Distribution",
+   "Swimming Pool",
+   "Jogging Trail",
+   "24 Hour Security",
+   "15-M Entrance",
+   "Perimeter Fence",
+   "Future Retail Area"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/montierra/",
+  "map": {
+   "lat": 8.4292355,
+   "lng": 124.6203083
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "64",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": null,
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/unit-1-1.jpg"
+    ]
+   },
+   {
+    "name": "Two-Storey Single Attached",
+    "specs": {
+     "usable_floor_area": "64",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "2",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/unit-2-1.jpg"
+    ]
+   },
+   {
+    "name": "Two-Storey Duplex",
+    "specs": {
+     "usable_floor_area": "64",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "2",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/unit-3-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "navona-court",
+  "name": "Navona Court",
+  "location": "Lumbia, Cagayan de Oro",
+  "region": "Cagayan de Oro",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/plan-1.jpg"
+  ],
+  "amenities": [
+   "Underground Drainage and Sewer",
+   "Power Distribution",
+   "Parks and Playgrounds",
+   "Concrete Road",
+   "Gate and Guardhouse",
+   "Lagoon",
+   "Sewage Treatment Facility",
+   "Clubhouse and Multi-Purpose Area",
+   "Basketball Court",
+   "Perimeter Fence",
+   "Cistern Tank",
+   "Water System",
+   "Open Spaces",
+   "Jogging Trail",
+   "Street Lights",
+   "Material Recovery Facility"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/navona-court/",
+  "map": {
+   "lat": 8.3987303,
+   "lng": 124.6102897
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "58.49",
+     "typical_floor_area": null,
+     "bedrooms": "3",
+     "baths": "2",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": [
+   {
+    "month": "2022",
+    "label": "2022",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2022-1.jpg"
+    ]
+   },
+   {
+    "month": "2024-01",
+    "label": "January 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-01-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-02",
+    "label": "February 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-11.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-02-12.jpg"
+    ]
+   },
+   {
+    "month": "2024-03",
+    "label": "March 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-03-4.jpg"
+    ]
+   },
+   {
+    "month": "2024-04",
+    "label": "April 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-04-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-04-7.jpg"
+    ]
+   },
+   {
+    "month": "2024-05",
+    "label": "May 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-05-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-05-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-05-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-05-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-05-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-05-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-06",
+    "label": "June 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-06-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-06-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-06-7.jpg"
+    ]
+   },
+   {
+    "month": "2024-07",
+    "label": "July 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-07-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-07-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-07-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-07-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-07-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-07-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-07-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-07-8.jpg"
+    ]
+   },
+   {
+    "month": "2024-08",
+    "label": "August 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-08-10.jpg"
+    ]
+   },
+   {
+    "month": "2024-09",
+    "label": "September 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-09-11.jpg"
+    ]
+   },
+   {
+    "month": "2024-10",
+    "label": "October 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-10-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-10-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-10-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-10-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-10-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2024-10-6.jpg"
+    ]
+   },
+   {
+    "month": "2025-01",
+    "label": "January 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-01-4.jpg"
+    ]
+   },
+   {
+    "month": "2025-02",
+    "label": "February 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-02-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-02-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-02-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-02-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-02-7.jpg"
+    ]
+   },
+   {
+    "month": "2025-03",
+    "label": "March 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-03-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-03-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-03-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-03-7.jpg"
+    ]
+   },
+   {
+    "month": "2025-04",
+    "label": "April 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-04-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-04-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-04-8.jpg"
+    ]
+   },
+   {
+    "month": "2025-06",
+    "label": "June 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-06-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/updates/2025-06-6.jpg"
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "navona-davao",
+  "name": "Navona Davao",
+  "location": "Davao",
+  "region": "Davao",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/plan-1.jpg"
+  ],
+  "amenities": [
+   "MECO Power",
+   "Park and Playgrounds",
+   "14-M Wide Entrance",
+   "Gate and Guardhouse",
+   "Sewage Treatment Facility",
+   "Clubhouse and Multi-Purpose Area",
+   "Multi-Purpose Court",
+   "Perimeter Fence",
+   "Water Supply",
+   "Swimming Pool",
+   "Centralized Rainwater Catchment/Lagoon"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/navona-davao/",
+  "map": {
+   "lat": 7.074685,
+   "lng": 125.569736
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "63",
+     "typical_floor_area": null,
+     "bedrooms": "3*",
+     "baths": "2",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/unit-1-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/unit-1-2.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "navona-lumbia",
+  "name": "Navona Lumbia",
+  "location": "Lumbia, Cagayan de Oro",
+  "region": "Cagayan de Oro",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-lumbia/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-lumbia/plan-1.jpg"
+  ],
+  "amenities": [
+   "Power Distribution",
+   "Grand Clubhouse",
+   "Underground Drainage",
+   "Landscape Gate and Guardhouse",
+   "Basketball Court",
+   "Sewage Treatment Plant",
+   "Water System",
+   "Jogging Trail",
+   "Park"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/navona-lumbia/",
+  "map": {
+   "lat": 8.3973495,
+   "lng": 124.6099222
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "63",
+     "typical_floor_area": null,
+     "bedrooms": "3",
+     "baths": "1",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-lumbia/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "pich-4b",
+  "name": "Pich 4B",
+  "location": "Opol, Misamis Oriental",
+  "region": "Cagayan de Oro",
+  "stage": null,
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/pich-4b/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/pich-4b/plan-1.jpg"
+  ],
+  "amenities": [
+   "Multi-Purpose Hall",
+   "Landscape Gate and Guardhouse",
+   "Multi-Purpose Play Court",
+   "Recreational Park"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/pich-4b/",
+  "map": {
+   "lat": 8.489345,
+   "lng": 124.570182
+  },
+  "unit_types": [
+   {
+    "name": "Duplex",
+    "specs": {
+     "usable_floor_area": "38",
+     "typical_floor_area": null,
+     "bedrooms": "2",
+     "baths": "1",
+     "floors": "1",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/pich-4b/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "plumera",
+  "name": "Plumera Mactan",
+  "location": "Basak, Lapu-Lapu City",
+  "region": "Cebu",
+  "stage": "Ongoing",
+  "hero": [
+   "/johndorf/site/plumera.jpg",
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/plan-1.jpg"
+  ],
+  "amenities": [
+   "Underground Drainage and Sewer",
+   "MECO Power",
+   "Pocket Park",
+   "Wide Entrance",
+   "Gate and Guardhouse",
+   "Lagoon",
+   "Sewage Treatment Facility",
+   "Clubhouse and Multi-Purpose Area",
+   "Multi-Purpose Court",
+   "Perimeter Fence",
+   "Future Retail Area",
+   "Mailbox Area",
+   "Water System (MCWD)",
+   "Swimming Pool",
+   "Jogging Trail",
+   "Fire Protection System",
+   "Material Recovery Facility"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/plumera/",
+  "map": {
+   "lat": 10.2959595,
+   "lng": 123.97544
+  },
+  "unit_types": [
+   {
+    "name": "Studio Unit",
+    "specs": {
+     "usable_floor_area": "24",
+     "typical_floor_area": null,
+     "bedrooms": null,
+     "baths": "1",
+     "floors": null,
+     "parking": null
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/unit-1-1.jpg"
+    ]
+   },
+   {
+    "name": "1BR Unit",
+    "specs": {
+     "usable_floor_area": "36",
+     "typical_floor_area": null,
+     "bedrooms": "1",
+     "baths": "1",
+     "floors": null,
+     "parking": null
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-carcar/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": [
+   {
+    "month": "2024-06",
+    "label": "June 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-06-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-07",
+    "label": "July 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-07-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-07-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-07-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-08",
+    "label": "August 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-08-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-08-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-08-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-09",
+    "label": "September 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-09-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-09-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-09-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-10",
+    "label": "October 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-10-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-10-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2024-10-6.jpg"
+    ]
+   },
+   {
+    "month": "2025-01",
+    "label": "January 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-14.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-15.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-16.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-21.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-22.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-23.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-01-24.jpg"
+    ]
+   },
+   {
+    "month": "2025-02",
+    "label": "February 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-15.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-16.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-17.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-23.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-24.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-25.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-26.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-02-27.jpg"
+    ]
+   },
+   {
+    "month": "2025-03",
+    "label": "March 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-11.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-12.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-18.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-19.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-20.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-21.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-03-22.jpg"
+    ]
+   },
+   {
+    "month": "2025-04",
+    "label": "April 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-04-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-04-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-04-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-04-15.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-04-16.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-04-17.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-04-18.jpg"
+    ]
+   },
+   {
+    "month": "2025-06",
+    "label": "June 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-06-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-06-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-06-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-06-15.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-06-16.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-06-17.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/updates/2025-06-18.jpg"
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "tierranava-carcar",
+  "name": "TierraNava Carcar",
+  "location": "Poblacion I, Carcar City",
+  "region": "Cebu",
+  "stage": "Completed",
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-carcar/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-carcar/plan-1.jpg"
+  ],
+  "amenities": [
+   "Underground Drainage",
+   "CEBECO",
+   "Clubhouse",
+   "Multi-Purpose Court",
+   "Perimeter Fence",
+   "Water System (MCWD)",
+   "Cistern Tank",
+   "Sewage Treatment Plant Facility",
+   "Gate and Guardhouse",
+   "Lagoon"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/tierranava-carcar/",
+  "map": null,
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "54",
+     "typical_floor_area": null,
+     "bedrooms": "2*",
+     "baths": "1",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-carcar/unit-1-1.jpg"
+    ]
+   }
+  ],
+  "updates": []
+ },
+ {
+  "slug": "tierranava-lumbia",
+  "name": "TierraNava Lumbia",
+  "location": "Lumbia, Cagayan de Oro",
+  "region": "Cagayan de Oro",
+  "stage": "Ongoing",
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/plan-1.jpg"
+  ],
+  "amenities": [
+   "Gate and Guardhouse",
+   "Clubhouse",
+   "24 Hour Security"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/tierranava-lumbia/",
+  "map": null,
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "36",
+     "typical_floor_area": null,
+     "bedrooms": "2*",
+     "baths": "1",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/unit-1-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/unit-1-2.jpg"
+    ]
+   }
+  ],
+  "updates": [
+   {
+    "month": "2024-01",
+    "label": "January 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-01-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-02",
+    "label": "February 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-02-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-02-4.jpg"
+    ]
+   },
+   {
+    "month": "2024-03",
+    "label": "March 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-03-4.jpg"
+    ]
+   },
+   {
+    "month": "2024-04",
+    "label": "April 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-04-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-06",
+    "label": "June 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-06-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-06-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-06-7.jpg"
+    ]
+   },
+   {
+    "month": "2024-07",
+    "label": "July 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-07-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-07-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-07-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-07-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-07-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-07-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-07-7.jpg"
+    ]
+   },
+   {
+    "month": "2024-08",
+    "label": "August 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-08-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-08-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-08-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-08-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-08-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-08-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-08-7.jpg"
+    ]
+   },
+   {
+    "month": "2024-09",
+    "label": "September 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-11.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-12.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-13.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2024-09-14.jpg"
+    ]
+   },
+   {
+    "month": "2025-01",
+    "label": "January 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-01-6.jpg"
+    ]
+   },
+   {
+    "month": "2025-03",
+    "label": "March 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-03-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-03-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-03-6.jpg"
+    ]
+   },
+   {
+    "month": "2025-04",
+    "label": "April 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-04-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-04-7.jpg"
+    ]
+   },
+   {
+    "month": "2025-06",
+    "label": "June 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-06-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/updates/2025-06-6.jpg"
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "tierranava-opol",
+  "name": "TierraNava Opol",
+  "location": "Opol, Misamis Oriental",
+  "region": "Cagayan de Oro",
+  "stage": "Ongoing",
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/plan-1.jpg"
+  ],
+  "amenities": [
+   "Moresco",
+   "Wide Road",
+   "Gate and Guardhouse",
+   "Clubhouse",
+   "Basketball Court",
+   "Perimeter Fence",
+   "Street Lights"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/tierranava-opol/",
+  "map": null,
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "36",
+     "typical_floor_area": null,
+     "bedrooms": "2",
+     "baths": "1",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/unit-1-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/unit-1-2.jpg"
+    ]
+   }
+  ],
+  "updates": [
+   {
+    "month": "2024-01",
+    "label": "January 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-01-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-01-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-01-8.jpg"
+    ]
+   },
+   {
+    "month": "2024-02",
+    "label": "February 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-02-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-02-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-02-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-02-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-02-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-02-8.jpg"
+    ]
+   },
+   {
+    "month": "2024-03",
+    "label": "March 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-03-9.jpg"
+    ]
+   },
+   {
+    "month": "2024-04",
+    "label": "April 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-04-9.jpg"
+    ]
+   },
+   {
+    "month": "2024-05",
+    "label": "May 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-05-9.jpg"
+    ]
+   },
+   {
+    "month": "2024-06",
+    "label": "June 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-06-9.jpg"
+    ]
+   },
+   {
+    "month": "2024-07",
+    "label": "July 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-07-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-07-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-07-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-07-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-07-5.jpg"
+    ]
+   },
+   {
+    "month": "2024-08",
+    "label": "August 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-08-11.jpg"
+    ]
+   },
+   {
+    "month": "2024-10",
+    "label": "October 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-10-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-10-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-10-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-10-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-10-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2024-10-6.jpg"
+    ]
+   },
+   {
+    "month": "2025-01",
+    "label": "January 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-01-6.jpg"
+    ]
+   },
+   {
+    "month": "2025-02",
+    "label": "February 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-02-10.jpg"
+    ]
+   },
+   {
+    "month": "2025-03",
+    "label": "March 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-03-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-03-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-03-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-03-7.jpg"
+    ]
+   },
+   {
+    "month": "2025-04",
+    "label": "April 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-04-9.jpg"
+    ]
+   },
+   {
+    "month": "2025-06",
+    "label": "June 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/updates/2025-06-10.jpg"
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "tierranava-tagoloan",
+  "name": "TierraNava Tagoloan",
+  "location": "Tagoloan, Misamis Oriental",
+  "region": "Cagayan de Oro",
+  "stage": "Ongoing",
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/hero-1.jpg",
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/hero-2.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/plan-1.jpg"
+  ],
+  "amenities": [
+   "Moresco",
+   "Clubhouse",
+   "Wide Road",
+   "Gate and Guardhouse",
+   "Basketball Court",
+   "Perimeter Fence",
+   "Street Lights"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/tierranava-tagoloan/",
+  "map": null,
+  "unit_types": [
+   {
+    "name": "Two-Storey Townhouse",
+    "specs": {
+     "usable_floor_area": "36",
+     "typical_floor_area": null,
+     "bedrooms": "2",
+     "baths": "1",
+     "floors": "2",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/unit-1-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/unit-1-2.jpg"
+    ]
+   }
+  ],
+  "updates": [
+   {
+    "month": "2025-01",
+    "label": "January 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-01-4.jpg"
+    ]
+   },
+   {
+    "month": "2025-02",
+    "label": "February 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-02-3.jpg"
+    ]
+   },
+   {
+    "month": "2025-03",
+    "label": "March 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-03-4.jpg"
+    ]
+   },
+   {
+    "month": "2025-04",
+    "label": "April 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-04-5.jpg"
+    ]
+   },
+   {
+    "month": "2025-06",
+    "label": "June 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/updates/2025-06-3.jpg"
+    ]
+   }
+  ]
+ },
+ {
+  "slug": "villa-castena",
+  "name": "Villa Castena",
+  "location": "Dalipuga, Iligan City",
+  "region": "Iligan",
+  "stage": "Ongoing",
+  "hero": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/hero-1.jpg"
+  ],
+  "site_plans": [
+   "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/plan-1.jpg"
+  ],
+  "amenities": [
+   "Clubhouse and Multi-Purpose Hall",
+   "Gate and Guardhouse",
+   "Basketball Court",
+   "Parks and Playgrounds",
+   "Sewage Treatment Facility",
+   "Water System",
+   "CEPALCO Power Distribution",
+   "Swimming Pool",
+   "Jogging Trail",
+   "24 Hour Security",
+   "15-M Entrance",
+   "Perimeter Fence",
+   "Future Retail Area"
+  ],
+  "official_url": "https://sitedev.johndorfventures.com/project/villa-castena/",
+  "map": {
+   "lat": 8.299862,
+   "lng": 124.260761
+  },
+  "unit_types": [
+   {
+    "name": "Two-Storey Single Attached",
+    "specs": {
+     "usable_floor_area": "44",
+     "typical_floor_area": null,
+     "bedrooms": "2",
+     "baths": "2",
+     "floors": "2",
+     "parking": "2"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/unit-1-1.jpg"
+    ]
+   },
+   {
+    "name": "One-Storey Duplex",
+    "specs": {
+     "usable_floor_area": "29",
+     "typical_floor_area": null,
+     "bedrooms": "2",
+     "baths": "1",
+     "floors": "1",
+     "parking": "1"
+    },
+    "images": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/unit-2-1.jpg"
+    ]
+   }
+  ],
+  "updates": [
+   {
+    "month": "2023-03",
+    "label": "March 2023",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2023-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2023-03-2.jpg"
+    ]
+   },
+   {
+    "month": "2023-04",
+    "label": "April 2023",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2023-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2023-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2023-04-3.jpg"
+    ]
+   },
+   {
+    "month": "2023-05",
+    "label": "May 2023",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2023-05-1.jpg"
+    ]
+   },
+   {
+    "month": "2024-01",
+    "label": "January 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-01-9.jpg"
+    ]
+   },
+   {
+    "month": "2024-02",
+    "label": "February 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-02-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-02-4.jpg"
+    ]
+   },
+   {
+    "month": "2024-03",
+    "label": "March 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-03-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-03-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-03-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-04",
+    "label": "April 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-04-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-05",
+    "label": "May 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-05-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-05-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-05-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-05-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-05-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-05-6.jpg"
+    ]
+   },
+   {
+    "month": "2024-06",
+    "label": "June 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-06-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-06-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-06-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-06-8.jpg"
+    ]
+   },
+   {
+    "month": "2024-07",
+    "label": "July 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-07-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-07-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-07-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-07-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-07-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-07-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-07-7.jpg"
+    ]
+   },
+   {
+    "month": "2024-08",
+    "label": "August 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-08-10.jpg"
+    ]
+   },
+   {
+    "month": "2024-09",
+    "label": "September 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-09-9.jpg"
+    ]
+   },
+   {
+    "month": "2024-10",
+    "label": "October 2024",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-10-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-10-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-10-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-10-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-10-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2024-10-6.jpg"
+    ]
+   },
+   {
+    "month": "2025-01",
+    "label": "January 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-01-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-01-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-01-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-01-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-01-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-01-6.jpg"
+    ]
+   },
+   {
+    "month": "2025-02",
+    "label": "February 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-02-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-02-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-02-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-02-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-02-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-02-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-02-7.jpg"
+    ]
+   },
+   {
+    "month": "2025-03",
+    "label": "March 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-03-9.jpg"
+    ]
+   },
+   {
+    "month": "2025-04",
+    "label": "April 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-04-10.jpg"
+    ]
+   },
+   {
+    "month": "2025-06",
+    "label": "June 2025",
+    "photos": [
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-1.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-3.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-4.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-5.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-6.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-7.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-8.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-9.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-10.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-11.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-12.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-13.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-14.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-15.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-16.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-17.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/updates/2025-06-18.jpg"
+    ]
+   }
+  ]
+ }
+]

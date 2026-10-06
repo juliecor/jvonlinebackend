@@ -74,5 +74,48 @@ class JohndorfProjectsSeeder extends Seeder
             }
             $this->command->info("  {$row['name']}: ".count($row['units']).' model(s)');
         }
+
+        $this->publicPages($realty);
+    }
+
+    /**
+     * The public project pages, from data/johndorf-public.json (Johndorf's own
+     * pages, images already on S3). Matched by project name; unit types by name,
+     * update months by month — so a re-run refreshes rather than duplicates.
+     */
+    private function publicPages(Realty $realty): void
+    {
+        $pages = json_decode(file_get_contents(__DIR__.'/data/johndorf-public.json'), true);
+        foreach ($pages as $pg) {
+            $project = Project::where('realty_id', $realty->id)->where('name', $pg['name'])->first();
+            if (! $project) {
+                continue;
+            }
+            $project->update([
+                'slug' => $pg['slug'],
+                'region' => $pg['region'],
+                'stage' => $pg['stage'],
+                'is_public' => true,
+                'hero_paths' => $pg['hero'],
+                'site_plan_paths' => $pg['site_plans'],
+                'amenities' => $pg['amenities'],
+                'official_url' => $pg['official_url'],
+                'lat' => $pg['map']['lat'] ?? $project->lat,
+                'lng' => $pg['map']['lng'] ?? $project->lng,
+            ]);
+            foreach ($pg['unit_types'] as $i => $ut) {
+                \App\Models\UnitType::updateOrCreate(
+                    ['project_id' => $project->id, 'name' => $ut['name']],
+                    ['realty_id' => $realty->id, 'specs' => $ut['specs'], 'image_paths' => $ut['images'], 'sort' => $i],
+                );
+            }
+            foreach ($pg['updates'] as $up) {
+                \App\Models\ProjectUpdate::updateOrCreate(
+                    ['project_id' => $project->id, 'month' => $up['month']],
+                    ['realty_id' => $realty->id, 'label' => $up['label'], 'photo_paths' => $up['photos']],
+                );
+            }
+            $this->command->info("  public page: /projects/{$pg['slug']} (".count($pg['unit_types']).' models, '.count($pg['updates']).' months)');
+        }
     }
 }

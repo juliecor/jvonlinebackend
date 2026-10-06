@@ -13,6 +13,9 @@ use App\Http\Controllers\Realty\OfferController;
 use App\Http\Controllers\Realty\OverviewController;
 use App\Http\Controllers\Realty\PaymentPlanController;
 use App\Http\Controllers\Realty\ProjectController;
+use App\Http\Controllers\Realty\ProjectPageController;
+use App\Http\Controllers\Realty\ProjectUpdateController;
+use App\Http\Controllers\Realty\UnitTypeController;
 use App\Http\Controllers\Realty\UnitController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 // Public
 Route::get('/realties', [PublicRealtyController::class, 'index']);
 Route::get('/realties/{slug}', [PublicRealtyController::class, 'show']);
+Route::get('/realties/{slug}/projects', [PublicRealtyController::class, 'projects']);
+Route::get('/realties/{slug}/projects/{projectSlug}', [PublicRealtyController::class, 'project']);
 Route::get('/offers/{code}', [PublicOfferController::class, 'show'])->middleware('throttle:60,1');
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:10,1');
 
@@ -70,6 +75,16 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/projects/{project}/plans', [PaymentPlanController::class, 'store']);
             Route::post('/plans/{plan}', [PaymentPlanController::class, 'update']);
             Route::delete('/plans/{plan}', [PaymentPlanController::class, 'destroy']);
+            // Public project page
+            Route::post('/projects/{project}/page', [ProjectPageController::class, 'settings']);
+            Route::post('/projects/{project}/page/media', [ProjectPageController::class, 'addMedia']);
+            Route::post('/projects/{project}/page/media/remove', [ProjectPageController::class, 'removeMedia']);
+            Route::post('/projects/{project}/unit-types', [UnitTypeController::class, 'store']);
+            Route::post('/unit-types/{unitType}', [UnitTypeController::class, 'update']);
+            Route::delete('/unit-types/{unitType}', [UnitTypeController::class, 'destroy']);
+            Route::post('/projects/{project}/updates', [ProjectUpdateController::class, 'store']);
+            Route::post('/updates/{update}/remove-photo', [ProjectUpdateController::class, 'removePhoto']);
+            Route::delete('/updates/{update}', [ProjectUpdateController::class, 'destroy']);
         });
     });
 });
