@@ -26,6 +26,26 @@ class RealtyController extends Controller
         return response()->json($realties);
     }
 
+    /** One realty in full: profile, people, projects and latest offers. */
+    public function show(Realty $realty): JsonResponse
+    {
+        $realty->load(['latestInvitation', 'users' => fn ($q) => $q->orderBy('role')->orderBy('name')])
+            ->loadCount(['users', 'agents', 'projects', 'offers']);
+        $projects = $realty->projects()->withCount(['units', 'paymentPlans', 'offers'])->orderBy('name')->get();
+        $offers = $realty->offers()->with(['project:id,name', 'unit:id,name,unit_type', 'agent:id,name'])->latest()->take(50)->get()->map(fn ($o) => [
+            'id' => $o->id, 'code' => $o->code, 'status' => $o->status, 'buyer_name' => $o->buyer_name, 'price' => (float) $o->price, 'views' => $o->views,
+            'created_at' => $o->created_at, 'project' => $o->project?->name, 'unit' => $o->unit?->name, 'agent' => $o->agent?->name, 'url' => \App\Models\Offer::url($o->code),
+        ]);
+
+        return response()->json([
+            'realty' => $realty,
+            'people' => $realty->users->map(fn ($u) => ['id' => $u->id, 'name' => $u->name, 'email' => $u->email, 'role' => $u->role, 'joined_at' => $u->created_at]),
+            'projects' => $projects,
+            'offers' => $offers,
+            'offer_views' => (int) $realty->offers()->sum('views'),
+        ]);
+    }
+
     /** Create the realty as "invited" and email the registration link. */
     public function store(Request $request): JsonResponse
     {

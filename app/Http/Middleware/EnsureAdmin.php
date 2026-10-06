@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/** Only jvonline admins past this point (routes under /api/admin). */
+/** Only jvconline admins past this point (routes under /api/admin). */
 class EnsureAdmin
 {
     public function handle(Request $request, Closure $next): Response

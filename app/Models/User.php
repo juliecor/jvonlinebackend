@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -19,7 +20,7 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
-    public const ROLE_ADMIN = 'admin';   // jvonline staff — sees every realty
+    public const ROLE_ADMIN = 'admin';   // jvconline staff — sees every realty
 
     public const ROLE_REALTY = 'realty'; // a realty's own staff — their dashboard
 
@@ -41,6 +42,12 @@ class User extends Authenticatable
     public function realty(): BelongsTo
     {
         return $this->belongsTo(Realty::class);
+    }
+
+    /** Offers this person prepared (agents, and staff who make offers themselves). */
+    public function offers(): HasMany
+    {
+        return $this->hasMany(Offer::class, 'agent_id');
     }
 
     public function isAdmin(): bool

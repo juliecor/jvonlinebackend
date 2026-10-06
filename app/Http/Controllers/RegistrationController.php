@@ -80,7 +80,7 @@ class RegistrationController extends Controller
             abort(410, 'This invitation has already been used.');
         }
         if ($invitation->expires_at->isPast()) {
-            abort(410, 'This invitation link has expired. Ask jvonline for a new one.');
+            abort(410, 'This invitation link has expired. Ask jvconline for a new one.');
         }
 
         return $invitation;

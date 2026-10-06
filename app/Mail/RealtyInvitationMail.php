@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-/** "You're invited to jvonline" — carries the registration link. */
+/** "You're invited to jvconline" — carries the registration link. */
 class RealtyInvitationMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -23,7 +23,7 @@ class RealtyInvitationMail extends Mailable
 
     public function envelope(): Envelope
     {
-        return new Envelope(subject: "{$this->realty->name} — your invitation to jvonline");
+        return new Envelope(subject: "{$this->realty->name} — your invitation to jvconline");
     }
 
     public function content(): Content

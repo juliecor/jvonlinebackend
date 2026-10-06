@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         User::updateOrCreate(
             ['email' => $email],
-            ['name' => env('ADMIN_NAME', 'jvonline admin'), 'password' => $password, 'role' => User::ROLE_ADMIN, 'realty_id' => null],
+            ['name' => env('ADMIN_NAME', 'jvconline admin'), 'password' => $password, 'role' => User::ROLE_ADMIN, 'realty_id' => null],
         );
         $this->command->info("Admin: {$email}");
 

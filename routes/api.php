@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AgentController as AdminAgentController;
+use App\Http\Controllers\Admin\OfferController as AdminOfferController;
 use App\Http\Controllers\Admin\RealtyController;
 use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\AgentJoinController;
@@ -35,12 +37,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/auth/me', [AuthController::class, 'me']);
 
-    // jvonline admin
+    // jvconline admin
     Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/stats', StatsController::class);
         Route::get('/realties', [RealtyController::class, 'index']);
         Route::post('/realties', [RealtyController::class, 'store']);
+        Route::get('/realties/{realty}', [RealtyController::class, 'show']);
         Route::post('/realties/{realty}/invite', [RealtyController::class, 'invite']);
+        Route::get('/offers', [AdminOfferController::class, 'index']);
+        Route::get('/people', [AdminAgentController::class, 'index']);
     });
 
     // A realty's own dashboard — every query is scoped to the signed-in user's realty
