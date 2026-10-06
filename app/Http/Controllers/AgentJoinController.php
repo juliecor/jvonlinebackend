@@ -30,19 +30,16 @@ class AgentJoinController extends Controller
 
         $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
+            'email' => ['required', 'email', 'max:190', Rule::unique('users', 'email')],
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
-        if (User::where('email', $invitation->email)->exists()) {
-            return response()->json(['message' => 'There is already an account with this email.'], 409);
-        }
-
         $user = DB::transaction(function () use ($data, $invitation) {
-            $invitation->update(['accepted_at' => now()]);
+            $invitation->update(['accepted_at' => now(), 'email' => $data['email']]);
 
             return User::create([
                 'name' => $data['name'],
-                'email' => $invitation->email,
+                'email' => $data['email'],
                 'password' => $data['password'],
                 'role' => User::ROLE_AGENT,
                 'realty_id' => $invitation->realty_id,

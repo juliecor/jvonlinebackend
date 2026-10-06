@@ -38,6 +38,7 @@ class RegistrationController extends Controller
             'address' => ['nullable', 'string', 'max:255'],
             'about' => ['nullable', 'string', 'max:2000'],
             'logo' => ['nullable', 'image', 'max:4096'],
+            'accent_color' => ['nullable', 'regex:/^#[0-9a-fA-F]{6}$/'],
             'email' => ['required', 'email', 'max:190', Rule::unique('users', 'email')],
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
@@ -53,6 +54,7 @@ class RegistrationController extends Controller
                 'address' => $data['address'] ?? null,
                 'about' => $data['about'] ?? null,
                 'logo_path' => $logoPath ?? $realty->logo_path,
+                'accent_color' => isset($data['accent_color']) ? strtolower($data['accent_color']) : $realty->accent_color,
                 'status' => Realty::STATUS_ACTIVE,
                 'registered_at' => now(),
             ]);

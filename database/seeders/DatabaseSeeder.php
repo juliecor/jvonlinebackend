@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         Realty::updateOrCreate(
             ['slug' => 'johndorf'],
-            ['name' => 'Johndorf Ventures Corporation', 'status' => Realty::STATUS_ACTIVE, 'registered_at' => now(), 'logo_path' => '/johndorf/logo.png'],
+            ['name' => 'Johndorf Ventures Corporation', 'status' => Realty::STATUS_ACTIVE, 'registered_at' => now(), 'logo_path' => '/johndorf/logo.png', 'accent_color' => '#b4241c'],
         );
         $this->command->info('Realty: Johndorf Ventures Corporation (/johndorf)');
     }

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['name', 'slug', 'email', 'contact_name', 'phone', 'address', 'about', 'status', 'logo_path', 'invited_at', 'registered_at'])]
+#[Fillable(['name', 'slug', 'email', 'contact_name', 'phone', 'address', 'about', 'status', 'logo_path', 'accent_color', 'invited_at', 'registered_at'])]
 class Realty extends Model
 {
     public const STATUS_INVITED = 'invited'; // invite sent, form not yet filled
@@ -89,6 +89,7 @@ class Realty extends Model
             'name' => $this->name,
             'slug' => $this->slug,
             'logo_url' => $this->logo_url,
+            'accent_color' => $this->accent_color,
             'status' => $this->status,
         ];
     }

@@ -33,7 +33,7 @@ class AgentInvitation extends Model
     }
 
     /** @return array{0: self, 1: string} the invitation and its plain token (only the hash is stored) */
-    public static function issue(Realty $realty, string $name, string $email, ?User $by): array
+    public static function issue(Realty $realty, string $name, ?string $email, ?User $by): array
     {
         $token = Str::random(48);
         $invitation = static::create([
