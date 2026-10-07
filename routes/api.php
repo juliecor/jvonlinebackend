@@ -45,9 +45,11 @@ Route::middleware('throttle:invite-link')->group(function () {
     Route::post('/join/{token}', [AgentJoinController::class, 'store']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/auth/me', [AuthController::class, 'me']);
+    Route::get('/auth/view-as', [AuthController::class, 'viewAsOptions']);
+    Route::post('/auth/view-as', [AuthController::class, 'viewAs']);
 
     // jvconline admin
     Route::prefix('admin')->middleware('admin')->group(function () {

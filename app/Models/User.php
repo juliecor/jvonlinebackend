@@ -32,6 +32,9 @@ class User extends Authenticatable
 
     public const STATUS_REJECTED = 'rejected'; // staff turned the application down; kept until they delete it
 
+    /** Name prefix of a super admin's preview token: "view-as:<realty id>:<role>" (see ApplyViewAs). */
+    public const VIEW_AS_TOKEN = 'view-as:';
+
     /** Same default as the column, so a freshly made user reads as active before it's reloaded. */
     protected $attributes = ['status' => self::STATUS_ACTIVE];
 
@@ -46,6 +49,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'reviewed_at' => 'datetime',
+            'is_superadmin' => 'boolean',
         ];
     }
 
@@ -69,6 +73,12 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
+    }
+
+    /** Platform admins who can also switch into any realty's dashboard as its admin or an agent. */
+    public function isSuperAdmin(): bool
+    {
+        return (bool) $this->is_superadmin;
     }
 
     public function isActive(): bool

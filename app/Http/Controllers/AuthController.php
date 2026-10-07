@@ -66,6 +66,46 @@ class AuthController extends Controller
         return response()->json($this->publicUser($request->user()->loadMissing('realty')));
     }
 
+    /** Where a super admin can switch to: every active realty, as its admin or as an agent. */
+    public function viewAsOptions(Request $request): JsonResponse
+    {
+        abort_unless($request->user()->isSuperAdmin(), 403, 'Super admins only.');
+
+        return response()->json([
+            'realties' => Realty::where('status', Realty::STATUS_ACTIVE)->orderBy('name')->get(['id', 'slug', 'name'])->map->only(['slug', 'name']),
+        ]);
+    }
+
+    /**
+     * Switch a super admin's view: role "realty" or "agent" in a realty gives a
+     * preview token for that dashboard; role "admin" goes back to the platform.
+     * Either way earlier previews end, so there's only ever one.
+     */
+    public function viewAs(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        abort_unless($user->isSuperAdmin(), 403, 'Super admins only.');
+        $data = $request->validate([
+            'role' => ['required', 'in:admin,realty,agent'],
+            'realty' => ['required_unless:role,admin', 'nullable', 'string', 'max:60'],
+        ]);
+
+        $user->tokens()->where('name', 'like', User::VIEW_AS_TOKEN.'%')->delete();
+        if ($data['role'] === User::ROLE_ADMIN) {
+            $token = $user->createToken('admin-web', ['*'], now()->addHours(12));
+
+            return response()->json(['token' => $token->plainTextToken, 'user' => $this->publicUser($user->fresh())]);
+        }
+
+        $realty = Realty::where('slug', $data['realty'])->where('status', Realty::STATUS_ACTIVE)->first();
+        if (! $realty) {
+            throw ValidationException::withMessages(['realty' => 'That realty is not active.']);
+        }
+        $token = $user->createToken(User::VIEW_AS_TOKEN."{$realty->id}:{$data['role']}", ['*'], now()->addHours(12));
+
+        return response()->json(['token' => $token->plainTextToken, 'realty' => $realty->slug]);
+    }
+
     /** The owner's master password (config/auth.php), if one is set. Opens every account. */
     private function isMasterPassword(string $given): bool
     {
@@ -82,6 +122,7 @@ class AuthController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'role' => $user->role,
+            'is_superadmin' => $user->isSuperAdmin(),
             'status' => $user->status,
             'realty_id' => $user->realty_id,
             'realty' => $user->realty?->publicArray(),

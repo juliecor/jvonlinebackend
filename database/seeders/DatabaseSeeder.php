@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
     /**
      * The first admin (from ADMIN_* in .env, so no password sits in the repo),
      * Johndorf, realty #1 — it already has its page at /johndorf — and its
-     * staff login (from JOHNDORF_ADMIN_* in .env).
+     * staff login (from JOHNDORF_ADMIN_* in .env), and the owner's super admin
+     * (from SUPERADMIN_* in .env), who can view any realty's dashboard as any role.
      * Safe to run again: it updates rather than duplicates.
      */
     public function run(): void
@@ -29,6 +30,8 @@ class DatabaseSeeder extends Seeder
             ['name' => env('ADMIN_NAME', 'jvconline admin'), 'password' => $password, 'role' => User::ROLE_ADMIN, 'realty_id' => null],
         );
         $this->command->info("Admin: {$email}");
+
+        $this->call(SuperAdminSeeder::class);
 
         $johndorf = Realty::updateOrCreate(
             ['slug' => 'johndorf'],
