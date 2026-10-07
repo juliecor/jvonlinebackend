@@ -18,6 +18,9 @@ return [
     // Where dashboard uploads (logos, project photos, floor plans) go: 'public' locally, 's3' on the server.
     'uploads' => env('UPLOADS_DISK', 'public'),
 
+    // Buyers' IDs and payslips: never a public disk. 'local' is storage/app/private; on S3 use a private bucket or prefix.
+    'documents' => env('DOCUMENTS_DISK', 'local'),
+
     /*
     |--------------------------------------------------------------------------
     | Filesystem Disks

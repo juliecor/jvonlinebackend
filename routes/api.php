@@ -15,8 +15,9 @@ use App\Http\Controllers\Realty\PaymentPlanController;
 use App\Http\Controllers\Realty\ProjectController;
 use App\Http\Controllers\Realty\ProjectPageController;
 use App\Http\Controllers\Realty\ProjectUpdateController;
-use App\Http\Controllers\Realty\UnitTypeController;
+use App\Http\Controllers\Realty\RequirementTypeController;
 use App\Http\Controllers\Realty\UnitController;
+use App\Http\Controllers\Realty\UnitTypeController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,11 @@ Route::get('/realties/{slug}/projects', [PublicRealtyController::class, 'project
 Route::get('/realties/{slug}/projects/{projectSlug}', [PublicRealtyController::class, 'project']);
 Route::get('/offers/{code}', [PublicOfferController::class, 'show'])->middleware('throttle:offer-view');
 Route::post('/offers/{code}/respond', [PublicOfferController::class, 'respond'])->middleware('throttle:offer-respond');
+Route::middleware('throttle:offer-upload')->group(function () {
+    Route::post('/offers/{code}/details', [PublicOfferController::class, 'details']);
+    Route::post('/offers/{code}/documents', [PublicOfferController::class, 'upload']);
+    Route::post('/offers/{code}/documents/{document}/remove', [PublicOfferController::class, 'removeDocument'])->whereNumber('document');
+});
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
 
 // Invite links (the token is the credential)
@@ -65,11 +71,20 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/offers/{id}', [OfferController::class, 'show'])->whereNumber('id');
             Route::post('/offers', [OfferController::class, 'store']);
             Route::post('/offers/{offer}/void', [OfferController::class, 'void']);
+            Route::get('/offers/{id}/documents/{document}', [OfferController::class, 'document'])->whereNumber(['id', 'document']);
+            Route::post('/offers/{id}/documents/{document}/review', [OfferController::class, 'review'])->whereNumber(['id', 'document']);
+            Route::post('/offers/{id}/remind', [OfferController::class, 'remind'])->whereNumber('id');
+            Route::post('/offers/{id}/send', [OfferController::class, 'send'])->whereNumber('id');
         });
         Route::middleware('realty.member:staff')->group(function () {
             Route::get('/agents', [AgentController::class, 'index']);
             Route::post('/agents', [AgentController::class, 'store']);
             Route::post('/agents/invitations/{invitation}/resend', [AgentController::class, 'resend']);
+            Route::get('/requirements', [RequirementTypeController::class, 'index']);
+            Route::post('/requirements', [RequirementTypeController::class, 'store']);
+            Route::post('/requirements/{type}', [RequirementTypeController::class, 'update']);
+            Route::post('/requirements/{type}/move', [RequirementTypeController::class, 'move']);
+            Route::delete('/requirements/{type}', [RequirementTypeController::class, 'destroy']);
             Route::post('/projects', [ProjectController::class, 'store']);
             Route::post('/projects/{project}', [ProjectController::class, 'update']); // POST, not PATCH: multipart cover upload
             Route::post('/projects/{project}/units', [UnitController::class, 'store']);

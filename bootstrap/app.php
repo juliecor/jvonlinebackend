@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\EnsureAdmin;
 use App\Http\Middleware\EnsureRealtyMember;
 use App\Http\Middleware\TrustFrontendClientIp;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -16,6 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // This app is an API: a guest gets a 401, never a redirect to a login page it doesn't have.
+        $middleware->redirectGuestsTo(fn () => null);
         $middleware->prepend(TrustFrontendClientIp::class);
         $middleware->alias([
             'admin' => EnsureAdmin::class,

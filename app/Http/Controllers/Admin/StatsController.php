@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
+use App\Models\OfferDocument;
 use App\Models\OfferResponse;
 use App\Models\Project;
 use App\Models\Realty;
@@ -36,6 +37,10 @@ class StatsController extends Controller
                 'kind' => 'offer_response', 'at' => $r->created_at, 'realty' => $r->offer?->realty?->name, 'realty_id' => $r->realty_id,
                 'text' => "{$r->name}: ".(OfferResponse::LABELS[$r->kind] ?? $r->kind).' — '.($r->offer?->unit?->name ?? 'a unit').' ('.($r->offer?->realty?->name ?? '').')', 'code' => $r->offer?->code,
             ]))
+            ->concat(OfferDocument::with(['offer.unit', 'offer.realty', 'type'])->latest()->take(15)->get()->map(fn ($d) => [
+                'kind' => 'document_uploaded', 'at' => $d->created_at, 'realty' => $d->offer?->realty?->name, 'realty_id' => $d->realty_id,
+                'text' => ($d->offer?->buyer_name ?? 'A buyer').' sent '.($d->type?->name ?? 'a document').' — '.($d->offer?->unit?->name ?? 'a unit').' ('.($d->offer?->realty?->name ?? '').')', 'code' => $d->offer?->code,
+            ]))
             ->sortByDesc('at')
             ->take(20)
             ->values();
@@ -52,6 +57,8 @@ class StatsController extends Controller
             'offers_total' => Offer::count(),
             'offer_views' => (int) Offer::sum('views'),
             'offer_responses' => OfferResponse::count(),
+            'documents' => OfferDocument::count(),
+            'documents_to_review' => OfferDocument::where('status', 'pending')->count(),
             'recent' => $recent,
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Realty;
 use App\Models\RealtyInvitation;
+use App\Models\RequirementType;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -59,6 +60,8 @@ class RegistrationController extends Controller
                 'registered_at' => now(),
             ]);
             $invitation->update(['accepted_at' => now()]);
+            // Every realty starts with the basic buyer checklist; they can change it in their dashboard.
+            RequirementType::seedDefaults($realty);
 
             return User::create([
                 'name' => $data['contact_name'],

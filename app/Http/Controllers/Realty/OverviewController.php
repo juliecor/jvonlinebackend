@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Realty;
 
 use App\Http\Controllers\Controller;
+use App\Models\OfferDocument;
 use App\Models\OfferResponse;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -33,6 +34,9 @@ class OverviewController extends Controller
                 'public_projects' => $realty->projects()->where('is_public', true)->count(),
                 'new_responses' => OfferResponse::where('realty_id', $realty->id)->whereNull('seen_at')
                     ->when($user->role === User::ROLE_AGENT, fn ($q) => $q->whereHas('offer', fn ($o) => $o->where('agent_id', $user->id)))->count(),
+                // Buyer files nobody has approved or sent back yet (on active offers this person can see).
+                'docs_to_review' => OfferDocument::where('realty_id', $realty->id)->where('status', 'pending')
+                    ->whereHas('offer', fn ($o) => $o->where('status', 'active')->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id)))->count(),
                 'units' => $realty->projects()->withCount('units')->get()->sum('units_count'),
                 // Agents see their own offers; staff the whole realty's.
                 'offers' => $realty->offers()->where('status', 'active')->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id))->count(),

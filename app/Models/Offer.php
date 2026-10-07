@@ -7,15 +7,19 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /** One unit + one payment plan, prepared by an agent for one buyer. The code is the public link. */
-#[Fillable(['realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status'])]
+#[Fillable(['realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent'])]
 class Offer extends Model
 {
     protected function casts(): array
     {
-        return ['purchase_date' => 'date:Y-m-d', 'price' => 'decimal:2', 'schedule' => 'array', 'first_viewed_at' => 'datetime', 'last_viewed_at' => 'datetime'];
+        return [
+            'purchase_date' => 'date:Y-m-d', 'price' => 'decimal:2', 'schedule' => 'array', 'first_viewed_at' => 'datetime', 'last_viewed_at' => 'datetime',
+            'buyer_details' => 'array', 'details_submitted_at' => 'datetime', 'offer_emailed_at' => 'datetime', 'last_reminded_at' => 'datetime',
+        ];
     }
 
     public function realty(): BelongsTo
@@ -46,6 +50,79 @@ class Offer extends Model
     public function agent(): BelongsTo
     {
         return $this->belongsTo(User::class, 'agent_id');
+    }
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(OfferDocument::class);
+    }
+
+    /** Where reminders and the offer itself are emailed: the details the buyer gave, else what the agent typed. */
+    public function buyerEmail(): ?string
+    {
+        return ($this->buyer_details['email'] ?? null) ?: $this->buyer_email;
+    }
+
+    /**
+     * This buyer's checklist: each requirement with what it needs from them
+     * ('required' / 'optional' / 'not_needed'), where it stands
+     * ('missing' / 'review' / 'approved' / 'rejected') and its files.
+     * $internal adds what only the realty sees (who reviewed, file type).
+     *
+     * @param  Collection<int, RequirementType>|null  $types  the realty's types, when listing many offers
+     * @return array<int, array<string, mixed>>
+     */
+    public function requirementList(bool $internal = false, $types = null): array
+    {
+        $docs = $this->documents->sortByDesc('id')->groupBy('requirement_type_id');
+        $types ??= RequirementType::where('realty_id', $this->realty_id)->orderBy('sort')->orderBy('id')->get();
+
+        return $types
+            // A hidden requirement still shows on offers where the buyer already sent files for it.
+            ->filter(fn (RequirementType $t) => $t->active || ($internal && $docs->has($t->id)))
+            ->map(function (RequirementType $t) use ($docs, $internal) {
+                $files = $docs->get($t->id, collect());
+                $state = match (true) {
+                    $files->contains('status', 'pending') => 'review',
+                    $files->contains('status', 'approved') => 'approved',
+                    $files->isNotEmpty() => 'rejected',
+                    default => 'missing',
+                };
+
+                return [
+                    'id' => $t->id,
+                    'name' => $t->name,
+                    'help' => $t->help,
+                    'applies' => $t->applies,
+                    'needed' => $t->neededFor($this->details_submitted_at ? $this->buyer_details : null),
+                    'state' => $state,
+                    'note' => $state === 'rejected' ? $files->first()->note : null,
+                    'files' => $files->map(fn (OfferDocument $d) => [
+                        'id' => $d->id,
+                        'name' => $d->original_name,
+                        'size' => $d->size,
+                        'status' => $d->status,
+                        'note' => $d->note,
+                        'uploaded_at' => $d->created_at,
+                    ] + ($internal ? ['mime' => $d->mime, 'reviewed_at' => $d->reviewed_at, 'reviewed_by' => $d->reviewer?->name] : []))->values()->all(),
+                ];
+            })->values()->all();
+    }
+
+    /** The numbers the offer lists show: required items sent / approved, files waiting for review, details in or not. */
+    public function requirementSummary($types = null): array
+    {
+        $list = collect($this->requirementList(false, $types));
+        $required = $list->where('needed', 'required');
+
+        return [
+            'required' => $required->count(),
+            'submitted' => $required->whereIn('state', ['review', 'approved'])->count(),
+            'approved' => $required->where('state', 'approved')->count(),
+            'missing' => $required->whereIn('state', ['missing', 'rejected'])->count(),
+            'to_review' => $this->documents->where('status', 'pending')->count(),
+            'details' => $this->details_submitted_at !== null,
+        ];
     }
 
     /** The buyer's link on the Next.js site. */
@@ -135,6 +212,10 @@ class Offer extends Model
             ],
             'model' => $model ? ['name' => $model->name, 'specs' => $model->specs, 'images' => $model->images] : null,
             'agent' => $this->agent ? ['name' => $this->agent->name, 'email' => $this->agent->email] : null,
+            // The buyer's own checklist. No file links: documents only open from the realty's dashboard.
+            'requirements' => $this->requirementList(),
+            'details_submitted_at' => $this->details_submitted_at,
+            'buyer_contact' => ['email' => $this->buyer_email, 'phone' => $this->buyer_phone],
         ];
     }
 }
