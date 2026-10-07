@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
-#[Fillable(['realty_id', 'invited_by', 'name', 'email', 'token_hash', 'expires_at', 'accepted_at'])]
+#[Fillable(['realty_id', 'invited_by', 'name', 'email', 'phone', 'token_hash', 'expires_at', 'accepted_at'])]
 #[Hidden(['token_hash'])]
 class AgentInvitation extends Model
 {
@@ -33,7 +33,7 @@ class AgentInvitation extends Model
     }
 
     /** @return array{0: self, 1: string} the invitation and its plain token (only the hash is stored) */
-    public static function issue(Realty $realty, string $name, ?string $email, ?User $by): array
+    public static function issue(Realty $realty, string $name, ?string $email, ?User $by, ?string $phone = null): array
     {
         $token = Str::random(48);
         $invitation = static::create([
@@ -41,6 +41,7 @@ class AgentInvitation extends Model
             'invited_by' => $by?->id,
             'name' => $name,
             'email' => $email,
+            'phone' => $phone,
             'token_hash' => hash('sha256', $token),
             'expires_at' => now()->addDays(self::DAYS_VALID),
         ]);

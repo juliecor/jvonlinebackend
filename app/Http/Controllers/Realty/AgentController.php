@@ -36,6 +36,7 @@ class AgentController extends Controller
             'id' => $i->id,
             'name' => $i->name,
             'email' => $i->email,
+            'phone' => $i->phone,
             'invited_at' => $i->created_at,
             'expires_at' => $i->expires_at,
             'expired' => $i->expires_at->isPast(),
@@ -67,6 +68,10 @@ class AgentController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'email' => ['nullable', 'email', 'max:190'],
+            // Same format the agent must use on the join form: 11 digits starting with 09.
+            'phone' => ['nullable', 'string', 'regex:/^09\d{9}$/'],
+        ], [
+            'phone.regex' => 'Enter an 11-digit mobile number starting with 09, numbers only, like 09171234567.',
         ]);
 
         $existing = ! empty($data['email']) ? User::where('email', $data['email'])->first() : null;
@@ -81,7 +86,7 @@ class AgentController extends Controller
             return response()->json(['message' => $message, 'errors' => ['email' => [$message]]], 422);
         }
 
-        [$invitation, $token] = AgentInvitation::issue($realty, $data['name'], $data['email'] ?? null, $request->user());
+        [$invitation, $token] = AgentInvitation::issue($realty, $data['name'], $data['email'] ?? null, $request->user(), $data['phone'] ?? null);
 
         return response()->json($this->withLink($invitation, $token), 201);
     }

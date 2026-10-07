@@ -161,6 +161,25 @@ class AgentApplicationTest extends TestCase
         $this->postJson('/api/realty/agents', ['name' => $rejected->name, 'email' => $rejected->email])->assertCreated();
     }
 
+    public function test_staff_can_note_a_contact_number_on_the_invite(): void
+    {
+        Sanctum::actingAs($this->staff);
+
+        $this->postJson('/api/realty/agents', ['name' => 'Juliecor', 'phone' => '0917 123 4567'])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['phone' => 'Enter an 11-digit mobile number starting with 09, numbers only, like 09171234567.']);
+
+        $link = $this->postJson('/api/realty/agents', ['name' => 'Juliecor', 'phone' => '09171234567'])->assertCreated()->json('join_url');
+        $this->postJson('/api/realty/agents', ['name' => 'No Number'])->assertCreated();
+
+        $phones = collect($this->getJson('/api/realty/agents')->assertOk()->json('invitations'))->pluck('phone', 'name');
+        $this->assertSame('09171234567', $phones['Juliecor']);
+        $this->assertNull($phones['No Number']);
+
+        // The join page starts with the number staff entered.
+        $this->getJson('/api/join/'.basename($link))->assertOk()->assertJsonPath('phone', '09171234567');
+    }
+
     public function test_inviting_a_pending_applicant_points_staff_to_the_review_list(): void
     {
         $pending = $this->agent(User::STATUS_PENDING);

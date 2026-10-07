@@ -25,6 +25,7 @@ class AgentJoinController extends Controller
             'realty' => $invitation->realty->publicArray(),
             'name' => $invitation->name,
             'email' => $invitation->email,
+            'phone' => $invitation->phone,
             // Shown on the join page so the agent knows who sent it and until when.
             'invited_by' => $invitation->inviter?->name,
             'expires_at' => $invitation->expires_at,
