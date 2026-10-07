@@ -54,7 +54,18 @@ class ViewAsTest extends TestCase
         $this->api('get', '/api/auth/me', $token)->assertJsonPath('role', User::ROLE_AGENT);
         $this->api('get', '/api/realty/offers', $token)->assertOk();
         $this->api('post', "/api/realty/projects/{$this->project->id}/status", $token, ['stage' => 'Ongoing'])->assertForbidden();
-        $this->api('get', '/api/admin/stats', $token)->assertForbidden();
+    }
+
+    public function test_super_admin_keeps_the_platform_pages_in_any_view_but_realty_people_do_not(): void
+    {
+        foreach (['realty', 'agent'] as $role) {
+            $token = $this->switchTo($this->adminToken(), $role, 'johndorf')->json('token');
+            $this->api('get', '/api/admin/stats', $token)->assertOk();
+            $this->api('get', '/api/admin/realties', $token)->assertOk();
+        }
+
+        $staff = User::factory()->create(['role' => User::ROLE_REALTY, 'realty_id' => $this->realty->id]);
+        $this->api('get', '/api/admin/stats', $staff->createToken('web')->plainTextToken)->assertForbidden();
     }
 
     public function test_switching_again_or_back_to_super_admin_ends_the_preview(): void

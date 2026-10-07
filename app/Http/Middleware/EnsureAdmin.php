@@ -6,12 +6,16 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/** Only jvconline admins past this point (routes under /api/admin). */
+/**
+ * Only jvconline admins past this point (routes under /api/admin). Super admins
+ * keep these pages while they view a realty's dashboard as its admin or an agent.
+ */
 class EnsureAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->user()?->isAdmin()) {
+        $user = $request->user();
+        if (! $user?->isAdmin() && ! $user?->isSuperAdmin()) {
             abort(403, 'Admins only.');
         }
 
