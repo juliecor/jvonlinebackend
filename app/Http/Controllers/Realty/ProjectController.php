@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 /** A realty's projects. Staff create and edit; agents may read (to pick a unit for an offer). */
 class ProjectController extends Controller
@@ -13,7 +15,7 @@ class ProjectController extends Controller
     public function index(Request $request): JsonResponse
     {
         $projects = $request->user()->realty->projects()
-            ->withCount(['units', 'paymentPlans', 'offers'])
+            ->withCount(['units', 'paymentPlans', 'offers', 'units as ready_units_count' => fn ($q) => $q->where('status', 'available')->whereNotNull('price')])
             ->orderBy('name')
             ->get();
 
@@ -49,6 +51,28 @@ class ProjectController extends Controller
         $project->update($data);
 
         return response()->json($project->fresh()->load(['units', 'paymentPlans'])->loadCount('offers'));
+    }
+
+    /**
+     * The status bar at the top of a project: open for offers or archived, its
+     * stage, and whether it shows on the public site. Send only what changes.
+     */
+    public function status(Request $request, Project $project): JsonResponse
+    {
+        $this->own($request, $project);
+        $data = $request->validate([
+            'status' => ['sometimes', 'in:active,archived'],
+            'stage' => ['sometimes', 'nullable', Rule::in(Project::STAGES)],
+            'is_public' => ['sometimes', 'boolean'],
+        ]);
+        if (($data['is_public'] ?? false) && ! $project->slug) {
+            $slug = Str::slug($project->name);
+            $taken = Project::where('realty_id', $project->realty_id)->where('slug', $slug)->whereKeyNot($project->id)->exists();
+            $data['slug'] = $taken ? "{$slug}-{$project->id}" : $slug;
+        }
+        $project->update($data);
+
+        return response()->json($project->only(['id', 'status', 'stage', 'is_public', 'slug']));
     }
 
     private function validated(Request $request): array

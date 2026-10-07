@@ -93,6 +93,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('/requirements/{type}', [RequirementTypeController::class, 'destroy']);
             Route::post('/projects', [ProjectController::class, 'store']);
             Route::post('/projects/{project}', [ProjectController::class, 'update']); // POST, not PATCH: multipart cover upload
+            Route::post('/projects/{project}/status', [ProjectController::class, 'status']);
             Route::post('/projects/{project}/units', [UnitController::class, 'store']);
             Route::post('/units/{unit}', [UnitController::class, 'update']);
             Route::delete('/units/{unit}', [UnitController::class, 'destroy']);
