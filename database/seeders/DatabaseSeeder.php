@@ -9,8 +9,9 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * The first admin (from ADMIN_* in .env, so no password sits in the repo)
-     * and Johndorf, realty #1 — it already has its page at /johndorf.
+     * The first admin (from ADMIN_* in .env, so no password sits in the repo),
+     * Johndorf, realty #1 — it already has its page at /johndorf — and its
+     * staff login (from JOHNDORF_ADMIN_* in .env).
      * Safe to run again: it updates rather than duplicates.
      */
     public function run(): void
@@ -29,11 +30,24 @@ class DatabaseSeeder extends Seeder
         );
         $this->command->info("Admin: {$email}");
 
-        Realty::updateOrCreate(
+        $johndorf = Realty::updateOrCreate(
             ['slug' => 'johndorf'],
             ['name' => 'Johndorf Ventures Corporation', 'status' => Realty::STATUS_ACTIVE, 'registered_at' => now(), 'logo_path' => '/johndorf/logo.png', 'accent_color' => '#b4241c'],
         );
         $this->command->info('Realty: Johndorf Ventures Corporation (/johndorf)');
+
+        // Johndorf's own staff login (signs in at /johndorf/login, not /admin/login).
+        $johndorfEmail = env('JOHNDORF_ADMIN_EMAIL');
+        $johndorfPassword = env('JOHNDORF_ADMIN_PASSWORD');
+        if ($johndorfEmail && $johndorfPassword) {
+            User::updateOrCreate(
+                ['email' => $johndorfEmail],
+                ['name' => env('JOHNDORF_ADMIN_NAME', 'Johndorf Admin'), 'password' => $johndorfPassword, 'role' => User::ROLE_REALTY, 'realty_id' => $johndorf->id],
+            );
+            $this->command->info("Johndorf staff: {$johndorfEmail}");
+        } else {
+            $this->command->warn('Skipped the Johndorf staff login: set JOHNDORF_ADMIN_EMAIL and JOHNDORF_ADMIN_PASSWORD in .env.');
+        }
 
         $this->call(JohndorfProjectsSeeder::class);
     }
