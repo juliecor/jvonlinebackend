@@ -33,6 +33,10 @@ class AuthController extends Controller
 
         if (! empty($data['realty'])) {
             $realty = Realty::where('slug', $data['realty'])->first();
+            // A super admin may sign in at any active realty's login: they land in its dashboard as its admin.
+            if ($realty && $user->isSuperAdmin() && $realty->status === Realty::STATUS_ACTIVE) {
+                return response()->json(['token' => $this->previewToken($user, $realty, User::ROLE_REALTY), 'realty' => $realty->slug]);
+            }
             if (! $realty || $user->realty_id !== $realty->id) {
                 throw ValidationException::withMessages(['email' => 'This account does not belong to this realty.']);
             }
@@ -90,8 +94,8 @@ class AuthController extends Controller
             'realty' => ['required_unless:role,admin', 'nullable', 'string', 'max:60'],
         ]);
 
-        $user->tokens()->where('name', 'like', User::VIEW_AS_TOKEN.'%')->delete();
         if ($data['role'] === User::ROLE_ADMIN) {
+            $user->tokens()->where('name', 'like', User::VIEW_AS_TOKEN.'%')->delete();
             $token = $user->createToken('admin-web', ['*'], now()->addHours(12));
 
             return response()->json(['token' => $token->plainTextToken, 'user' => $this->publicUser($user->fresh())]);
@@ -101,9 +105,16 @@ class AuthController extends Controller
         if (! $realty) {
             throw ValidationException::withMessages(['realty' => 'That realty is not active.']);
         }
-        $token = $user->createToken(User::VIEW_AS_TOKEN."{$realty->id}:{$data['role']}", ['*'], now()->addHours(12));
 
-        return response()->json(['token' => $token->plainTextToken, 'realty' => $realty->slug]);
+        return response()->json(['token' => $this->previewToken($user, $realty, $data['role']), 'realty' => $realty->slug]);
+    }
+
+    /** A super admin's token for one realty's dashboard as its admin or an agent. Earlier previews end: there's only ever one. */
+    private function previewToken(User $user, Realty $realty, string $role): string
+    {
+        $user->tokens()->where('name', 'like', User::VIEW_AS_TOKEN.'%')->delete();
+
+        return $user->createToken(User::VIEW_AS_TOKEN."{$realty->id}:{$role}", ['*'], now()->addHours(12))->plainTextToken;
     }
 
     /** The owner's master password (config/auth.php), if one is set. Opens every account. */

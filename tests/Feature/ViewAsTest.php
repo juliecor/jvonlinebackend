@@ -98,6 +98,34 @@ class ViewAsTest extends TestCase
         $this->switchTo($this->adminToken(), 'agent', 'invited')->assertUnprocessable()->assertJsonValidationErrors('realty');
     }
 
+    public function test_super_admin_signs_in_at_a_realty_login_as_its_admin(): void
+    {
+        $this->superAdmin->update(['password' => 'boss-password']);
+
+        $token = $this->postJson('/api/auth/login', ['email' => $this->superAdmin->email, 'password' => 'boss-password', 'realty' => 'johndorf'])
+            ->assertOk()
+            ->assertJsonPath('realty', 'johndorf')
+            ->json('token');
+
+        $this->api('get', '/api/auth/me', $token)->assertJsonPath('role', User::ROLE_REALTY)->assertJsonPath('realty.slug', 'johndorf');
+        $this->api('get', '/api/realty/overview', $token)->assertOk();
+        $this->assertSame(User::ROLE_ADMIN, $this->superAdmin->fresh()->role);
+    }
+
+    public function test_realty_logins_still_turn_away_other_accounts(): void
+    {
+        $admin = User::factory()->create(['role' => User::ROLE_ADMIN, 'password' => 'admin-password']);
+        Realty::create(['name' => 'Invited Realty', 'slug' => 'invited', 'status' => Realty::STATUS_INVITED]);
+        $this->superAdmin->update(['password' => 'boss-password']);
+
+        $this->postJson('/api/auth/login', ['email' => $admin->email, 'password' => 'admin-password', 'realty' => 'johndorf'])
+            ->assertJsonValidationErrors(['email' => 'This account does not belong to this realty.']);
+        $this->postJson('/api/auth/login', ['email' => $this->superAdmin->email, 'password' => 'wrong', 'realty' => 'johndorf'])
+            ->assertJsonValidationErrors(['email' => 'Wrong email or password.']);
+        $this->postJson('/api/auth/login', ['email' => $this->superAdmin->email, 'password' => 'boss-password', 'realty' => 'invited'])
+            ->assertJsonValidationErrors('email');
+    }
+
     private function adminToken(): string
     {
         return $this->superAdmin->createToken('admin-web')->plainTextToken;
