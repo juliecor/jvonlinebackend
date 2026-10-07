@@ -31,7 +31,8 @@ class OfferController extends Controller
                 'created_at' => $o->created_at,
                 'realty' => $o->realty ? ['id' => $o->realty->id, 'name' => $o->realty->name, 'slug' => $o->realty->slug] : null,
                 'project' => $o->project?->name,
-                'unit' => $o->unit ? trim($o->unit->name.' · '.($o->unit->unit_type ?? ''), ' ·') : null,
+                // "Unit 415 · 1 Bedroom"; just the name when the type says the same thing.
+                'unit' => $o->unit ? implode(' · ', array_unique(array_filter([$o->unit->name, $o->unit->unit_type]))) : null,
                 'agent' => $o->agent?->name,
                 'url' => Offer::url($o->code),
                 'responses_count' => $o->responses->count(),
