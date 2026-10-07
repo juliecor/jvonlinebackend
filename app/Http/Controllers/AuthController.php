@@ -38,6 +38,14 @@ class AuthController extends Controller
             }
         }
 
+        // Agents who applied wait for their realty's staff; the master password doesn't skip this.
+        if ($user->status === User::STATUS_PENDING) {
+            throw ValidationException::withMessages(['email' => 'Your account is waiting for approval from '.($user->realty?->name ?? 'your realty').'.']);
+        }
+        if ($user->status === User::STATUS_REJECTED) {
+            throw ValidationException::withMessages(['email' => 'Your application to '.($user->realty?->name ?? 'this realty')." wasn't approved."]);
+        }
+
         $token = $user->createToken($data['device'] ?? 'web', ['*'], now()->addHours(12));
 
         return response()->json([
@@ -74,6 +82,7 @@ class AuthController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'role' => $user->role,
+            'status' => $user->status,
             'realty_id' => $user->realty_id,
             'realty' => $user->realty?->publicArray(),
         ];

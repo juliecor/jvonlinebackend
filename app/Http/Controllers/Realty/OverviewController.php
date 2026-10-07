@@ -29,6 +29,7 @@ class OverviewController extends Controller
             ],
             'stats' => [
                 'agents' => $realty->agents()->count(),
+                'agents_pending' => $realty->agentApplications()->where('status', User::STATUS_PENDING)->count(),
                 'agents_invited' => $realty->agentInvitations()->whereNull('accepted_at')->where('expires_at', '>', now())->count(),
                 'staff' => $realty->users()->where('role', User::ROLE_REALTY)->count(),
                 'projects' => $realty->projects()->count(),

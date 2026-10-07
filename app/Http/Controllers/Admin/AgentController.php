@@ -23,6 +23,7 @@ class AgentController extends Controller
                 'name' => $u->name,
                 'email' => $u->email,
                 'role' => $u->role,
+                'status' => $u->status,
                 'joined_at' => $u->created_at,
                 'offers_count' => $u->offers_count,
                 'realty' => $u->realty ? ['id' => $u->realty->id, 'name' => $u->realty->name, 'slug' => $u->realty->slug] : null,

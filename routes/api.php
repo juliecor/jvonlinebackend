@@ -82,6 +82,10 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/agents', [AgentController::class, 'index']);
             Route::post('/agents', [AgentController::class, 'store']);
             Route::post('/agents/invitations/{invitation}/resend', [AgentController::class, 'resend']);
+            Route::post('/agents/{agent}/approve', [AgentController::class, 'approve'])->whereNumber('agent');
+            Route::post('/agents/{agent}/reject', [AgentController::class, 'reject'])->whereNumber('agent');
+            Route::get('/agents/{agent}/resume', [AgentController::class, 'resume'])->whereNumber('agent');
+            Route::delete('/agents/{agent}', [AgentController::class, 'destroy'])->whereNumber('agent');
             Route::get('/requirements', [RequirementTypeController::class, 'index']);
             Route::post('/requirements', [RequirementTypeController::class, 'store']);
             Route::post('/requirements/{type}', [RequirementTypeController::class, 'update']);

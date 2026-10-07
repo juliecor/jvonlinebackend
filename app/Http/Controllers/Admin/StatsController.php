@@ -24,7 +24,7 @@ class StatsController extends Controller
             ->concat(Realty::where('status', Realty::STATUS_INVITED)->whereNotNull('invited_at')->latest('invited_at')->take(10)->get()->map(fn (Realty $r) => [
                 'kind' => 'realty_invited', 'at' => $r->invited_at, 'realty' => $r->name, 'realty_id' => $r->id, 'text' => "{$r->name} was invited",
             ]))
-            ->concat(User::with('realty')->where('role', User::ROLE_AGENT)->latest()->take(10)->get()->map(fn (User $u) => [
+            ->concat(User::with('realty')->where('role', User::ROLE_AGENT)->where('status', User::STATUS_ACTIVE)->latest()->take(10)->get()->map(fn (User $u) => [
                 'kind' => 'agent_joined', 'at' => $u->created_at, 'realty' => $u->realty?->name, 'realty_id' => $u->realty_id, 'text' => "{$u->name} joined ".($u->realty?->name ?? 'a realty').' as an agent',
             ]))
             ->concat(Project::with('realty')->latest()->take(10)->get()->map(fn (Project $p) => [
@@ -50,7 +50,8 @@ class StatsController extends Controller
             'realties_active' => Realty::where('status', Realty::STATUS_ACTIVE)->count(),
             'realties_invited' => Realty::where('status', Realty::STATUS_INVITED)->count(),
             'realty_users' => User::where('role', User::ROLE_REALTY)->count(),
-            'agents' => User::where('role', User::ROLE_AGENT)->count(),
+            'agents' => User::where('role', User::ROLE_AGENT)->where('status', User::STATUS_ACTIVE)->count(),
+            'agents_pending' => User::where('role', User::ROLE_AGENT)->where('status', User::STATUS_PENDING)->count(),
             'projects' => Project::count(),
             'units' => Unit::count(),
             'offers_active' => Offer::where('status', 'active')->count(),

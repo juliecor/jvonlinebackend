@@ -13,8 +13,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['name', 'email', 'password', 'role', 'realty_id'])]
-#[Hidden(['password', 'remember_token'])]
+#[Fillable(['name', 'email', 'password', 'role', 'status', 'realty_id', 'phone', 'resume_path', 'resume_name', 'resume_size', 'reviewed_by', 'reviewed_at'])]
+#[Hidden(['password', 'remember_token', 'resume_path'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -26,6 +26,15 @@ class User extends Authenticatable
 
     public const ROLE_AGENT = 'agent';   // invited by a realty — sends buyer links
 
+    public const STATUS_PENDING = 'pending';   // an agent who applied; can't sign in until staff approve
+
+    public const STATUS_ACTIVE = 'active';     // can sign in
+
+    public const STATUS_REJECTED = 'rejected'; // staff turned the application down; kept until they delete it
+
+    /** Same default as the column, so a freshly made user reads as active before it's reloaded. */
+    protected $attributes = ['status' => self::STATUS_ACTIVE];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -36,6 +45,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'reviewed_at' => 'datetime',
         ];
     }
 
@@ -50,8 +60,25 @@ class User extends Authenticatable
         return $this->hasMany(Offer::class, 'agent_id');
     }
 
+    /** The staff member who approved or rejected this agent's application. */
+    public function reviewer(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'reviewed_by');
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
+    }
+
+    /** Agents' resumes sit on the private documents disk, like buyers' IDs — never a public one. */
+    public static function resumeDisk(): string
+    {
+        return config('filesystems.documents');
     }
 }

@@ -51,9 +51,16 @@ class Realty extends Model
         return $this->hasMany(User::class);
     }
 
+    /** Working agents: approved and able to sign in. */
     public function agents(): HasMany
     {
-        return $this->hasMany(User::class)->where('role', User::ROLE_AGENT);
+        return $this->hasMany(User::class)->where('role', User::ROLE_AGENT)->where('status', User::STATUS_ACTIVE);
+    }
+
+    /** Agents who filled in the join form and are waiting on staff, or were turned down. */
+    public function agentApplications(): HasMany
+    {
+        return $this->hasMany(User::class)->where('role', User::ROLE_AGENT)->whereIn('status', [User::STATUS_PENDING, User::STATUS_REJECTED]);
     }
 
     public function invitations(): HasMany
