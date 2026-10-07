@@ -25,6 +25,7 @@ class SuperAdminSeederTest extends TestCase
         $user = User::where('email', SuperAdminSeeder::EMAIL)->firstOrFail();
         $this->assertTrue($user->isSuperAdmin());
         $this->assertSame(User::ROLE_ADMIN, $user->role);
+        $this->assertSame(SuperAdminSeeder::NAME, $user->name);
         $this->assertTrue(Hash::check('typed-in-secret', $user->password));
     }
 

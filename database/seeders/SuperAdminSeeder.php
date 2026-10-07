@@ -15,6 +15,8 @@ class SuperAdminSeeder extends Seeder
 {
     public const EMAIL = 'mindworth@gmail.com';
 
+    public const NAME = 'Anthony Leuterio';
+
     public function run(): void
     {
         $user = User::where('email', self::EMAIL)->first();
@@ -38,8 +40,8 @@ class SuperAdminSeeder extends Seeder
             }
         }
 
-        $user ??= new User(['email' => self::EMAIL, 'name' => 'Super Admin']);
-        $user->forceFill(['role' => User::ROLE_ADMIN, 'realty_id' => null, 'is_superadmin' => true] + ($password !== '' ? ['password' => $password] : []))->save();
+        $user ??= new User(['email' => self::EMAIL]);
+        $user->forceFill(['name' => self::NAME, 'role' => User::ROLE_ADMIN, 'realty_id' => null, 'is_superadmin' => true] + ($password !== '' ? ['password' => $password] : []))->save();
         $this->command->info('Super admin: '.self::EMAIL.($password === '' ? ' (password unchanged)' : ''));
     }
 }
