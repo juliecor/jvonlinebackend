@@ -11,8 +11,8 @@ class DatabaseSeeder extends Seeder
     /**
      * The first admin (from ADMIN_* in .env, so no password sits in the repo),
      * Johndorf, realty #1 — it already has its page at /johndorf — and its
-     * staff login (from JOHNDORF_ADMIN_* in .env), and the owner's super admin
-     * (from SUPERADMIN_* in .env), who can view any realty's dashboard as any role.
+     * staff login (from JOHNDORF_ADMIN_* in .env), and the owner's super admin,
+     * who can view any realty's dashboard as any role (its password is typed in).
      * Safe to run again: it updates rather than duplicates.
      */
     public function run(): void
