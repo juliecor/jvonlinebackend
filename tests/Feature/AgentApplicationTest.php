@@ -182,6 +182,7 @@ class AgentApplicationTest extends TestCase
             ->assertOk()
             ->assertJsonCount(1, 'agents')
             ->assertJsonPath('agents.0.id', $active->id)
+            ->assertJsonPath('agents.0.phone', '09171234567')
             ->assertJsonCount(2, 'applications')
             ->assertJsonPath('applications.0.id', $pending->id)
             ->assertJsonPath('applications.0.phone', '09171234567')

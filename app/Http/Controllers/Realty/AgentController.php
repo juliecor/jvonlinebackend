@@ -27,6 +27,7 @@ class AgentController extends Controller
             'id' => $u->id,
             'name' => $u->name,
             'email' => $u->email,
+            'phone' => $u->phone,
             'joined_at' => $u->created_at,
             'offers_count' => $u->offers_count,
         ]);
