@@ -6,12 +6,10 @@ use App\Models\AgentInvitation;
 use App\Models\Realty;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-/** Invited agents apply with a contact number and resume, and only sign in once their realty's staff approve them. */
+/** Invited agents apply with a contact number, and only sign in once their realty's staff approve them. */
 class AgentApplicationTest extends TestCase
 {
     use RefreshDatabase;
@@ -24,12 +22,11 @@ class AgentApplicationTest extends TestCase
     {
         parent::setUp();
 
-        Storage::fake(User::resumeDisk());
         $this->realty = $this->makeRealty('johndorf', 'Johndorf Ventures Corporation');
         $this->staff = User::factory()->create(['role' => User::ROLE_REALTY, 'realty_id' => $this->realty->id]);
     }
 
-    public function test_join_creates_a_pending_agent_with_phone_and_resume(): void
+    public function test_join_creates_a_pending_agent_with_a_contact_number(): void
     {
         $token = $this->invite();
 
@@ -40,25 +37,15 @@ class AgentApplicationTest extends TestCase
         $agent = User::where('email', 'juliecor@example.com')->firstOrFail();
         $this->assertSame(User::STATUS_PENDING, $agent->status);
         $this->assertSame('09171234567', $agent->phone);
-        $this->assertSame('cv.pdf', $agent->resume_name);
-        Storage::disk(User::resumeDisk())->assertExists($agent->resume_path);
     }
 
-    public function test_join_requires_a_contact_number_and_a_pdf_resume(): void
+    public function test_join_requires_a_contact_number(): void
     {
         $token = $this->invite();
 
-        $this->post("/api/join/{$token}", $this->application(['phone' => '', 'resume' => null]), ['Accept' => 'application/json'])
+        $this->postJson("/api/join/{$token}", $this->application(['phone' => '']))
             ->assertUnprocessable()
-            ->assertJsonValidationErrors(['phone', 'resume']);
-
-        $this->post("/api/join/{$token}", $this->application(['resume' => UploadedFile::fake()->create('cv.docx', 100, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')]), ['Accept' => 'application/json'])
-            ->assertUnprocessable()
-            ->assertJsonValidationErrors(['resume' => 'Upload your resume as a PDF.']);
-
-        $this->post("/api/join/{$token}", $this->application(['resume' => UploadedFile::fake()->create('cv.pdf', 10241, 'application/pdf')]), ['Accept' => 'application/json'])
-            ->assertUnprocessable()
-            ->assertJsonValidationErrors(['resume' => 'Your resume can be up to 10 MB.']);
+            ->assertJsonValidationErrors(['phone' => 'Enter your contact number.']);
 
         $this->assertDatabaseMissing('users', ['email' => 'juliecor@example.com']);
     }
@@ -157,7 +144,6 @@ class AgentApplicationTest extends TestCase
         $this->deleteJson("/api/realty/agents/{$rejected->id}")->assertNoContent();
 
         $this->assertModelMissing($rejected);
-        Storage::disk(User::resumeDisk())->assertMissing($rejected->resume_path);
         $this->postJson('/api/realty/agents', ['name' => $rejected->name, 'email' => $rejected->email])->assertCreated();
     }
 
@@ -205,9 +191,7 @@ class AgentApplicationTest extends TestCase
             ->assertJsonCount(2, 'applications')
             ->assertJsonPath('applications.0.id', $pending->id)
             ->assertJsonPath('applications.0.phone', '09171234567')
-            ->assertJsonPath('applications.0.has_resume', true)
-            ->assertJsonPath('applications.1.id', $rejected->id)
-            ->assertJsonMissingPath('applications.0.resume_path');
+            ->assertJsonPath('applications.1.id', $rejected->id);
 
         $this->getJson('/api/realty/overview')
             ->assertOk()
@@ -215,23 +199,16 @@ class AgentApplicationTest extends TestCase
             ->assertJsonPath('stats.agents_pending', 1);
     }
 
-    public function test_only_the_realtys_own_staff_can_open_or_review_an_application(): void
+    public function test_only_the_realtys_own_staff_can_review_an_application(): void
     {
         $agent = $this->agent(User::STATUS_PENDING);
 
-        Sanctum::actingAs($this->staff);
-        $this->get("/api/realty/agents/{$agent->id}/resume")
-            ->assertOk()
-            ->assertHeader('Content-Type', 'application/pdf')
-            ->assertHeader('Content-Security-Policy', 'sandbox');
-
         $otherRealty = $this->makeRealty('other-realty', 'Other Realty');
         Sanctum::actingAs(User::factory()->create(['role' => User::ROLE_REALTY, 'realty_id' => $otherRealty->id]));
-        $this->getJson("/api/realty/agents/{$agent->id}/resume")->assertNotFound();
         $this->postJson("/api/realty/agents/{$agent->id}/approve")->assertNotFound();
+        $this->postJson("/api/realty/agents/{$agent->id}/reject")->assertNotFound();
 
         Sanctum::actingAs($this->agent(User::STATUS_ACTIVE));
-        $this->getJson("/api/realty/agents/{$agent->id}/resume")->assertForbidden();
         $this->postJson("/api/realty/agents/{$agent->id}/approve")->assertForbidden();
 
         $this->assertSame(User::STATUS_PENDING, $agent->fresh()->status);
@@ -257,7 +234,6 @@ class AgentApplicationTest extends TestCase
             'name' => 'Juliecor',
             'email' => 'juliecor@example.com',
             'phone' => '09171234567',
-            'resume' => UploadedFile::fake()->create('cv.pdf', 500, 'application/pdf'),
             'password' => 'secret-password',
             'password_confirmation' => 'secret-password',
             ...$overrides,
@@ -266,17 +242,12 @@ class AgentApplicationTest extends TestCase
 
     private function agent(string $status): User
     {
-        $path = Storage::disk(User::resumeDisk())->putFile("resumes/{$this->realty->id}", UploadedFile::fake()->create('cv.pdf', 200, 'application/pdf'));
-
         return User::factory()->create([
             'password' => 'secret-password',
             'role' => User::ROLE_AGENT,
             'status' => $status,
             'realty_id' => $this->realty->id,
             'phone' => '09171234567',
-            'resume_path' => $path,
-            'resume_name' => 'cv.pdf',
-            'resume_size' => 200 * 1024,
         ]);
     }
 }

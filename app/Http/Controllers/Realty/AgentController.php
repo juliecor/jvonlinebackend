@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * A realty's Agents section. Inviting makes a link the realty sends however it
@@ -53,9 +52,6 @@ class AgentController extends Controller
                 'applied_at' => $u->created_at,
                 'reviewed_at' => $u->reviewed_at,
                 'reviewed_by' => $u->reviewer?->name,
-                'has_resume' => (bool) $u->resume_path,
-                'resume_name' => $u->resume_name,
-                'resume_size' => $u->resume_size,
             ]);
 
         return response()->json(['agents' => $agents, 'applications' => $applications, 'invitations' => $invited]);
@@ -115,7 +111,7 @@ class AgentController extends Controller
         return response()->json(['id' => $agent->id, 'status' => $agent->status]);
     }
 
-    /** Turn an application down. It stays listed (with the resume) until staff delete it. */
+    /** Turn an application down. It stays listed until staff delete it. */
     public function reject(Request $request, User $agent): JsonResponse
     {
         $this->ownApplicant($request, $agent);
@@ -128,7 +124,7 @@ class AgentController extends Controller
         return response()->json(['id' => $agent->id, 'status' => $agent->status]);
     }
 
-    /** Remove a rejected application and its resume, so the email can be invited again. */
+    /** Remove a rejected application, so the email can be invited again. */
     public function destroy(Request $request, User $agent): Response
     {
         $this->ownApplicant($request, $agent);
@@ -138,27 +134,8 @@ class AgentController extends Controller
             $agent->tokens()->delete();
             $agent->delete();
         });
-        if ($agent->resume_path) {
-            Storage::disk(User::resumeDisk())->delete($agent->resume_path);
-        }
 
         return response()->noContent();
-    }
-
-    /** Opens an applicant's resume (the dashboard streams it through to the browser). */
-    public function resume(Request $request, User $agent)
-    {
-        $this->ownApplicant($request, $agent);
-        $disk = Storage::disk(User::resumeDisk());
-        abort_unless($agent->resume_path && $disk->exists($agent->resume_path), 404, 'This agent has no resume on file.');
-
-        return $disk->response($agent->resume_path, $agent->resume_name ?? 'resume.pdf', [
-            'Content-Type' => 'application/pdf',
-            // Never let an uploaded file run as a page.
-            'Content-Security-Policy' => 'sandbox',
-            'X-Content-Type-Options' => 'nosniff',
-            'Cache-Control' => 'private, no-store',
-        ], 'inline');
     }
 
     /** Staff only reach their own realty's agents. */

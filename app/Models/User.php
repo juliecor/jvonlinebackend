@@ -13,8 +13,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['name', 'email', 'password', 'role', 'status', 'realty_id', 'phone', 'resume_path', 'resume_name', 'resume_size', 'reviewed_by', 'reviewed_at'])]
-#[Hidden(['password', 'remember_token', 'resume_path'])]
+#[Fillable(['name', 'email', 'password', 'role', 'status', 'realty_id', 'phone', 'reviewed_by', 'reviewed_at'])]
+#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -84,11 +84,5 @@ class User extends Authenticatable
     public function isActive(): bool
     {
         return $this->status === self::STATUS_ACTIVE;
-    }
-
-    /** Agents' resumes sit on the private documents disk, like buyers' IDs — never a public one. */
-    public static function resumeDisk(): string
-    {
-        return config('filesystems.documents');
     }
 }
