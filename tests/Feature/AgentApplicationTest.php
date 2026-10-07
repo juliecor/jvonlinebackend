@@ -39,7 +39,7 @@ class AgentApplicationTest extends TestCase
 
         $agent = User::where('email', 'juliecor@example.com')->firstOrFail();
         $this->assertSame(User::STATUS_PENDING, $agent->status);
-        $this->assertSame('0917 123 4567', $agent->phone);
+        $this->assertSame('09171234567', $agent->phone);
         $this->assertSame('cv.pdf', $agent->resume_name);
         Storage::disk(User::resumeDisk())->assertExists($agent->resume_path);
     }
@@ -59,6 +59,19 @@ class AgentApplicationTest extends TestCase
         $this->post("/api/join/{$token}", $this->application(['resume' => UploadedFile::fake()->create('cv.pdf', 10241, 'application/pdf')]), ['Accept' => 'application/json'])
             ->assertUnprocessable()
             ->assertJsonValidationErrors(['resume' => 'Your resume can be up to 10 MB.']);
+
+        $this->assertDatabaseMissing('users', ['email' => 'juliecor@example.com']);
+    }
+
+    public function test_the_contact_number_must_be_an_11_digit_number_starting_with_09(): void
+    {
+        $token = $this->invite();
+
+        foreach (['0917 123 4567', '+639171234567', '9171234567', '0817123456', '091712345678', '0917-123-4567', '0917123456a'] as $phone) {
+            $this->post("/api/join/{$token}", $this->application(['phone' => $phone]), ['Accept' => 'application/json'])
+                ->assertUnprocessable()
+                ->assertJsonValidationErrors(['phone' => 'Enter an 11-digit mobile number starting with 09, numbers only, like 09171234567.']);
+        }
 
         $this->assertDatabaseMissing('users', ['email' => 'juliecor@example.com']);
     }
@@ -171,7 +184,7 @@ class AgentApplicationTest extends TestCase
             ->assertJsonPath('agents.0.id', $active->id)
             ->assertJsonCount(2, 'applications')
             ->assertJsonPath('applications.0.id', $pending->id)
-            ->assertJsonPath('applications.0.phone', '0917 123 4567')
+            ->assertJsonPath('applications.0.phone', '09171234567')
             ->assertJsonPath('applications.0.has_resume', true)
             ->assertJsonPath('applications.1.id', $rejected->id)
             ->assertJsonMissingPath('applications.0.resume_path');
@@ -223,7 +236,7 @@ class AgentApplicationTest extends TestCase
         return array_filter([
             'name' => 'Juliecor',
             'email' => 'juliecor@example.com',
-            'phone' => '0917 123 4567',
+            'phone' => '09171234567',
             'resume' => UploadedFile::fake()->create('cv.pdf', 500, 'application/pdf'),
             'password' => 'secret-password',
             'password_confirmation' => 'secret-password',
@@ -240,7 +253,7 @@ class AgentApplicationTest extends TestCase
             'role' => User::ROLE_AGENT,
             'status' => $status,
             'realty_id' => $this->realty->id,
-            'phone' => '0917 123 4567',
+            'phone' => '09171234567',
             'resume_path' => $path,
             'resume_name' => 'cv.pdf',
             'resume_size' => 200 * 1024,

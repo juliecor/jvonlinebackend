@@ -39,12 +39,14 @@ class AgentJoinController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:190', Rule::unique('users', 'email')],
-            'phone' => ['required', 'string', 'max:40', 'regex:/^[0-9+()\-\s]{7,40}$/'],
+            // A Philippine mobile number: 11 digits starting with 09, digits only.
+            'phone' => ['required', 'string', 'regex:/^09\d{9}$/'],
             'resume' => ['required', 'file', 'mimes:pdf', 'max:10240'],
             'password' => ['required', 'confirmed', Password::min(8)],
         ], [
             'email.unique' => 'There is already an account with this email.',
-            'phone.regex' => 'Enter a valid contact number, like 0917 123 4567.',
+            'phone.required' => 'Enter your contact number.',
+            'phone.regex' => 'Enter an 11-digit mobile number starting with 09, numbers only, like 09171234567.',
             'resume.required' => 'Attach your resume (PDF).',
             'resume.mimes' => 'Upload your resume as a PDF.',
             'resume.max' => 'Your resume can be up to 10 MB.',
@@ -62,7 +64,7 @@ class AgentJoinController extends Controller
                 return User::create([
                     'name' => $data['name'],
                     'email' => $data['email'],
-                    'phone' => trim($data['phone']),
+                    'phone' => $data['phone'],
                     'password' => $data['password'],
                     'role' => User::ROLE_AGENT,
                     'status' => User::STATUS_PENDING,
