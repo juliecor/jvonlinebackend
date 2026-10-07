@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Realty;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentPlan;
 use App\Models\Project;
+use App\Support\Milestones;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 /** Payment plans per project. Staff only. Milestones must add up to 100%. */
 class PaymentPlanController extends Controller
@@ -39,18 +39,8 @@ class PaymentPlanController extends Controller
 
     private function validated(Request $request): array
     {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:120'],
-            'milestones' => ['required', 'array', 'min:1', 'max:24'],
-            'milestones.*.label' => ['required', 'string', 'max:120'],
-            'milestones.*.percent' => ['required', 'numeric', 'gt:0', 'max:100'],
-            'milestones.*.days' => ['nullable', 'integer', 'min:0', 'max:36500'],
-        ]);
-        $total = array_sum(array_map(fn ($m) => (float) $m['percent'], $data['milestones']));
-        if (abs($total - 100) > 0.01) {
-            throw ValidationException::withMessages(['milestones' => "The percentages add up to {$total}%, they need to be 100%."]);
-        }
-        $data['milestones'] = array_map(fn ($m) => ['label' => $m['label'], 'percent' => (float) $m['percent'], 'days' => isset($m['days']) && $m['days'] !== '' ? (int) $m['days'] : null], array_values($data['milestones']));
+        $data = $request->validate(['name' => ['required', 'string', 'max:120']] + Milestones::rules('milestones'));
+        $data['milestones'] = Milestones::normalize($data['milestones'], 'milestones');
 
         return $data;
     }

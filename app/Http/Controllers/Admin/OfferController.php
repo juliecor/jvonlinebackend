@@ -37,6 +37,8 @@ class OfferController extends Controller
                 'responses_count' => $o->responses->count(),
                 'latest_response' => ($r = $o->responses->sortByDesc('created_at')->first()) ? ['kind' => $r->kind, 'label' => OfferResponse::LABELS[$r->kind] ?? $r->kind] : null,
                 'requirements' => $o->requirementSummary($types->get($o->realty_id, collect())),
+                'custom' => $o->custom_milestones !== null,
+                'approval_status' => $o->approval_status,
             ]);
 
         return response()->json($offers);

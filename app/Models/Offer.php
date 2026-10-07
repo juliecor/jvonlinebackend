@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /** One unit + one payment plan, prepared by an agent for one buyer. The code is the public link. */
-#[Fillable(['realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent'])]
+#[Fillable(['realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval'])]
 class Offer extends Model
 {
     protected function casts(): array
@@ -19,6 +19,7 @@ class Offer extends Model
         return [
             'purchase_date' => 'date:Y-m-d', 'price' => 'decimal:2', 'schedule' => 'array', 'first_viewed_at' => 'datetime', 'last_viewed_at' => 'datetime',
             'buyer_details' => 'array', 'details_submitted_at' => 'datetime', 'offer_emailed_at' => 'datetime', 'last_reminded_at' => 'datetime',
+            'custom_milestones' => 'array', 'approved_at' => 'datetime', 'email_on_approval' => 'boolean',
         ];
     }
 
@@ -50,6 +51,23 @@ class Offer extends Model
     public function agent(): BelongsTo
     {
         return $this->belongsTo(User::class, 'agent_id');
+    }
+
+    public function approver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'approved_by');
+    }
+
+    /** Custom terms the admin hasn't approved (yet, or sent back): the buyer can't open the link. */
+    public function awaitingApproval(): bool
+    {
+        return in_array($this->approval_status, ['pending', 'rejected'], true);
+    }
+
+    /** Active and, if it has custom terms, approved: the buyer can open and act on it. */
+    public function isLive(): bool
+    {
+        return $this->status === 'active' && ! $this->awaitingApproval();
     }
 
     public function documents(): HasMany
@@ -143,11 +161,13 @@ class Offer extends Model
     }
 
     /**
-     * Turn a plan's milestones into dated amounts for this price. The last
-     * milestone takes the rounding so the schedule always adds up to the price.
+     * Turn milestones into dated amounts for this price. The last milestone
+     * takes the rounding so the schedule always adds up to the price. A
+     * milestone spread over months lists each monthly payment; the last
+     * month takes that milestone's rounding.
      *
-     * @param  array<int, array{label: string, percent: float|int|string, days: int|null}>  $milestones
-     * @return array<int, array{label: string, percent: float, date: string|null, amount: float}>
+     * @param  array<int, array{label: string, percent: float|int|string, days: int|null, months?: int|null}>  $milestones
+     * @return array<int, array<string, mixed>>
      */
     public static function buildSchedule(float $price, array $milestones, CarbonInterface $purchaseDate, ?CarbonInterface $completionDate): array
     {
@@ -158,8 +178,23 @@ class Offer extends Model
             $percent = (float) $m['percent'];
             $amount = $i === $count - 1 ? round($price - $running, 2) : round($price * $percent / 100, 2);
             $running += $amount;
-            $date = $m['days'] === null || $m['days'] === '' ? $completionDate?->toDateString() : $purchaseDate->copy()->addDays((int) $m['days'])->toDateString();
-            $rows[] = ['label' => $m['label'], 'percent' => $percent, 'date' => $date, 'amount' => $amount];
+            $due = $m['days'] === null || $m['days'] === '' ? $completionDate : $purchaseDate->copy()->addDays((int) $m['days']);
+            $row = ['label' => $m['label'], 'percent' => $percent, 'date' => $due?->toDateString(), 'amount' => $amount];
+
+            $months = (int) ($m['months'] ?? 0);
+            if ($months >= 2 && $due) {
+                $each = floor($amount / $months * 100) / 100;
+                $installments = [];
+                for ($n = 0; $n < $months; $n++) {
+                    $installments[] = [
+                        'n' => $n + 1,
+                        'date' => $due->copy()->addMonthsNoOverflow($n)->toDateString(),
+                        'amount' => $n === $months - 1 ? round($amount - $each * ($months - 1), 2) : $each,
+                    ];
+                }
+                $row += ['months' => $months, 'monthly' => $each, 'end_date' => end($installments)['date'], 'installments' => $installments];
+            }
+            $rows[] = $row;
         }
 
         return $rows;

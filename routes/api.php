@@ -75,6 +75,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/offers/{id}/documents/{document}/review', [OfferController::class, 'review'])->whereNumber(['id', 'document']);
             Route::post('/offers/{id}/remind', [OfferController::class, 'remind'])->whereNumber('id');
             Route::post('/offers/{id}/send', [OfferController::class, 'send'])->whereNumber('id');
+            Route::post('/offers/{id}/approval', [OfferController::class, 'approval'])->whereNumber('id');
+            Route::post('/offers/{id}/terms', [OfferController::class, 'terms'])->whereNumber('id');
         });
         Route::middleware('realty.member:staff')->group(function () {
             Route::get('/agents', [AgentController::class, 'index']);

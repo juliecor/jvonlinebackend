@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Realty;
 
 use App\Http\Controllers\Controller;
+use App\Models\Offer;
 use App\Models\OfferDocument;
 use App\Models\OfferResponse;
 use App\Models\User;
@@ -37,6 +38,9 @@ class OverviewController extends Controller
                 // Buyer files nobody has approved or sent back yet (on active offers this person can see).
                 'docs_to_review' => OfferDocument::where('realty_id', $realty->id)->where('status', 'pending')
                     ->whereHas('offer', fn ($o) => $o->where('status', 'active')->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id)))->count(),
+                // Custom terms: admins see what waits for them; agents see what was sent back to them.
+                'to_approve' => $user->role === User::ROLE_REALTY ? Offer::where('realty_id', $realty->id)->where('status', 'active')->where('approval_status', 'pending')->count() : 0,
+                'sent_back' => Offer::where('realty_id', $realty->id)->where('status', 'active')->where('approval_status', 'rejected')->where('agent_id', $user->id)->count(),
                 'units' => $realty->projects()->withCount('units')->get()->sum('units_count'),
                 // Agents see their own offers; staff the whole realty's.
                 'offers' => $realty->offers()->where('status', 'active')->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id))->count(),

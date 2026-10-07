@@ -19,11 +19,15 @@ class PublicOfferController extends Controller
 {
     public function show(Request $request, string $code): JsonResponse
     {
-        $offer = $this->active($code);
+        $offer = $this->active($code, preview: true);
 
         // The realty's own people (and admins) opening the link don't count as a buyer view.
         $viewer = auth('sanctum')->user();
         $insider = $viewer instanceof User && ($viewer->isAdmin() || $viewer->realty_id === $offer->realty_id);
+        // Custom terms not approved yet: the realty's people can preview it, buyers can't open it.
+        if ($offer->awaitingApproval() && ! $insider) {
+            abort(423, "This offer isn't ready yet. Your agent will send it to you once it's approved.");
+        }
         if (! $insider) {
             $offer->forceFill([
                 'views' => $offer->views + 1,
@@ -32,7 +36,7 @@ class PublicOfferController extends Controller
             ])->save();
         }
 
-        return response()->json($offer->publicArray());
+        return response()->json($offer->publicArray() + ['preview' => $offer->awaitingApproval() ? $offer->approval_status : null]);
     }
 
     public function respond(Request $request, string $code): JsonResponse
@@ -147,11 +151,15 @@ class PublicOfferController extends Controller
         return response()->json(['requirements' => $offer->fresh()->requirementList()]);
     }
 
-    private function active(string $code): Offer
+    /** An active offer the buyer may act on. $preview lets the realty's people open one still waiting for approval. */
+    private function active(string $code, bool $preview = false): Offer
     {
         $offer = Offer::with(['realty', 'agent'])->where('code', strtoupper($code))->firstOrFail();
         if ($offer->status !== 'active') {
             abort(410, 'This offer is no longer available. Please ask your agent for a new one.');
+        }
+        if (! $preview && $offer->awaitingApproval()) {
+            abort(423, "This offer isn't ready yet. Your agent will send it to you once it's approved.");
         }
 
         return $offer;

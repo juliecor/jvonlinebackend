@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\PaymentPlan;
 use App\Models\Project;
+use App\Models\ProjectUpdate;
 use App\Models\Realty;
 use App\Models\Unit;
+use App\Models\UnitType;
 use Illuminate\Database\Seeder;
 
 /**
@@ -67,7 +69,8 @@ class JohndorfProjectsSeeder extends Seeder
                     ['project_id' => $project->id, 'name' => 'Reservation, 24-month equity, balance via Pag-IBIG or bank'],
                     ['realty_id' => $realty->id, 'milestones' => [
                         ['label' => 'Reservation fee', 'percent' => 0.54, 'days' => 0],
-                        ['label' => 'Equity, spread over 24 months', 'percent' => 6.61, 'days' => 730],
+                        // Johndorf's Buyer's Guide: equity payments start 30 days after the reservation date.
+                        ['label' => 'Equity, 24 monthly payments', 'percent' => 6.61, 'days' => 30, 'months' => 24],
                         ['label' => 'Balance through Pag-IBIG or bank financing', 'percent' => 92.85, 'days' => null],
                     ]],
                 );
@@ -104,13 +107,13 @@ class JohndorfProjectsSeeder extends Seeder
                 'lng' => $pg['map']['lng'] ?? $project->lng,
             ]);
             foreach ($pg['unit_types'] as $i => $ut) {
-                \App\Models\UnitType::updateOrCreate(
+                UnitType::updateOrCreate(
                     ['project_id' => $project->id, 'name' => $ut['name']],
                     ['realty_id' => $realty->id, 'specs' => $ut['specs'], 'image_paths' => $ut['images'], 'sort' => $i],
                 );
             }
             foreach ($pg['updates'] as $up) {
-                \App\Models\ProjectUpdate::updateOrCreate(
+                ProjectUpdate::updateOrCreate(
                     ['project_id' => $project->id, 'month' => $up['month']],
                     ['realty_id' => $realty->id, 'label' => $up['label'], 'photo_paths' => $up['photos']],
                 );
