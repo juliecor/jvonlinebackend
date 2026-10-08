@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\DB;
  * matched against the house models JohndorfProjectsSeeder::publicPages() already
  * seeded. Chained from the end of JohndorfProjectsSeeder::run() — run on its own
  * before that has happened at least once and every project is skipped, for
- * having no house model to match a unit's unit_type against.
+ * having no house model to match a unit's unit_type against. Prefer running
+ * JohndorfProjectsSeeder (it is idempotent) over this seeder alone: it is what
+ * attaches each unit's floor plan afterwards (attachFloorPlans()).
  *
  * Idempotent and re-run safe:
  *  - a unit this seeder creates carries a provenance marker at the start of its

@@ -29,10 +29,12 @@ class ProjectController extends Controller
         $this->own($request, $project);
 
         $project->load(['units.statusOffer:id,code,buyer_name,agent_id', 'units.statusOffer.agent:id,name', 'units.statusBy:id,name', 'paymentPlans', 'unitTypes', 'updates'])->loadCount('offers');
-        // Who each reserved or sold unit went to; buyers' names are for the realty's admins.
+        // Who each reserved or sold unit went to (buyers' names are for the realty's
+        // admins), and a picture for each row: its house model's, else the project's.
         $staff = $request->user()->role === User::ROLE_REALTY;
-        $project->units->each(function (Unit $unit) use ($staff) {
+        $project->units->each(function (Unit $unit) use ($staff, $project) {
             $unit->setAttribute('status_detail', $unit->statusDetail($staff));
+            $unit->setAttribute('photo', $unit->photo($project->unitTypes, $project));
             $unit->unsetRelation('statusOffer')->unsetRelation('statusBy');
         });
 

@@ -45,7 +45,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/arvesa-village/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": []
@@ -89,7 +90,8 @@
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/unit-1-1.jpg",
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/astana-davao/unit-1-2.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": [
@@ -188,9 +190,11 @@
      "parking": "1"
     },
     "images": [
+     "/johndorf/site/projects/coral-village/main.jpg",
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/unit-1-1.jpg",
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/unit-1-2.jpg"
-    ]
+    ],
+    "floor_plan": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/coral-village/unit-1-1.jpg"
    }
   ],
   "updates": [
@@ -300,7 +304,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/evissa-davao/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": []
@@ -343,7 +348,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/evissa-lapu-lapu/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": []
@@ -388,7 +394,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-cebu/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": []
@@ -434,7 +441,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/mimosa-minglanilla/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": []
@@ -484,7 +492,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    },
    {
     "name": "Two-Storey Single Attached",
@@ -498,7 +507,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/unit-2-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    },
    {
     "name": "Two-Storey Duplex",
@@ -512,7 +522,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/unit-3-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": []
@@ -564,8 +575,10 @@
      "parking": "1"
     },
     "images": [
+     "/johndorf/site/projects/navona-court/main.jpg",
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-court/unit-1-1.jpg"
    }
   ],
   "updates": [
@@ -819,9 +832,11 @@
      "parking": "1"
     },
     "images": [
-     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/unit-1-1.jpg",
-     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/unit-1-2.jpg"
-    ]
+     "/johndorf/site/projects/navona-davao/main.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/unit-1-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/unit-1-1.jpg"
+    ],
+    "floor_plan": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-davao/unit-1-2.jpg"
    }
   ],
   "updates": []
@@ -867,7 +882,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/navona-lumbia/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": []
@@ -908,7 +924,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/pich-4b/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": []
@@ -962,8 +979,10 @@
      "parking": null
     },
     "images": [
+     "/johndorf/site/plumera.jpg",
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/unit-1-1.jpg"
    },
    {
     "name": "1BR Unit",
@@ -976,8 +995,10 @@
      "parking": null
     },
     "images": [
-     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-carcar/unit-1-1.jpg"
-    ]
+     "/johndorf/site/plumera.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/unit-2-1.jpg"
+    ],
+    "floor_plan": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/plumera/unit-2-1.jpg"
    }
   ],
   "updates": [
@@ -1147,8 +1168,11 @@
      "parking": "1"
     },
     "images": [
-     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-carcar/unit-1-1.jpg"
-    ]
+     "/johndorf/site/tierranava-carcar.jpg",
+     "/johndorf/site/projects/tierranava-carcar/floor-plan.png",
+     "/johndorf/site/projects/tierranava-carcar/floor-plan-bare.png"
+    ],
+    "floor_plan": "/johndorf/site/projects/tierranava-carcar/floor-plan.png"
    }
   ],
   "updates": []
@@ -1184,9 +1208,11 @@
      "parking": "1"
     },
     "images": [
+     "/johndorf/site/tierranava-lumbia.jpg",
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/unit-1-1.jpg",
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/unit-1-2.jpg"
-    ]
+    ],
+    "floor_plan": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-lumbia/unit-1-1.jpg"
    }
   ],
   "updates": [
@@ -1379,9 +1405,11 @@
      "parking": "1"
     },
     "images": [
-     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/unit-1-1.jpg",
-     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/unit-1-2.jpg"
-    ]
+     "/johndorf/site/tierranava-opol.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/unit-1-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/unit-1-1.jpg"
+    ],
+    "floor_plan": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-opol/unit-1-2.jpg"
    }
   ],
   "updates": [
@@ -1623,9 +1651,11 @@
      "parking": "1"
     },
     "images": [
-     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/unit-1-1.jpg",
-     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/unit-1-2.jpg"
-    ]
+     "/johndorf/site/tierranava-tagoloan.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/unit-1-2.jpg",
+     "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/unit-1-1.jpg"
+    ],
+    "floor_plan": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/tierranava-tagoloan/unit-1-2.jpg"
    }
   ],
   "updates": [
@@ -1725,7 +1755,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/unit-1-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    },
    {
     "name": "One-Storey Duplex",
@@ -1739,7 +1770,8 @@
     },
     "images": [
      "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/unit-2-1.jpg"
-    ]
+    ],
+    "floor_plan": null
    }
   ],
   "updates": [

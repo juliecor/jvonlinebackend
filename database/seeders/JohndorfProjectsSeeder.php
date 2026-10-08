@@ -16,7 +16,8 @@ use Illuminate\Database\Seeder;
  * listings and press (each unit's notes say where). Safe to run again —
  * it updates by project name and house model, and never touches units a
  * staff member added by hand. Ends by calling JohndorfUnitsSeeder, which
- * adds the real per-unit inventory for the projects Johndorf sells online.
+ * adds the real per-unit inventory for the projects Johndorf sells online,
+ * then gives every unit its house model's floor plan.
  */
 class JohndorfProjectsSeeder extends Seeder
 {
@@ -79,20 +80,24 @@ class JohndorfProjectsSeeder extends Seeder
             $this->command->info("  {$row['name']}: ".count($row['units']).' model(s)');
         }
 
-        $this->publicPages($realty);
+        $pages = json_decode(file_get_contents(__DIR__.'/data/johndorf-public.json'), true);
+        $this->publicPages($realty, $pages);
 
         // Per-unit inventory from Johndorf's online reservation list; needs the unit types above.
         $this->call(JohndorfUnitsSeeder::class);
+
+        $this->attachFloorPlans($realty, $pages);
     }
 
     /**
      * The public project pages, from data/johndorf-public.json (Johndorf's own
      * pages, images already on S3). Matched by project name; unit types by name,
      * update months by month — so a re-run refreshes rather than duplicates.
+     *
+     * @param  array<int, array<string, mixed>>  $pages
      */
-    private function publicPages(Realty $realty): void
+    private function publicPages(Realty $realty, array $pages): void
     {
-        $pages = json_decode(file_get_contents(__DIR__.'/data/johndorf-public.json'), true);
         foreach ($pages as $pg) {
             $project = Project::where('realty_id', $realty->id)->where('name', $pg['name'])->first();
             if (! $project) {
@@ -123,6 +128,39 @@ class JohndorfProjectsSeeder extends Seeder
                 );
             }
             $this->command->info("  public page: /projects/{$pg['slug']} (".count($pg['unit_types']).' models, '.count($pg['updates']).' months)');
+        }
+    }
+
+    /**
+     * Every unit gets its house model's floor plan (the model's "floor_plan" in
+     * johndorf-public.json) as its own, so it prints on the buyer's offer. Runs
+     * after JohndorfUnitsSeeder so the real inventory gets one too. A plan a
+     * staff member uploaded (a relative path on the uploads disk) is never
+     * replaced; a seeded one (a "/" or "http" path) is refreshed.
+     *
+     * @param  array<int, array<string, mixed>>  $pages
+     */
+    private function attachFloorPlans(Realty $realty, array $pages): void
+    {
+        foreach ($pages as $pg) {
+            $project = Project::where('realty_id', $realty->id)->where('name', $pg['name'])->first();
+            if (! $project) {
+                continue;
+            }
+            $attached = 0;
+            foreach ($pg['unit_types'] as $ut) {
+                if (empty($ut['floor_plan'])) {
+                    continue;
+                }
+                Unit::where('project_id', $project->id)
+                    ->where('unit_type', $ut['name'])
+                    ->where(fn ($q) => $q->whereNull('floor_plan_path')->orWhere('floor_plan_path', 'like', '/%')->orWhere('floor_plan_path', 'like', 'http%'))
+                    ->update(['floor_plan_path' => $ut['floor_plan']]);
+                $attached += Unit::where('project_id', $project->id)->where('unit_type', $ut['name'])->where('floor_plan_path', $ut['floor_plan'])->count();
+            }
+            if ($attached > 0) {
+                $this->command->info("  {$pg['name']}: floor plan on {$attached} unit(s)");
+            }
         }
     }
 }

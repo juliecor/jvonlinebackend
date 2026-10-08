@@ -232,24 +232,19 @@ class Offer extends Model
         return $rows;
     }
 
-    /** Everything the buyer's page shows. */
     /**
-     * A picture for the dashboard: the house model's render, else the project's
-     * photo, else the unit's floor plan. Pass the realty's models when listing
-     * many offers, so it isn't one query each.
+     * A picture for the dashboard: the unit's (its house model's photo, else the
+     * project's, else its floor plan — see Unit::photo()). Pass the realty's
+     * models when listing many offers, so it isn't one query each.
      *
      * @param  Collection<int, UnitType>|null  $models
      */
     public function photo(?Collection $models = null): ?string
     {
-        $names = array_values(array_filter([$this->unit?->unit_type, $this->unit?->name]));
-        $model = $models
-            ? $models->first(fn (UnitType $m) => $m->project_id === $this->project_id && in_array($m->name, $names, true))
-            : ($names ? UnitType::where('project_id', $this->project_id)->whereIn('name', $names)->first() : null);
-
-        return $model?->images[0] ?? $this->project?->hero_urls[0] ?? $this->project?->cover_url ?? $this->unit?->floor_plan_url;
+        return $this->unit?->photo($models, $this->project) ?? $this->project?->hero_urls[0] ?? $this->project?->cover_url;
     }
 
+    /** Everything the buyer's page shows. */
     public function publicArray(): array
     {
         $this->loadMissing(['realty', 'project', 'unit', 'agent']);

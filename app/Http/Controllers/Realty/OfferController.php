@@ -33,7 +33,7 @@ class OfferController extends Controller
         $user = $request->user();
         $types = RequirementType::where('realty_id', $user->realty_id)->orderBy('sort')->orderBy('id')->get();
         $offers = $this->visible($request)
-            ->with(['project:id,name,cover_path,hero_paths', 'unit:id,name,unit_type,status,status_offer_id,floor_plan_path', 'agent:id,name', 'responses', 'documents'])
+            ->with(['project:id,name,cover_path,hero_paths', 'unit:id,project_id,name,unit_type,status,status_offer_id,floor_plan_path', 'agent:id,name', 'responses', 'documents'])
             ->latest()
             ->get();
         // One query for every house model, so each row can show its picture.

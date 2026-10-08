@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 #[Fillable(['realty_id', 'project_id', 'name', 'unit_type', 'category', 'floor', 'area_sqm', 'price', 'status', 'status_offer_id', 'status_by_id', 'status_at', 'floor_plan_path', 'notes', 'buyer_notes'])]
@@ -53,6 +54,26 @@ class Unit extends Model
             'by' => $this->statusBy?->name,
             'at' => $this->status_at?->toIso8601String(),
         ];
+    }
+
+    /**
+     * A picture for the dashboard: the house model's first image that isn't this
+     * unit's own floor plan (so it stays a photo once the plan is attached), else
+     * the project's hero, else its cover, else the floor plan. Pass the project's
+     * models and the project when listing many units, so it isn't a query each.
+     *
+     * @param  Collection<int, UnitType>|null  $models
+     */
+    public function photo(?Collection $models = null, ?Project $project = null): ?string
+    {
+        $project ??= $this->project;
+        $names = array_values(array_filter([$this->unit_type, $this->name]));
+        $model = $models
+            ? $models->first(fn (UnitType $m) => $m->project_id === $this->project_id && in_array($m->name, $names, true))
+            : ($names ? UnitType::where('project_id', $this->project_id)->whereIn('name', $names)->first() : null);
+        $render = collect($model?->images ?? [])->first(fn (string $url) => $url !== $this->floor_plan_url);
+
+        return $render ?? $project?->hero_urls[0] ?? $project?->cover_url ?? $this->floor_plan_url;
     }
 
     /** Uploads live on the uploads disk (local or S3); a path starting with "/" or "http" (images shipped with the frontend) is used as-is. */
