@@ -18,7 +18,16 @@ class Assistant
     /** Lookups the model may make for one question before it has to answer. */
     private const MAX_ROUNDS = 6;
 
+    /** The lookups of the last reply (they remember which units it showed as cards). */
+    private ?RealtyTools $tools = null;
+
     public function __construct(private readonly User $user) {}
+
+    /** @return array<int, int> Units the last reply showed as cards, in order. */
+    public function shownUnitIds(): array
+    {
+        return $this->tools?->shownUnitIds() ?? [];
+    }
 
     /** "Johndorf" for Johndorf Ventures Corporation: the realty's name without the company words. */
     public static function nameFor(Realty $realty): string
@@ -33,8 +42,9 @@ class Assistant
      *
      * With $emit, the answer streams: emit('status', ['tool' => …]) before each
      * lookup, emit('delta', ['text' => …]) for each piece of the answer as
-     * OpenAI writes it, and emit('reset', []) if text already sent turns out not
-     * to be the answer (the model went on to look something up).
+     * OpenAI writes it, emit('cards', ['cards' => …]) when it puts units under
+     * the answer, and emit('reset', []) if text already sent turns out not to
+     * be the answer (the model went on to look something up).
      *
      * @param  array<int, array{role: string, content: string}>  $conversation
      * @param  (callable(string, array<string, mixed>): void)|null  $emit
@@ -45,7 +55,7 @@ class Assistant
         if (! $key) {
             throw new AssistantUnavailable("The AI assistant isn't set up yet: OPENAI_API_KEY is missing from the backend's .env.");
         }
-        $tools = new RealtyTools($this->user);
+        $tools = $this->tools = new RealtyTools($this->user);
         $messages = [['role' => 'system', 'content' => $this->instructions()], ...$conversation];
 
         for ($round = 0; $round <= self::MAX_ROUNDS; $round++) {
@@ -64,6 +74,9 @@ class Assistant
                 $args = json_decode($call['function']['arguments'] ?? '{}', true);
                 $result = $this->lookup($tools, (string) ($call['function']['name'] ?? ''), is_array($args) ? $args : []);
                 $messages[] = ['role' => 'tool', 'tool_call_id' => $call['id'], 'content' => json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)];
+                if ($emit && ($call['function']['name'] ?? '') === 'show_units' && ! isset($result['error'])) {
+                    $emit('cards', ['cards' => UnitCards::for($this->user, $tools->shownUnitIds())]);
+                }
             }
         }
 
@@ -182,7 +195,8 @@ class Assistant
         $realty = $this->user->realty;
         $name = self::nameFor($realty);
         $agent = $this->user->role === User::ROLE_AGENT;
-        $today = now('Asia/Manila')->format('l, F j, Y');
+        $today = now('Asia/Manila')->format('l, F j, Y, g:i A');
+        $first = explode(' ', trim($this->user->name))[0];
         $who = $agent ? "an agent of {$realty->name}. You only see their own offers and buyers" : "an admin of {$realty->name}. You see the whole realty";
 
         return <<<PROMPT
@@ -213,6 +227,25 @@ class Assistant
         - Write dates like Oct 7, 2026, never 2026-10-07.
         - Never show field names, JSON, code formatting or words like null: write "2 offers were sent this month", not "offers_sent_this_month: 2". Say "not set yet" or "not listed" for missing values.
         - When it helps, end with one practical next step (who to follow up, what to check).
+
+        Unit cards
+        - When you present specific units (show me, which units, the cheapest, the best for a family, compare these), call show_units with their ids from search_units, up to 6, so they appear under your answer as cards with a photo, price, status and a Make offer button.
+        - Then write a short intro and the highlights (what makes each one stand out). Don't describe the cards or their buttons, and don't repeat them in a table. Never mention unit ids.
+
+        Messages for buyers
+        - When asked to write a message, text, Viber, SMS, Messenger or email for a buyer, look the offer up first: offer_details for one buyer, list_offers for several.
+        - Put the message itself in a block that starts with a line ```message followed by the buyer's full name (like ```message Juliecor Repompo) and ends with a line ```. Before the block, at most one short line for the user (not the buyer), in the language of the user's latest message, like "Here's a Viber message for Juliecor:" or "Heto ang message para kay Juliecor:". For several buyers, one block each, each with that line.
+        - Inside the block: plain text only (no Markdown, no ** or #), short lines, warm and professional.
+        - The message's language can differ from your reply's: when the user names one ("in Bisaya", "in Tagalog", "Cebuano"), write the whole message in it, every line including the sign-in note; Bisaya means Cebuano. If they don't name one, use the language of their latest message.
+        - Greet the buyer by first name, say exactly what you need from them (name the missing documents, or the next step), give their buyer_link as a plain URL, and sign off with {$first} and {$realty->name}. Never put a dashboard link in a message: buyers can't open the dashboard.
+        - If buyer_has_to_sign_in is true, the message must have a sign-in line right before the link, in the message's language: "Please sign in with the username and password we gave you." / Cebuano: "Palihug pag-sign in gamit ang username ug password nga among gihatag kanimo." / Tagalog: "Paki-sign in gamit ang username at password na ibinigay namin sa iyo." Never write a username or password.
+        - If the offer is void or its custom terms aren't approved yet, don't write a message with a link: say why instead.
+
+        What needs attention today
+        - For "what needs my attention", "what should I do today", "any updates" or a good morning, use attention_today.
+        - Start with a greeting for the time of day and the number of things to do in bold. Then, in this order, only the parts that have something: things only you can do (approvals, files to review, agent applications), then buyers to follow up (new answers, opened often but no answer yet, missing requirements, links not opened), then the good news (units reserved or sold this week).
+        - Each item: the buyer or unit linked to its page, and the one thing to do. Short. If nothing needs doing, say so in one line and share the good news if there is any.
+        - End by offering to write the follow-up messages for the buyers to chase.
         PROMPT;
     }
 }

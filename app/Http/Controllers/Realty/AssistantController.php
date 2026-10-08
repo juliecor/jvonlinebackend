@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Realty;
 use App\Http\Controllers\Controller;
 use App\Models\AssistantChat;
 use App\Models\AssistantMessage;
+use App\Models\Unit;
 use App\Models\User;
 use App\Support\Assistant\Assistant;
 use App\Support\Assistant\AssistantUnavailable;
+use App\Support\Assistant\RealtyTools;
+use App\Support\Assistant\UnitCards;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -28,7 +31,15 @@ class AssistantController extends Controller
         $chats = AssistantChat::where('user_id', $user->id)->where('realty_id', $user->realty_id)
             ->latest('updated_at')->limit(50)->get(['id', 'title', 'updated_at']);
 
-        return response()->json(['name' => Assistant::nameFor($user->realty).' AI', 'chats' => $chats]);
+        // How many things wait for this person, for the "What needs my attention today?" button.
+        try {
+            $attention = (new RealtyTools($user))->attention()['total_things_to_do'];
+        } catch (Throwable $e) {
+            Log::error('AI assistant: attention count failed', ['error' => $e->getMessage()]);
+            $attention = null;
+        }
+
+        return response()->json(['name' => Assistant::nameFor($user->realty).' AI', 'chats' => $chats, 'attention' => $attention]);
     }
 
     public function show(Request $request, AssistantChat $chat): JsonResponse
@@ -38,7 +49,7 @@ class AssistantController extends Controller
         return response()->json([
             'id' => $chat->id,
             'title' => $chat->title,
-            'messages' => $chat->messages()->get(['id', 'role', 'content', 'created_at']),
+            'messages' => $chat->messages()->get(['id', 'role', 'content', 'meta', 'created_at'])->map(fn (AssistantMessage $m) => $this->present($request->user(), $m)),
         ]);
     }
 
@@ -59,24 +70,26 @@ class AssistantController extends Controller
         $conversation = $this->conversation($chat, $data['message']);
 
         set_time_limit(180);
+        $assistant = new Assistant($user);
         try {
-            $answer = (new Assistant($user))->reply($conversation);
+            $answer = $assistant->reply($conversation);
         } catch (AssistantUnavailable $e) {
             return response()->json(['message' => $e->getMessage()], 503);
         }
 
-        [$chat, $reply] = $this->save($user, $chat, $data['message'], $answer);
+        [$chat, $reply] = $this->save($user, $chat, $data['message'], $answer, $assistant->shownUnitIds());
 
         return response()->json([
             'chat' => ['id' => $chat->id, 'title' => $chat->title, 'updated_at' => $chat->updated_at],
-            'message' => $reply->only(['id', 'role', 'content', 'created_at']),
+            'message' => $this->present($user, $reply),
         ]);
     }
 
     /**
      * The same question, answered word by word as server-sent events:
-     * status (a lookup is running), delta (more of the answer), reset (start
-     * the answer again), then done (saved: the chat and the message) or error.
+     * status (a lookup is running), delta (more of the answer), cards (units
+     * to show under it), reset (start the answer again), then done (saved:
+     * the chat and the message) or error.
      */
     public function stream(Request $request): StreamedResponse
     {
@@ -102,8 +115,9 @@ class AssistantController extends Controller
                 flush();
             };
 
+            $assistant = new Assistant($user);
             try {
-                $answer = (new Assistant($user))->reply($conversation, $emit);
+                $answer = $assistant->reply($conversation, $emit);
             } catch (AssistantUnavailable $e) {
                 $emit('error', ['message' => $e->getMessage()]);
 
@@ -115,10 +129,10 @@ class AssistantController extends Controller
                 return;
             }
 
-            [$chat, $reply] = $this->save($user, $chat, $data['message'], $answer);
+            [$chat, $reply] = $this->save($user, $chat, $data['message'], $answer, $assistant->shownUnitIds());
             $emit('done', [
                 'chat' => ['id' => $chat->id, 'title' => $chat->title, 'updated_at' => $chat->updated_at],
-                'message' => $reply->only(['id', 'role', 'content', 'created_at']),
+                'message' => $this->present($user, $reply),
             ]);
         }, 200, [
             'Content-Type' => 'text/event-stream; charset=utf-8',
@@ -138,29 +152,54 @@ class AssistantController extends Controller
 
     /**
      * The chat so far (its last messages) plus the new question, for the model.
+     * Units an answer showed as cards follow it as a note, so "the second one"
+     * still means something in the next question.
      *
      * @return array<int, array{role: string, content: string}>
      */
     private function conversation(?AssistantChat $chat, string $question): array
     {
-        $conversation = $chat
-            ? $chat->messages()->reorder('id', 'desc')->limit(self::HISTORY)->get(['role', 'content'])->reverse()->values()->map->only(['role', 'content'])->all()
-            : [];
+        $conversation = [];
+        if ($chat) {
+            $messages = $chat->messages()->reorder('id', 'desc')->limit(self::HISTORY)->get(['role', 'content', 'meta'])->reverse()->values();
+            $units = Unit::where('realty_id', $chat->realty_id)->whereIn('id', $messages->flatMap(fn (AssistantMessage $m) => $m->unitIds()))->with('project:id,name')->get()->keyBy('id');
+            foreach ($messages as $m) {
+                $conversation[] = ['role' => $m->role, 'content' => $m->content];
+                $shown = collect($m->unitIds())->map(fn (int $id) => $units->get($id))->filter();
+                if ($shown->isNotEmpty()) {
+                    $conversation[] = ['role' => 'system', 'content' => 'Under that answer, these units were shown as cards, in order: '.$shown->map(fn (Unit $u) => "{$u->name} ({$u->project?->name}, id {$u->id})")->implode('; ').'.'];
+                }
+            }
+        }
         $conversation[] = ['role' => 'user', 'content' => $question];
 
         return $conversation;
     }
 
     /**
+     * A message as the page shows it: an answer comes with its unit cards,
+     * drawn from the live units.
+     *
+     * @return array<string, mixed>
+     */
+    private function present(User $user, AssistantMessage $message): array
+    {
+        $cards = $message->unitIds() ? UnitCards::for($user, $message->unitIds()) : [];
+
+        return $message->only(['id', 'role', 'content', 'created_at']) + ($cards ? ['cards' => $cards] : []);
+    }
+
+    /**
      * Keep the question and its answer; a first question starts the chat and names it.
      *
+     * @param  array<int, int>  $unitIds  units the answer showed as cards
      * @return array{0: AssistantChat, 1: AssistantMessage}
      */
-    private function save(User $user, ?AssistantChat $chat, string $question, string $answer): array
+    private function save(User $user, ?AssistantChat $chat, string $question, string $answer, array $unitIds = []): array
     {
         $chat ??= AssistantChat::create(['user_id' => $user->id, 'realty_id' => $user->realty_id, 'title' => Str::limit(preg_replace('/\s+/', ' ', trim($question)), 80, '…')]);
         $chat->messages()->create(['role' => 'user', 'content' => $question]);
-        $reply = $chat->messages()->create(['role' => 'assistant', 'content' => $answer]);
+        $reply = $chat->messages()->create(['role' => 'assistant', 'content' => $answer, 'meta' => $unitIds ? ['units' => $unitIds] : null]);
         $chat->touch();
 
         return [$chat, $reply];

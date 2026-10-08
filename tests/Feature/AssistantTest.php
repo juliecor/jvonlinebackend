@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\AssistantChat;
 use App\Models\Offer;
+use App\Models\OfferDocument;
 use App\Models\OfferResponse;
 use App\Models\Project;
 use App\Models\Realty;
@@ -171,6 +172,106 @@ class AssistantTest extends TestCase
         $this->getJson("/api/realty/assistant/chats/{$chat->id}")->assertNotFound();
         $this->deleteJson("/api/realty/assistant/chats/{$chat->id}")->assertNotFound();
         $this->postJson('/api/realty/assistant/messages', ['chat_id' => $chat->id, 'message' => 'Hi'])->assertNotFound();
+    }
+
+    public function test_units_shown_as_cards_stream_with_the_answer_and_stay_with_the_chat(): void
+    {
+        $sold = Unit::create(['realty_id' => $this->realty->id, 'project_id' => $this->unit->project_id, 'name' => 'Bldg S · Unit 124', 'unit_type' => 'Studio Unit', 'price' => 3600000, 'status' => 'sold']);
+        $elsewhere = Realty::create(['name' => 'Other Realty', 'slug' => 'other', 'status' => Realty::STATUS_ACTIVE, 'registered_at' => now()]);
+        $theirs = Unit::create(['realty_id' => $elsewhere->id, 'project_id' => Project::create(['realty_id' => $elsewhere->id, 'name' => 'Theirs', 'status' => 'active'])->id, 'name' => 'Not yours', 'price' => 1, 'status' => 'available']);
+        $sse = fn (array ...$deltas) => implode('', array_map(fn (array $d) => 'data: '.json_encode(['choices' => [['delta' => $d]]])."\n\n", $deltas))."data: [DONE]\n\n";
+        $call = fn (string $name, array $args) => ['tool_calls' => [['index' => 0, 'id' => "call_{$name}", 'type' => 'function', 'function' => ['name' => $name, 'arguments' => json_encode($args)]]]];
+        Http::fakeSequence('api.openai.com/*')
+            ->push($sse($call('search_units', ['project' => 'Plumera'])))
+            ->push($sse($call('show_units', ['unit_ids' => [$this->unit->id, $theirs->id, $sold->id]])))
+            ->push($sse(['content' => 'Here are **2 studios** in Plumera Mactan.']))
+            ->push(['choices' => [['message' => ['role' => 'assistant', 'content' => 'The first one is available.']]]]);
+        Sanctum::actingAs($this->agent);
+
+        $events = $this->postJson('/api/realty/assistant/stream', ['message' => 'Show me studios in Plumera'])->assertOk()->streamedContent();
+
+        // search_units hands the model ids to show; the other realty's unit is never shown.
+        Http::assertSent(function (HttpRequest $r) {
+            $found = collect($r['messages'])->where('role', 'tool')->map(fn (array $m) => json_decode($m['content'], true))->firstWhere('units');
+
+            return $found && $found['units'][0]['id'] === $this->unit->id && $found['units'][0]['name'] === 'Bldg S · Unit 123';
+        });
+        $this->assertStringContainsString('event: cards', $events);
+        $this->assertStringNotContainsString('Not yours', $events);
+        $chat = AssistantChat::firstOrFail();
+        $this->assertSame([$this->unit->id, $sold->id], $chat->messages()->where('role', 'assistant')->firstOrFail()->unitIds());
+
+        $cards = $this->getJson("/api/realty/assistant/chats/{$chat->id}")->assertOk()->json('messages.1.cards');
+        $this->assertSame(['Bldg S · Unit 123', 'Bldg S · Unit 124'], array_column($cards, 'name'));
+        $this->assertSame([true, false], array_column($cards, 'can_offer'));
+        $this->assertSame('Plumera Mactan', $cards[0]['project']['name']);
+
+        // The cards come from the live units: once it's sold, no more Make offer.
+        $this->unit->update(['status' => 'sold']);
+        $this->assertFalse($this->getJson("/api/realty/assistant/chats/{$chat->id}")->json('messages.1.cards.0.can_offer'));
+
+        // The next question knows which units were on the cards.
+        $this->postJson('/api/realty/assistant/messages', ['chat_id' => $chat->id, 'message' => 'Is the first one still available?'])->assertOk();
+        Http::assertSent(fn (HttpRequest $r) => str_contains(json_encode($r['messages'], JSON_UNESCAPED_UNICODE), 'these units were shown as cards, in order: Bldg S · Unit 123 (Plumera Mactan, id '.$this->unit->id.')'));
+    }
+
+    public function test_offer_details_give_the_buyer_link_for_messages_but_never_the_login(): void
+    {
+        $offer = $this->offer($this->agent, 'Juliecor Repompo');
+        $offer->forceFill(['access_username' => 'jrepompo-login', 'access_password' => 'S3cret-Pass'])->save();
+
+        $detail = (new RealtyTools($this->agent))->call('offer_details', ['offer' => $offer->code]);
+
+        $this->assertSame(Offer::url($offer->code), $detail['buyer_link']);
+        $this->assertTrue($detail['buyer_has_to_sign_in']);
+        $this->assertStringNotContainsString('jrepompo-login', json_encode($detail));
+        $this->assertStringNotContainsString('S3cret-Pass', json_encode($detail));
+
+        $offer->forceFill(['approval_status' => 'pending'])->save();
+        $this->assertStringStartsWith('not usable yet', (new RealtyTools($this->agent))->call('offer_details', ['offer' => $offer->code])['buyer_link']);
+    }
+
+    public function test_attention_today_lists_what_needs_doing_for_each_person(): void
+    {
+        RequirementType::seedDefaults($this->realty);
+        $answered = $this->offer($this->agent, 'Ana Answered');
+        OfferResponse::create(['offer_id' => $answered->id, 'realty_id' => $this->realty->id, 'kind' => 'interested', 'name' => 'Ana Answered', 'message' => 'Text me at 0917 123 4567']);
+        $files = $this->offer($this->agent, 'Fe Files');
+        OfferDocument::create(['offer_id' => $files->id, 'realty_id' => $this->realty->id, 'path' => 'x.pdf', 'original_name' => 'id.pdf', 'mime' => 'application/pdf', 'size' => 10, 'status' => 'pending']);
+        $this->offer($this->agent, 'Terry Terms')->forceFill(['approval_status' => 'pending'])->save();
+        $this->offer($this->agent, 'Vic Views')->forceFill(['views' => 8, 'last_viewed_at' => now()->subDay()])->save();
+        $quiet = $this->offer($this->admin, 'Uma Unopened');
+        $quiet->forceFill(['created_at' => now()->subDays(4)])->save();
+        $this->unit->update(['status' => 'reserved', 'status_offer_id' => $answered->id, 'status_at' => now()]);
+        User::factory()->create(['role' => User::ROLE_AGENT, 'realty_id' => $this->realty->id, 'status' => User::STATUS_PENDING, 'name' => 'Paolo Pending']);
+
+        $admin = (new RealtyTools($this->admin))->call('attention_today', []);
+        $this->assertSame(['Ana Answered'], array_column($admin['new_buyer_answers_not_opened_yet']['items'], 'buyer'));
+        $this->assertStringContainsString('[number hidden]', $admin['new_buyer_answers_not_opened_yet']['items'][0]['message']);
+        $this->assertSame(['Fe Files'], array_column($admin['buyer_files_to_review']['items'], 'buyer'));
+        $this->assertSame(['Terry Terms'], array_column($admin['custom_terms_waiting_for_your_approval']['items'], 'buyer'));
+        $this->assertSame(['Ana Answered'], array_column($admin['interested_buyers_still_missing_requirements']['items'], 'buyer'));
+        $this->assertSame(['Vic Views'], array_column($admin['opened_often_but_no_answer_yet']['items'], 'buyer'));
+        $this->assertSame(['Uma Unopened'], array_column($admin['links_not_opened_3_days_after_sending']['items'], 'buyer'));
+        $this->assertSame(['Paolo Pending'], array_column($admin['agent_applications_waiting']['items'], 'name'));
+        $this->assertSame('Ana Answered', $admin['good_news_reserved_or_sold_last_7_days']['items'][0]['buyer']);
+        $this->assertSame(7, $admin['total_things_to_do']);
+
+        // An agent sees only their own offers, and nothing that's the admins' to do.
+        $agent = (new RealtyTools($this->agent))->call('attention_today', []);
+        $this->assertArrayNotHasKey('custom_terms_waiting_for_your_approval', $agent);
+        $this->assertArrayNotHasKey('agent_applications_waiting', $agent);
+        $this->assertSame(0, $agent['links_not_opened_3_days_after_sending']['count']);
+        $this->assertSame(['Ana Answered', 'Fe Files', 'Ana Answered', 'Vic Views'], [
+            ...array_column($agent['new_buyer_answers_not_opened_yet']['items'], 'buyer'),
+            ...array_column($agent['buyer_files_to_review']['items'], 'buyer'),
+            ...array_column($agent['interested_buyers_still_missing_requirements']['items'], 'buyer'),
+            ...array_column($agent['opened_often_but_no_answer_yet']['items'], 'buyer'),
+        ]);
+        $this->assertSame(4, $agent['total_things_to_do']);
+
+        Sanctum::actingAs($this->agent);
+        $this->getJson('/api/realty/assistant/chats')->assertJsonPath('attention', 4);
     }
 
     private function offer(User $by, string $buyer): Offer
