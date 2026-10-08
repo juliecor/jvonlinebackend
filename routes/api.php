@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AgentController as AdminAgentController;
 use App\Http\Controllers\Admin\OfferController as AdminOfferController;
 use App\Http\Controllers\Admin\RealtyController;
@@ -52,6 +53,11 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
     Route::get('/auth/view-as', [AuthController::class, 'viewAsOptions']);
     Route::post('/auth/view-as', [AuthController::class, 'viewAs']);
+
+    // Everyone's own account: name, email, phone and password.
+    Route::get('/account', [AccountController::class, 'show']);
+    Route::patch('/account', [AccountController::class, 'update'])->middleware('throttle:login');
+    Route::post('/account/password', [AccountController::class, 'password'])->middleware('throttle:login');
 
     // jvconline admin
     Route::prefix('admin')->middleware('admin')->group(function () {
