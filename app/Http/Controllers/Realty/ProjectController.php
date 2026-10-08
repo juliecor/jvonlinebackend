@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Realty;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Unit;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -26,7 +28,15 @@ class ProjectController extends Controller
     {
         $this->own($request, $project);
 
-        return response()->json($project->load(['units', 'paymentPlans', 'unitTypes', 'updates'])->loadCount('offers'));
+        $project->load(['units.statusOffer:id,code,buyer_name,agent_id', 'units.statusOffer.agent:id,name', 'units.statusBy:id,name', 'paymentPlans', 'unitTypes', 'updates'])->loadCount('offers');
+        // Who each reserved or sold unit went to; buyers' names are for the realty's admins.
+        $staff = $request->user()->role === User::ROLE_REALTY;
+        $project->units->each(function (Unit $unit) use ($staff) {
+            $unit->setAttribute('status_detail', $unit->statusDetail($staff));
+            $unit->unsetRelation('statusOffer')->unsetRelation('statusBy');
+        });
+
+        return response()->json($project);
     }
 
     public function store(Request $request): JsonResponse

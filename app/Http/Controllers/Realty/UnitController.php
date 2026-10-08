@@ -32,6 +32,13 @@ class UnitController extends Controller
         if ($request->hasFile('floor_plan')) {
             $data['floor_plan_path'] = $request->file('floor_plan')->store('floor-plans', config('filesystems.uploads'));
         }
+        // A status changed by hand here: remember who; available again lets go of the offer that held it.
+        if (isset($data['status']) && $data['status'] !== $unit->status) {
+            $data += ['status_by_id' => $request->user()->id, 'status_at' => now()];
+            if ($data['status'] === 'available') {
+                $data['status_offer_id'] = null;
+            }
+        }
         $unit->update($data);
 
         return response()->json($unit->fresh());

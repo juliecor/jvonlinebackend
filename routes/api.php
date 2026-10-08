@@ -83,6 +83,7 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::post('/offers/{id}/login', [OfferController::class, 'login'])->whereNumber('id');
         });
         Route::middleware('realty.member:staff')->group(function () {
+            Route::post('/offers/{id}/unit-status', [OfferController::class, 'unitStatus'])->whereNumber('id');
             Route::get('/agents', [AgentController::class, 'index']);
             Route::post('/agents', [AgentController::class, 'store']);
             Route::post('/agents/invitations/{invitation}/resend', [AgentController::class, 'resend']);

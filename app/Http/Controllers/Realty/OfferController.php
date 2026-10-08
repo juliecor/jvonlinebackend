@@ -32,7 +32,7 @@ class OfferController extends Controller
         $user = $request->user();
         $types = RequirementType::where('realty_id', $user->realty_id)->orderBy('sort')->orderBy('id')->get();
         $offers = $this->visible($request)
-            ->with(['project:id,name', 'unit:id,name,unit_type', 'agent:id,name', 'responses', 'documents'])
+            ->with(['project:id,name', 'unit:id,name,unit_type,status,status_offer_id', 'agent:id,name', 'responses', 'documents'])
             ->latest()
             ->get()
             ->map(fn (Offer $o) => $this->row($o) + ['requirements' => $o->requirementSummary($types)]);
@@ -52,6 +52,7 @@ class OfferController extends Controller
             'fee_notes' => $offer->fee_notes,
             'first_viewed_at' => $offer->first_viewed_at,
             'last_viewed_at' => $offer->last_viewed_at,
+            'unit_hold' => $offer->unit ? $this->unitHold($offer, $request->user()) : null,
             'unit_detail' => ['name' => $offer->unit?->name, 'unit_type' => $offer->unit?->unit_type, 'area_sqm' => $offer->unit?->area_sqm !== null ? (float) $offer->unit->area_sqm : null, 'status' => $offer->unit?->status],
             'responses' => $leads,
             'buyer_phone' => $offer->buyer_phone,
@@ -204,7 +205,10 @@ class OfferController extends Controller
             'views' => $o->views,
             'created_at' => $o->created_at,
             'project' => $o->project?->name,
-            'unit' => $o->unit ? trim($o->unit->name.' · '.($o->unit->unit_type ?? ''), ' ·') : null,
+            // "Unit 415 · 1 Bedroom"; just the name when the type says the same thing.
+            'unit' => $o->unit ? implode(' · ', array_unique(array_filter([$o->unit->name, $o->unit->unit_type]))) : null,
+            // Reserved or sold through this offer.
+            'unit_status' => $o->unit && $o->unit->status_offer_id === $o->id ? $o->unit->status : null,
             'agent' => $o->agent?->name,
             'agent_id' => $o->agent_id,
             'url' => Offer::url($o->code),
@@ -290,6 +294,48 @@ class OfferController extends Controller
         }
 
         return response()->json(['id' => $offer->id, 'code' => $offer->code, 'url' => Offer::url($offer->code), 'emailed_to' => $emailed, 'approval_status' => $offer->approval_status], 201);
+    }
+
+    /**
+     * A realty admin marks the offer's unit reserved or sold to this buyer (or
+     * available again). A unit held through another offer has to be let go there first.
+     */
+    public function unitStatus(Request $request, int $id): JsonResponse
+    {
+        $user = $request->user();
+        abort_unless($user->role === User::ROLE_REALTY, 403, "Only your realty's admins can change a unit's status.");
+        $offer = $this->visible($request)->with('unit.statusOffer:id,code,buyer_name')->findOrFail($id);
+        $data = $request->validate(['status' => ['required', Rule::in(Unit::STATUSES)]]);
+        $unit = $offer->unit;
+        abort_unless($unit !== null, 404, 'This offer has no unit.');
+
+        $other = $unit->status !== 'available' && $unit->status_offer_id && $unit->status_offer_id !== $offer->id ? $unit->statusOffer : null;
+        if ($other) {
+            return response()->json(['message' => "This unit is already {$unit->status} to {$other->buyer_name} (offer {$other->code}). Set it back to available on that offer first."], 409);
+        }
+        abort_unless($offer->status === 'active' || $data['status'] === 'available', 422, 'This offer is void.');
+
+        $unit->update([
+            'status' => $data['status'],
+            'status_offer_id' => $data['status'] === 'available' ? null : $offer->id,
+            'status_by_id' => $user->id,
+            'status_at' => now(),
+        ]);
+
+        return response()->json($this->unitHold($offer->fresh('unit'), $user));
+    }
+
+    /**
+     * The offer's unit: its status, whether this offer holds it, and who has it.
+     *
+     * @return array{status: string, this_offer: bool, detail: array<string, mixed>|null}
+     */
+    private function unitHold(Offer $offer, User $user): array
+    {
+        $unit = $offer->unit->loadMissing(['statusOffer:id,code,buyer_name,agent_id', 'statusOffer.agent:id,name', 'statusBy:id,name']);
+        $mine = $unit->status_offer_id === $offer->id;
+
+        return ['status' => $unit->status, 'this_offer' => $mine, 'detail' => $unit->statusDetail($mine || $user->role === User::ROLE_REALTY)];
     }
 
     /** Set or change the buyer's username and password. A new password signs the buyer out of the old one. */
