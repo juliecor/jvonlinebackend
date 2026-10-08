@@ -28,15 +28,15 @@ class RealtyTools
 {
     private const MAX_ROWS = 25;
 
-    /** Units the model asked to show as cards under its answer (ids, in order). */
-    private array $shown = [];
+    /** The cards to show under the answer, as references (see Cards), in order. */
+    private array $cards = [];
 
     public function __construct(private readonly User $user) {}
 
-    /** @return array<int, int> */
-    public function shownUnitIds(): array
+    /** @return array<int, array<string, mixed>> */
+    public function shownCards(): array
     {
-        return $this->shown;
+        return $this->cards;
     }
 
     /**
@@ -59,7 +59,7 @@ class RealtyTools
 
         return [
             $tool('overview', 'The realty at a glance today: projects, units by status, active offers, new buyer responses, files to review, approvals and agents.'),
-            $tool('list_projects', 'Projects with location, stage, whether they are open for offers, unit counts by status and price range.', [
+            $tool('list_projects', 'Projects with location, stage, whether they are open for offers, unit counts by status and price range, each with an id for show_projects.', [
                 'query' => $text('Part of a project name or place, e.g. "Plumera" or "Cebu".'),
                 'include_archived' => ['type' => 'boolean', 'description' => 'Also list archived projects.'],
             ]),
@@ -78,7 +78,13 @@ class RealtyTools
             $tool('show_units', 'Show units as cards under your answer: photo, project, type, floor area, price, status, and a "Make offer" button on available ones. Use it whenever you present specific units someone may want to look at or offer (show me, which units, cheapest, best for a family, compare these), with ids from search_units. Up to 6, in the order to show. Not for counts or statistics.', [
                 'unit_ids' => ['type' => 'array', 'items' => ['type' => 'integer'], 'description' => 'Unit ids from search_units, in order.'],
             ]),
-            $tool('list_offers', "Sales offers sent to buyers, newest first, with each one's progress. Filter by status, project, agent, buyer, the buyer's answer, or what still needs doing.", [
+            $tool('show_offers', "Show offers as cards under your answer: the buyer, the unit's photo, their answer, documents in and how often they opened it, with buttons to open the offer, copy the buyer's link and write a follow-up. Use it whenever you present specific buyers or offers (who is missing documents, who hasn't answered, a buyer you were asked about), with codes from list_offers or offer_details. Up to 6, in the order to show.", [
+                'offer_codes' => ['type' => 'array', 'items' => ['type' => 'string'], 'description' => 'Offer codes, e.g. 3XT3WEF4P7.'],
+            ]),
+            $tool('show_projects', 'Show projects as cards under your answer: photo, location, stage, units left and price range, with buttons to view the project and make an offer. Use it whenever you present specific projects (which projects, projects in a place, compare projects), with ids from list_projects. Up to 6, in the order to show.', [
+                'project_ids' => ['type' => 'array', 'items' => ['type' => 'integer'], 'description' => 'Project ids from list_projects, in order.'],
+            ]),
+            $tool('list_offers', "Sales offers sent to buyers, newest first, with each one's progress. Filter by status, project, agent, buyer, the buyer's answer (none: buyers who haven't answered), or what still needs doing.", [
                 'status' => ['type' => 'string', 'enum' => ['active', 'void', 'all']],
                 'project' => $text('Project name, or part of it.'),
                 'agent' => $text("Agent's name, or part of it."),
@@ -118,7 +124,7 @@ class RealtyTools
                 ],
                 'purchase_date' => $text('YYYY-MM-DD. Today if left out.'),
             ]),
-            $tool('attention_today', 'Everything that needs the person now, in one lookup: new buyer answers nobody opened yet, buyer files to review, custom terms to approve (or sent back), interested buyers still missing requirements, buyers who opened their offer often but never answered, links not opened 3+ days after sending, agent applications, and units reserved or sold in the last 7 days. Use it for "what needs my attention", "what should I do today", "any updates", "good morning", "summary of today".'),
+            $tool('attention_today', 'Everything that needs the person now, in one lookup: new buyer answers nobody opened yet, buyer files to review, custom terms to approve (or sent back), interested buyers still missing requirements, buyers who opened their offer often but never answered, links not opened 3+ days after sending, agent applications, and units reserved or sold in the last 7 days. Only for those general questions: "what needs my attention", "what should I do today", "any updates", "good morning", "summary of today". For a specific question (who hasn\'t answered, who is missing documents) use list_offers.'),
         ];
     }
 
@@ -136,6 +142,8 @@ class RealtyTools
             'project_details' => $this->projectDetails($args),
             'search_units' => $this->searchUnits($args),
             'show_units' => $this->showUnits($args),
+            'show_offers' => $this->showOffers($args),
+            'show_projects' => $this->showProjects($args),
             'list_offers' => $this->listOffers($args),
             'offer_details' => $this->offerDetails($args),
             'buyer_responses' => $this->buyerResponses($args),
@@ -199,10 +207,13 @@ class RealtyTools
             ->withMax('units', 'price')
             ->orderBy('name')
             ->get();
+        $carded = $this->text($args, 'query') ? $this->cardsFor('project', $projects->pluck('id')->all()) : null;
 
         return [
             'count' => $projects->count(),
+            'shown_as_cards' => $carded,
             'projects' => $projects->map(fn (Project $p) => [
+                'id' => $p->id,
                 'name' => $p->name,
                 'location' => $p->location,
                 'region' => $p->region,
@@ -232,6 +243,7 @@ class RealtyTools
         $example = $units->where('status', 'available')->whereNotNull('price')->sortBy('price')->first() ?? $units->whereNotNull('price')->sortBy('price')->first();
 
         return [
+            'id' => $project->id,
             'name' => $project->name,
             'location' => $project->location,
             'region' => $project->region,
@@ -270,6 +282,7 @@ class RealtyTools
             ])->values()->all(),
             'website' => $project->is_public && $project->slug ? "/projects/{$project->slug}" : null,
             'dashboard_url' => $this->url("projects/{$project->id}"),
+            'shown_as_cards' => $this->cardsFor('project', [$project->id]),
         ];
     }
 
@@ -303,6 +316,7 @@ class RealtyTools
         return [
             'total_matching' => $total,
             'showing' => $units->count(),
+            'shown_as_cards' => $total <= Cards::MAX['unit'] ? $this->cardsFor('unit', $units->pluck('id')->all()) : null,
             'units' => $units->map(fn (Unit $u) => [
                 'id' => $u->id,
                 'name' => $u->name,
@@ -321,7 +335,7 @@ class RealtyTools
 
     /**
      * Put units under the answer as cards. Only this realty's units; the
-     * cards themselves are drawn from the live units by UnitCards.
+     * cards themselves are drawn from the live units by Cards.
      *
      * @param  array<string, mixed>  $args
      * @return array<string, mixed>
@@ -334,12 +348,88 @@ class RealtyTools
         if ($found === []) {
             return ['error' => 'None of those ids are units of this realty. Use the ids from search_units.'];
         }
-        $this->shown = array_slice(array_values(array_unique([...$this->shown, ...$found])), 0, UnitCards::MAX);
+        foreach ($found as $id) {
+            $this->card(['type' => 'unit', 'id' => $id]);
+        }
 
         return [
-            'shown_as_cards' => array_values(array_filter(array_map(fn (int $id) => $names[$id] ?? null, $this->shown))),
+            'shown_as_cards' => array_map(fn (int $id) => $names[$id], $found),
             'note' => "The cards show each unit's photo, price and status with a Make offer button. Introduce them in a sentence and give the highlights; don't repeat them in a table.",
         ];
+    }
+
+    /**
+     * Put offers (buyers) under the answer as cards: only offers this person
+     * may see, so an agent can't show another agent's buyer.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function showOffers(array $args): array
+    {
+        $codes = array_values(array_unique(array_filter(array_map(fn ($c) => strtoupper(trim((string) $c)), (array) ($args['offer_codes'] ?? [])))));
+        $offers = $this->offers()->whereIn('code', $codes)->get(['id', 'code', 'buyer_name'])->keyBy('code');
+        $found = array_values(array_filter($codes, fn (string $code) => $offers->has($code)));
+        if ($found === []) {
+            return ['error' => 'None of those codes are offers you can see. Use the codes from list_offers or offer_details.'];
+        }
+        foreach ($found as $code) {
+            $this->card(['type' => 'offer', 'id' => $offers[$code]->id]);
+        }
+
+        return [
+            'shown_as_cards' => array_map(fn (string $code) => $offers[$code]->buyer_name, $found),
+            'note' => "The cards show each buyer's progress with buttons to open the offer, copy the buyer's link and write a follow-up. Introduce them and say what to do next; don't repeat them in a table.",
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function showProjects(array $args): array
+    {
+        $ids = array_values(array_unique(array_filter(array_map('intval', (array) ($args['project_ids'] ?? [])))));
+        $names = $this->realty()->projects()->whereIn('id', $ids)->pluck('name', 'id');
+        $found = array_values(array_filter($ids, fn (int $id) => $names->has($id)));
+        if ($found === []) {
+            return ['error' => 'None of those ids are projects of this realty. Use the ids from list_projects.'];
+        }
+        foreach ($found as $id) {
+            $this->card(['type' => 'project', 'id' => $id]);
+        }
+
+        return [
+            'shown_as_cards' => array_map(fn (int $id) => $names[$id], $found),
+            'note' => 'The cards show each project\'s photo, units left and price range with buttons to view it and make an offer. Introduce them and give the highlights; don\'t repeat them in a table.',
+        ];
+    }
+
+    /** @param  array<string, mixed>  $ref */
+    private function card(array $ref): void
+    {
+        $this->cards = Cards::add($this->cards, $ref);
+    }
+
+    /**
+     * A lookup that found a few specific things (6 or fewer) puts them under
+     * the answer as cards by itself, so the model doesn't have to ask. The
+     * note tells the model so (null when nothing was shown).
+     *
+     * @param  array<int, int>  $ids
+     */
+    private function cardsFor(string $type, array $ids): ?string
+    {
+        if ($ids === [] || count($ids) > Cards::MAX[$type]) {
+            return null;
+        }
+        foreach ($ids as $id) {
+            $this->card(['type' => $type, 'id' => (int) $id]);
+        }
+
+        return count($ids) === 1
+            ? "Already under your answer as a card (photo, details, buttons). Don't repeat it in a table: give the key facts and what to do next."
+            : 'These '.count($ids)." are already under your answer as cards (photos, details, buttons). Don't list them in a table: give a short summary and what to do next.";
     }
 
     /**
@@ -379,6 +469,7 @@ class RealtyTools
         return [
             'total_matching' => $offers->count(),
             'showing' => min($offers->count(), self::MAX_ROWS),
+            'shown_as_cards' => $this->cardsFor('offer', $offers->pluck('id')->all()),
             'offers' => $offers->take(self::MAX_ROWS)->map(fn (Offer $o) => $this->offerRow($o, $types))->all(),
         ];
     }
@@ -404,6 +495,7 @@ class RealtyTools
         $offer->load(['project:id,name', 'unit', 'agent:id,name', 'responses', 'documents']);
 
         return $this->offerRow($offer) + [
+            'shown_as_cards' => $this->cardsFor('offer', [$offer->id]),
             'purchase_date' => $offer->purchase_date?->toDateString(),
             'payment_schedule' => collect($offer->schedule)->map(fn (array $m) => [
                 'label' => $m['label'],
@@ -556,12 +648,13 @@ class RealtyTools
         }
 
         $plans = $project?->paymentPlans()->orderBy('id')->get() ?? collect();
+        $planId = null;
         if ($wanted = $this->text($args, 'plan')) {
             $plan = $plans->first(fn (PaymentPlan $p) => strcasecmp($p->name, $wanted) === 0) ?? $plans->first(fn (PaymentPlan $p) => stripos($p->name, $wanted) !== false);
             if (! $plan) {
                 return ['error' => $project ? "{$project->name} has no plan called \"{$wanted}\". Its plans: ".($plans->pluck('name')->implode(', ') ?: 'none').'.' : 'Say which project the plan belongs to.'];
             }
-            [$milestones, $terms] = [$plan->milestones, $plan->name];
+            [$milestones, $terms, $planId] = [$plan->milestones, $plan->name, $plan->id];
         } elseif (is_array($args['terms'] ?? null) && $args['terms'] !== []) {
             $milestones = $this->customTerms($args['terms'], $price);
             if (is_string($milestones)) {
@@ -576,6 +669,7 @@ class RealtyTools
         $purchase = $date && preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) ? Carbon::parse($date, 'Asia/Manila') : now('Asia/Manila')->startOfDay();
         $schedule = Offer::buildSchedule($price, $milestones, $purchase, $project?->completion_date);
         $day = fn (?string $d) => $d ? Carbon::parse($d)->format('M j, Y') : null;
+        $this->card(['type' => 'payment', 'unit' => $unit?->id, 'project' => $project?->id, 'price' => $price, 'plan' => $planId, 'terms' => $terms, 'milestones' => array_values($milestones), 'date' => $purchase->toDateString()]);
 
         return [
             'unit' => $unit?->name,
@@ -597,7 +691,7 @@ class RealtyTools
                 ] : null,
             ], fn ($v) => $v !== null))->all(),
             'total' => round(array_sum(array_column($schedule, 'amount')), 2),
-            'note' => 'Worked out like the offers: the last payment of each part takes the centavo rounding.',
+            'note' => 'Worked out like the offers: the last payment of each part takes the centavo rounding. A card with this schedule (and a "Make offer with these terms" button for an available unit) shows under your answer: give the key amounts in a sentence or two, no need to list every payment.',
         ];
     }
 

@@ -5,13 +5,12 @@ namespace App\Http\Controllers\Realty;
 use App\Http\Controllers\Controller;
 use App\Models\AssistantChat;
 use App\Models\AssistantMessage;
-use App\Models\Unit;
 use App\Models\User;
 use App\Support\Assistant\Assistant;
 use App\Support\Assistant\AssistantUnavailable;
+use App\Support\Assistant\Cards;
 use App\Support\Assistant\RealtyTools;
 use App\Support\Assistant\Transcriber;
-use App\Support\Assistant\UnitCards;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -70,7 +69,7 @@ class AssistantController extends Controller
             $this->own($request, $chat);
         }
 
-        $conversation = $this->conversation($chat, $data['message'], (new RealtyTools($user))->describePage($data['page'] ?? null));
+        $conversation = $this->conversation($user, $chat, $data['message'], (new RealtyTools($user))->describePage($data['page'] ?? null));
 
         set_time_limit(180);
         $assistant = new Assistant($user);
@@ -80,7 +79,7 @@ class AssistantController extends Controller
             return response()->json(['message' => $e->getMessage()], 503);
         }
 
-        [$chat, $reply] = $this->save($user, $chat, $data['message'], $answer, $assistant->shownUnitIds());
+        [$chat, $reply] = $this->save($user, $chat, $data['message'], $answer, $assistant->shownCards());
 
         return response()->json([
             'chat' => ['id' => $chat->id, 'title' => $chat->title, 'updated_at' => $chat->updated_at],
@@ -108,7 +107,7 @@ class AssistantController extends Controller
             $chat = AssistantChat::findOrFail($data['chat_id']);
             $this->own($request, $chat);
         }
-        $conversation = $this->conversation($chat, $data['message'], (new RealtyTools($user))->describePage($data['page'] ?? null));
+        $conversation = $this->conversation($user, $chat, $data['message'], (new RealtyTools($user))->describePage($data['page'] ?? null));
 
         return response()->stream(function () use ($user, $chat, $data, $conversation) {
             set_time_limit(180);
@@ -134,7 +133,7 @@ class AssistantController extends Controller
                 return;
             }
 
-            [$chat, $reply] = $this->save($user, $chat, $data['message'], $answer, $assistant->shownUnitIds());
+            [$chat, $reply] = $this->save($user, $chat, $data['message'], $answer, $assistant->shownCards());
             $emit('done', [
                 'chat' => ['id' => $chat->id, 'title' => $chat->title, 'updated_at' => $chat->updated_at],
                 'message' => $this->present($user, $reply),
@@ -175,23 +174,27 @@ class AssistantController extends Controller
 
     /**
      * The chat so far (its last messages) plus the new question, for the model.
-     * Units an answer showed as cards follow it as a note, so "the second one"
-     * still means something in the next question; so does the page the
-     * question is asked from, so "this project" does too.
+     * The cards an answer showed follow it as a note, so "the second one" or
+     * "that buyer" still means something in the next question; so does the
+     * page the question is asked from, so "this project" does too.
      *
      * @return array<int, array{role: string, content: string}>
      */
-    private function conversation(?AssistantChat $chat, string $question, ?string $page = null): array
+    private function conversation(User $user, ?AssistantChat $chat, string $question, ?string $page = null): array
     {
         $conversation = [];
         if ($chat) {
             $messages = $chat->messages()->reorder('id', 'desc')->limit(self::HISTORY)->get(['role', 'content', 'meta'])->reverse()->values();
-            $units = Unit::where('realty_id', $chat->realty_id)->whereIn('id', $messages->flatMap(fn (AssistantMessage $m) => $m->unitIds()))->with('project:id,name')->get()->keyBy('id');
             foreach ($messages as $m) {
                 $conversation[] = ['role' => $m->role, 'content' => $m->content];
-                $shown = collect($m->unitIds())->map(fn (int $id) => $units->get($id))->filter();
-                if ($shown->isNotEmpty()) {
-                    $conversation[] = ['role' => 'system', 'content' => 'Under that answer, these units were shown as cards, in order: '.$shown->map(fn (Unit $u) => "{$u->name} ({$u->project?->name}, id {$u->id})")->implode('; ').'.'];
+                $shown = $m->cardRefs() ? Cards::for($user, $m->cardRefs()) : [];
+                if ($shown !== []) {
+                    $conversation[] = ['role' => 'system', 'content' => 'Under that answer, these cards were shown, in order: '.collect($shown)->map(fn (array $c) => match ($c['type']) {
+                        'unit' => "unit {$c['name']} ({$c['project']['name']}, id {$c['id']})",
+                        'offer' => "the offer {$c['code']} for {$c['buyer']}",
+                        'project' => "the project {$c['name']} (id {$c['id']})",
+                        'payment' => 'payments for '.($c['unit']['name'] ?? 'a price of '.number_format($c['price'], 2)).' with '.$c['terms'],
+                    })->implode('; ').'.'];
                 }
             }
         }
@@ -204,14 +207,14 @@ class AssistantController extends Controller
     }
 
     /**
-     * A message as the page shows it: an answer comes with its unit cards,
-     * drawn from the live units.
+     * A message as the page shows it: an answer comes with its cards, drawn
+     * from the live data.
      *
      * @return array<string, mixed>
      */
     private function present(User $user, AssistantMessage $message): array
     {
-        $cards = $message->unitIds() ? UnitCards::for($user, $message->unitIds()) : [];
+        $cards = $message->cardRefs() ? Cards::for($user, $message->cardRefs()) : [];
 
         return $message->only(['id', 'role', 'content', 'created_at']) + ($cards ? ['cards' => $cards] : []);
     }
@@ -219,14 +222,14 @@ class AssistantController extends Controller
     /**
      * Keep the question and its answer; a first question starts the chat and names it.
      *
-     * @param  array<int, int>  $unitIds  units the answer showed as cards
+     * @param  array<int, array<string, mixed>>  $cards  what the answer showed as cards (references, see Cards)
      * @return array{0: AssistantChat, 1: AssistantMessage}
      */
-    private function save(User $user, ?AssistantChat $chat, string $question, string $answer, array $unitIds = []): array
+    private function save(User $user, ?AssistantChat $chat, string $question, string $answer, array $cards = []): array
     {
         $chat ??= AssistantChat::create(['user_id' => $user->id, 'realty_id' => $user->realty_id, 'title' => Str::limit(preg_replace('/\s+/', ' ', trim($question)), 80, '…')]);
         $chat->messages()->create(['role' => 'user', 'content' => $question]);
-        $reply = $chat->messages()->create(['role' => 'assistant', 'content' => $answer, 'meta' => $unitIds ? ['units' => $unitIds] : null]);
+        $reply = $chat->messages()->create(['role' => 'assistant', 'content' => $answer, 'meta' => $cards ? ['cards' => $cards] : null]);
         $chat->touch();
 
         return [$chat, $reply];

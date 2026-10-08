@@ -18,15 +18,15 @@ class Assistant
     /** Lookups the model may make for one question before it has to answer. */
     private const MAX_ROUNDS = 6;
 
-    /** The lookups of the last reply (they remember which units it showed as cards). */
+    /** The lookups of the last reply (they remember which cards it showed). */
     private ?RealtyTools $tools = null;
 
     public function __construct(private readonly User $user) {}
 
-    /** @return array<int, int> Units the last reply showed as cards, in order. */
-    public function shownUnitIds(): array
+    /** @return array<int, array<string, mixed>> The cards the last reply showed (references, see Cards), in order. */
+    public function shownCards(): array
     {
-        return $this->tools?->shownUnitIds() ?? [];
+        return $this->tools?->shownCards() ?? [];
     }
 
     /** "Johndorf" for Johndorf Ventures Corporation: the realty's name without the company words. */
@@ -42,9 +42,10 @@ class Assistant
      *
      * With $emit, the answer streams: emit('status', ['tool' => …]) before each
      * lookup, emit('delta', ['text' => …]) for each piece of the answer as
-     * OpenAI writes it, emit('cards', ['cards' => …]) when it puts units under
-     * the answer, and emit('reset', []) if text already sent turns out not to
-     * be the answer (the model went on to look something up).
+     * OpenAI writes it, emit('cards', ['cards' => …]) when it puts cards (units,
+     * offers, projects, a payment schedule) under the answer, and
+     * emit('reset', []) if text already sent turns out not to be the answer
+     * (the model went on to look something up).
      *
      * @param  array<int, array{role: string, content: string}>  $conversation
      * @param  (callable(string, array<string, mixed>): void)|null  $emit
@@ -72,10 +73,11 @@ class Assistant
             foreach ($calls as $call) {
                 $emit && $emit('status', ['tool' => (string) ($call['function']['name'] ?? '')]);
                 $args = json_decode($call['function']['arguments'] ?? '{}', true);
+                $before = count($tools->shownCards());
                 $result = $this->lookup($tools, (string) ($call['function']['name'] ?? ''), is_array($args) ? $args : []);
                 $messages[] = ['role' => 'tool', 'tool_call_id' => $call['id'], 'content' => json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)];
-                if ($emit && ($call['function']['name'] ?? '') === 'show_units' && ! isset($result['error'])) {
-                    $emit('cards', ['cards' => UnitCards::for($this->user, $tools->shownUnitIds())]);
+                if ($emit && count($tools->shownCards()) !== $before) {
+                    $emit('cards', ['cards' => Cards::for($this->user, $tools->shownCards())]);
                 }
             }
         }
@@ -229,9 +231,11 @@ class Assistant
         - When it helps, end with one practical next step (who to follow up, what to check).
         - Payments: for any how-much, monthly, down payment or what-if question, use compute_payments and give its amounts exactly. Never work out payment amounts yourself.
 
-        Unit cards
-        - When you present specific units (show me, which units, the cheapest, the best for a family, compare these), call show_units with their ids from search_units, up to 6, so they appear under your answer as cards with a photo, price, status and a Make offer button.
-        - Then write a short intro and the highlights (what makes each one stand out). Don't describe the cards or their buttons, and don't repeat them in a table. Never mention unit ids.
+        Cards
+        - Cards are how specific things are presented, because people act on them (Make offer, Write follow-up, View). A lookup that found a few specific units, buyers (offers) or projects puts them under your answer as cards by itself: its result then has a shown_as_cards note. compute_payments adds its own payment card.
+        - To present a few picked from a longer list (the 4 cheapest of 25 units, the 3 buyers to call first), call show_units, show_offers or show_projects with their ids or codes.
+        - Then write a short intro and the highlights or what to do next. Don't describe the cards or their buttons, don't repeat them in a table, and don't offer to show cards: just show them. Never mention ids.
+        - Use a table instead only for more than 6 items, or for counts and statistics (e.g. units by type).
 
         Messages for buyers
         - When asked to write a message, text, Viber, SMS, Messenger or email for a buyer, look the offer up first: offer_details for one buyer, list_offers for several.

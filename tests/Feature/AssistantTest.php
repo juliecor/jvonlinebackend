@@ -12,6 +12,7 @@ use App\Models\Realty;
 use App\Models\RequirementType;
 use App\Models\Unit;
 use App\Models\User;
+use App\Support\Assistant\Cards;
 use App\Support\Assistant\RealtyTools;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request as HttpRequest;
@@ -201,7 +202,7 @@ class AssistantTest extends TestCase
         $this->assertStringContainsString('event: cards', $events);
         $this->assertStringNotContainsString('Not yours', $events);
         $chat = AssistantChat::firstOrFail();
-        $this->assertSame([$this->unit->id, $sold->id], $chat->messages()->where('role', 'assistant')->firstOrFail()->unitIds());
+        $this->assertSame([['type' => 'unit', 'id' => $this->unit->id], ['type' => 'unit', 'id' => $sold->id]], $chat->messages()->where('role', 'assistant')->firstOrFail()->cardRefs());
 
         $cards = $this->getJson("/api/realty/assistant/chats/{$chat->id}")->assertOk()->json('messages.1.cards');
         $this->assertSame(['Bldg S · Unit 123', 'Bldg S · Unit 124'], array_column($cards, 'name'));
@@ -214,7 +215,47 @@ class AssistantTest extends TestCase
 
         // The next question knows which units were on the cards.
         $this->postJson('/api/realty/assistant/messages', ['chat_id' => $chat->id, 'message' => 'Is the first one still available?'])->assertOk();
-        Http::assertSent(fn (HttpRequest $r) => str_contains(json_encode($r['messages'], JSON_UNESCAPED_UNICODE), 'these units were shown as cards, in order: Bldg S · Unit 123 (Plumera Mactan, id '.$this->unit->id.')'));
+        Http::assertSent(fn (HttpRequest $r) => str_contains(json_encode($r['messages'], JSON_UNESCAPED_UNICODE), 'these cards were shown, in order: unit Bldg S · Unit 123 (Plumera Mactan, id '.$this->unit->id.')'));
+    }
+
+    public function test_offer_project_and_payment_cards_come_from_the_live_data_and_only_what_the_person_may_see(): void
+    {
+        RequirementType::seedDefaults($this->realty);
+        $mine = $this->offer($this->agent, 'Juliecor Repompo');
+        $mine->forceFill(['views' => 8, 'last_viewed_at' => now()])->save();
+        OfferResponse::create(['offer_id' => $mine->id, 'realty_id' => $this->realty->id, 'kind' => 'interested', 'name' => 'Juliecor Repompo']);
+        $theirs = $this->offer($this->admin, 'Someone Else');
+        $project = $this->unit->project;
+        $tools = new RealtyTools($this->agent);
+
+        $this->assertSame(['Juliecor Repompo'], $tools->call('show_offers', ['offer_codes' => [strtolower($mine->code), $theirs->code]])['shown_as_cards']);
+        $this->assertArrayHasKey('error', $tools->call('show_offers', ['offer_codes' => [$theirs->code]]));
+        $this->assertSame(['Plumera Mactan'], $tools->call('show_projects', ['project_ids' => [$project->id, 999]])['shown_as_cards']);
+        $tools->call('compute_payments', ['unit' => 'Bldg S · Unit 123', 'terms' => [
+            ['label' => 'Reservation fee', 'amount' => 20000, 'due' => 'on_purchase'],
+            ['label' => 'Balance', 'rest' => true, 'due' => 'on_turnover'],
+        ]]);
+
+        [$offer, $projectCard, $payment] = Cards::for($this->agent, $tools->shownCards());
+        $this->assertSame(['offer', 'Juliecor Repompo', 8, 'interested', Offer::url($mine->code)], [$offer['type'], $offer['buyer'], $offer['views'], $offer['answer']['kind'], $offer['url']]);
+        $this->assertNull($offer['agent']);
+        $this->assertSame(['project', 1, 1, true], [$projectCard['type'], $projectCard['units']['total'], $projectCard['units']['available'], $projectCard['can_offer']]);
+        $this->assertSame(['payment', 'Bldg S · Unit 123', 'custom terms', [20000.0, 3523000.0], true], [$payment['type'], $payment['unit']['name'], $payment['terms'], array_column($payment['payments'], 'amount'), $payment['can_offer']]);
+
+        // The schedule stays the one the AI worked out (a fixed fee stays fixed); a new price shows beside it.
+        $this->unit->update(['price' => 3600000]);
+        $later = Cards::for($this->agent, $tools->shownCards())[2];
+        $this->assertSame([20000.0, 3523000.0], array_column($later['payments'], 'amount'));
+        $this->assertSame(3600000.0, $later['price_now']);
+        // A lookup that finds a few specific things shows them by itself; a long list doesn't.
+        $lookups = new RealtyTools($this->agent);
+        $this->assertNotNull($lookups->call('list_offers', ['response' => 'interested'])['shown_as_cards']);
+        $this->assertNull($lookups->call('list_projects', [])['shown_as_cards']);
+        $lookups->call('project_details', ['project' => 'Plumera']);
+        $this->assertSame([['type' => 'offer', 'id' => $mine->id], ['type' => 'project', 'id' => $project->id]], $lookups->shownCards());
+        // Another agent never gets this buyer's card.
+        $other = User::factory()->create(['role' => User::ROLE_AGENT, 'realty_id' => $this->realty->id]);
+        $this->assertSame(['project', 'payment'], array_column(Cards::for($other, $tools->shownCards()), 'type'));
     }
 
     public function test_offer_details_give_the_buyer_link_for_messages_but_never_the_login(): void
