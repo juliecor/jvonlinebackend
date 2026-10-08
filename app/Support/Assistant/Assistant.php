@@ -31,9 +31,15 @@ class Assistant
     /**
      * Answer the last question in the conversation, in Markdown.
      *
+     * With $emit, the answer streams: emit('status', ['tool' => …]) before each
+     * lookup, emit('delta', ['text' => …]) for each piece of the answer as
+     * OpenAI writes it, and emit('reset', []) if text already sent turns out not
+     * to be the answer (the model went on to look something up).
+     *
      * @param  array<int, array{role: string, content: string}>  $conversation
+     * @param  (callable(string, array<string, mixed>): void)|null  $emit
      */
-    public function reply(array $conversation): string
+    public function reply(array $conversation, ?callable $emit = null): string
     {
         $key = config('services.openai.key');
         if (! $key) {
@@ -44,7 +50,9 @@ class Assistant
 
         for ($round = 0; $round <= self::MAX_ROUNDS; $round++) {
             $last = $round === self::MAX_ROUNDS;
-            $message = $this->complete($key, $messages, $last ? [] : $tools->definitions());
+            $message = $emit
+                ? $this->stream($key, $messages, $last ? [] : $tools->definitions(), $emit)
+                : $this->complete($key, $messages, $last ? [] : $tools->definitions());
             $calls = $message['tool_calls'] ?? [];
             if ($calls === [] || $last) {
                 return trim((string) ($message['content'] ?? '')) ?: "Sorry, I couldn't put an answer together. Try asking another way.";
@@ -52,6 +60,7 @@ class Assistant
 
             $messages[] = ['role' => 'assistant', 'content' => $message['content'] ?? null, 'tool_calls' => $calls];
             foreach ($calls as $call) {
+                $emit && $emit('status', ['tool' => (string) ($call['function']['name'] ?? '')]);
                 $args = json_decode($call['function']['arguments'] ?? '{}', true);
                 $result = $this->lookup($tools, (string) ($call['function']['name'] ?? ''), is_array($args) ? $args : []);
                 $messages[] = ['role' => 'tool', 'tool_call_id' => $call['id'], 'content' => json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)];
@@ -102,6 +111,70 @@ class Assistant
         }
 
         return $response->json('choices.0.message') ?? [];
+    }
+
+    /**
+     * The same call, streamed: text goes out to $emit as it arrives; tool calls
+     * come in pieces and are put back together. Returns the whole message.
+     *
+     * @param  array<int, array<string, mixed>>  $messages
+     * @param  array<int, array<string, mixed>>  $tools
+     * @param  callable(string, array<string, mixed>): void  $emit
+     * @return array<string, mixed>
+     */
+    private function stream(string $key, array $messages, array $tools, callable $emit): array
+    {
+        $response = Http::withToken($key)->withOptions(['stream' => true])->timeout(120)->post('https://api.openai.com/v1/chat/completions', array_filter([
+            'model' => config('services.openai.model'),
+            'messages' => $messages,
+            'tools' => $tools ?: null,
+            'stream' => true,
+        ]));
+
+        if ($response->failed()) {
+            Log::warning('AI assistant: OpenAI request failed', ['status' => $response->status(), 'error' => $response->json('error.message')]);
+            throw new AssistantUnavailable($response->status() === 429
+                ? 'The AI is busy or the OpenAI account has run out of credit. Try again in a minute.'
+                : "The AI couldn't answer right now. Try again in a moment.");
+        }
+
+        $body = $response->toPsrResponse()->getBody();
+        $content = '';
+        $calls = [];
+        $buffer = '';
+        while (! $body->eof()) {
+            $buffer .= $body->read(2048);
+            while (($end = strpos($buffer, "\n")) !== false) {
+                $line = trim(substr($buffer, 0, $end));
+                $buffer = substr($buffer, $end + 1);
+                if (! str_starts_with($line, 'data:')) {
+                    continue;
+                }
+                $data = trim(substr($line, 5));
+                if ($data === '[DONE]') {
+                    break 2;
+                }
+                $delta = json_decode($data, true)['choices'][0]['delta'] ?? [];
+                if (($delta['content'] ?? '') !== '') {
+                    $content .= $delta['content'];
+                    $emit('delta', ['text' => $delta['content']]);
+                }
+                foreach ($delta['tool_calls'] ?? [] as $piece) {
+                    $i = $piece['index'] ?? 0;
+                    $calls[$i] ??= ['id' => '', 'type' => 'function', 'function' => ['name' => '', 'arguments' => '']];
+                    $calls[$i]['id'] .= $piece['id'] ?? '';
+                    $calls[$i]['function']['name'] .= $piece['function']['name'] ?? '';
+                    $calls[$i]['function']['arguments'] .= $piece['function']['arguments'] ?? '';
+                }
+            }
+        }
+
+        if ($calls !== [] && $content !== '') {
+            // Words written before deciding to look something up aren't the answer.
+            $emit('reset', []);
+        }
+
+        return ['content' => $content, 'tool_calls' => array_values($calls)];
     }
 
     private function instructions(): string

@@ -66,6 +66,41 @@ class AssistantTest extends TestCase
         $this->getJson('/api/realty/assistant/chats')->assertJsonPath('name', 'Johndorf AI')->assertJsonCount(1, 'chats');
     }
 
+    public function test_the_answer_streams_word_by_word_and_is_saved_when_complete(): void
+    {
+        $sse = fn (array ...$deltas) => implode('', array_map(fn (array $d) => 'data: '.json_encode(['choices' => [['delta' => $d]]])."\n\n", $deltas))."data: [DONE]\n\n";
+        Http::fakeSequence('api.openai.com/*')
+            ->push($sse(
+                ['tool_calls' => [['index' => 0, 'id' => 'call_1', 'type' => 'function', 'function' => ['name' => 'list_projects', 'arguments' => '{"que']]]],
+                ['tool_calls' => [['index' => 0, 'function' => ['arguments' => 'ry":"Plumera"}']]]],
+            ))
+            ->push($sse(['content' => '**Plumera Mactan'], ['content' => ' has 1 available unit.**']));
+        Sanctum::actingAs($this->admin);
+
+        $response = $this->postJson('/api/realty/assistant/stream', ['message' => 'Units in Plumera?'])->assertOk();
+        $events = $response->streamedContent();
+
+        $this->assertStringContainsString("event: status\ndata: {\"tool\":\"list_projects\"}", $events);
+        $this->assertStringContainsString("event: delta\ndata: {\"text\":\"**Plumera Mactan\"}", $events);
+        $this->assertStringContainsString("event: delta\ndata: {\"text\":\" has 1 available unit.**\"}", $events);
+        $this->assertStringContainsString('event: done', $events);
+        // The tool ran with the arguments that came in two pieces.
+        Http::assertSent(fn (HttpRequest $r) => str_contains(json_encode($r['messages']), 'Plumera Mactan') && collect($r['messages'])->contains('role', 'tool'));
+        $this->assertSame('**Plumera Mactan has 1 available unit.**', AssistantChat::firstOrFail()->messages()->where('role', 'assistant')->value('content'));
+    }
+
+    public function test_a_streamed_answer_that_fails_ends_with_an_error_and_saves_nothing(): void
+    {
+        Http::fake(['api.openai.com/*' => Http::response(['error' => ['message' => 'quota']], 429)]);
+        Sanctum::actingAs($this->admin);
+
+        $events = $this->postJson('/api/realty/assistant/stream', ['message' => 'Hello'])->assertOk()->streamedContent();
+
+        $this->assertStringContainsString('event: error', $events);
+        $this->assertStringContainsString('run out of credit', $events);
+        $this->assertSame(0, AssistantChat::count());
+    }
+
     public function test_follow_up_questions_send_the_earlier_conversation(): void
     {
         Http::fake(['api.openai.com/*' => Http::response(['choices' => [['message' => ['role' => 'assistant', 'content' => 'Sure.']]]])]);

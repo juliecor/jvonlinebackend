@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::get('/assistant/chats/{chat}', [AssistantController::class, 'show'])->whereNumber('chat');
             Route::delete('/assistant/chats/{chat}', [AssistantController::class, 'destroy'])->whereNumber('chat');
             Route::post('/assistant/messages', [AssistantController::class, 'send'])->middleware('throttle:assistant');
+            Route::post('/assistant/stream', [AssistantController::class, 'stream'])->middleware('throttle:assistant');
             Route::get('/projects', [ProjectController::class, 'index']);
             Route::get('/projects/{project}', [ProjectController::class, 'show']);
             Route::get('/offers', [OfferController::class, 'index']);
