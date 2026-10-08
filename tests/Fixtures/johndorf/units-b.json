@@ -1,0 +1,52 @@
+{
+  "generated_by": "php artisan johndorf:scrape-units",
+  "generated_at": "2026-10-08T00:00:00+00:00",
+  "source_pattern": "https://johndorfventures.com/reservation/project_unit_list.php?RealtyID={id}",
+  "projects": [
+    {
+      "slug": "test-towers",
+      "name": "Test Towers",
+      "realty_id": 9999,
+      "inventory_title": "Test Towers",
+      "source_url": "https://johndorfventures.com/reservation/project_unit_list.php?RealtyID=9999",
+      "scraped_at": "2026-10-08T00:00:00+00:00",
+      "inventory_state": "listed",
+      "available_count": 1,
+      "requirements_days": 7,
+      "error": null,
+      "units": [
+        {
+          "project_unit_id": 9001,
+          "code": "A-1F (101)",
+          "name": "Bldg A \u00b7 Unit 101",
+          "model": "Condominium",
+          "raw_type": "studio",
+          "unit_type": "Studio Unit",
+          "building": "A",
+          "floor_code": "1F",
+          "floor": "1st floor",
+          "unit_number": 101,
+          "block": null,
+          "lot": null,
+          "area_sqm": 24,
+          "price": 3000000,
+          "total_package": 3000000,
+          "reservation_fee": 15000,
+          "financing": [
+            {
+              "option": "Bank Financing",
+              "discount": 80000,
+              "required_income": 90000,
+              "loanable_amount": 2700000,
+              "monthly_amortization": 21000.5,
+              "equity_months": 24,
+              "equity_total": 220000,
+              "equity_monthly": 9166.67
+            }
+          ],
+          "status": "available"
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,8 @@ use Illuminate\Database\Seeder;
  * amenities read off Johndorf's own project pages, prices from published
  * listings and press (each unit's notes say where). Safe to run again —
  * it updates by project name and house model, and never touches units a
- * staff member added by hand.
+ * staff member added by hand. Ends by calling JohndorfUnitsSeeder, which
+ * adds the real per-unit inventory for the projects Johndorf sells online.
  */
 class JohndorfProjectsSeeder extends Seeder
 {
@@ -79,6 +80,9 @@ class JohndorfProjectsSeeder extends Seeder
         }
 
         $this->publicPages($realty);
+
+        // Per-unit inventory from Johndorf's online reservation list; needs the unit types above.
+        $this->call(JohndorfUnitsSeeder::class);
     }
 
     /**

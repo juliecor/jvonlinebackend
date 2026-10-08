@@ -313,30 +313,9 @@
     "location": "Basak, Lapu-Lapu City",
     "description": "Plumera Mactan by Johndorf Ventures Corporation in Basak, Lapu-Lapu City. House models: Studio Unit, 1BR Unit. Amenities: Underground Drainage and Sewer, MECO Power, Pocket Park, Wide Entrance, Gate and Guardhouse, Lagoon, Sewage Treatment Facility, Clubhouse and Multi-Purpose Area, Multi-Purpose Court, Perimeter Fence, Future Retail Area, Mailbox Area, Water System (MCWD), Swimming Pool, Jogging Trail, Fire Protection System, Material Recovery Facility. Johndorf published 21 construction updates (2023 to June 2025). Details from Johndorf's project page, read October 2025.",
     "cover_path": "/johndorf/site/plumera.jpg",
-    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
+    "fee_notes": "Prices are Johndorf's package prices from its online reservation inventory, refreshed by the seeder; promo discounts are per unit.",
     "status": "active",
-    "units": [
-      {
-        "name": "Studio Unit",
-        "unit_type": "Studio Unit",
-        "category": "Residential",
-        "floor": null,
-        "area_sqm": 24,
-        "price": 2600000,
-        "status": "available",
-        "notes": "24 sqm usable floor area, 1 T&B. Studio units listed from ₱2.6M to ₱3.1M depending on building (myhouse.ph, 2026 update)."
-      },
-      {
-        "name": "1BR Unit",
-        "unit_type": "1BR Unit",
-        "category": "Residential",
-        "floor": null,
-        "area_sqm": 36,
-        "price": 4400000,
-        "status": "available",
-        "notes": "36 sqm usable floor area, 1 bedroom, 1 T&B. 1-bedroom units listed from ₱4.4M to ₱5.2M depending on building (myhouse.ph, 2026 update)."
-      }
-    ],
+    "units": [],
     "official_url": "https://sitedev.johndorfventures.com/project/plumera/",
     "lat": 10.2959595,
     "lng": 123.97544
@@ -347,20 +326,9 @@
     "location": "Poblacion I, Carcar City",
     "description": "TierraNava Carcar by Johndorf Ventures Corporation in Poblacion I, Carcar City. House models: Two-Storey Townhouse. Amenities: Underground Drainage, CEBECO, Clubhouse, Multi-Purpose Court, Perimeter Fence, Water System (MCWD), Cistern Tank, Sewage Treatment Plant Facility, Gate and Guardhouse, Lagoon. Johndorf published 1 construction update (June 2025). Details from Johndorf's project page, read October 2025.",
     "cover_path": "/johndorf/site/tierranava-carcar.jpg",
-    "fee_notes": "Prices shown come from published listings and press and may have changed; Johndorf confirms the current price on reservation. Financing through the Pag-IBIG Fund or accredited banks; a 5% discount applied to equity paid in spot cash in past Johndorf promotions (SunStar). Transfer and registration fees are for the buyer's account unless agreed otherwise.",
-    "status": "archived",
-    "units": [
-      {
-        "name": "Two-Storey Townhouse",
-        "unit_type": "Two-Storey Townhouse",
-        "category": "Residential",
-        "floor": null,
-        "area_sqm": 54,
-        "price": null,
-        "status": "available",
-        "notes": "54 sqm usable floor area, 2* bedrooms, 1 T&B, 2 floors, 1 parking. No price published online; ask Johndorf for the current price list."
-      }
-    ],
+    "fee_notes": "Prices are Johndorf's package prices from its online reservation inventory, refreshed by the seeder; promo discounts are per unit.",
+    "status": "active",
+    "units": [],
     "official_url": "https://sitedev.johndorfventures.com/project/tierranava-carcar/",
     "lat": null,
     "lng": null
