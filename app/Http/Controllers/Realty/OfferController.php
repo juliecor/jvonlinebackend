@@ -13,6 +13,7 @@ use App\Models\OfferResponse;
 use App\Models\PaymentPlan;
 use App\Models\RequirementType;
 use App\Models\Unit;
+use App\Models\UnitType;
 use App\Models\User;
 use App\Support\Milestones;
 use Carbon\Carbon;
@@ -32,10 +33,12 @@ class OfferController extends Controller
         $user = $request->user();
         $types = RequirementType::where('realty_id', $user->realty_id)->orderBy('sort')->orderBy('id')->get();
         $offers = $this->visible($request)
-            ->with(['project:id,name', 'unit:id,name,unit_type,status,status_offer_id', 'agent:id,name', 'responses', 'documents'])
+            ->with(['project:id,name,cover_path,hero_paths', 'unit:id,name,unit_type,status,status_offer_id,floor_plan_path', 'agent:id,name', 'responses', 'documents'])
             ->latest()
-            ->get()
-            ->map(fn (Offer $o) => $this->row($o) + ['requirements' => $o->requirementSummary($types)]);
+            ->get();
+        // One query for every house model, so each row can show its picture.
+        $models = UnitType::whereIn('project_id', $offers->pluck('project_id')->unique())->get();
+        $offers = $offers->map(fn (Offer $o) => $this->row($o) + ['requirements' => $o->requirementSummary($types), 'photo' => $o->photo($models)]);
 
         return response()->json($offers);
     }
@@ -53,6 +56,7 @@ class OfferController extends Controller
             'first_viewed_at' => $offer->first_viewed_at,
             'last_viewed_at' => $offer->last_viewed_at,
             'unit_hold' => $offer->unit ? $this->unitHold($offer, $request->user()) : null,
+            'photo' => $offer->photo(),
             'unit_detail' => ['name' => $offer->unit?->name, 'unit_type' => $offer->unit?->unit_type, 'area_sqm' => $offer->unit?->area_sqm !== null ? (float) $offer->unit->area_sqm : null, 'status' => $offer->unit?->status],
             'responses' => $leads,
             'buyer_phone' => $offer->buyer_phone,
