@@ -3,9 +3,9 @@
     Table layout with inline styles, so it renders the same in Gmail, Outlook and Apple Mail.
 
     <x-branded-mail :brand="$brand" title="..." ribbon="..." preheader="...">body</x-branded-mail>
-    $brand comes from Realty::mailBrand() (name, logo, accent, site).
+    $brand comes from Realty::mailBrand() (name, logo, accent, site). $footnote says why the reader got the email.
 --}}
-@props(['brand', 'title', 'ribbon' => null, 'preheader' => null])
+@props(['brand', 'title', 'ribbon' => null, 'preheader' => null, 'footnote' => null])
 @php
     $accent = $brand['accent'];
     $sans = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
@@ -79,7 +79,7 @@
             <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;width:100%;max-width:600px;">
                 <tr>
                     <td align="center" style="padding:18px 24px 0;font-family:{{ $sans }};font-size:11px;line-height:17px;color:#a39d92;">
-                        You are receiving this because of your accreditation with {{ $brand['name'] }}. Please do not forward this email.
+                        {{ $footnote ?? 'You are receiving this because of your accreditation with '.$brand['name'].'.' }} Please do not forward this email.
                     </td>
                 </tr>
             </table>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Realty;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AgentApprovedMail;
+use App\Mail\AgentRejectedMail;
 use App\Models\AgentInvitation;
 use App\Models\User;
+use App\Support\QuietMail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -107,6 +110,8 @@ class AgentController extends Controller
             return response()->json(['message' => "{$agent->name} is already approved."], 409);
         }
         $agent->update(['status' => User::STATUS_ACTIVE, 'reviewed_by' => $request->user()->id, 'reviewed_at' => now()]);
+        // They are told they can sign in; if the mail can't be sent, the approval still stands.
+        QuietMail::send($agent->email, new AgentApprovedMail($agent->load('reviewer'), $agent->realty->loadMissing('developer')), "agent approved {$agent->id}");
 
         return response()->json(['id' => $agent->id, 'status' => $agent->status]);
     }
@@ -120,6 +125,7 @@ class AgentController extends Controller
         }
         $agent->update(['status' => User::STATUS_REJECTED, 'reviewed_by' => $request->user()->id, 'reviewed_at' => now()]);
         $agent->tokens()->delete();
+        QuietMail::send($agent->email, new AgentRejectedMail($agent->load('reviewer'), $agent->realty->loadMissing('developer')), "agent rejected {$agent->id}");
 
         return response()->json(['id' => $agent->id, 'status' => $agent->status]);
     }

@@ -9,12 +9,11 @@ use App\Models\AccreditationDocument;
 use App\Models\Realty;
 use App\Models\RealtyAccreditation;
 use App\Models\User;
+use App\Support\QuietMail;
 use Carbon\CarbonInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -139,7 +138,7 @@ class RealtyAccreditationController extends Controller
             'reviewed_by' => $form->reviewer?->name,
             'reviewed_at' => $form->reviewed_at,
             'review_note' => $form->review_note,
-            'realty' => $form->realty ? ['id' => $form->realty->id, 'name' => $form->realty->name, 'slug' => $form->realty->slug, 'login_url' => $this->loginUrl($form->realty)] : null,
+            'realty' => $form->realty ? ['id' => $form->realty->id, 'name' => $form->realty->name, 'slug' => $form->realty->slug, 'login_url' => $form->realty->loginUrl()] : null,
             // Still holding the mailed temporary password: "Resend login details" is available.
             'login_pending' => (bool) $admin?->must_change_password,
         ]);
@@ -277,7 +276,7 @@ class RealtyAccreditationController extends Controller
     private function sent(RealtyAccreditation $form, string $token): array
     {
         $url = RealtyAccreditation::url($token);
-        $emailed = $this->mail($form->email, new AccreditationInviteMail($form->loadMissing('developer'), $url), "invite {$form->id}");
+        $emailed = QuietMail::send($form->email, new AccreditationInviteMail($form->loadMissing('developer'), $url), "invite {$form->id}");
 
         return ['id' => $form->id, 'email' => $form->email, 'expires_at' => $form->expires_at, 'emailed' => $emailed, 'accreditation_url' => $url];
     }
@@ -287,8 +286,8 @@ class RealtyAccreditationController extends Controller
      */
     private function loginSent(Realty $realty, User $admin, string $password): array
     {
-        $loginUrl = $this->loginUrl($realty);
-        $emailed = $this->mail($admin->email, new AccreditationApprovedMail($realty, $admin, $password, $loginUrl), "login {$realty->slug}");
+        $loginUrl = $realty->loginUrl();
+        $emailed = QuietMail::send($admin->email, new AccreditationApprovedMail($realty, $admin, $password, $loginUrl), "login {$realty->slug}");
 
         return [
             'realty' => $realty->only(['id', 'name', 'slug']),
@@ -298,24 +297,5 @@ class RealtyAccreditationController extends Controller
             // Only when the mail couldn't be sent, so there is always a way to hand the login over.
             'temporary_password' => $emailed ? null : $password,
         ];
-    }
-
-    private function loginUrl(Realty $realty): string
-    {
-        return rtrim(config('app.frontend_url'), '/')."/{$realty->slug}/login";
-    }
-
-    /** A mail hiccup is logged and reported, never a failure: the accreditation itself already happened. */
-    private function mail(string $to, object $mailable, string $what): bool
-    {
-        try {
-            Mail::to($to)->send($mailable);
-
-            return true;
-        } catch (\Throwable $e) {
-            Log::warning('Accreditation mail failed', ['what' => $what, 'error' => $e->getMessage()]);
-
-            return false;
-        }
     }
 }

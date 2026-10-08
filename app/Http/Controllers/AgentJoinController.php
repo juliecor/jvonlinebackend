@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AgentApplicationReceivedMail;
 use App\Models\AgentInvitation;
+use App\Models\Realty;
 use App\Models\User;
+use App\Support\QuietMail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +15,10 @@ use Illuminate\Validation\Rules\Password;
 
 /**
  * An agent accepting a realty's invite (jvconline.ph/<realty>/join/<token>): they pick their
- * password and send a contact number, then wait for the realty's staff to approve them.
+ * password and send a contact number, then wait for the realty's staff to approve them. The staff
+ * are emailed, and the applicant stays signed in on a "pending" page that opens the dashboard
+ * once they are approved. That session can reach nothing else: every dashboard route refuses an
+ * account that is not approved.
  */
 class AgentJoinController extends Controller
 {
@@ -62,7 +68,22 @@ class AgentJoinController extends Controller
             ]);
         });
 
-        return response()->json(['realty' => $invitation->realty->publicArray(), 'user' => ['id' => $user->id, 'email' => $user->email, 'status' => $user->status]], 201);
+        $realty = $invitation->realty->loadMissing('developer');
+        $this->tellStaff($realty, $user);
+
+        return response()->json([
+            'realty' => $realty->publicArray(),
+            'user' => ['id' => $user->id, 'email' => $user->email, 'status' => $user->status],
+            // Same session length as a normal sign-in, so the pending page can follow the application.
+            'token' => $user->createToken('realty-web:'.$realty->slug, ['*'], now()->addHours(12))->plainTextToken,
+        ], 201);
+    }
+
+    /** Every active admin of the realty hears about the application, each with a link to review it. */
+    private function tellStaff(Realty $realty, User $applicant): void
+    {
+        User::where('realty_id', $realty->id)->where('role', User::ROLE_REALTY)->where('status', User::STATUS_ACTIVE)->pluck('email')
+            ->each(fn (string $email) => QuietMail::send($email, new AgentApplicationReceivedMail($applicant, $realty), "agent application {$applicant->id}"));
     }
 
     private function usable(string $token): AgentInvitation

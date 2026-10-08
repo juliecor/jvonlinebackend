@@ -97,6 +97,18 @@ class Realty extends Model
         return $slug;
     }
 
+    /** Where this realty's people sign in. */
+    public function loginUrl(): string
+    {
+        return rtrim(config('app.frontend_url'), '/')."/{$this->slug}/login";
+    }
+
+    /** Where this realty's staff review its agents: applications, invites and the team. */
+    public function agentsUrl(): string
+    {
+        return rtrim(config('app.frontend_url'), '/')."/{$this->slug}/dashboard/agents";
+    }
+
     /** What an email needs to wear this realty's brand: absolute logo, accent colour, name and site. */
     public function mailBrand(): array
     {
