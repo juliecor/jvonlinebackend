@@ -6,6 +6,7 @@ use App\Models\AssistantChat;
 use App\Models\Offer;
 use App\Models\OfferDocument;
 use App\Models\OfferResponse;
+use App\Models\PaymentPlan;
 use App\Models\Project;
 use App\Models\Realty;
 use App\Models\RequirementType;
@@ -14,6 +15,7 @@ use App\Models\User;
 use App\Support\Assistant\RealtyTools;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request as HttpRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
@@ -272,6 +274,71 @@ class AssistantTest extends TestCase
 
         Sanctum::actingAs($this->agent);
         $this->getJson('/api/realty/assistant/chats')->assertJsonPath('attention', 4);
+    }
+
+    public function test_payments_are_worked_out_like_the_offers_for_a_plan_or_custom_terms(): void
+    {
+        $project = $this->unit->project;
+        $project->update(['completion_date' => '2028-12-31']);
+        $milestones = [
+            ['label' => 'Reservation', 'percent' => 10, 'days' => 0, 'months' => null],
+            ['label' => 'Down payment', 'percent' => 20, 'days' => 30, 'months' => 12],
+            ['label' => 'Balance', 'percent' => 70, 'days' => null, 'months' => null],
+        ];
+        PaymentPlan::create(['realty_id' => $this->realty->id, 'project_id' => $project->id, 'name' => 'Standard 10-20-70', 'milestones' => $milestones]);
+        $tools = new RealtyTools($this->agent);
+
+        $plan = $tools->call('compute_payments', ['unit' => 'Bldg S · Unit 123', 'plan' => 'standard', 'purchase_date' => '2026-10-08']);
+        $expected = Offer::buildSchedule(3543000.0, $milestones, now()->setDate(2026, 10, 8), $project->completion_date);
+        $this->assertSame(array_column($expected, 'amount'), array_column($plan['payments'], 'amount'));
+        $this->assertSame(['payments' => 12, 'each' => 59050.0, 'from' => 'Nov 7, 2026', 'to' => 'Oct 7, 2027', 'last_payment' => 59050.0], $plan['payments'][1]['monthly']);
+        $this->assertSame('Dec 31, 2028', $plan['payments'][2]['due']);
+        $this->assertSame(3543000.0, $plan['total']);
+
+        // A fixed reservation fee, 20% over 24 months, and whatever is left on turnover.
+        $custom = $tools->call('compute_payments', ['unit' => 'Unit 123', 'terms' => [
+            ['label' => 'Reservation fee', 'amount' => 20000, 'due' => 'on_purchase'],
+            ['label' => 'Down payment', 'percent' => 20, 'due' => 'days_after_purchase', 'days' => 30, 'months' => 24],
+            ['label' => 'Balance', 'rest' => true, 'due' => 'on_turnover'],
+        ]]);
+        $this->assertSame([20000.0, 708600.0, 2814400.0], array_column($custom['payments'], 'amount'));
+        $this->assertSame('custom terms', $custom['terms']);
+
+        $this->assertStringContainsString('need to make 100%', $tools->call('compute_payments', ['price' => 1000000, 'terms' => [['label' => 'Down', 'percent' => 30, 'due' => 'on_purchase']]])['error']);
+        $this->assertStringContainsString('Standard 10-20-70', $tools->call('compute_payments', ['unit' => 'Unit 123'])['error']);
+    }
+
+    public function test_a_question_from_a_dashboard_page_knows_the_page_but_only_what_the_person_may_see(): void
+    {
+        $theirs = $this->offer($this->admin, 'Someone Else');
+        $mine = $this->offer($this->agent, 'Juliecor Repompo');
+        $agentTools = new RealtyTools($this->agent);
+
+        $this->assertSame('the page of the project Plumera Mactan', $agentTools->describePage("/johndorf/dashboard/projects/{$this->unit->project_id}"));
+        $this->assertStringContainsString('Juliecor Repompo', $agentTools->describePage("/johndorf/dashboard/offers/{$mine->id}"));
+        $this->assertNull($agentTools->describePage("/johndorf/dashboard/offers/{$theirs->id}"));
+        $this->assertNull($agentTools->describePage('/somewhere/else'));
+
+        Http::fake(['api.openai.com/*' => Http::response(['choices' => [['message' => ['role' => 'assistant', 'content' => 'Sure.']]]])]);
+        Sanctum::actingAs($this->agent);
+        $this->postJson('/api/realty/assistant/messages', ['message' => "What's left here?", 'page' => "/johndorf/dashboard/projects/{$this->unit->project_id}"])->assertOk();
+
+        Http::assertSent(fn (HttpRequest $r) => collect($r['messages'])->contains(fn (array $m) => $m['role'] === 'system' && str_contains($m['content'], 'asking from the page of the project Plumera Mactan')));
+    }
+
+    public function test_a_spoken_question_comes_back_as_text(): void
+    {
+        Http::fake(['api.openai.com/v1/audio/transcriptions' => Http::response(['text' => ' How many units are left in Plumera? '])]);
+        Sanctum::actingAs($this->agent);
+
+        $this->post('/api/realty/assistant/transcribe', ['audio' => UploadedFile::fake()->create('question.webm', 40, 'audio/webm')], ['Accept' => 'application/json'])
+            ->assertOk()
+            ->assertExactJson(['text' => 'How many units are left in Plumera?']);
+
+        // The realty's project names go along so they come out spelled right.
+        Http::assertSent(fn (HttpRequest $r) => str_contains(collect($r->data())->firstWhere('name', 'prompt')['contents'] ?? '', 'Plumera Mactan')
+            && (collect($r->data())->firstWhere('name', 'model')['contents'] ?? null) === config('services.openai.transcribe_model'));
+        $this->post('/api/realty/assistant/transcribe', ['audio' => UploadedFile::fake()->create('notes.pdf', 40, 'application/pdf')], ['Accept' => 'application/json'])->assertUnprocessable();
     }
 
     private function offer(User $by, string $buyer): Offer

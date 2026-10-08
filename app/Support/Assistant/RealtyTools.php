@@ -12,6 +12,7 @@ use App\Models\RequirementType;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -93,6 +94,30 @@ class RealtyTools
                 'kind' => ['type' => 'string', 'enum' => ['interested', 'question', 'not_interested']],
             ]),
             $tool('list_agents', "The realty's agents: how many, who is active, who applied and waits for approval, unused invite links, and each agent's offers and buyer responses. Realty admins only."),
+            $tool('compute_payments', "Work out a buyer's payments in pesos for a unit (or a price): with one of the project's payment plans, or with custom terms (e.g. a ₱20,000 reservation fee, 20% down over 24 months, the rest on turnover). Same math as the offers, so the amounts match what the buyer would see. Use it for every how-much, monthly, down payment or what-if question; never do payment math yourself.", [
+                'unit' => $text('The unit name, or part of it, e.g. "Block 24 · Lot 27".'),
+                'project' => $text('The project: needed for its plans, or when a unit name is in several projects.'),
+                'price' => $number('A price in pesos, when there is no unit.'),
+                'plan' => $text("One of the project's payment plans, by name or part of it."),
+                'terms' => [
+                    'type' => 'array',
+                    'description' => 'Custom terms instead of a plan, in order. Together they must make 100% of the price: give the last one rest: true for the remaining balance.',
+                    'items' => [
+                        'type' => 'object',
+                        'properties' => [
+                            'label' => ['type' => 'string'],
+                            'percent' => ['type' => 'number', 'description' => 'Share of the price.'],
+                            'amount' => ['type' => 'number', 'description' => 'A fixed amount in pesos, instead of a percent.'],
+                            'rest' => ['type' => 'boolean', 'description' => 'This payment is whatever is left.'],
+                            'due' => ['type' => 'string', 'enum' => ['on_purchase', 'days_after_purchase', 'on_turnover']],
+                            'days' => ['type' => 'integer', 'description' => 'With days_after_purchase.'],
+                            'months' => ['type' => 'integer', 'description' => 'Paid monthly over this many months, from the due date.'],
+                        ],
+                        'required' => ['label', 'due'],
+                    ],
+                ],
+                'purchase_date' => $text('YYYY-MM-DD. Today if left out.'),
+            ]),
             $tool('attention_today', 'Everything that needs the person now, in one lookup: new buyer answers nobody opened yet, buyer files to review, custom terms to approve (or sent back), interested buyers still missing requirements, buyers who opened their offer often but never answered, links not opened 3+ days after sending, agent applications, and units reserved or sold in the last 7 days. Use it for "what needs my attention", "what should I do today", "any updates", "good morning", "summary of today".'),
         ];
     }
@@ -115,6 +140,7 @@ class RealtyTools
             'offer_details' => $this->offerDetails($args),
             'buyer_responses' => $this->buyerResponses($args),
             'list_agents' => $this->listAgents(),
+            'compute_payments' => $this->computePayments($args),
             'attention_today' => $this->attention(),
             default => ['error' => "There is no tool called {$name}."],
         };
@@ -494,6 +520,176 @@ class RealtyTools
             'buyer_has_to_sign_in' => $o->isLocked(),
             'dashboard_url' => $this->url("offers/{$o->id}"),
         ];
+    }
+
+    /**
+     * A buyer's payments for a unit or a price, with a project plan or custom
+     * terms, worked out by the code that builds offers' schedules.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function computePayments(array $args): array
+    {
+        $project = null;
+        if ($name = $this->text($args, 'project')) {
+            $project = $this->findProject($name);
+            if (! $project instanceof Project) {
+                return $project;
+            }
+        }
+        $unit = null;
+        if ($needle = $this->text($args, 'unit')) {
+            $units = Unit::where('realty_id', $this->realty()->id)->when($project, fn ($q) => $q->where('project_id', $project->id))
+                ->where('name', 'like', "%{$needle}%")->with('project')->limit(8)->get();
+            $unit = $units->first(fn (Unit $u) => strcasecmp($u->name, $needle) === 0) ?? ($units->count() === 1 ? $units->first() : null);
+            if (! $unit) {
+                return $units->isEmpty()
+                    ? ['error' => "No unit called \"{$needle}\". Find it with search_units first."]
+                    : ['several_match' => $units->map(fn (Unit $u) => "{$u->name} ({$u->project?->name})")->all()];
+            }
+            $project ??= $unit->project;
+        }
+        $price = $unit ? ($unit->price !== null ? (float) $unit->price : null) : (isset($args['price']) ? (float) $args['price'] : null);
+        if (! $price || $price <= 0) {
+            return ['error' => $unit ? "{$unit->name} has no price yet." : 'Say which unit, or give a price.'];
+        }
+
+        $plans = $project?->paymentPlans()->orderBy('id')->get() ?? collect();
+        if ($wanted = $this->text($args, 'plan')) {
+            $plan = $plans->first(fn (PaymentPlan $p) => strcasecmp($p->name, $wanted) === 0) ?? $plans->first(fn (PaymentPlan $p) => stripos($p->name, $wanted) !== false);
+            if (! $plan) {
+                return ['error' => $project ? "{$project->name} has no plan called \"{$wanted}\". Its plans: ".($plans->pluck('name')->implode(', ') ?: 'none').'.' : 'Say which project the plan belongs to.'];
+            }
+            [$milestones, $terms] = [$plan->milestones, $plan->name];
+        } elseif (is_array($args['terms'] ?? null) && $args['terms'] !== []) {
+            $milestones = $this->customTerms($args['terms'], $price);
+            if (is_string($milestones)) {
+                return ['error' => $milestones];
+            }
+            $terms = 'custom terms';
+        } else {
+            return ['error' => 'Say which plan'.($plans->isNotEmpty() ? ' ('.$plans->pluck('name')->implode(', ').')' : '').', or give custom terms.'];
+        }
+
+        $date = $this->text($args, 'purchase_date');
+        $purchase = $date && preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) ? Carbon::parse($date, 'Asia/Manila') : now('Asia/Manila')->startOfDay();
+        $schedule = Offer::buildSchedule($price, $milestones, $purchase, $project?->completion_date);
+        $day = fn (?string $d) => $d ? Carbon::parse($d)->format('M j, Y') : null;
+
+        return [
+            'unit' => $unit?->name,
+            'project' => $project?->name,
+            'price' => $price,
+            'terms' => $terms,
+            'purchase_date' => $purchase->format('M j, Y'),
+            'payments' => collect($schedule)->map(fn (array $r) => array_filter([
+                'label' => $r['label'],
+                'percent' => round((float) $r['percent'], 2),
+                'amount' => $r['amount'],
+                'due' => $day($r['date']) ?? 'on turnover (no date announced yet)',
+                'monthly' => isset($r['months']) ? [
+                    'payments' => $r['months'],
+                    'each' => $r['monthly'],
+                    'from' => $day($r['date']),
+                    'to' => $day($r['end_date']),
+                    'last_payment' => end($r['installments'])['amount'],
+                ] : null,
+            ], fn ($v) => $v !== null))->all(),
+            'total' => round(array_sum(array_column($schedule, 'amount')), 2),
+            'note' => 'Worked out like the offers: the last payment of each part takes the centavo rounding.',
+        ];
+    }
+
+    /**
+     * The model's custom terms as milestones (share of the price, days after
+     * purchase or null for turnover, months), or what's wrong with them.
+     *
+     * @param  array<int, mixed>  $terms
+     * @return array<int, array{label: string, percent: float, days: int|null, months: int|null}>|string
+     */
+    private function customTerms(array $terms, float $price): array|string
+    {
+        if (count($terms) > 24) {
+            return 'At most 24 payments.';
+        }
+        $rows = [];
+        $rest = null;
+        foreach (array_values($terms) as $i => $t) {
+            if (! is_array($t)) {
+                return 'Each payment needs a label and when it is due.';
+            }
+            $label = trim((string) ($t['label'] ?? '')) ?: 'Payment';
+            $percent = match (true) {
+                ! empty($t['rest']) => null,
+                isset($t['amount']) && is_numeric($t['amount']) => (float) $t['amount'] / $price * 100,
+                isset($t['percent']) && is_numeric($t['percent']) => (float) $t['percent'],
+                default => false,
+            };
+            if ($percent === false || ($percent !== null && $percent <= 0)) {
+                return "Give \"{$label}\" a percent or an amount above zero, or make it the rest.";
+            }
+            if ($percent === null) {
+                if ($rest !== null) {
+                    return 'Only one payment can be the rest.';
+                }
+                $rest = $i;
+            }
+            $rows[] = [
+                'label' => $label,
+                'percent' => $percent ?? 0.0,
+                'days' => match ($t['due'] ?? 'on_purchase') {
+                    'on_turnover' => null,
+                    'days_after_purchase' => max(0, min(36500, (int) ($t['days'] ?? 0))),
+                    default => 0,
+                },
+                'months' => isset($t['months']) && (int) $t['months'] >= 2 ? min(120, (int) $t['months']) : null,
+            ];
+        }
+        $sum = array_sum(array_column($rows, 'percent'));
+        if ($rest !== null) {
+            $rows[$rest]['percent'] = 100 - $sum;
+            if ($rows[$rest]['percent'] <= 0.001) {
+                return 'The other payments already make 100% or more, so nothing is left for the rest.';
+            }
+        } elseif (abs($sum - 100) > 0.01) {
+            return 'The payments make '.round($sum, 2).'% of the price; they need to make 100%. Give the last one rest: true for the remaining balance.';
+        }
+
+        return $rows;
+    }
+
+    /**
+     * The dashboard page a question is asked from (the "Ask" button on every
+     * page), in words for the model, or null. Only what this person may see:
+     * another agent's offer gives no context at all.
+     */
+    public function describePage(?string $page): ?string
+    {
+        if (! $page || ! preg_match('#^/[\w-]+/dashboard(?:/([^?\#]*))?#', $page, $m)) {
+            return null;
+        }
+        $path = trim($m[1] ?? '', '/');
+        if (preg_match('#^projects/(\d+)$#', $path, $p)) {
+            $project = Project::where('realty_id', $this->realty()->id)->find((int) $p[1]);
+
+            return $project ? "the page of the project {$project->name}".($project->location ? " ({$project->location})" : '') : null;
+        }
+        if (preg_match('#^offers/(\d+)$#', $path, $o)) {
+            $offer = $this->offers()->with(['project:id,name', 'unit:id,name'])->find((int) $o[1]);
+
+            return $offer ? "the offer for {$offer->buyer_name} (code {$offer->code}: {$offer->project?->name}, {$offer->unit?->name})" : null;
+        }
+
+        return match ($path) {
+            '' => 'the dashboard overview',
+            'projects' => 'the list of projects',
+            'offers' => 'the list of sales offers',
+            'approvals' => 'the approvals page (custom terms waiting for an admin)',
+            'agents' => 'the agents page',
+            'requirements' => 'the settings for what buyers have to send',
+            default => null,
+        };
     }
 
     /**

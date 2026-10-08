@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Support\Assistant\Assistant;
 use App\Support\Assistant\AssistantUnavailable;
 use App\Support\Assistant\RealtyTools;
+use App\Support\Assistant\Transcriber;
 use App\Support\Assistant\UnitCards;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -60,6 +61,8 @@ class AssistantController extends Controller
         $data = $request->validate([
             'chat_id' => ['nullable', 'integer'],
             'message' => ['required', 'string', 'max:2000'],
+            // The dashboard page it's asked from ("Ask" on any page), e.g. /johndorf/dashboard/projects/14.
+            'page' => ['nullable', 'string', 'max:300'],
         ]);
         $chat = null;
         if (! empty($data['chat_id'])) {
@@ -67,7 +70,7 @@ class AssistantController extends Controller
             $this->own($request, $chat);
         }
 
-        $conversation = $this->conversation($chat, $data['message']);
+        $conversation = $this->conversation($chat, $data['message'], (new RealtyTools($user))->describePage($data['page'] ?? null));
 
         set_time_limit(180);
         $assistant = new Assistant($user);
@@ -97,13 +100,15 @@ class AssistantController extends Controller
         $data = $request->validate([
             'chat_id' => ['nullable', 'integer'],
             'message' => ['required', 'string', 'max:2000'],
+            // The dashboard page it's asked from ("Ask" on any page), e.g. /johndorf/dashboard/projects/14.
+            'page' => ['nullable', 'string', 'max:300'],
         ]);
         $chat = null;
         if (! empty($data['chat_id'])) {
             $chat = AssistantChat::findOrFail($data['chat_id']);
             $this->own($request, $chat);
         }
-        $conversation = $this->conversation($chat, $data['message']);
+        $conversation = $this->conversation($chat, $data['message'], (new RealtyTools($user))->describePage($data['page'] ?? null));
 
         return response()->stream(function () use ($user, $chat, $data, $conversation) {
             set_time_limit(180);
@@ -142,6 +147,24 @@ class AssistantController extends Controller
         ]);
     }
 
+    /** A spoken question, as text for the question box (nothing is kept). */
+    public function transcribe(Request $request): JsonResponse
+    {
+        $request->validate([
+            // Chrome records webm, Safari mp4; 10 MB is several minutes.
+            'audio' => ['required', 'file', 'max:10240', 'mimetypes:audio/webm,video/webm,audio/ogg,audio/mp4,video/mp4,audio/x-m4a,audio/aac,audio/mpeg,audio/wav,audio/x-wav'],
+        ]);
+
+        set_time_limit(90);
+        try {
+            $text = (new Transcriber($request->user()))->text($request->file('audio'));
+        } catch (AssistantUnavailable $e) {
+            return response()->json(['message' => $e->getMessage()], 503);
+        }
+
+        return response()->json(['text' => $text]);
+    }
+
     public function destroy(Request $request, AssistantChat $chat): Response
     {
         $this->own($request, $chat);
@@ -153,11 +176,12 @@ class AssistantController extends Controller
     /**
      * The chat so far (its last messages) plus the new question, for the model.
      * Units an answer showed as cards follow it as a note, so "the second one"
-     * still means something in the next question.
+     * still means something in the next question; so does the page the
+     * question is asked from, so "this project" does too.
      *
      * @return array<int, array{role: string, content: string}>
      */
-    private function conversation(?AssistantChat $chat, string $question): array
+    private function conversation(?AssistantChat $chat, string $question, ?string $page = null): array
     {
         $conversation = [];
         if ($chat) {
@@ -170,6 +194,9 @@ class AssistantController extends Controller
                     $conversation[] = ['role' => 'system', 'content' => 'Under that answer, these units were shown as cards, in order: '.$shown->map(fn (Unit $u) => "{$u->name} ({$u->project?->name}, id {$u->id})")->implode('; ').'.'];
                 }
             }
+        }
+        if ($page) {
+            $conversation[] = ['role' => 'system', 'content' => "The user is asking from {$page} in the dashboard. \"This project\", \"this offer\", \"this buyer\" or \"here\" mean it."];
         }
         $conversation[] = ['role' => 'user', 'content' => $question];
 

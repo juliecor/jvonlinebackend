@@ -18,6 +18,8 @@ return [
     'openai' => [
         'key' => env('OPENAI_API_KEY'),
         'model' => env('OPENAI_MODEL', 'gpt-5.4-mini'),
+        // Turns a spoken question (the mic button) into text.
+        'transcribe_model' => env('OPENAI_TRANSCRIBE_MODEL', 'gpt-4o-mini-transcribe'),
     ],
 
     'postmark' => [
