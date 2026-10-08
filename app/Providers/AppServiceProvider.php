@@ -28,5 +28,7 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('offer-respond', fn (Request $r) => Limit::perMinute(5)->by($r->ip()));
         RateLimiter::for('invite-link', fn (Request $r) => Limit::perMinute(20)->by($r->ip()));
         RateLimiter::for('offer-upload', fn (Request $r) => Limit::perMinute(30)->by($r->ip()));
+        // Each question costs an OpenAI call: 20 a minute per person is plenty for a conversation.
+        RateLimiter::for('assistant', fn (Request $r) => Limit::perMinute(20)->by($r->user()?->id ?: $r->ip()));
     }
 }

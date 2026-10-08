@@ -14,6 +14,12 @@ return [
     |
     */
 
+    // The dashboard's AI assistant. Only the server talks to OpenAI; the key never reaches a browser.
+    'openai' => [
+        'key' => env('OPENAI_API_KEY'),
+        'model' => env('OPENAI_MODEL', 'gpt-5.4-mini'),
+    ],
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],

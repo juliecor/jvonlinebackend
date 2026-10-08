@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicOfferController;
 use App\Http\Controllers\PublicRealtyController;
 use App\Http\Controllers\Realty\AgentController;
+use App\Http\Controllers\Realty\AssistantController;
 use App\Http\Controllers\Realty\OfferController;
 use App\Http\Controllers\Realty\OverviewController;
 use App\Http\Controllers\Realty\PaymentPlanController;
@@ -67,6 +68,11 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
     Route::prefix('realty')->group(function () {
         Route::middleware('realty.member')->group(function () {
             Route::get('/overview', OverviewController::class);
+            // The AI assistant: everyone in the realty, each with their own chats.
+            Route::get('/assistant/chats', [AssistantController::class, 'index']);
+            Route::get('/assistant/chats/{chat}', [AssistantController::class, 'show'])->whereNumber('chat');
+            Route::delete('/assistant/chats/{chat}', [AssistantController::class, 'destroy'])->whereNumber('chat');
+            Route::post('/assistant/messages', [AssistantController::class, 'send'])->middleware('throttle:assistant');
             Route::get('/projects', [ProjectController::class, 'index']);
             Route::get('/projects/{project}', [ProjectController::class, 'show']);
             Route::get('/offers', [OfferController::class, 'index']);
