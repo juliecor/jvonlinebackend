@@ -11,6 +11,7 @@ use App\Models\Offer;
 use App\Models\OfferDocument;
 use App\Models\OfferResponse;
 use App\Models\PaymentPlan;
+use App\Models\Realty;
 use App\Models\RequirementType;
 use App\Models\Unit;
 use App\Models\UnitType;
@@ -31,9 +32,10 @@ class OfferController extends Controller
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();
-        $types = RequirementType::where('realty_id', $user->realty_id)->orderBy('sort')->orderBy('id')->get();
+        // The buyer's checklist belongs to the developer who owns the units, whoever sold them.
+        $types = RequirementType::where('realty_id', $user->realty->inventoryId())->orderBy('sort')->orderBy('id')->get();
         $offers = $this->visible($request)
-            ->with(['project:id,name,cover_path,hero_paths', 'unit:id,project_id,name,unit_type,status,status_offer_id,floor_plan_path', 'agent:id,name', 'responses', 'documents'])
+            ->with(['project:id,name,cover_path,hero_paths', 'unit:id,project_id,name,unit_type,status,status_offer_id,floor_plan_path', 'agent:id,name', 'broker:id,name', 'responses', 'documents'])
             ->latest()
             ->get();
         // One query for every house model, so each row can show its picture.
@@ -46,9 +48,12 @@ class OfferController extends Controller
     /** One offer with everything the agent needs to follow up. Opening it marks its responses as seen. */
     public function show(Request $request, int $id): JsonResponse
     {
-        $offer = $this->visible($request)->with(['project', 'unit', 'agent:id,name,email', 'responses', 'documents.reviewer:id,name', 'approver:id,name', 'paymentPlan:id,name'])->findOrFail($id);
+        $offer = $this->visible($request)->with(['project', 'unit', 'agent:id,name,email', 'broker:id,name', 'responses', 'documents.reviewer:id,name', 'approver:id,name', 'paymentPlan:id,name'])->findOrFail($id);
         $leads = $offer->responses->sortByDesc('created_at')->values()->map(fn (OfferResponse $r) => $r->toLead());
-        $offer->responses()->whereNull('seen_at')->update(['seen_at' => now()]);
+        // Only the selling side clears the "new" flags: the developer opening a broker's offer must not.
+        if ($offer->broker_realty_id === null || $offer->broker_realty_id === $request->user()->realty_id) {
+            $offer->responses()->whereNull('seen_at')->update(['seen_at' => now()]);
+        }
 
         return response()->json($this->row($offer) + [
             'schedule' => $offer->schedule,
@@ -102,6 +107,7 @@ class OfferController extends Controller
     /** Approve a file, or send it back with a reason the buyer will see. */
     public function review(Request $request, int $id, int $document): JsonResponse
     {
+        abort_unless($request->user()->isDeveloperMember(), 403, "Only the developer's team can check a buyer's files.");
         $offer = $this->visible($request)->findOrFail($id);
         $doc = $offer->documents()->whereKey($document)->firstOrFail();
         $data = $request->validate([
@@ -167,10 +173,8 @@ class OfferController extends Controller
     /** Newest buyer responses across the offers this person can see (Overview panel). */
     public function responses(Request $request): JsonResponse
     {
-        $user = $request->user();
         $rows = OfferResponse::with(['offer:id,code,buyer_name,unit_id,project_id,agent_id', 'offer.unit:id,name', 'offer.project:id,name'])
-            ->where('realty_id', $user->realty_id)
-            ->when($user->role === User::ROLE_AGENT, fn ($q) => $q->whereHas('offer', fn ($o) => $o->where('agent_id', $user->id)))
+            ->whereIn('offer_id', Offer::visibleTo($request->user())->select('offers.id'))
             ->latest()
             ->take(min(max($request->integer('limit', 8), 1), 50))
             ->get()
@@ -184,13 +188,13 @@ class OfferController extends Controller
         return response()->json($rows);
     }
 
-    /** Offers this user may see: their own for agents, the realty's for staff. */
+    /**
+     * Offers this user may see: their own for agents; for staff, everything on the
+     * developer's inventory (a broker's staff: what their firm sold). See the visibleTo scope on Offer.
+     */
     private function visible(Request $request)
     {
-        $user = $request->user();
-
-        return Offer::where('realty_id', $user->realty_id)
-            ->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id));
+        return Offer::visibleTo($request->user());
     }
 
     private function row(Offer $o): array
@@ -215,6 +219,9 @@ class OfferController extends Controller
             'unit_status' => $o->unit && $o->unit->status_offer_id === $o->id ? $o->unit->status : null,
             'agent' => $o->agent?->name,
             'agent_id' => $o->agent_id,
+            // The accredited realty that sold it; null for the developer's own team.
+            'broker' => $o->broker?->name,
+            'broker_id' => $o->broker_realty_id,
             'url' => Offer::url($o->code),
             'first_viewed_at' => $o->first_viewed_at,
             'last_viewed_at' => $o->last_viewed_at,
@@ -248,7 +255,12 @@ class OfferController extends Controller
             'approval_reason' => ['nullable', 'string', 'max:500'],
         ] + self::loginRules() + ($custom ? Milestones::rules('custom_milestones') : []), ['buyer_email.required' => "Enter the buyer's email to send them the offer."] + self::loginMessages());
 
-        $unit = Unit::with('project')->where('realty_id', $user->realty_id)->findOrFail($data['unit_id']);
+        // Units, plans and the buyer's checklist belong to the developer; a broker sells them.
+        $inventoryId = $user->realty->inventoryId();
+        $unit = Unit::with('project')->where('realty_id', $inventoryId)->findOrFail($data['unit_id']);
+        if ($unit->status !== 'available' || $unit->project->status !== 'active') {
+            return response()->json(['message' => 'This unit is not open for offers.', 'errors' => ['unit_id' => ['This unit is not open for offers.']]], 422);
+        }
         if ($unit->price === null) {
             return response()->json(['message' => 'This unit has no price yet, so it cannot be offered.', 'errors' => ['unit_id' => ['This unit has no price yet.']]], 422);
         }
@@ -257,15 +269,17 @@ class OfferController extends Controller
             $milestones = Milestones::normalize($data['custom_milestones'], 'custom_milestones');
         } else {
             if (! empty($data['payment_plan_id'])) {
-                $plan = PaymentPlan::where('realty_id', $user->realty_id)->where('project_id', $unit->project_id)->findOrFail($data['payment_plan_id']);
+                $plan = PaymentPlan::where('realty_id', $inventoryId)->where('project_id', $unit->project_id)->findOrFail($data['payment_plan_id']);
             }
             $milestones = $plan?->milestones ?? [['label' => 'Full payment', 'percent' => 100, 'days' => 0]];
         }
-        $staff = $user->role === User::ROLE_REALTY;
+        // Only the developer's admins approve their own custom terms; everyone else waits for them.
+        $staff = $user->isDeveloperStaff();
         $purchase = Carbon::parse($data['purchase_date']);
 
         $offer = Offer::create([
-            'realty_id' => $user->realty_id,
+            'realty_id' => $inventoryId,
+            'broker_realty_id' => $user->realty->isBroker() ? $user->realty_id : null,
             'project_id' => $unit->project_id,
             'unit_id' => $unit->id,
             'payment_plan_id' => $plan?->id,
@@ -307,8 +321,8 @@ class OfferController extends Controller
     public function unitStatus(Request $request, int $id): JsonResponse
     {
         $user = $request->user();
-        abort_unless($user->role === User::ROLE_REALTY, 403, "Only your realty's admins can change a unit's status.");
-        $offer = $this->visible($request)->with('unit.statusOffer:id,code,buyer_name')->findOrFail($id);
+        abort_unless($user->isDeveloperStaff(), 403, "Only the developer's admins can change a unit's status.");
+        $offer = $this->visible($request)->with('unit.statusOffer:id,realty_id,broker_realty_id,code,buyer_name,agent_id')->findOrFail($id);
         $data = $request->validate(['status' => ['required', Rule::in(Unit::STATUSES)]]);
         $unit = $offer->unit;
         abort_unless($unit !== null, 404, 'This offer has no unit.');
@@ -336,10 +350,12 @@ class OfferController extends Controller
      */
     private function unitHold(Offer $offer, User $user): array
     {
-        $unit = $offer->unit->loadMissing(['statusOffer:id,code,buyer_name,agent_id', 'statusOffer.agent:id,name', 'statusBy:id,name']);
+        $unit = $offer->unit->loadMissing(['statusOffer:id,realty_id,broker_realty_id,code,buyer_name,agent_id', 'statusOffer.agent:id,name', 'statusBy:id,name']);
         $mine = $unit->status_offer_id === $offer->id;
+        // A broker sees that the unit is taken, but only its own firm's sale behind it.
+        $withOffer = ! $user->isBrokerMember() || (bool) $unit->statusOffer?->isVisibleTo($user);
 
-        return ['status' => $unit->status, 'this_offer' => $mine, 'detail' => $unit->statusDetail($mine || $user->role === User::ROLE_REALTY)];
+        return ['status' => $unit->status, 'this_offer' => $mine, 'detail' => $unit->statusDetail($mine || $user->isDeveloperStaff(), $withOffer)];
     }
 
     /** Set or change the buyer's username and password. A new password signs the buyer out of the old one. */
@@ -375,8 +391,8 @@ class OfferController extends Controller
     public function approval(Request $request, int $id): JsonResponse
     {
         $user = $request->user();
-        abort_unless($user->role === User::ROLE_REALTY, 403, 'Only your realty\'s admins can approve terms.');
-        $offer = $this->visible($request)->with(['unit', 'project', 'realty', 'agent'])->findOrFail($id);
+        abort_unless($user->isDeveloperStaff(), 403, 'Only the developer\'s admins can approve terms.');
+        $offer = $this->visible($request)->with(['unit', 'project', 'realty', 'agent.realty'])->findOrFail($id);
         abort_unless($offer->approval_status === 'pending', 422, 'This offer isn\'t waiting for approval.');
         $data = $request->validate([
             'decision' => ['required', Rule::in(['approve', 'reject'])],
@@ -402,7 +418,7 @@ class OfferController extends Controller
             $emailed = $this->emailBuyerQuietly($offer);
         }
         if ($offer->agent && $offer->agent->id !== $user->id) {
-            $this->notify($offer->agent->email, new ApprovalResultMail($offer->load('approver'), $this->dashboardUrl($offer), $emailed), $offer);
+            $this->notify($offer->agent->email, new ApprovalResultMail($offer->load('approver'), $this->dashboardUrl($offer, $offer->agent->realty), $emailed), $offer);
         }
 
         return response()->json(['approval_status' => $offer->approval_status, 'emailed_to' => $emailed, 'plan_id' => $plan?->id]);
@@ -413,11 +429,13 @@ class OfferController extends Controller
     {
         $user = $request->user();
         $offer = $this->visible($request)->with(['unit.project', 'project', 'realty', 'agent'])->findOrFail($id);
+        // The agent who made the offer, or the developer's admins; a broker's other staff may not rewrite its terms.
+        abort_unless($offer->agent_id === $user->id || $user->isDeveloperStaff(), 403, "Only the offer's agent or the developer's admins can change its terms.");
         abort_unless($offer->status === 'active' && $offer->custom_milestones !== null, 422, 'Only an active offer with custom terms can be changed.');
-        abort_unless($offer->approval_status !== 'approved' || $user->role === User::ROLE_REALTY, 422, 'These terms are approved already. Make a new offer to change them.');
+        abort_unless($offer->approval_status !== 'approved' || $user->isDeveloperStaff(), 422, 'These terms are approved already. Make a new offer to change them.');
         $data = $request->validate(['approval_reason' => ['nullable', 'string', 'max:500']] + Milestones::rules('custom_milestones'));
         $milestones = Milestones::normalize($data['custom_milestones'], 'custom_milestones');
-        $staff = $user->role === User::ROLE_REALTY;
+        $staff = $user->isDeveloperStaff();
 
         $offer->update([
             'custom_milestones' => $milestones,
@@ -435,7 +453,7 @@ class OfferController extends Controller
         return response()->json(['approval_status' => $offer->approval_status]);
     }
 
-    /** Email every admin of the realty (except whoever made it) that terms wait for them. */
+    /** Email every admin of the developer who owns the unit (except whoever made it) that terms wait for them. */
     private function askForApproval(Offer $offer): void
     {
         $offer->loadMissing(['unit', 'project', 'agent']);
@@ -471,16 +489,16 @@ class OfferController extends Controller
         }
     }
 
-    private function dashboardUrl(Offer $offer): string
+    /** The offer's page in the recipient's own dashboard: a broker's agent signs in at their firm's address, not Johndorf's. */
+    private function dashboardUrl(Offer $offer, ?Realty $for = null): string
     {
-        return rtrim(config('app.frontend_url'), '/')."/{$offer->realty->slug}/dashboard/offers/{$offer->id}";
+        return rtrim(config('app.frontend_url'), '/').'/'.($for ?? $offer->realty)->slug."/dashboard/offers/{$offer->id}";
     }
 
-    /** Staff may void any offer of theirs; an agent only their own. */
-    public function void(Request $request, Offer $offer): JsonResponse
+    /** Staff may void any offer they can see (a broker's staff: their firm's); an agent only their own. */
+    public function void(Request $request, int $offer): JsonResponse
     {
-        $user = $request->user();
-        abort_unless($offer->realty_id === $user->realty_id && ($user->role === User::ROLE_REALTY || $offer->agent_id === $user->id), 404);
+        $offer = $this->visible($request)->findOrFail($offer);
         $offer->update(['status' => 'void']);
 
         return response()->json(['id' => $offer->id, 'status' => $offer->status]);

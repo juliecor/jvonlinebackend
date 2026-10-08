@@ -6,18 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Unit;
 use App\Models\User;
+use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-/** A realty's projects. Staff create and edit; agents may read (to pick a unit for an offer). */
+/**
+ * The developer's projects. Its own admins create and edit; its agents and any
+ * accredited broker's people may read (to pick a unit for an offer).
+ */
 class ProjectController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $projects = $request->user()->realty->projects()
-            ->withCount(['units', 'paymentPlans', 'offers', 'units as ready_units_count' => fn ($q) => $q->where('status', 'available')->whereNotNull('price')])
+        $user = $request->user();
+        $projects = $user->realty->inventoryProjects()
+            ->withCount(['units', 'paymentPlans', 'offers' => $this->offersTheyMaySee($user), 'units as ready_units_count' => fn ($q) => $q->where('status', 'available')->whereNotNull('price')])
             ->orderBy('name')
             ->get();
 
@@ -26,16 +31,24 @@ class ProjectController extends Controller
 
     public function show(Request $request, Project $project): JsonResponse
     {
-        $this->own($request, $project);
+        $this->readable($request, $project);
+        $user = $request->user();
 
-        $project->load(['units.statusOffer:id,code,buyer_name,agent_id', 'units.statusOffer.agent:id,name', 'units.statusBy:id,name', 'paymentPlans', 'unitTypes', 'updates'])->loadCount('offers');
-        // Who each reserved or sold unit went to (buyers' names are for the realty's
+        $project->load(['units.statusOffer:id,realty_id,broker_realty_id,code,buyer_name,agent_id', 'units.statusOffer.agent:id,name', 'units.statusBy:id,name', 'paymentPlans', 'unitTypes', 'updates'])
+            ->loadCount(['offers' => $this->offersTheyMaySee($user)]);
+        // Who each reserved or sold unit went to (buyers' names are for the developer's
         // admins), and a picture for each row: its house model's, else the project's.
-        $staff = $request->user()->role === User::ROLE_REALTY;
-        $project->units->each(function (Unit $unit) use ($staff, $project) {
-            $unit->setAttribute('status_detail', $unit->statusDetail($staff));
+        // A broker sees that a unit is taken, but only its own firm's sale behind it,
+        // and never Johndorf's internal notes on a unit.
+        $staff = $user->isDeveloperStaff();
+        $broker = $user->isBrokerMember();
+        $project->units->each(function (Unit $unit) use ($staff, $broker, $user, $project) {
+            $unit->setAttribute('status_detail', $unit->statusDetail($staff, ! $broker || (bool) $unit->statusOffer?->isVisibleTo($user)));
             $unit->setAttribute('photo', $unit->photo($project->unitTypes, $project));
             $unit->unsetRelation('statusOffer')->unsetRelation('statusBy');
+            if ($broker) {
+                $unit->makeHidden('notes');
+            }
         });
 
         return response()->json($project);
@@ -102,8 +115,21 @@ class ProjectController extends Controller
         ]);
     }
 
+    /** Editing: only the realty that owns the project (the route guard already keeps brokers out). */
     private function own(Request $request, Project $project): void
     {
         abort_unless($project->realty_id === $request->user()->realty_id, 404);
+    }
+
+    /** Reading: the developer's inventory, which a broker works from too. */
+    private function readable(Request $request, Project $project): void
+    {
+        abort_unless($project->realty_id === $request->user()->realty->inventoryId(), 404);
+    }
+
+    /** A project's offer count: everything for the developer's team, only their firm's for a broker. */
+    private function offersTheyMaySee(User $user): Closure
+    {
+        return fn ($query) => $user->realty->isBroker() ? $query->visibleTo($user) : $query;
     }
 }

@@ -11,7 +11,8 @@ class PublicRealtyController extends Controller
 {
     public function index(): JsonResponse
     {
-        $realties = Realty::where('status', Realty::STATUS_ACTIVE)
+        // The platform page lists developers; the realties accredited under one have their own login, not a page here.
+        $realties = Realty::where('status', Realty::STATUS_ACTIVE)->where('kind', Realty::KIND_DEVELOPER)
             ->orderBy('registered_at')
             ->get()
             ->map(fn (Realty $r) => $r->publicArray() + ['registered_at' => $r->registered_at]);

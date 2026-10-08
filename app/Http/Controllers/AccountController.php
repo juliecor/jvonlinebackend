@@ -47,7 +47,10 @@ class AccountController extends Controller
         return response()->json($this->details($user));
     }
 
-    /** A new password; every other device signed in with the old one is signed out. */
+    /**
+     * A new password; every other device signed in with the old one is signed out. It also ends the
+     * temporary password an accepted realty was mailed: this is how they choose their own at first sign-in.
+     */
     public function password(Request $request): JsonResponse
     {
         $user = $request->user();
@@ -62,7 +65,8 @@ class AccountController extends Controller
             throw ValidationException::withMessages(['current_password' => "That's not your current password."]);
         }
 
-        $user->update(['password' => $request->input('password')]);
+        // must_change_password is never mass assignable; the server clears it here and nowhere else.
+        $user->forceFill(['password' => $request->input('password'), 'must_change_password' => false])->save();
         $current = $user->currentAccessToken();
         $user->tokens()->when($current instanceof PersonalAccessToken, fn ($q) => $q->whereKeyNot($current->getKey()))->delete();
 

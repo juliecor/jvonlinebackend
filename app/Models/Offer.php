@@ -5,6 +5,8 @@ namespace App\Models;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,7 +14,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /** One unit + one payment plan, prepared by an agent for one buyer. The code is the public link. */
-#[Fillable(['realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'access_username', 'access_password', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval'])]
+#[Fillable(['realty_id', 'broker_realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'access_username', 'access_password', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval'])]
 #[Hidden(['access_password'])]
 class Offer extends Model
 {
@@ -26,9 +28,56 @@ class Offer extends Model
         ];
     }
 
+    /** The developer whose unit this is (Johndorf): it owns the offer's approvals and buyer requirements. */
     public function realty(): BelongsTo
     {
         return $this->belongsTo(Realty::class);
+    }
+
+    /** The accredited realty that made the sale; null when the developer's own people did. */
+    public function broker(): BelongsTo
+    {
+        return $this->belongsTo(Realty::class, 'broker_realty_id');
+    }
+
+    /** The firm the buyer deals with: the broker, else the developer. */
+    public function sellerName(): string
+    {
+        return ($this->broker ?? $this->realty)->name;
+    }
+
+    /**
+     * The one rule for who sees an offer, used by the dashboard, the buyer page's
+     * "is this a staff preview" check and unit holds (Offer::visibleTo($user)):
+     *  - an agent: their own offers;
+     *  - a developer's staff: every offer on its inventory, whichever firm sold it;
+     *  - a broker's staff: the offers their firm sold.
+     */
+    #[Scope]
+    protected function visibleTo(Builder $query, User $user): Builder
+    {
+        $realty = $user->realty;
+        $query->where($query->qualifyColumn('realty_id'), $realty->inventoryId());
+
+        if ($user->role === User::ROLE_AGENT) {
+            return $query->where($query->qualifyColumn('agent_id'), $user->id);
+        }
+
+        return $realty->isDeveloper() ? $query : $query->where($query->qualifyColumn('broker_realty_id'), $realty->id);
+    }
+
+    /** The same rule as the visibleTo scope, for one offer already in hand. */
+    public function isVisibleTo(User $user): bool
+    {
+        $realty = $user->realty;
+        if (! $realty || $this->realty_id !== $realty->inventoryId()) {
+            return false;
+        }
+        if ($user->role === User::ROLE_AGENT) {
+            return $this->agent_id === $user->id;
+        }
+
+        return $realty->isDeveloper() || $this->broker_realty_id === $realty->id;
     }
 
     public function project(): BelongsTo
@@ -247,7 +296,7 @@ class Offer extends Model
     /** Everything the buyer's page shows. */
     public function publicArray(): array
     {
-        $this->loadMissing(['realty', 'project', 'unit', 'agent']);
+        $this->loadMissing(['realty', 'broker', 'project', 'unit', 'agent']);
         $project = $this->project;
         $unit = $this->unit;
         // The model on the project's public page that this unit is (renders + spec sheet), if there is one.
@@ -291,6 +340,8 @@ class Offer extends Model
             ],
             'model' => $model ? ['name' => $model->name, 'specs' => $model->specs, 'images' => $model->images] : null,
             'agent' => $this->agent ? ['name' => $this->agent->name, 'email' => $this->agent->email] : null,
+            // The firm that sold it, when it isn't the developer's own team.
+            'broker' => $this->broker ? ['name' => $this->broker->name, 'phone' => $this->broker->phone, 'email' => $this->broker->email] : null,
             // The buyer's own checklist. No file links: documents only open from the realty's dashboard.
             'requirements' => $this->requirementList(),
             'details_submitted_at' => $this->details_submitted_at,

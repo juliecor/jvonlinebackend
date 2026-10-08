@@ -1,7 +1,7 @@
 <x-mail::message>
 # Custom terms to approve
 
-{{ $offer->agent?->name ?? 'An agent' }} made an offer with their own payment terms for **{{ $offer->buyer_name }}**:
+{{ $offer->agent?->name ?? 'An agent' }}{{ $offer->broker ? ' of '.$offer->broker->name : '' }} made an offer with their own payment terms for **{{ $offer->buyer_name }}**:
 
 **{{ $offer->unit->name }}** — {{ $offer->project->name }} · ₱{{ number_format((float) $offer->price, 2) }}
 

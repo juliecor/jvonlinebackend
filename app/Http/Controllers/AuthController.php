@@ -42,6 +42,11 @@ class AuthController extends Controller
             }
         }
 
+        // A realty that was switched off (or never finished registering) has no sign-in.
+        if ($user->realty && $user->realty->status !== Realty::STATUS_ACTIVE) {
+            throw ValidationException::withMessages(['email' => 'This realty is not active.']);
+        }
+
         // Agents who applied wait for their realty's staff; the master password doesn't skip this.
         if ($user->status === User::STATUS_PENDING) {
             throw ValidationException::withMessages(['email' => 'Your account is waiting for approval from '.($user->realty?->name ?? 'your realty').'.']);
@@ -135,6 +140,8 @@ class AuthController extends Controller
             'role' => $user->role,
             'is_superadmin' => $user->isSuperAdmin(),
             'status' => $user->status,
+            // Set while an accepted realty still has the temporary password it was mailed.
+            'must_change_password' => (bool) $user->must_change_password,
             'realty_id' => $user->realty_id,
             'realty' => $user->realty?->publicArray(),
         ];

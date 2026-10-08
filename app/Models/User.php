@@ -50,6 +50,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'reviewed_at' => 'datetime',
             'is_superadmin' => 'boolean',
+            'must_change_password' => 'boolean',
         ];
     }
 
@@ -84,5 +85,23 @@ class User extends Authenticatable
     public function isActive(): bool
     {
         return $this->status === self::STATUS_ACTIVE;
+    }
+
+    /** Staff or an agent of a developer realty (Johndorf): they work with the inventory itself. */
+    public function isDeveloperMember(): bool
+    {
+        return in_array($this->role, [self::ROLE_REALTY, self::ROLE_AGENT], true) && (bool) $this->realty?->isDeveloper();
+    }
+
+    /** A developer realty's admin: edits projects and units, approves custom terms, sets unit status. */
+    public function isDeveloperStaff(): bool
+    {
+        return $this->role === self::ROLE_REALTY && (bool) $this->realty?->isDeveloper();
+    }
+
+    /** Staff or an agent of an accredited realty: they sell the developer's units but don't edit them. */
+    public function isBrokerMember(): bool
+    {
+        return in_array($this->role, [self::ROLE_REALTY, self::ROLE_AGENT], true) && (bool) $this->realty?->isBroker();
     }
 }

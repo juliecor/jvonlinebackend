@@ -16,12 +16,13 @@ Complete my requirements
 </x-mail::button>
 
 @if ($offer->isLocked())
-The page is private: open it with the **username and password {{ $offer->agent?->name ?? $offer->realty->name }} gave you**. Don't have them? Just reply to this email.
+The page is private: open it with the **username and password {{ $offer->agent?->name ?? $offer->sellerName() }} gave you**. Don't have them? Just reply to this email.
 @endif
 
 You can take photos of your documents with your phone and upload them on the page.
 
 Questions? Just reply to this email{{ $offer->agent ? ' and it goes to '.$offer->agent->name : '' }}.
 
-{{ $offer->realty->name }}
+{{ $offer->sellerName() }}@if ($offer->broker)<br>
+in partnership with {{ $offer->realty->name }}@endif
 </x-mail::message>

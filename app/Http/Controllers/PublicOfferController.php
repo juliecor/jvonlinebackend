@@ -105,7 +105,8 @@ class PublicOfferController extends Controller
         $to = $offer->agent?->email ?? $offer->realty->email;
         if ($to) {
             try {
-                $url = rtrim(config('app.frontend_url'), '/')."/{$offer->realty->slug}/dashboard/offers/{$offer->id}";
+                // The agent signs in at their own realty's address, which for a broker's agent isn't Johndorf's.
+                $url = rtrim(config('app.frontend_url'), '/').'/'.($offer->agent?->realty ?? $offer->realty)->slug."/dashboard/offers/{$offer->id}";
                 Mail::to($to)->send(new OfferResponseMail($offer->load(['unit', 'project']), $response, $url));
             } catch (\Throwable $e) {
                 // The lead is saved either way; a mail hiccup shouldn't lose it or show the buyer an error.
@@ -200,18 +201,18 @@ class PublicOfferController extends Controller
         return $offer;
     }
 
-    /** The realty's own people, or a platform admin, signed in on this browser. */
+    /** Whoever may see this offer in their dashboard (see the visibleTo scope on Offer), or a platform admin, signed in on this browser. */
     private function isInsider(Offer $offer): bool
     {
         $viewer = auth('sanctum')->user();
 
-        return $viewer instanceof User && ($viewer->isAdmin() || $viewer->realty_id === $offer->realty_id);
+        return $viewer instanceof User && ($viewer->isAdmin() || $offer->isVisibleTo($viewer));
     }
 
     /** An active offer the buyer may act on. $preview lets the realty's people open one still waiting for approval. */
     private function active(string $code, bool $preview = false): Offer
     {
-        $offer = Offer::with(['realty', 'agent'])->where('code', strtoupper($code))->firstOrFail();
+        $offer = Offer::with(['realty', 'broker', 'agent.realty'])->where('code', strtoupper($code))->firstOrFail();
         if ($offer->status !== 'active') {
             abort(410, 'This offer is no longer available. Please ask your agent for a new one.');
         }

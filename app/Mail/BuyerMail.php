@@ -11,7 +11,7 @@ class BuyerMail
 {
     public static function envelope(Offer $offer, string $subject): Envelope
     {
-        $offer->loadMissing(['realty', 'agent', 'unit', 'project']);
+        $offer->loadMissing(['realty', 'broker', 'agent', 'unit', 'project']);
         $from = new Address(config('mail.from.address'), $offer->realty->name);
         $replyTo = $offer->agent?->email ? [new Address($offer->agent->email, $offer->agent->name)] : [];
 

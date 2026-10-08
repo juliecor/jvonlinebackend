@@ -35,22 +35,24 @@ class Unit extends Model
     }
 
     /**
-     * Who has it, for the project's unit list and the offer: the buyer (realty
-     * admins only), the agent, the offer, who marked it and when.
+     * Who has it, for the project's unit list and the offer: the buyer (the
+     * developer's admins only), the agent, the offer, who marked it and when.
+     * $withOffer false hides the offer and its agent: another firm's sale is
+     * none of a broker's business, only that the unit is taken.
      *
      * @return array{offer_id: int|null, offer_code: string|null, buyer: string|null, agent: string|null, by: string|null, at: string|null}|null
      */
-    public function statusDetail(bool $withBuyer): ?array
+    public function statusDetail(bool $withBuyer, bool $withOffer = true): ?array
     {
         if ($this->status === 'available') {
             return null;
         }
 
         return [
-            'offer_id' => $this->statusOffer?->id,
-            'offer_code' => $this->statusOffer?->code,
+            'offer_id' => $withOffer ? $this->statusOffer?->id : null,
+            'offer_code' => $withOffer ? $this->statusOffer?->code : null,
             'buyer' => $withBuyer ? $this->statusOffer?->buyer_name : null,
-            'agent' => $this->statusOffer?->agent?->name,
+            'agent' => $withOffer ? $this->statusOffer?->agent?->name : null,
             'by' => $this->statusBy?->name,
             'at' => $this->status_at?->toIso8601String(),
         ];
