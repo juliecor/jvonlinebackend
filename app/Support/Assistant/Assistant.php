@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use RuntimeException;
+use Throwable;
 
 /**
  * The dashboard's AI assistant: OpenAI answers from the realty's own data,
@@ -52,12 +53,30 @@ class Assistant
             $messages[] = ['role' => 'assistant', 'content' => $message['content'] ?? null, 'tool_calls' => $calls];
             foreach ($calls as $call) {
                 $args = json_decode($call['function']['arguments'] ?? '{}', true);
-                $result = $tools->call((string) ($call['function']['name'] ?? ''), is_array($args) ? $args : []);
+                $result = $this->lookup($tools, (string) ($call['function']['name'] ?? ''), is_array($args) ? $args : []);
                 $messages[] = ['role' => 'tool', 'tool_call_id' => $call['id'], 'content' => json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)];
             }
         }
 
         throw new RuntimeException('Unreachable.');
+    }
+
+    /**
+     * One lookup. If it breaks, the model hears that it failed (and says so)
+     * instead of the whole answer failing; the error is logged for us.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function lookup(RealtyTools $tools, string $name, array $args): array
+    {
+        try {
+            return $tools->call($name, $args);
+        } catch (Throwable $e) {
+            Log::error('AI assistant: lookup failed', ['tool' => $name, 'args' => $args, 'error' => $e->getMessage()]);
+
+            return ['error' => "This lookup failed, so this piece of information isn't available right now. Say so briefly and answer the rest."];
+        }
     }
 
     /**
@@ -114,6 +133,12 @@ class Assistant
         - Link pages with the dashboard_url values from the tools, like [Plumera Mactan](/johndorf/dashboard/projects/14). Only use links the tools gave you, and link a page once, not on every row.
         - Plain, friendly and brief. No italics, no emojis. Use ### headings only in long answers.
         - Always answer in the language of the user's latest message: Cebuano/Bisaya gets Cebuano, Tagalog or Taglish gets Taglish, English gets English. Keep project and unit names, and words like "reservation fee" or "Pag-IBIG", as they are.
+        - Be specific. When the answer is a handful of things (up to 12), name them instead of only counting them: which unit is sold, which documents are missing, which buyers answered. Look them up if you need to.
+        - For one buyer or one offer (its documents, payment schedule or answers), use offer_details.
+        - Prices: when a payment plan is in percent, also give the peso amounts from the plan's example unit, and say which unit and price they are for.
+        - Never guess anyone's gender from their name. Use their name, or "they".
+        - Write dates like Oct 7, 2026, never 2026-10-07.
+        - Never show field names, JSON, code formatting or words like null: write "2 offers were sent this month", not "offers_sent_this_month: 2". Say "not set yet" or "not listed" for missing values.
         - When it helps, end with one practical next step (who to follow up, what to check).
         PROMPT;
     }

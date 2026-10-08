@@ -7,6 +7,7 @@ use App\Models\Offer;
 use App\Models\OfferResponse;
 use App\Models\Project;
 use App\Models\Realty;
+use App\Models\RequirementType;
 use App\Models\Unit;
 use App\Models\User;
 use App\Support\Assistant\RealtyTools;
@@ -93,6 +94,24 @@ class AssistantTest extends TestCase
         $this->assertStringContainsString('[number hidden]', $detail);
         $this->assertSame(['error' => "Only the realty's admins can see the team."], $tools->call('list_agents', []));
         $this->assertSame(['error' => 'No offer found for "Someone Else" among your offers.'], $tools->call('offer_details', ['offer' => 'Someone Else']));
+    }
+
+    public function test_offers_name_what_the_buyer_still_has_to_send_and_agents_are_counted(): void
+    {
+        $waiting = $this->offer($this->agent, 'Juliecor Repompo');
+        $done = $this->offer($this->agent, 'Maria Buyer');
+        $done->forceFill(['details_submitted_at' => now(), 'buyer_details' => ['income_source' => 'employed']])->save();
+        RequirementType::seedDefaults($this->realty);
+        User::factory()->create(['role' => User::ROLE_AGENT, 'realty_id' => $this->realty->id, 'status' => User::STATUS_PENDING]);
+
+        $tools = new RealtyTools($this->admin);
+        $rows = collect($tools->call('list_offers', ['status' => 'all'])['offers'])->keyBy('buyer');
+        $this->assertSame('Buyer information form', $rows['Juliecor Repompo']['still_missing'][0]);
+        $this->assertNotContains('Buyer information form', $rows['Maria Buyer']['still_missing']);
+
+        $team = $tools->call('list_agents', []);
+        $this->assertSame(1, $team['active_agents']);
+        $this->assertSame(1, $team['applications_waiting_for_approval']);
     }
 
     public function test_without_a_key_or_when_openai_fails_nothing_is_saved(): void

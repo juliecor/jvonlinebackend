@@ -72,14 +72,14 @@ class RealtyTools
                 'response' => ['type' => 'string', 'enum' => ['interested', 'question', 'not_interested', 'none']],
                 'needs' => ['type' => 'string', 'enum' => ['documents', 'review', 'approval'], 'description' => 'documents: buyer still missing requirements; review: buyer files waiting to be checked; approval: custom terms waiting.'],
             ]),
-            $tool('offer_details', "One offer: the buyer's payment schedule, each requirement's state, the buyer's answers and what happened when.", [
+            $tool('offer_details', "One offer in full: which requirements (documents and the buyer form) are missing, waiting for review or approved; the buyer's payment schedule; the buyer's answers; and when it was sent, opened and reminded.", [
                 'offer' => $text("The offer code (e.g. 3XT3WEF4P7) or the buyer's name."),
             ]),
             $tool('buyer_responses', "Buyers' answers to offers (interested, a question, not interested), newest first.", [
                 'days' => ['type' => 'integer', 'description' => 'Only the last N days.'],
                 'kind' => ['type' => 'string', 'enum' => ['interested', 'question', 'not_interested']],
             ]),
-            $tool('list_agents', "The realty's agents: who is active or waiting for approval, and each one's offers and buyer responses. Realty admins only."),
+            $tool('list_agents', "The realty's agents: how many, who is active, who applied and waits for approval, unused invite links, and each agent's offers and buyer responses. Realty admins only."),
         ];
     }
 
@@ -119,6 +119,16 @@ class RealtyTools
             'projects_open_for_offers' => $realty->projects()->where('status', 'active')->count(),
             'units' => ['total' => (int) $units->sum(), 'available' => (int) ($units['available'] ?? 0), 'reserved' => (int) ($units['reserved'] ?? 0), 'sold' => (int) ($units['sold'] ?? 0)],
             'active_offers' => (clone $offers)->where('status', 'active')->count(),
+            'offers_sent_this_month' => (clone $offers)->where('created_at', '>=', now('Asia/Manila')->startOfMonth()->utc())->count(),
+            'offers_sent_last_7_days' => (clone $offers)->where('created_at', '>=', now()->subDays(7))->count(),
+            'reserved_and_sold_units' => Unit::where('realty_id', $realty->id)->whereIn('status', ['reserved', 'sold'])->with(['project:id,name', 'statusOffer:id,buyer_name,agent_id'])->latest('status_at')->limit(12)->get()
+                ->map(fn (Unit $u) => array_filter([
+                    'unit' => $u->name,
+                    'project' => $u->project?->name,
+                    'status' => $u->status,
+                    'buyer' => $u->statusOffer && $this->canSeeOfferOf($u->statusOffer->agent_id) ? $u->statusOffer->buyer_name : null,
+                    'since' => $u->status_at?->format('M j, Y'),
+                ]))->all(),
             'new_buyer_responses' => OfferResponse::whereNull('seen_at')->whereIn('offer_id', (clone $offers)->select('id'))->count(),
             'buyer_files_to_review' => OfferDocument::where('status', 'pending')->whereIn('offer_id', (clone $offers)->where('status', 'active')->select('id'))->count(),
             'custom_terms_waiting_for_approval' => (clone $offers)->where('status', 'active')->where('approval_status', 'pending')->count(),
@@ -175,7 +185,9 @@ class RealtyTools
         if (! $project instanceof Project) {
             return $project;
         }
-        $units = $project->units()->get(['unit_type', 'status', 'price', 'area_sqm']);
+        $units = $project->units()->get(['name', 'unit_type', 'status', 'price', 'area_sqm']);
+        // Plans are in percent: work them out on one real unit (the cheapest available with a price) so answers can say pesos.
+        $example = $units->where('status', 'available')->whereNotNull('price')->sortBy('price')->first() ?? $units->whereNotNull('price')->sortBy('price')->first();
 
         return [
             'name' => $project->name,
@@ -183,7 +195,7 @@ class RealtyTools
             'region' => $project->region,
             'stage' => $project->stage,
             'open_for_offers' => $project->status === 'active',
-            'turnover' => $project->completion_date?->toDateString(),
+            'turnover' => $project->completion_date?->format('M j, Y') ?? 'not announced yet',
             'description' => $project->description,
             'amenities' => $project->amenities ?? [],
             'fee_notes' => $project->fee_notes,
@@ -195,6 +207,15 @@ class RealtyTools
                     'due' => $m['days'] === null ? 'on completion' : ($m['days'] == 0 ? 'on the purchase date' : "{$m['days']} days after purchase"),
                     'monthly_payments' => $m['months'] ?? null,
                 ])->all(),
+                'example_in_pesos' => $example ? [
+                    'unit' => $example->name,
+                    'unit_price' => (float) $example->price,
+                    'payments' => collect($plan->milestones)->map(fn (array $m) => array_filter([
+                        'label' => $m['label'],
+                        'amount' => round((float) $example->price * (float) $m['percent'] / 100, 2),
+                        'each_month' => ($m['months'] ?? null) ? round((float) $example->price * (float) $m['percent'] / 100 / (int) $m['months'], 2) : null,
+                    ], fn ($v) => $v !== null))->all(),
+                ] : null,
             ])->all(),
             'units_by_type' => $units->groupBy(fn (Unit $u) => $u->unit_type ?: 'Other')->map(fn (Collection $of, string $type) => [
                 'type' => $type,
@@ -378,12 +399,13 @@ class RealtyTools
             ->withMax('offers', 'created_at')
             ->orderBy('name')
             ->get();
-        $responses = OfferResponse::where('realty_id', $realty->id)->join('offers', 'offers.id', '=', 'offer_responses.offer_id')
+        $responses = OfferResponse::where('offer_responses.realty_id', $realty->id)->join('offers', 'offers.id', '=', 'offer_responses.offer_id')
             ->selectRaw('offers.agent_id, count(*) as n')->groupBy('offers.agent_id')->pluck('n', 'offers.agent_id');
 
         return [
-            'count' => $agents->count(),
-            'invitations_open' => $realty->agentInvitations()->whereNull('accepted_at')->where('expires_at', '>', now())->count(),
+            'active_agents' => $agents->where('status', User::STATUS_ACTIVE)->count(),
+            'applications_waiting_for_approval' => $agents->where('status', User::STATUS_PENDING)->count(),
+            'invite_links_sent_but_not_used_yet' => $realty->agentInvitations()->whereNull('accepted_at')->where('expires_at', '>', now())->count(),
             'agents' => $agents->map(fn (User $a) => [
                 'name' => $a->name,
                 'status' => $a->status === User::STATUS_PENDING ? 'waiting for approval' : $a->status,
@@ -406,6 +428,12 @@ class RealtyTools
     {
         $latest = $o->responses->sortByDesc('created_at')->first();
         $req = $o->requirementSummary($types);
+        // Which ones, by name: the buyer form first, then each required document not in (or sent back).
+        $missing = collect($o->requirementList(false, $types))
+            ->filter(fn (array $r) => $r['needed'] === 'required' && in_array($r['state'], ['missing', 'rejected'], true))
+            ->map(fn (array $r) => $r['name'].($r['state'] === 'rejected' ? ' (sent back, needs a new file)' : ''))
+            ->when(! $o->details_submitted_at, fn (Collection $c) => $c->prepend('Buyer information form'))
+            ->values()->all();
 
         return [
             'code' => $o->code,
@@ -419,6 +447,7 @@ class RealtyTools
             'opened' => $o->views ? "{$o->views} times, last on ".$o->last_viewed_at?->toDateString() : 'not opened yet',
             'latest_answer' => $latest ? (OfferResponse::LABELS[$latest->kind] ?? $latest->kind).' on '.$latest->created_at->toDateString() : 'no answer yet',
             'requirements' => $req['required'] ? ($req['submitted'] + ($req['details'] ? 1 : 0)).' of '.($req['required'] + 1).' in'.($req['to_review'] ? ", {$req['to_review']} to review" : '') : 'none asked',
+            'still_missing' => $missing,
             'custom_terms' => $o->approval_status,
             'unit_status' => $o->unit && $o->unit->status_offer_id === $o->id ? $o->unit->status : null,
             'buyer_login_set' => $o->isLocked(),
