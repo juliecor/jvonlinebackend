@@ -55,6 +55,9 @@ class OfferController extends Controller
             'unit_detail' => ['name' => $offer->unit?->name, 'unit_type' => $offer->unit?->unit_type, 'area_sqm' => $offer->unit?->area_sqm !== null ? (float) $offer->unit->area_sqm : null, 'status' => $offer->unit?->status],
             'responses' => $leads,
             'buyer_phone' => $offer->buyer_phone,
+            // The buyer's login: the agent can see it again (and resend it) when the buyer forgets.
+            'access_username' => $offer->access_username,
+            'access_password' => $offer->isLocked() ? $offer->access_password : null,
             'buyer_details' => $offer->buyer_details ? collect($offer->buyer_details)->except('ip')->all() : null,
             'details_submitted_at' => $offer->details_submitted_at,
             'requirements' => $offer->requirementList(true),
@@ -195,6 +198,7 @@ class OfferController extends Controller
             'status' => $o->status,
             'buyer_name' => $o->buyer_name,
             'buyer_email' => $o->buyer_email,
+            'locked' => $o->isLocked(),
             'purchase_date' => $o->purchase_date?->toDateString(),
             'price' => (float) $o->price,
             'views' => $o->views,
@@ -234,7 +238,7 @@ class OfferController extends Controller
             'email_buyer' => ['boolean'],
             'custom' => ['boolean'],
             'approval_reason' => ['nullable', 'string', 'max:500'],
-        ] + ($custom ? Milestones::rules('custom_milestones') : []), ['buyer_email.required' => "Enter the buyer's email to send them the offer."]);
+        ] + self::loginRules() + ($custom ? Milestones::rules('custom_milestones') : []), ['buyer_email.required' => "Enter the buyer's email to send them the offer."] + self::loginMessages());
 
         $unit = Unit::with('project')->where('realty_id', $user->realty_id)->findOrFail($data['unit_id']);
         if ($unit->price === null) {
@@ -262,6 +266,8 @@ class OfferController extends Controller
             'buyer_name' => $data['buyer_name'],
             'buyer_email' => $data['buyer_email'] ?? null,
             'buyer_phone' => $data['buyer_phone'] ?? null,
+            'access_username' => trim($data['access_username']),
+            'access_password' => $data['access_password'],
             'purchase_date' => $purchase->toDateString(),
             'price' => $unit->price,
             'schedule' => Offer::buildSchedule((float) $unit->price, $milestones, $purchase, $unit->project->completion_date),
@@ -284,6 +290,35 @@ class OfferController extends Controller
         }
 
         return response()->json(['id' => $offer->id, 'code' => $offer->code, 'url' => Offer::url($offer->code), 'emailed_to' => $emailed, 'approval_status' => $offer->approval_status], 201);
+    }
+
+    /** Set or change the buyer's username and password. A new password signs the buyer out of the old one. */
+    public function login(Request $request, int $id): JsonResponse
+    {
+        $offer = $this->visible($request)->findOrFail($id);
+        $data = $request->validate(self::loginRules(), self::loginMessages());
+        $offer->update(['access_username' => trim($data['access_username']), 'access_password' => $data['access_password']]);
+
+        return response()->json(['access_username' => $offer->access_username, 'access_password' => $offer->access_password, 'locked' => true]);
+    }
+
+    /** @return array<string, array<int, string>> */
+    private static function loginRules(): array
+    {
+        return [
+            'access_username' => ['required', 'string', 'min:2', 'max:60'],
+            'access_password' => ['required', 'string', 'min:6', 'max:60'],
+        ];
+    }
+
+    /** @return array<string, string> */
+    private static function loginMessages(): array
+    {
+        return [
+            'access_username.required' => 'Give the buyer a username to open the offer with.',
+            'access_password.required' => 'Give the buyer a password to open the offer with.',
+            'access_password.min' => 'The password needs at least 6 characters.',
+        ];
     }
 
     /** A realty admin approves custom terms (the buyer can open the offer), or sends them back with a note. */

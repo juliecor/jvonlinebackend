@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,7 +12,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /** One unit + one payment plan, prepared by an agent for one buyer. The code is the public link. */
-#[Fillable(['realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval'])]
+#[Fillable(['realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'access_username', 'access_password', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval'])]
+#[Hidden(['access_password'])]
 class Offer extends Model
 {
     protected function casts(): array
@@ -20,6 +22,7 @@ class Offer extends Model
             'purchase_date' => 'date:Y-m-d', 'price' => 'decimal:2', 'schedule' => 'array', 'first_viewed_at' => 'datetime', 'last_viewed_at' => 'datetime',
             'buyer_details' => 'array', 'details_submitted_at' => 'datetime', 'offer_emailed_at' => 'datetime', 'last_reminded_at' => 'datetime',
             'custom_milestones' => 'array', 'approved_at' => 'datetime', 'email_on_approval' => 'boolean',
+            'access_password' => 'encrypted',
         ];
     }
 
@@ -62,6 +65,35 @@ class Offer extends Model
     public function awaitingApproval(): bool
     {
         return in_array($this->approval_status, ['pending', 'rejected'], true);
+    }
+
+    /** The agent set a username and password: the buyer has to type them to open the link. */
+    public function isLocked(): bool
+    {
+        return filled($this->access_username) && filled($this->getRawOriginal('access_password'));
+    }
+
+    /** The buyer's username (any case, spaces around it ignored) and password (exactly). */
+    public function checkLogin(string $username, string $password): bool
+    {
+        return $this->isLocked()
+            && strcasecmp(trim($username), (string) $this->access_username) === 0
+            && hash_equals((string) $this->access_password, $password);
+    }
+
+    /**
+     * What the buyer's browser keeps after signing in. It is tied to the
+     * stored password, so changing the password signs everyone out.
+     */
+    public function accessToken(): string
+    {
+        return hash_hmac('sha256', "offer-access:{$this->id}:{$this->access_username}:".$this->getRawOriginal('access_password'), (string) config('app.key'));
+    }
+
+    /** Whether this visitor may open the offer: it has no login, or they signed in to it. */
+    public function grantsAccess(?string $token): bool
+    {
+        return ! $this->isLocked() || (is_string($token) && $token !== '' && hash_equals($this->accessToken(), $token));
     }
 
     /** Active and, if it has custom terms, approved: the buyer can open and act on it. */

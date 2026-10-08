@@ -30,6 +30,7 @@ Route::get('/realties/{slug}/projects', [PublicRealtyController::class, 'project
 Route::get('/realties/{slug}/projects/{projectSlug}', [PublicRealtyController::class, 'project']);
 Route::get('/offers/{code}', [PublicOfferController::class, 'show'])->middleware('throttle:offer-view');
 Route::post('/offers/{code}/respond', [PublicOfferController::class, 'respond'])->middleware('throttle:offer-respond');
+Route::post('/offers/{code}/unlock', [PublicOfferController::class, 'unlock'])->middleware('throttle:login');
 Route::middleware('throttle:offer-upload')->group(function () {
     Route::post('/offers/{code}/details', [PublicOfferController::class, 'details']);
     Route::post('/offers/{code}/documents', [PublicOfferController::class, 'upload']);
@@ -79,6 +80,7 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::post('/offers/{id}/send', [OfferController::class, 'send'])->whereNumber('id');
             Route::post('/offers/{id}/approval', [OfferController::class, 'approval'])->whereNumber('id');
             Route::post('/offers/{id}/terms', [OfferController::class, 'terms'])->whereNumber('id');
+            Route::post('/offers/{id}/login', [OfferController::class, 'login'])->whereNumber('id');
         });
         Route::middleware('realty.member:staff')->group(function () {
             Route::get('/agents', [AgentController::class, 'index']);

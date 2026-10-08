@@ -12,6 +12,10 @@ It has the full payment schedule, the site plan and the location.
 View your offer
 </x-mail::button>
 
+@if ($offer->isLocked())
+The page is private: open it with the **username and password {{ $offer->agent?->name ?? $offer->realty->name }} gave you**. Don't have them? Just reply to this email.
+@endif
+
 @if ($requirements)
 Ready to reserve? You can submit your requirements on the same page — from your phone is fine.
 @endif

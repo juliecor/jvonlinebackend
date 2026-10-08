@@ -13,20 +13,36 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
-/** The buyer's page: one offer by its code (counts the view), and the buyer's answer to it. */
+/**
+ * The buyer's page: one offer by its code (counts the view), and the buyer's
+ * answer to it. A private offer (with a username and password) only opens for
+ * a buyer who signed in to it, sending back the X-Offer-Access token.
+ */
 class PublicOfferController extends Controller
 {
     public function show(Request $request, string $code): JsonResponse
     {
         $offer = $this->active($code, preview: true);
 
-        // The realty's own people (and admins) opening the link don't count as a buyer view.
-        $viewer = auth('sanctum')->user();
-        $insider = $viewer instanceof User && ($viewer->isAdmin() || $viewer->realty_id === $offer->realty_id);
+        // The realty's own people (and admins) opening the link don't count as a buyer view, and need no login.
+        $insider = $this->isInsider($offer);
         // Custom terms not approved yet: the realty's people can preview it, buyers can't open it.
         if ($offer->awaitingApproval() && ! $insider) {
             abort(423, "This offer isn't ready yet. Your agent will send it to you once it's approved.");
+        }
+        // Private: just enough to draw the sign-in page, nothing about the buyer or the price.
+        if (! $insider && ! $offer->grantsAccess($request->header('X-Offer-Access'))) {
+            $offer->loadMissing('project');
+
+            return response()->json([
+                'locked' => true,
+                'code' => $offer->code,
+                'realty' => ['name' => $offer->realty->name, 'slug' => $offer->realty->slug, 'logo_url' => $offer->realty->logo_url, 'accent_color' => $offer->realty->accent_color],
+                'project' => ['name' => $offer->project?->name, 'location' => $offer->project?->location, 'photo' => $offer->project?->hero_urls[0] ?? $offer->project?->cover_url],
+                'agent' => $offer->agent?->name,
+            ]);
         }
         if (! $insider) {
             $offer->forceFill([
@@ -36,12 +52,34 @@ class PublicOfferController extends Controller
             ])->save();
         }
 
-        return response()->json($offer->publicArray() + ['preview' => $offer->awaitingApproval() ? $offer->approval_status : null]);
+        return response()->json($offer->publicArray() + [
+            'preview' => $offer->awaitingApproval() ? $offer->approval_status : null,
+            // The realty's own people see a note that buyers need the login.
+            'private' => $insider && $offer->isLocked(),
+        ]);
+    }
+
+    /** The buyer signs in with the username and password from the agent; the token opens the offer from then on. */
+    public function unlock(Request $request, string $code): JsonResponse
+    {
+        $offer = $this->active($code);
+        $data = $request->validate([
+            'username' => ['required', 'string', 'max:60'],
+            'password' => ['required', 'string', 'max:60'],
+        ]);
+        if (! $offer->isLocked()) {
+            return response()->json(['token' => null]);
+        }
+        if (! $offer->checkLogin($data['username'], $data['password'])) {
+            throw ValidationException::withMessages(['username' => 'Wrong username or password. Check them with your agent.']);
+        }
+
+        return response()->json(['token' => $offer->accessToken()]);
     }
 
     public function respond(Request $request, string $code): JsonResponse
     {
-        $offer = $this->active($code);
+        $offer = $this->forBuyer($request, $code);
         $data = $request->validate([
             'kind' => ['required', Rule::in(OfferResponse::KINDS)],
             'name' => ['required', 'string', 'max:120'],
@@ -84,7 +122,7 @@ class PublicOfferController extends Controller
      */
     public function details(Request $request, string $code): JsonResponse
     {
-        $offer = $this->active($code);
+        $offer = $this->forBuyer($request, $code);
         $text = fn (int $max = 150, bool $required = true) => [$required ? 'required' : 'nullable', 'string', "max:{$max}"];
         $data = $request->validate([
             'first_name' => $text(), 'middle_name' => $text(), 'last_name' => $text(), 'name_extension' => $text(20, false),
@@ -115,7 +153,7 @@ class PublicOfferController extends Controller
     /** Files for one requirement: photos or PDFs, kept on the private documents disk. */
     public function upload(Request $request, string $code): JsonResponse
     {
-        $offer = $this->active($code);
+        $offer = $this->forBuyer($request, $code);
         $data = $request->validate([
             'requirement_type_id' => ['required', 'integer', Rule::exists('requirement_types', 'id')->where('realty_id', $offer->realty_id)->where('active', true)],
             'files' => ['required', 'array', 'min:1', 'max:10'],
@@ -140,15 +178,34 @@ class PublicOfferController extends Controller
     }
 
     /** The buyer takes back a file sent by mistake — only while nobody has reviewed it. */
-    public function removeDocument(string $code, int $document): JsonResponse
+    public function removeDocument(Request $request, string $code, int $document): JsonResponse
     {
-        $offer = $this->active($code);
+        $offer = $this->forBuyer($request, $code);
         $doc = $offer->documents()->whereKey($document)->firstOrFail();
         abort_unless($doc->status === 'pending', 422, 'This file was already reviewed, so it can no longer be removed.');
         Storage::disk(OfferDocument::disk())->delete($doc->path);
         $doc->delete();
 
         return response()->json(['requirements' => $offer->fresh()->requirementList()]);
+    }
+
+    /** An active offer the buyer may act on, which they signed in to if it's private. */
+    private function forBuyer(Request $request, string $code): Offer
+    {
+        $offer = $this->active($code);
+        if (! $this->isInsider($offer) && ! $offer->grantsAccess($request->header('X-Offer-Access'))) {
+            abort(401, 'Sign in to this offer first, with the username and password from your agent.');
+        }
+
+        return $offer;
+    }
+
+    /** The realty's own people, or a platform admin, signed in on this browser. */
+    private function isInsider(Offer $offer): bool
+    {
+        $viewer = auth('sanctum')->user();
+
+        return $viewer instanceof User && ($viewer->isAdmin() || $viewer->realty_id === $offer->realty_id);
     }
 
     /** An active offer the buyer may act on. $preview lets the realty's people open one still waiting for approval. */
