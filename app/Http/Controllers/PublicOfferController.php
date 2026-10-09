@@ -81,9 +81,10 @@ class PublicOfferController extends Controller
     {
         $offer = $this->forBuyer($request, $code);
         $data = $request->validate([
-            'kind' => ['required', Rule::in(OfferResponse::KINDS)],
+            // Buyers can say they're interested or ask; "not interested" was taken off the page (older answers stay).
+            'kind' => ['required', Rule::in(['interested', 'question'])],
             'name' => ['required', 'string', 'max:120'],
-            'phone' => [Rule::requiredIf($request->input('kind') !== 'not_interested'), 'nullable', 'string', 'max:40'],
+            'phone' => ['required', 'string', 'max:40'],
             'email' => ['nullable', 'email', 'max:190'],
             'contact_via' => ['nullable', Rule::in(['call', 'viber', 'whatsapp', 'sms', 'email'])],
             'message' => ['nullable', 'string', 'max:2000'],

@@ -100,7 +100,8 @@ class OfferAccessTest extends TestCase
         $offer = $this->privateOffer(['access_username' => null, 'access_password' => null]);
 
         $this->getJson("/api/offers/{$offer->code}")->assertOk()->assertJsonPath('buyer_name', 'Juliecor Repompo');
-        $this->postJson("/api/offers/{$offer->code}/respond", ['kind' => 'not_interested', 'name' => 'Juliecor'])->assertCreated();
+        $this->postJson("/api/offers/{$offer->code}/respond", ['kind' => 'question', 'name' => 'Juliecor', 'phone' => '09171234567', 'message' => 'Can I visit?'])->assertCreated();
+        $this->postJson("/api/offers/{$offer->code}/respond", ['kind' => 'not_interested', 'name' => 'Juliecor', 'phone' => '09171234567'])->assertJsonValidationErrors('kind');
     }
 
     /** @param  array<string, mixed>  $overrides */

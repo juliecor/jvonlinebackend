@@ -72,6 +72,12 @@ class RequirementType extends Model
      * (johndorfventures.com/buyers_guide.php) and Pag-IBIG's housing loan
      * requirements; other realties start with the two every lender asks for.
      */
+    /** Every realty that has no requirements yet gets the standard list. */
+    public static function seedMissing(): void
+    {
+        Realty::whereNotIn('id', static::select('realty_id'))->get()->each(fn (Realty $realty) => static::seedDefaults($realty));
+    }
+
     public static function seedDefaults(Realty $realty): void
     {
         if (static::where('realty_id', $realty->id)->exists()) {

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Realty;
+use App\Models\RequirementType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -37,6 +38,8 @@ class DatabaseSeeder extends Seeder
             ['slug' => 'johndorf'],
             ['name' => 'Johndorf Ventures Corporation', 'status' => Realty::STATUS_ACTIVE, 'registered_at' => now(), 'logo_path' => '/johndorf/logo.png', 'accent_color' => '#b4241c'],
         );
+        // What buyers send with their offer (ID, proof of income…); left alone if Johndorf already has its list.
+        RequirementType::seedDefaults($johndorf);
         $this->command->info('Realty: Johndorf Ventures Corporation (/johndorf)');
 
         // Johndorf's own staff login (signs in at /johndorf/login, not /admin/login).
