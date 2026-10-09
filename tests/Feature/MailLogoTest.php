@@ -44,6 +44,9 @@ class MailLogoTest extends TestCase
         $this->assertStringNotContainsString('src=3D"https://jvconline.ph/johndorf/logo.png"', $raw);
         $this->assertStringContainsString('Content-Type: image/png', $raw);
         $this->assertStringContainsString('Content-Disposition: inline', $raw);
+        // A file name would make Gmail show the logo as an attachment.
+        $this->assertDoesNotMatchRegularExpression('/Content-Type: image\/png[^\n]*name=/i', $raw);
+        $this->assertDoesNotMatchRegularExpression('/Content-Disposition: inline[^\n]*(file)?name=/i', $raw);
     }
 
     public function test_a_logo_that_cannot_be_fetched_stays_a_web_address(): void
