@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /** One unit + one payment plan, prepared by an agent for one buyer. The code is the public link. */
-#[Fillable(['realty_id', 'broker_realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'access_username', 'access_password', 'purchase_date', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval'])]
+#[Fillable(['realty_id', 'broker_realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'access_username', 'access_password', 'purchase_date', 'expires_at', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval'])]
 #[Hidden(['access_password'])]
 class Offer extends Model
 {
@@ -24,7 +24,7 @@ class Offer extends Model
             'purchase_date' => 'date:Y-m-d', 'price' => 'decimal:2', 'schedule' => 'array', 'first_viewed_at' => 'datetime', 'last_viewed_at' => 'datetime',
             'buyer_details' => 'array', 'details_submitted_at' => 'datetime', 'offer_emailed_at' => 'datetime', 'last_reminded_at' => 'datetime',
             'custom_milestones' => 'array', 'approved_at' => 'datetime', 'email_on_approval' => 'boolean',
-            'access_password' => 'encrypted',
+            'access_password' => 'encrypted', 'expires_at' => 'datetime',
         ];
     }
 
@@ -139,10 +139,59 @@ class Offer extends Model
         return hash_hmac('sha256', "offer-access:{$this->id}:{$this->access_username}:".$this->getRawOriginal('access_password'), (string) config('app.key'));
     }
 
+    /** How long the sign-in link in a reminder email keeps working. */
+    public const ENTRY_DAYS = 30;
+
+    /**
+     * The key in a reminder email's link: it signs the buyer in without typing the login, and stops working
+     * after ENTRY_DAYS or as soon as the agent changes the username or password. Only good for opening this offer.
+     */
+    public function entryToken(): string
+    {
+        $expires = now()->addDays(self::ENTRY_DAYS)->timestamp;
+
+        return $expires.'.'.$this->entrySignature($expires);
+    }
+
+    public function checkEntryToken(?string $token): bool
+    {
+        if (! is_string($token) || ! preg_match('/^(\d{9,12})\.([a-f0-9]{64})$/', $token, $m)) {
+            return false;
+        }
+
+        return (int) $m[1] > now()->timestamp && hash_equals($this->entrySignature((int) $m[1]), $m[2]);
+    }
+
+    private function entrySignature(int $expires): string
+    {
+        return hash_hmac('sha256', "offer-entry:{$this->id}:{$expires}:{$this->access_username}:".$this->getRawOriginal('access_password'), (string) config('app.key'));
+    }
+
+    /**
+     * Where a reminder sends the buyer to finish their requirements. A private offer's link carries the entry key,
+     * so it opens already signed in, on the requirements, with what's missing marked.
+     */
+    public function requirementsUrl(): string
+    {
+        if ($this->isLocked()) {
+            return self::url($this->code).'/enter?k='.$this->entryToken();
+        }
+
+        return self::url($this->code).'?guide=1#requirements';
+    }
+
     /** Whether this visitor may open the offer: it has no login, or they signed in to it. */
     public function grantsAccess(?string $token): bool
     {
         return ! $this->isLocked() || (is_string($token) && $token !== '' && hash_equals($this->accessToken(), $token));
+    }
+
+    public const EXPIRED_MESSAGE = 'This offer has expired. Please ask your agent to extend it.';
+
+    /** The agent's "valid for" choice has run out: the buyer can't open or answer it until it is extended. No date means it never expires. */
+    public function isExpired(): bool
+    {
+        return $this->expires_at !== null && $this->expires_at->isPast();
     }
 
     /** Active and, if it has custom terms, approved: the buyer can open and act on it. */
@@ -293,6 +342,39 @@ class Offer extends Model
         return $this->unit?->photo($models, $this->project) ?? $this->project?->hero_urls[0] ?? $this->project?->cover_url;
     }
 
+    /**
+     * What a buyer sees before signing in: the sales-offer sheet. Property, price, plan and where it is,
+     * nothing about the buyer, their contact details, documents or the login.
+     */
+    public function sheetArray(): array
+    {
+        $this->loadMissing(['realty', 'broker', 'project', 'unit', 'agent']);
+        $project = $this->project;
+        $unit = $this->unit;
+
+        return [
+            'price' => (float) $this->price,
+            'schedule' => $this->schedule,
+            'fee_notes' => $this->fee_notes,
+            'created_at' => $this->created_at,
+            'expires_at' => $this->expires_at,
+            'project' => [
+                'name' => $project?->name,
+                'location' => $project?->location,
+                'lat' => $project?->lat,
+                'lng' => $project?->lng,
+                'completion_date' => $project?->completion_date?->toDateString(),
+            ],
+            'unit' => [
+                'name' => $unit?->name,
+                'unit_type' => $unit?->unit_type,
+                'category' => $unit?->category,
+                'area_sqm' => $unit?->area_sqm !== null ? (float) $unit->area_sqm : null,
+            ],
+            'broker' => $this->broker?->name,
+        ];
+    }
+
     /** Everything the buyer's page shows. */
     public function publicArray(): array
     {
@@ -313,6 +395,7 @@ class Offer extends Model
             'schedule' => $this->schedule,
             'fee_notes' => $this->fee_notes,
             'created_at' => $this->created_at,
+            'expires_at' => $this->expires_at,
             'realty' => $this->realty->publicArray() + ['phone' => $this->realty->phone, 'email' => $this->realty->email, 'address' => $this->realty->address],
             'project' => [
                 'name' => $project->name,

@@ -21,6 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -130,6 +131,7 @@ class OfferController extends Controller
         $offer = $this->visible($request)->with(['unit', 'project', 'realty', 'agent', 'documents'])->findOrFail($id);
         abort_unless($offer->status === 'active', 422, 'This offer is void.');
         abort_if($offer->awaitingApproval(), 422, 'The custom terms are not approved yet, so the buyer cannot open the offer.');
+        abort_if($offer->isExpired(), 422, 'This offer has expired. Extend it first, then send the reminder.');
         $to = $offer->buyerEmail();
         abort_unless($to, 422, "There's no email for this buyer. Copy the link and send it by Viber or text instead.");
         if ($offer->last_reminded_at && $offer->last_reminded_at->gt(now()->subMinutes(10))) {
@@ -151,6 +153,7 @@ class OfferController extends Controller
         $offer = $this->visible($request)->with(['unit', 'project', 'realty', 'agent'])->findOrFail($id);
         abort_unless($offer->status === 'active', 422, 'This offer is void.');
         abort_if($offer->awaitingApproval(), 422, 'The custom terms are not approved yet, so the buyer cannot open the offer.');
+        abort_if($offer->isExpired(), 422, 'This offer has expired. Extend it first, then send it again.');
         $to = $offer->buyerEmail();
         abort_unless($to, 422, "There's no email for this buyer.");
         $this->mail($to, new OfferToBuyerMail($offer), $offer);
@@ -212,6 +215,8 @@ class OfferController extends Controller
             'price' => (float) $o->price,
             'views' => $o->views,
             'created_at' => $o->created_at,
+            'expires_at' => $o->expires_at,
+            'expired' => $o->isExpired(),
             'project' => $o->project?->name,
             // "Unit 415 · 1 Bedroom"; just the name when the type says the same thing.
             'unit' => $o->unit ? implode(' · ', array_unique(array_filter([$o->unit->name, $o->unit->unit_type]))) : null,
@@ -253,6 +258,8 @@ class OfferController extends Controller
             'email_buyer' => ['boolean'],
             'custom' => ['boolean'],
             'approval_reason' => ['nullable', 'string', 'max:500'],
+            // How long the buyer can open it, in hours (up to 90 days). Left out: it never expires.
+            'valid_hours' => ['nullable', 'integer', 'min:1', 'max:2160'],
         ] + self::loginRules() + ($custom ? Milestones::rules('custom_milestones') : []), ['buyer_email.required' => "Enter the buyer's email to send them the offer."] + self::loginMessages());
 
         // Units, plans and the buyer's checklist belong to the developer; a broker sells them.
@@ -291,6 +298,7 @@ class OfferController extends Controller
             'access_username' => trim($data['access_username']),
             'access_password' => $data['access_password'],
             'purchase_date' => $purchase->toDateString(),
+            'expires_at' => ! empty($data['valid_hours']) ? now()->addHours((int) $data['valid_hours']) : null,
             'price' => $unit->price,
             'schedule' => Offer::buildSchedule((float) $unit->price, $milestones, $purchase, $unit->project->completion_date),
             'fee_notes' => $unit->project->fee_notes,
@@ -502,5 +510,38 @@ class OfferController extends Controller
         $offer->update(['status' => 'void']);
 
         return response()->json(['id' => $offer->id, 'status' => $offer->status]);
+    }
+
+    /**
+     * Delete an offer for good, with the buyer's answers and uploaded files. If it was holding its unit
+     * (reserved or sold), the unit goes back to available. Staff only; they see what visible() allows.
+     */
+    public function destroy(Request $request, int $offer): JsonResponse
+    {
+        $offer = $this->visible($request)->with(['documents', 'unit'])->findOrFail($offer);
+        $paths = $offer->documents->pluck('path')->filter()->all();
+
+        $userId = $request->user()->id;
+
+        DB::transaction(function () use ($offer, $userId) {
+            if ($offer->unit && $offer->unit->status_offer_id === $offer->id) {
+                $offer->unit->update(['status' => 'available', 'status_offer_id' => null, 'status_by_id' => $userId, 'status_at' => now()]);
+            }
+            $offer->delete();
+        });
+        Storage::disk(OfferDocument::disk())->delete($paths);
+
+        return response()->json(['deleted' => $offer->id]);
+    }
+
+    /** Open an offer again, or longer: it is valid for this many hours from now. Agents extend their own; staff, any they see. */
+    public function extend(Request $request, int $offer): JsonResponse
+    {
+        $offer = $this->visible($request)->findOrFail($offer);
+        abort_unless($offer->status === 'active', 422, 'This offer is void.');
+        $data = $request->validate(['valid_hours' => ['required', 'integer', 'min:1', 'max:2160']]);
+        $offer->update(['expires_at' => now()->addHours((int) $data['valid_hours'])]);
+
+        return response()->json(['id' => $offer->id, 'expires_at' => $offer->expires_at, 'expired' => false]);
     }
 }

@@ -28,11 +28,15 @@ class PublicOfferController extends Controller
 
         // The realty's own people (and admins) opening the link don't count as a buyer view, and need no login.
         $insider = $this->isInsider($offer);
+        // The realty's own people can still open an expired offer; the buyer gets the expired page.
+        if ($offer->isExpired() && ! $insider) {
+            abort(410, Offer::EXPIRED_MESSAGE);
+        }
         // Custom terms not approved yet: the realty's people can preview it, buyers can't open it.
         if ($offer->awaitingApproval() && ! $insider) {
             abort(423, "This offer isn't ready yet. Your agent will send it to you once it's approved.");
         }
-        // Private: just enough to draw the sign-in page, nothing about the buyer or the price.
+        // Private: the sales-offer sheet and the sign-in page. Nothing about the buyer, their documents or the login.
         if (! $insider && ! $offer->grantsAccess($request->header('X-Offer-Access'))) {
             $offer->loadMissing('project');
 
@@ -42,6 +46,8 @@ class PublicOfferController extends Controller
                 'realty' => ['name' => $offer->realty->name, 'slug' => $offer->realty->slug, 'logo_url' => $offer->realty->logo_url, 'accent_color' => $offer->realty->accent_color],
                 'project' => ['name' => $offer->project?->name, 'location' => $offer->project?->location, 'photo' => $offer->project?->hero_urls[0] ?? $offer->project?->cover_url],
                 'agent' => $offer->agent?->name,
+                // The sales-offer sheet they read before signing in.
+                'sheet' => $offer->sheetArray(),
             ]);
         }
         if (! $insider) {
@@ -72,6 +78,21 @@ class PublicOfferController extends Controller
         }
         if (! $offer->checkLogin($data['username'], $data['password'])) {
             throw ValidationException::withMessages(['username' => 'Wrong username or password. Check them with your agent.']);
+        }
+
+        return response()->json(['token' => $offer->accessToken()]);
+    }
+
+    /** The buyer comes in from the link in a reminder email: the signed key stands in for the username and password. */
+    public function enter(Request $request, string $code): JsonResponse
+    {
+        $offer = $this->active($code);
+        $data = $request->validate(['key' => ['required', 'string', 'max:100']]);
+        if (! $offer->isLocked()) {
+            return response()->json(['token' => null]);
+        }
+        if (! $offer->checkEntryToken($data['key'])) {
+            throw ValidationException::withMessages(['key' => 'This link has expired. Sign in with the username and password from your agent.']);
         }
 
         return response()->json(['token' => $offer->accessToken()]);
@@ -219,6 +240,10 @@ class PublicOfferController extends Controller
         }
         if (! $preview && $offer->awaitingApproval()) {
             abort(423, "This offer isn't ready yet. Your agent will send it to you once it's approved.");
+        }
+        // Past its "valid for": no opening, signing in or answering until the agent extends it.
+        if (! $preview && $offer->isExpired()) {
+            abort(410, Offer::EXPIRED_MESSAGE);
         }
 
         return $offer;

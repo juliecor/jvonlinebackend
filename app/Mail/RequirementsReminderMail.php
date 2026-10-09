@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-/** "3 requirements left" — what's missing or needs re-uploading, with the link straight to them. */
+/** "3 requirements left": what's missing or needs re-uploading, with a link that opens the offer signed in, right on them. */
 class RequirementsReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -26,6 +26,17 @@ class RequirementsReminderMail extends Mailable
 
     public function content(): Content
     {
-        return new Content(markdown: 'mail.requirements-reminder', with: ['url' => Offer::url($this->offer->code).'#requirements']);
+        $this->offer->loadMissing(['realty', 'broker', 'agent', 'unit', 'project']);
+
+        return new Content(
+            view: 'mail.requirements-reminder',
+            text: 'mail.requirements-reminder-text',
+            with: [
+                'brand' => $this->offer->realty->mailBrand(),
+                // A private offer's link signs the buyer in; the key in it runs out, so it's made when the mail is sent.
+                'url' => $this->offer->requirementsUrl(),
+                'days' => Offer::ENTRY_DAYS,
+            ],
+        );
     }
 }

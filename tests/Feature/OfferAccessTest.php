@@ -70,6 +70,25 @@ class OfferAccessTest extends TestCase
         $this->assertSame(1, $offer->fresh()->views);
     }
 
+    public function test_the_sign_in_page_comes_with_the_sales_offer_sheet_but_nothing_about_the_buyer(): void
+    {
+        $offer = $this->privateOffer();
+
+        $response = $this->getJson("/api/offers/{$offer->code}")
+            ->assertOk()
+            ->assertJsonPath('locked', true)
+            ->assertJsonPath('sheet.price', 2800000)
+            ->assertJsonPath('sheet.unit.name', 'Lot 1')
+            ->assertJsonPath('sheet.unit.category', 'Residential')
+            ->assertJsonPath('sheet.project.name', 'Montierra')
+            ->assertJsonStructure(['sheet' => ['schedule', 'fee_notes', 'created_at', 'project' => ['lat', 'lng', 'location'], 'unit' => ['area_sqm', 'unit_type']]]);
+
+        $body = $response->getContent();
+        foreach (['Juliecor', 'Repompo', 'buyer_name', 'buyer_contact', 'access_password', 'requirements'] as $private) {
+            $this->assertStringNotContainsString($private, $body);
+        }
+    }
+
     public function test_the_buyers_answers_need_the_sign_in_too(): void
     {
         $offer = $this->privateOffer();

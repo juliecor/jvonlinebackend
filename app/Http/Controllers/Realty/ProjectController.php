@@ -9,6 +9,7 @@ use App\Models\User;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -98,6 +99,35 @@ class ProjectController extends Controller
         $project->update($data);
 
         return response()->json($project->only(['id', 'status', 'stage', 'is_public', 'slug']));
+    }
+
+    /**
+     * A project with offers can't be deleted: they would go with it, buyers' files and all. Archive it instead.
+     * Without offers, its units, plans, models and updates go too, and so do their uploaded pictures.
+     */
+    public function destroy(Request $request, Project $project): JsonResponse
+    {
+        $this->own($request, $project);
+        $offers = $project->offers()->count();
+        if ($offers > 0) {
+            return response()->json(['message' => "This project has {$offers} offer".($offers === 1 ? '' : 's')." and can't be deleted. Archive it instead."], 409);
+        }
+
+        $project->loadMissing(['unitTypes', 'updates']);
+        $files = array_merge(
+            [$project->cover_path],
+            $project->hero_paths ?? [],
+            $project->site_plan_paths ?? [],
+            $project->units()->pluck('floor_plan_path')->all(),
+            $project->unitTypes->flatMap(fn ($t) => $t->image_paths ?? [])->all(),
+            $project->updates->flatMap(fn ($u) => $u->photo_paths ?? [])->all(),
+        );
+        DB::transaction(fn () => $project->delete());
+        foreach ($files as $path) {
+            ProjectPageController::deleteUpload($path);
+        }
+
+        return response()->json(['deleted' => $project->id]);
     }
 
     private function validated(Request $request): array

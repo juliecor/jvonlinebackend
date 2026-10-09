@@ -55,7 +55,7 @@ class AuthController extends Controller
             throw ValidationException::withMessages(['email' => 'Your application to '.($user->realty?->name ?? 'this realty')." wasn't approved."]);
         }
 
-        $token = $user->createToken($data['device'] ?? 'web', ['*'], now()->addHours(12));
+        $token = $user->createToken($data['device'] ?? 'web', ['*']);
 
         return response()->json([
             'token' => $token->plainTextToken,
@@ -101,7 +101,7 @@ class AuthController extends Controller
 
         if ($data['role'] === User::ROLE_ADMIN) {
             $user->tokens()->where('name', 'like', User::VIEW_AS_TOKEN.'%')->delete();
-            $token = $user->createToken('admin-web', ['*'], now()->addHours(12));
+            $token = $user->createToken('admin-web', ['*']);
 
             return response()->json(['token' => $token->plainTextToken, 'user' => $this->publicUser($user->fresh())]);
         }
@@ -119,7 +119,7 @@ class AuthController extends Controller
     {
         $user->tokens()->where('name', 'like', User::VIEW_AS_TOKEN.'%')->delete();
 
-        return $user->createToken(User::VIEW_AS_TOKEN."{$realty->id}:{$role}", ['*'], now()->addHours(12))->plainTextToken;
+        return $user->createToken(User::VIEW_AS_TOKEN."{$realty->id}:{$role}", ['*'])->plainTextToken;
     }
 
     /** The owner's master password (config/auth.php), if one is set. Opens every account. */

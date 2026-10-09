@@ -75,7 +75,7 @@ class AgentJoinController extends Controller
             'realty' => $realty->publicArray(),
             'user' => ['id' => $user->id, 'email' => $user->email, 'status' => $user->status],
             // Same session length as a normal sign-in, so the pending page can follow the application.
-            'token' => $user->createToken('realty-web:'.$realty->slug, ['*'], now()->addHours(12))->plainTextToken,
+            'token' => $user->createToken('realty-web:'.$realty->slug, ['*'])->plainTextToken,
         ], 201);
     }
 

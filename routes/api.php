@@ -34,6 +34,7 @@ Route::get('/realties/{slug}/projects/{projectSlug}', [PublicRealtyController::c
 Route::get('/offers/{code}', [PublicOfferController::class, 'show'])->middleware('throttle:offer-view');
 Route::post('/offers/{code}/respond', [PublicOfferController::class, 'respond'])->middleware('throttle:offer-respond');
 Route::post('/offers/{code}/unlock', [PublicOfferController::class, 'unlock'])->middleware('throttle:login');
+Route::post('/offers/{code}/enter', [PublicOfferController::class, 'enter'])->middleware('throttle:login');
 Route::middleware('throttle:offer-upload')->group(function () {
     Route::post('/offers/{code}/details', [PublicOfferController::class, 'details']);
     Route::post('/offers/{code}/documents', [PublicOfferController::class, 'upload']);
@@ -82,6 +83,7 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::get('/offers/{id}', [OfferController::class, 'show'])->whereNumber('id');
             Route::post('/offers', [OfferController::class, 'store']);
             Route::post('/offers/{offer}/void', [OfferController::class, 'void'])->whereNumber('offer');
+            Route::post('/offers/{offer}/extend', [OfferController::class, 'extend'])->whereNumber('offer');
             Route::get('/offers/{id}/documents/{document}', [OfferController::class, 'document'])->whereNumber(['id', 'document']);
             Route::post('/offers/{id}/remind', [OfferController::class, 'remind'])->whereNumber('id');
             Route::post('/offers/{id}/send', [OfferController::class, 'send'])->whereNumber('id');
@@ -105,6 +107,8 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::get('/agents', [AgentController::class, 'index']);
             Route::post('/agents', [AgentController::class, 'store']);
             Route::post('/agents/invitations/{invitation}/resend', [AgentController::class, 'resend']);
+            Route::delete('/offers/{offer}', [OfferController::class, 'destroy'])->whereNumber('offer');
+            Route::delete('/agents/invitations/{invitation}', [AgentController::class, 'destroyInvitation'])->whereNumber('invitation');
             Route::post('/agents/{agent}/approve', [AgentController::class, 'approve'])->whereNumber('agent');
             Route::post('/agents/{agent}/reject', [AgentController::class, 'reject'])->whereNumber('agent');
             Route::delete('/agents/{agent}', [AgentController::class, 'destroy'])->whereNumber('agent');
@@ -120,6 +124,8 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::post('/realties/accreditations/{accreditation}/approve', [RealtyAccreditationController::class, 'approve'])->whereNumber('accreditation');
             Route::post('/realties/accreditations/{accreditation}/reject', [RealtyAccreditationController::class, 'reject'])->whereNumber('accreditation');
             Route::post('/realties/accreditations/{accreditation}/resend-login', [RealtyAccreditationController::class, 'resendLogin'])->whereNumber('accreditation');
+            Route::delete('/realties/accreditations/{accreditation}', [RealtyAccreditationController::class, 'destroy'])->whereNumber('accreditation');
+            Route::delete('/realties/{realty}', [RealtyAccreditationController::class, 'destroyBroker'])->whereNumber('realty');
             Route::post('/offers/{id}/approval', [OfferController::class, 'approval'])->whereNumber('id');
             Route::post('/offers/{id}/unit-status', [OfferController::class, 'unitStatus'])->whereNumber('id');
             Route::get('/requirements', [RequirementTypeController::class, 'index']);
@@ -130,6 +136,7 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::post('/projects', [ProjectController::class, 'store']);
             Route::post('/projects/{project}', [ProjectController::class, 'update']); // POST, not PATCH: multipart cover upload
             Route::post('/projects/{project}/status', [ProjectController::class, 'status']);
+            Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->whereNumber('project');
             Route::post('/projects/{project}/units', [UnitController::class, 'store']);
             Route::post('/units/{unit}', [UnitController::class, 'update']);
             Route::delete('/units/{unit}', [UnitController::class, 'destroy']);

@@ -130,16 +130,29 @@ class AgentController extends Controller
         return response()->json(['id' => $agent->id, 'status' => $agent->status]);
     }
 
-    /** Remove a rejected application, so the email can be invited again. */
+    /**
+     * Remove an agent who has joined (their sign-ins stop at once) or a rejected application. Their offers stay,
+     * just without an agent on them. The email can be invited again. A pending application is approved or rejected first.
+     */
     public function destroy(Request $request, User $agent): Response
     {
         $this->ownApplicant($request, $agent);
-        abort_unless($agent->status === User::STATUS_REJECTED, 409, 'Only a rejected application can be deleted.');
+        abort_if($agent->status === User::STATUS_PENDING, 409, 'Approve or reject this application first.');
 
         DB::transaction(function () use ($agent) {
             $agent->tokens()->delete();
             $agent->delete();
         });
+
+        return response()->noContent();
+    }
+
+    /** Take back an open invitation: its link stops working. */
+    public function destroyInvitation(Request $request, AgentInvitation $invitation): Response
+    {
+        abort_unless($invitation->realty_id === $request->user()->realty_id, 404);
+        abort_if($invitation->accepted_at, 409, "{$invitation->name} has already joined. Delete them from the agents list instead.");
+        $invitation->delete();
 
         return response()->noContent();
     }

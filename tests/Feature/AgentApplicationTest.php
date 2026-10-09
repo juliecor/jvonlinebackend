@@ -129,7 +129,7 @@ class AgentApplicationTest extends TestCase
         $this->assertSame(User::STATUS_ACTIVE, $agent->fresh()->status);
     }
 
-    public function test_only_rejected_applications_can_be_deleted_and_the_email_can_then_be_invited_again(): void
+    public function test_pending_applications_are_decided_before_they_can_be_deleted_and_the_email_can_then_be_invited_again(): void
     {
         $pending = $this->agent(User::STATUS_PENDING);
         $rejected = $this->agent(User::STATUS_REJECTED);

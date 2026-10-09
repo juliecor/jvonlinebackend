@@ -247,6 +247,65 @@ class RealtyAccreditationController extends Controller
         return response()->json($this->loginSent($form->realty->setRelation('developer', $request->user()->realty), $admin, $password));
     }
 
+    /**
+     * Delete an invite or a form that was turned down, with its attached files. An accepted form belongs
+     * to a live broker: delete the broker instead (destroyBroker).
+     */
+    public function destroy(Request $request, int $accreditation): JsonResponse
+    {
+        $form = $this->own($request, $accreditation);
+        abort_if($form->status === RealtyAccreditation::STATUS_APPROVED, 409, 'This realty was accepted. Delete the realty instead.');
+        abort_if($form->status === RealtyAccreditation::STATUS_SUBMITTED, 409, 'This form is waiting for review. Accept or turn it down first.');
+
+        $this->removeForms(collect([$form]));
+
+        return response()->json(['deleted' => $form->id]);
+    }
+
+    /**
+     * Delete an accredited broker: its people (and their sign-ins) and its accreditation form go with it.
+     * A realty that has sold offers can't be deleted, because the offers would lose who sold them.
+     */
+    public function destroyBroker(Request $request, int $realty): JsonResponse
+    {
+        $developer = $request->user()->realty;
+        $broker = $developer->brokers()->where('kind', Realty::KIND_BROKER)->findOrFail($realty);
+        $offers = $broker->brokerOffers()->count();
+        if ($offers > 0) {
+            return response()->json(['message' => "{$broker->name} has sold {$offers} offer".($offers === 1 ? '' : 's').' and can\'t be deleted.'], 409);
+        }
+
+        $forms = RealtyAccreditation::where('realty_id', $broker->id)->with('documents')->get();
+        DB::transaction(function () use ($broker) {
+            foreach ($broker->users()->get() as $user) {
+                $user->tokens()->delete();
+                $user->delete();
+            }
+            RealtyAccreditation::where('realty_id', $broker->id)->each(fn ($form) => $form->delete());
+            $broker->delete();
+        });
+        $this->removeFiles($forms);
+
+        return response()->json(['deleted' => $broker->id]);
+    }
+
+    /** @param \Illuminate\Support\Collection<int, RealtyAccreditation> $forms */
+    private function removeForms($forms): void
+    {
+        $forms->each->load('documents');
+        DB::transaction(fn () => $forms->each(fn ($form) => $form->delete()));
+        $this->removeFiles($forms);
+    }
+
+    /** The attached files of forms that are gone (their rows went with the form). */
+    private function removeFiles($forms): void
+    {
+        $paths = $forms->flatMap(fn ($form) => $form->documents->pluck('path'))->filter()->all();
+        if ($paths) {
+            Storage::disk(AccreditationDocument::disk())->delete($paths);
+        }
+    }
+
     private function own(Request $request, int $id): RealtyAccreditation
     {
         return RealtyAccreditation::where('developer_id', $request->user()->realty_id)->findOrFail($id);
