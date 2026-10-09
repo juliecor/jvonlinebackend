@@ -100,13 +100,18 @@ class RealtyAccreditationController extends Controller
         return response()->json($this->sent($accreditation, $token), 201);
     }
 
-    /** A fresh link for an invite that wasn't filled in (the old one stops working). */
+    /**
+     * A fresh link for an invite that wasn't filled in (the old one stops working). It is emailed again unless
+     * the staff only want the link to send themselves (`email` = false): links are stored hashed, so an
+     * existing one can't be read back, only replaced.
+     */
     public function resend(Request $request, int $accreditation): JsonResponse
     {
         $form = $this->own($request, $accreditation);
         abort_unless($form->status === RealtyAccreditation::STATUS_INVITED, 409, 'This form was already sent in.');
+        $data = $request->validate(['email' => ['sometimes', 'boolean']]);
 
-        return response()->json($this->sent($form, $form->refresh()));
+        return response()->json($this->sent($form, $form->refresh(), $data['email'] ?? true));
     }
 
     /** One submitted form in full, for the review page. */
@@ -332,10 +337,10 @@ class RealtyAccreditationController extends Controller
      *
      * @return array<string, mixed>
      */
-    private function sent(RealtyAccreditation $form, string $token): array
+    private function sent(RealtyAccreditation $form, string $token, bool $mail = true): array
     {
         $url = RealtyAccreditation::url($token);
-        $emailed = QuietMail::send($form->email, new AccreditationInviteMail($form->loadMissing('developer'), $url), "invite {$form->id}");
+        $emailed = $mail && QuietMail::send($form->email, new AccreditationInviteMail($form->loadMissing('developer'), $url), "invite {$form->id}");
 
         return ['id' => $form->id, 'email' => $form->email, 'expires_at' => $form->expires_at, 'emailed' => $emailed, 'accreditation_url' => $url];
     }

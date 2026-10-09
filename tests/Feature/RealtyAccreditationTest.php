@@ -145,6 +145,20 @@ class RealtyAccreditationTest extends TestCase
         Mail::assertSent(AccreditationInviteMail::class, fn (AccreditationInviteMail $m) => $m->url === $newUrl);
     }
 
+    public function test_the_link_can_be_copied_without_emailing_the_realty(): void
+    {
+        Mail::fake();
+        [$form, $oldToken] = RealtyAccreditation::issue($this->johndorf, 'broker@example.com', $this->admin);
+        Sanctum::actingAs($this->admin);
+
+        $newUrl = $this->postJson("/api/realty/realties/invitations/{$form->id}/resend", ['email' => false])
+            ->assertOk()->assertJsonPath('emailed', false)->json('accreditation_url');
+
+        Mail::assertNothingSent();
+        $this->getJson("/api/accreditation/{$oldToken}")->assertNotFound();
+        $this->getJson('/api/accreditation/'.basename($newUrl))->assertOk();
+    }
+
     // ----- who may manage realties -----
 
     public function test_only_the_developers_admins_can_manage_realties(): void
