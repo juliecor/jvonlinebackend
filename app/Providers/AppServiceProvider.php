@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
+use App\Listeners\EmbedBrandLogo;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Events\MessageSending;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Branded emails carry their logo inside the message instead of pointing at a web address.
+        Event::listen(MessageSending::class, EmbedBrandLogo::class);
+
         // Per visitor (the real IP, see TrustFrontendClientIp), and per kind of request.
         RateLimiter::for('login', fn (Request $r) => Limit::perMinute(10)->by($r->ip()));
         RateLimiter::for('offer-view', fn (Request $r) => Limit::perMinute(120)->by($r->ip()));
