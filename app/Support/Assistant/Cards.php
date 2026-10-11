@@ -57,7 +57,7 @@ class Cards
 
         $units = Unit::where('realty_id', $user->realty_id)->whereIn('id', [...$ids('unit'), ...$ids('payment', 'unit')])->with('project')->get()->keyBy('id');
         $offers = Offer::where('realty_id', $user->realty_id)->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id))
-            ->whereIn('id', $ids('offer'))->with(['project', 'unit', 'agent:id,name', 'responses', 'documents'])->get()->keyBy('id');
+            ->whereIn('id', $user->canUse('offers') ? $ids('offer') : [])->with(['project', 'unit', 'agent:id,name', 'responses', 'documents'])->get()->keyBy('id');
         $projects = Project::where('realty_id', $user->realty_id)->whereIn('id', [...$ids('project'), ...$ids('payment', 'project')])
             ->withCount([
                 'units',

@@ -54,8 +54,13 @@ class AuthController extends Controller
         if ($user->status === User::STATUS_REJECTED) {
             throw ValidationException::withMessages(['email' => 'Your application to '.($user->realty?->name ?? 'this realty')." wasn't approved."]);
         }
+        if ($user->status === User::STATUS_DISABLED) {
+            throw ValidationException::withMessages(['email' => 'This account is turned off. Ask your admin at '.($user->realty?->name ?? 'your realty').' to turn it back on.']);
+        }
 
         $token = $user->createToken($data['device'] ?? 'web', ['*']);
+        // Shown on the admin's Staff page.
+        $user->forceFill(['last_login_at' => now()])->saveQuietly();
 
         return response()->json([
             'token' => $token->plainTextToken,
@@ -144,6 +149,8 @@ class AuthController extends Controller
             'must_change_password' => (bool) $user->must_change_password,
             'realty_id' => $user->realty_id,
             'realty' => $user->realty?->publicArray(),
+            // The dashboard sections this person may use ("staff" = manage staff accounts); empty for agents.
+            'access' => $user->access(),
         ];
     }
 }

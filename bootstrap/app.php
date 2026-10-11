@@ -3,6 +3,7 @@
 use App\Http\Middleware\ApplyViewAs;
 use App\Http\Middleware\EnsureAdmin;
 use App\Http\Middleware\EnsureRealtyMember;
+use App\Http\Middleware\EnsureSection;
 use App\Http\Middleware\TrustFrontendClientIp;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -23,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => EnsureAdmin::class,
             'realty.member' => EnsureRealtyMember::class,
+            'section' => EnsureSection::class,
             'view-as' => ApplyViewAs::class,
         ]);
     })

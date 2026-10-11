@@ -20,6 +20,7 @@ use App\Http\Controllers\Realty\ProjectPageController;
 use App\Http\Controllers\Realty\ProjectUpdateController;
 use App\Http\Controllers\Realty\RealtyAccreditationController;
 use App\Http\Controllers\Realty\RequirementTypeController;
+use App\Http\Controllers\Realty\StaffController;
 use App\Http\Controllers\Realty\UnitController;
 use App\Http\Controllers\Realty\UnitTypeController;
 use Illuminate\Support\Facades\Route;
@@ -78,81 +79,103 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::get('/overview', OverviewController::class);
             Route::get('/projects', [ProjectController::class, 'index']);
             Route::get('/projects/{project}', [ProjectController::class, 'show']);
-            Route::get('/offers', [OfferController::class, 'index']);
-            Route::get('/offers/responses', [OfferController::class, 'responses']);
-            Route::get('/offers/{id}', [OfferController::class, 'show'])->whereNumber('id');
-            Route::post('/offers', [OfferController::class, 'store']);
-            Route::post('/offers/{offer}/void', [OfferController::class, 'void'])->whereNumber('offer');
-            Route::post('/offers/{offer}/extend', [OfferController::class, 'extend'])->whereNumber('offer');
-            Route::get('/offers/{id}/documents/{document}', [OfferController::class, 'document'])->whereNumber(['id', 'document']);
-            Route::post('/offers/{id}/remind', [OfferController::class, 'remind'])->whereNumber('id');
-            Route::post('/offers/{id}/send', [OfferController::class, 'send'])->whereNumber('id');
-            Route::post('/offers/{id}/terms', [OfferController::class, 'terms'])->whereNumber('id');
-            Route::post('/offers/{id}/login', [OfferController::class, 'login'])->whereNumber('id');
+            // Staff need the Offers section; agents always reach their own offers.
+            Route::middleware('section:offers')->group(function () {
+                Route::get('/offers', [OfferController::class, 'index']);
+                Route::get('/offers/responses', [OfferController::class, 'responses']);
+                Route::get('/offers/{id}', [OfferController::class, 'show'])->whereNumber('id');
+                Route::post('/offers', [OfferController::class, 'store']);
+                Route::post('/offers/{offer}/void', [OfferController::class, 'void'])->whereNumber('offer');
+                Route::post('/offers/{offer}/extend', [OfferController::class, 'extend'])->whereNumber('offer');
+                Route::get('/offers/{id}/documents/{document}', [OfferController::class, 'document'])->whereNumber(['id', 'document']);
+                Route::post('/offers/{id}/remind', [OfferController::class, 'remind'])->whereNumber('id');
+                Route::post('/offers/{id}/send', [OfferController::class, 'send'])->whereNumber('id');
+                Route::post('/offers/{id}/terms', [OfferController::class, 'terms'])->whereNumber('id');
+                Route::post('/offers/{id}/login', [OfferController::class, 'login'])->whereNumber('id');
+            });
         });
         // The developer's team: staff and agents of Johndorf, not of a broker.
         Route::middleware('realty.member:any,developer')->group(function () {
             // The AI assistant: each with their own chats.
-            Route::get('/assistant/chats', [AssistantController::class, 'index']);
-            Route::get('/assistant/chats/{chat}', [AssistantController::class, 'show'])->whereNumber('chat');
-            Route::delete('/assistant/chats/{chat}', [AssistantController::class, 'destroy'])->whereNumber('chat');
-            Route::post('/assistant/messages', [AssistantController::class, 'send'])->middleware('throttle:assistant');
-            Route::post('/assistant/stream', [AssistantController::class, 'stream'])->middleware('throttle:assistant');
-            Route::post('/assistant/transcribe', [AssistantController::class, 'transcribe'])->middleware('throttle:assistant-voice');
+            Route::middleware('section:ai')->group(function () {
+                Route::get('/assistant/chats', [AssistantController::class, 'index']);
+                Route::get('/assistant/chats/{chat}', [AssistantController::class, 'show'])->whereNumber('chat');
+                Route::delete('/assistant/chats/{chat}', [AssistantController::class, 'destroy'])->whereNumber('chat');
+                Route::post('/assistant/messages', [AssistantController::class, 'send'])->middleware('throttle:assistant');
+                Route::post('/assistant/stream', [AssistantController::class, 'stream'])->middleware('throttle:assistant');
+                Route::post('/assistant/transcribe', [AssistantController::class, 'transcribe'])->middleware('throttle:assistant-voice');
+            });
             // Buyers' files are checked by the developer, not by the firm that sold.
-            Route::post('/offers/{id}/documents/{document}/review', [OfferController::class, 'review'])->whereNumber(['id', 'document']);
+            Route::post('/offers/{id}/documents/{document}/review', [OfferController::class, 'review'])->whereNumber(['id', 'document'])->middleware('section:offers');
         });
         // Any realty's admins manage their own agents.
         Route::middleware('realty.member:staff')->group(function () {
-            Route::get('/agents', [AgentController::class, 'index']);
-            Route::post('/agents', [AgentController::class, 'store']);
-            Route::post('/agents/invitations/{invitation}/resend', [AgentController::class, 'resend']);
-            Route::delete('/offers/{offer}', [OfferController::class, 'destroy'])->whereNumber('offer');
-            Route::delete('/agents/invitations/{invitation}', [AgentController::class, 'destroyInvitation'])->whereNumber('invitation');
-            Route::post('/agents/{agent}/approve', [AgentController::class, 'approve'])->whereNumber('agent');
-            Route::post('/agents/{agent}/reject', [AgentController::class, 'reject'])->whereNumber('agent');
-            Route::delete('/agents/{agent}', [AgentController::class, 'destroy'])->whereNumber('agent');
+            Route::middleware('section:agents')->group(function () {
+                Route::get('/agents', [AgentController::class, 'index']);
+                Route::post('/agents', [AgentController::class, 'store']);
+                Route::post('/agents/invitations/{invitation}/resend', [AgentController::class, 'resend']);
+                Route::delete('/agents/invitations/{invitation}', [AgentController::class, 'destroyInvitation'])->whereNumber('invitation');
+                Route::post('/agents/{agent}/approve', [AgentController::class, 'approve'])->whereNumber('agent');
+                Route::post('/agents/{agent}/reject', [AgentController::class, 'reject'])->whereNumber('agent');
+                Route::delete('/agents/{agent}', [AgentController::class, 'destroy'])->whereNumber('agent');
+            });
+            Route::delete('/offers/{offer}', [OfferController::class, 'destroy'])->whereNumber('offer')->middleware('section:offers');
+            // Team > Staff: a full admin's own staff accounts and what each may use.
+            Route::middleware('section:staff')->group(function () {
+                Route::get('/staff', [StaffController::class, 'index']);
+                Route::post('/staff', [StaffController::class, 'store']);
+                Route::post('/staff/{user}/access', [StaffController::class, 'access'])->whereNumber('user');
+                Route::post('/staff/{user}/password', [StaffController::class, 'password'])->whereNumber('user');
+                Route::post('/staff/{user}/status', [StaffController::class, 'status'])->whereNumber('user');
+                Route::delete('/staff/{user}', [StaffController::class, 'destroy'])->whereNumber('user');
+            });
         });
         // The developer's admins: approve terms, set unit status, edit the inventory.
         Route::middleware('realty.member:staff,developer')->group(function () {
-            // Team > Realties: invite a realty, review its accreditation form, accept or turn it down.
-            Route::get('/realties', [RealtyAccreditationController::class, 'index']);
-            Route::post('/realties/invite', [RealtyAccreditationController::class, 'invite']);
-            Route::post('/realties/invitations/{accreditation}/resend', [RealtyAccreditationController::class, 'resend'])->whereNumber('accreditation');
-            Route::get('/realties/accreditations/{accreditation}', [RealtyAccreditationController::class, 'show'])->whereNumber('accreditation');
-            Route::get('/realties/accreditations/{accreditation}/documents/{document}', [RealtyAccreditationController::class, 'document'])->whereNumber(['accreditation', 'document']);
-            Route::post('/realties/accreditations/{accreditation}/approve', [RealtyAccreditationController::class, 'approve'])->whereNumber('accreditation');
-            Route::post('/realties/accreditations/{accreditation}/reject', [RealtyAccreditationController::class, 'reject'])->whereNumber('accreditation');
-            Route::post('/realties/accreditations/{accreditation}/resend-login', [RealtyAccreditationController::class, 'resendLogin'])->whereNumber('accreditation');
-            Route::delete('/realties/accreditations/{accreditation}', [RealtyAccreditationController::class, 'destroy'])->whereNumber('accreditation');
-            Route::delete('/realties/{realty}', [RealtyAccreditationController::class, 'destroyBroker'])->whereNumber('realty');
-            Route::post('/offers/{id}/approval', [OfferController::class, 'approval'])->whereNumber('id');
-            Route::post('/offers/{id}/unit-status', [OfferController::class, 'unitStatus'])->whereNumber('id');
-            Route::get('/requirements', [RequirementTypeController::class, 'index']);
-            Route::post('/requirements', [RequirementTypeController::class, 'store']);
-            Route::post('/requirements/{type}', [RequirementTypeController::class, 'update']);
-            Route::post('/requirements/{type}/move', [RequirementTypeController::class, 'move']);
-            Route::delete('/requirements/{type}', [RequirementTypeController::class, 'destroy']);
-            Route::post('/projects', [ProjectController::class, 'store']);
-            Route::post('/projects/{project}', [ProjectController::class, 'update']); // POST, not PATCH: multipart cover upload
-            Route::post('/projects/{project}/status', [ProjectController::class, 'status']);
-            Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->whereNumber('project');
-            Route::post('/projects/{project}/units', [UnitController::class, 'store']);
-            Route::post('/units/{unit}', [UnitController::class, 'update']);
-            Route::delete('/units/{unit}', [UnitController::class, 'destroy']);
-            Route::post('/projects/{project}/plans', [PaymentPlanController::class, 'store']);
-            Route::post('/plans/{plan}', [PaymentPlanController::class, 'update']);
-            Route::delete('/plans/{plan}', [PaymentPlanController::class, 'destroy']);
-            // Public project page
-            Route::post('/projects/{project}/page', [ProjectPageController::class, 'settings']);
-            Route::post('/projects/{project}/page/media', [ProjectPageController::class, 'addMedia']);
-            Route::post('/projects/{project}/page/media/remove', [ProjectPageController::class, 'removeMedia']);
-            Route::post('/projects/{project}/unit-types', [UnitTypeController::class, 'store']);
-            Route::post('/unit-types/{unitType}', [UnitTypeController::class, 'update']);
-            Route::delete('/unit-types/{unitType}', [UnitTypeController::class, 'destroy']);
-            Route::post('/projects/{project}/updates', [ProjectUpdateController::class, 'store']);
-            Route::post('/updates/{update}/remove-photo', [ProjectUpdateController::class, 'removePhoto']);
-            Route::delete('/updates/{update}', [ProjectUpdateController::class, 'destroy']);
+            // Team > Realty Company Invitation: invite a realty, review its accreditation form, accept or turn it down.
+            Route::middleware('section:realties')->group(function () {
+                Route::get('/realties', [RealtyAccreditationController::class, 'index']);
+                Route::post('/realties/invite', [RealtyAccreditationController::class, 'invite']);
+                Route::post('/realties/invitations/{accreditation}/resend', [RealtyAccreditationController::class, 'resend'])->whereNumber('accreditation');
+                Route::get('/realties/accreditations/{accreditation}', [RealtyAccreditationController::class, 'show'])->whereNumber('accreditation');
+                Route::get('/realties/accreditations/{accreditation}/documents/{document}', [RealtyAccreditationController::class, 'document'])->whereNumber(['accreditation', 'document']);
+                Route::post('/realties/accreditations/{accreditation}/approve', [RealtyAccreditationController::class, 'approve'])->whereNumber('accreditation');
+                Route::post('/realties/accreditations/{accreditation}/reject', [RealtyAccreditationController::class, 'reject'])->whereNumber('accreditation');
+                Route::post('/realties/accreditations/{accreditation}/resend-login', [RealtyAccreditationController::class, 'resendLogin'])->whereNumber('accreditation');
+                Route::delete('/realties/accreditations/{accreditation}', [RealtyAccreditationController::class, 'destroy'])->whereNumber('accreditation');
+                Route::delete('/realties/{realty}', [RealtyAccreditationController::class, 'destroyBroker'])->whereNumber('realty');
+            });
+            Route::post('/offers/{id}/approval', [OfferController::class, 'approval'])->whereNumber('id')->middleware('section:approvals');
+            Route::post('/offers/{id}/unit-status', [OfferController::class, 'unitStatus'])->whereNumber('id')->middleware('section:offers');
+            Route::middleware('section:requirements')->group(function () {
+                Route::get('/requirements', [RequirementTypeController::class, 'index']);
+                Route::post('/requirements', [RequirementTypeController::class, 'store']);
+                Route::post('/requirements/{type}', [RequirementTypeController::class, 'update']);
+                Route::post('/requirements/{type}/move', [RequirementTypeController::class, 'move']);
+                Route::delete('/requirements/{type}', [RequirementTypeController::class, 'destroy']);
+            });
+            Route::middleware('section:projects')->group(function () {
+                Route::post('/projects', [ProjectController::class, 'store']);
+                Route::post('/projects/{project}', [ProjectController::class, 'update']); // POST, not PATCH: multipart cover upload
+                Route::post('/projects/{project}/status', [ProjectController::class, 'status']);
+                Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->whereNumber('project');
+                Route::post('/projects/{project}/units', [UnitController::class, 'store']);
+                Route::post('/units/{unit}', [UnitController::class, 'update']);
+                Route::delete('/units/{unit}', [UnitController::class, 'destroy']);
+                Route::post('/projects/{project}/plans', [PaymentPlanController::class, 'store']);
+                Route::post('/plans/{plan}', [PaymentPlanController::class, 'update']);
+                Route::delete('/plans/{plan}', [PaymentPlanController::class, 'destroy']);
+                // Public project page
+                Route::post('/projects/{project}/page', [ProjectPageController::class, 'settings']);
+                Route::post('/projects/{project}/page/media', [ProjectPageController::class, 'addMedia']);
+                Route::post('/projects/{project}/page/media/remove', [ProjectPageController::class, 'removeMedia']);
+                Route::post('/projects/{project}/unit-types', [UnitTypeController::class, 'store']);
+                Route::post('/unit-types/{unitType}', [UnitTypeController::class, 'update']);
+                Route::delete('/unit-types/{unitType}', [UnitTypeController::class, 'destroy']);
+                Route::post('/projects/{project}/updates', [ProjectUpdateController::class, 'store']);
+                Route::post('/updates/{update}/remove-photo', [ProjectUpdateController::class, 'removePhoto']);
+                Route::delete('/updates/{update}', [ProjectUpdateController::class, 'destroy']);
+            });
         });
     });
 });

@@ -136,6 +136,12 @@ class RealtyTools
      */
     public function call(string $name, array $args): array
     {
+        // A staff member only learns about what their account includes (see User::SECTIONS).
+        $needs = ['list_offers' => 'offers', 'offer_details' => 'offers', 'buyer_responses' => 'offers', 'show_offers' => 'offers', 'list_agents' => 'agents'];
+        if (isset($needs[$name]) && ! $this->user->canUse($needs[$name])) {
+            return ['error' => 'This account has no access to '.($needs[$name] === 'offers' ? 'offers and buyers' : 'the agents').'. Say so, and that their admin can add it.'];
+        }
+
         return match ($name) {
             'overview' => $this->overview(),
             'list_projects' => $this->listProjects($args),
@@ -813,7 +819,8 @@ class RealtyTools
     public function attention(): array
     {
         $agent = $this->isAgent();
-        $active = $this->offers()->where('status', 'active');
+        // Without the Offers section there are no buyers to chase, only what else the account includes.
+        $active = $this->user->canUse('offers') ? $this->offers()->where('status', 'active') : $this->offers()->whereRaw('1 = 0');
         $types = RequirementType::where('realty_id', $this->realty()->id)->orderBy('sort')->orderBy('id')->get();
         $day = fn ($at) => $at?->timezone('Asia/Manila')->format('M j, Y');
         $list = fn (Collection $items) => ['count' => $items->count(), 'items' => $items->take(8)->values()->all()];
@@ -877,7 +884,7 @@ class RealtyTools
         $unopened = $live->filter(fn (Offer $o) => ! $o->views && $o->created_at->lte(now()->subDays(3)))
             ->map(fn (Offer $o) => $row($o, ['sent' => $day($o->created_at), 'days_ago' => (int) $o->created_at->diffInDays(now())]));
 
-        $applications = $agent ? collect() : $this->realty()->agentApplications()->where('status', User::STATUS_PENDING)->oldest()->get(['id', 'name', 'created_at'])
+        $applications = $agent || ! $this->user->canUse('agents') ? collect() : $this->realty()->agentApplications()->where('status', User::STATUS_PENDING)->oldest()->get(['id', 'name', 'created_at'])
             ->map(fn (User $a) => ['name' => $a->name, 'applied' => $day($a->created_at)]);
 
         $deals = Unit::where('realty_id', $this->realty()->id)->whereIn('status', ['reserved', 'sold'])->where('status_at', '>=', now()->subDays(7))
@@ -937,7 +944,7 @@ class RealtyTools
 
     private function canSeeOfferOf(?int $agentId): bool
     {
-        return ! $this->isAgent() || $agentId === $this->user->id;
+        return $this->user->canUse('offers') && (! $this->isAgent() || $agentId === $this->user->id);
     }
 
     private function isAgent(): bool

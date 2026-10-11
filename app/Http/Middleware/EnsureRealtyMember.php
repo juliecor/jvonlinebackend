@@ -25,6 +25,9 @@ class EnsureRealtyMember
         if (! $user || ! $user->realty_id || ! in_array($user->role, [User::ROLE_REALTY, User::ROLE_AGENT], true)) {
             abort(403, 'Realty accounts only.');
         }
+        if ($user->status === User::STATUS_DISABLED) {
+            abort(403, 'This account is turned off. Ask your admin.');
+        }
         if (! $user->isActive()) {
             abort(403, 'This account is not approved yet.');
         }
