@@ -121,6 +121,12 @@ class RealtyAccreditation extends Model
         return $this->belongsTo(Realty::class, 'developer_id');
     }
 
+    /** Its certificates of accreditation, one per fully accredited period (the newest is the one that counts). */
+    public function certificates(): HasMany
+    {
+        return $this->hasMany(AccreditationCertificate::class);
+    }
+
     public function inviter(): BelongsTo
     {
         return $this->belongsTo(User::class, 'invited_by');

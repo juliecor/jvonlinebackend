@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Realty;
 
 use App\Http\Controllers\Controller;
 use App\Mail\AccreditationApprovedMail;
+use App\Mail\AccreditationCertificateMail;
 use App\Mail\AccreditationInviteMail;
+use App\Models\AccreditationCertificate;
 use App\Models\AccreditationDocument;
 use App\Models\Realty;
 use App\Models\RealtyAccreditation;
@@ -155,6 +157,8 @@ class RealtyAccreditationController extends Controller
             // The agreement they agreed to online (with the dates once accepted), and the accreditation period.
             'agreed' => $form->agreed_at ? ['name' => $form->agreed_name, 'at' => $form->agreed_at] : null,
             'privacy_accepted_at' => $form->privacy_accepted_at,
+            // The newest certificate of accreditation (issued once the signed copy is checked).
+            'certificate' => $form->certificates()->latest('id')->first()?->toPayload(),
             // A form sent before the agreement was set up prints from today's details.
             'agreement' => $form->agreement || AccreditationAgreement::ready($form->developer)
                 ? AccreditationAgreement::document($form->agreement ?? AccreditationAgreement::snapshot($form->developer, $form), $form->accredited_from?->toDateString(), $form->accredited_until?->toDateString())
@@ -262,6 +266,8 @@ class RealtyAccreditationController extends Controller
             'ended_notified_at' => null,
         ]);
 
+        $this->certify($form->fresh());
+
         return response()->json($this->period($form->fresh()));
     }
 
@@ -292,7 +298,28 @@ class RealtyAccreditationController extends Controller
             'signed_copy_checked_at' => now(),
         ]);
 
+        // Checked and accepted: fully accredited, so the certificate is issued and emailed.
+        if ($data['verdict'] === 'verified') {
+            $this->certify($form->fresh());
+        }
+
         return response()->json($this->period($form->fresh()));
+    }
+
+    /**
+     * Issues the certificate for a fully accredited realty's current period, and emails its admins the
+     * first time (and on each renewal). Nothing happens until the signed copy is checked.
+     */
+    private function certify(RealtyAccreditation $form): void
+    {
+        $renewed = $form->certificates()->exists();
+        $certificate = AccreditationCertificate::issueFor($form);
+        if (! $certificate?->wasRecentlyCreated || ! $form->realty) {
+            return;
+        }
+        $url = rtrim((string) config('app.frontend_url'), '/')."/{$form->realty->slug}/certificate";
+        $admins = User::where('realty_id', $form->realty_id)->where('role', User::ROLE_REALTY)->where('status', User::STATUS_ACTIVE)->get()->filter->isFullAdmin();
+        defer(fn () => $admins->each(fn (User $to) => QuietMail::send($to->email, new AccreditationCertificateMail($certificate, $renewed, $url), "certificate {$certificate->id}")));
     }
 
     /**

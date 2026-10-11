@@ -32,7 +32,7 @@ class Realty extends Model
      */
     public const RESERVED_SLUGS = [
         'admin', 'auth', 'home', 'johndorf', 'offer', 'platform', 'projects', 'register', 'accreditation', 'view-as',
-        'api', '_next', 'login', 'logout', 'dashboard', 'join', 'password', 'www', 'jvconline', 'static', 'assets',
+        'api', '_next', 'login', 'logout', 'dashboard', 'join', 'password', 'www', 'jvconline', 'static', 'assets', 'verify',
     ];
 
     /** Same default as the column, so a freshly made realty reads as a developer before it's reloaded. */

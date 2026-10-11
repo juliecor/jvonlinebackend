@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Mail\AccreditationCertificateMail;
 use App\Mail\AccreditationPeriodMail;
 use App\Models\AccreditationDocument;
 use App\Models\Project;
@@ -132,6 +133,68 @@ class AccreditationAgreementTest extends TestCase
         $this->artisan('accreditations:remind');
         Mail::assertSent(AccreditationPeriodMail::class, fn (AccreditationPeriodMail $m) => $m->state === 'ended');
         $this->assertSame(4, Mail::sent(AccreditationPeriodMail::class)->count());
+    }
+
+    public function test_checking_the_signed_copy_issues_the_certificate_and_emails_the_realty_once(): void
+    {
+        [$form, $brokerAdmin] = $this->accepted('1y');
+        $this->assertNull($this->api($brokerAdmin, 'get', '/api/realty/accreditation')->json('certificate'));
+        $this->uploadSignedCopy($brokerAdmin);
+        $this->api($this->admin, 'post', "/api/realty/realties/accreditations/{$form->id}/signed-copy", ['verdict' => 'returned', 'note' => 'Unsigned page'])->assertOk();
+        $this->assertSame(0, $form->certificates()->count());
+        $this->uploadSignedCopy($brokerAdmin);
+        Mail::fake();
+
+        $this->api($this->admin, 'post', "/api/realty/realties/accreditations/{$form->id}/signed-copy", ['verdict' => 'verified'])->assertOk();
+        $this->api($this->admin, 'post', "/api/realty/realties/accreditations/{$form->id}/signed-copy", ['verdict' => 'verified'])->assertStatus(409);
+
+        $this->assertSame(1, $form->certificates()->count());
+        Mail::assertSent(AccreditationCertificateMail::class, 1);
+        Mail::assertSent(AccreditationCertificateMail::class, fn (AccreditationCertificateMail $m) => ! $m->renewed && $m->hasTo('abby@abc.example') && $m->url === 'https://jvconline.ph/'.$form->realty->slug.'/certificate');
+        $mine = $this->api($brokerAdmin, 'get', '/api/realty/accreditation')->json('certificate');
+        $this->assertSame(['JVC-2026-0001', 'ABC Realty', 'Abby Cruz', '2026-10-11', '2027-10-10', 'Maria Santos', 'Sales Director', 'valid'], [$mine['number'], $mine['firm'], $mine['representative'], $mine['from'], $mine['until'], $mine['signer']['name'], $mine['signer']['title'], $mine['status']]);
+        $this->assertSame($mine['number'], $this->api($this->admin, 'get', "/api/realty/realties/accreditations/{$form->id}")->json('certificate.number'));
+
+        // The public check: what the certificate shows, without the representative; any case works.
+        $this->app['auth']->forgetGuards();
+        $public = $this->getJson('/api/certificates/'.strtolower($mine['code']))->assertOk()->assertJsonPath('status', 'valid')->assertJsonPath('firm', 'ABC Realty')->json();
+        $this->assertNull($public['representative']);
+        $this->getJson('/api/certificates/ZZZZZZZZZZ')->assertNotFound();
+    }
+
+    public function test_a_renewal_issues_a_new_certificate_and_the_old_one_says_it_was_replaced(): void
+    {
+        [$form, $brokerAdmin] = $this->accepted('dec31');
+        $this->uploadSignedCopy($brokerAdmin);
+        $this->api($this->admin, 'post', "/api/realty/realties/accreditations/{$form->id}/signed-copy", ['verdict' => 'verified']);
+        $first = $form->certificates()->first();
+        Mail::fake();
+
+        $this->api($this->admin, 'post', "/api/realty/realties/accreditations/{$form->id}/term", ['term' => '1y'])->assertOk();
+
+        $second = $form->certificates()->latest('id')->first();
+        $this->assertSame(['JVC-2026-0002', '2026-10-11', '2027-12-31'], [$second->number, $second->valid_from->toDateString(), $second->valid_until->toDateString()]);
+        Mail::assertSent(AccreditationCertificateMail::class, fn (AccreditationCertificateMail $m) => $m->renewed);
+        $this->getJson("/api/certificates/{$first->code}")->assertJsonPath('status', 'replaced');
+
+        $this->api($this->admin, 'post', "/api/realty/realties/accreditations/{$form->id}/end", ['note' => 'Ended for the test']);
+        $this->getJson("/api/certificates/{$second->code}")->assertJsonPath('status', 'ended');
+    }
+
+    public function test_a_certificate_whose_last_day_passed_reads_expired(): void
+    {
+        [$form, $brokerAdmin] = $this->accepted('dec31');
+        $this->uploadSignedCopy($brokerAdmin);
+        $this->api($this->admin, 'post', "/api/realty/realties/accreditations/{$form->id}/signed-copy", ['verdict' => 'verified']);
+        $code = $form->certificates()->value('code');
+
+        $this->travelTo(now()->setDate(2027, 1, 1));
+        $this->getJson("/api/certificates/{$code}")->assertJsonPath('status', 'expired')->assertJsonPath('until', '2026-12-31');
+    }
+
+    private function uploadSignedCopy(User $brokerAdmin): void
+    {
+        $this->api($brokerAdmin, 'post', '/api/realty/accreditation/signed-copy', ['file' => UploadedFile::fake()->create('signed.pdf', 100, 'application/pdf')])->assertOk();
     }
 
     /** @return array{0: RealtyAccreditation, 1: User} An accepted realty (agreed online) and its admin. */

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RealtyController;
 use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\AgentJoinController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PublicCertificateController;
 use App\Http\Controllers\PublicOfferController;
 use App\Http\Controllers\PublicRealtyController;
 use App\Http\Controllers\Realty\AccreditationAgreementController;
@@ -45,6 +46,9 @@ Route::middleware('throttle:offer-upload')->group(function () {
     Route::post('/offers/{code}/documents/{document}/remove', [PublicOfferController::class, 'removeDocument'])->whereNumber('document');
 });
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
+
+// The public check for a certificate of accreditation (jvconline.ph/verify/<code>).
+Route::get('/certificates/{code}', [PublicCertificateController::class, 'show'])->where('code', '[A-Za-z0-9]{6,20}')->middleware('throttle:offer-view');
 
 // Invite links (the token is the credential)
 Route::middleware('throttle:invite-link')->group(function () {

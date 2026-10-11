@@ -33,6 +33,8 @@ class MyAccreditationController extends Controller
             'agreed' => $form->agreed_at ? ['name' => $form->agreed_name, 'at' => $form->agreed_at] : null,
             // Printed, signed on every page and notarized, then uploaded.
             'agreement' => AccreditationAgreement::ready($form->developer) || $form->agreement ? AccreditationAgreement::document($snapshot, $form->accredited_from?->toDateString(), $form->accredited_until?->toDateString()) : null,
+            // The certificate of accreditation, once the signed copy is checked.
+            'certificate' => $form->certificates()->latest('id')->first()?->toPayload(),
             'signed_copy' => [
                 'status' => $form->signed_copy_status,
                 'due' => $form->signed_copy_due?->toDateString(),
