@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\AccreditationDocument;
 use App\Models\RealtyAccreditation;
+use App\Support\AccreditationAgreement;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 /**
  * The accreditation form a realty reaches from its invite email (jvconline.ph/accreditation/<token>).
@@ -25,16 +27,31 @@ class AccreditationController extends Controller
             'expires_at' => $accreditation->expires_at,
             'documents' => AccreditationDocument::forForm(),
             'civil_statuses' => RealtyAccreditation::CIVIL_STATUSES,
+            // The agreement the realty agrees to before sending the form (null until the developer has set it up).
+            'agreement' => AccreditationAgreement::ready($accreditation->developer) ? AccreditationAgreement::draft($accreditation->developer) + [
+                'signed_copy_days' => AccreditationAgreement::settings($accreditation->developer)['signed_copy_days'],
+            ] : null,
         ]);
     }
 
     public function store(Request $request, string $token): JsonResponse
     {
         $accreditation = $this->usable($token);
-        $data = $request->validate($this->rules($request), $this->messages());
-        $fields = collect($data)->except('documents')->all();
+        $agreement = AccreditationAgreement::ready($accreditation->developer);
+        $data = $request->validate($this->rules($request) + ($agreement ? [
+            'agree' => ['accepted'],
+            'agreed_name' => ['required', 'string', 'max:120'],
+        ] : []), $this->messages() + [
+            'agree.accepted' => 'Tick the box to agree to the accreditation agreement.',
+            'agreed_name.required' => 'Type your full name to sign the agreement.',
+        ]);
+        // The typed name is the signature: it has to be the representative's own.
+        if ($agreement && mb_strtolower(preg_replace('/\s+/', ' ', trim($data['agreed_name']))) !== mb_strtolower(preg_replace('/\s+/', ' ', trim($data['representative_name'])))) {
+            throw ValidationException::withMessages(['agreed_name' => 'Type the representative\'s full name exactly as above: '.trim($data['representative_name']).'.']);
+        }
+        $fields = collect($data)->except(['documents', 'agree', 'agreed_name'])->all();
 
-        DB::transaction(function () use ($request, $accreditation, $fields) {
+        DB::transaction(function () use ($request, $accreditation, $fields, $agreement, $data) {
             // Two clicks on Submit must not file it twice.
             $form = RealtyAccreditation::whereKey($accreditation->id)->lockForUpdate()->firstOrFail();
             abort_unless($form->isUsable(), 410, 'This form was already submitted.');
@@ -44,6 +61,16 @@ class AccreditationController extends Controller
                 'submitted_at' => now(),
                 'submitted_ip' => $request->ip(),
             ]);
+            // What they agreed to, as it stood today, and the typed signature.
+            if ($agreement) {
+                $form->update([
+                    'agreement_version' => AccreditationAgreement::VERSION,
+                    'agreement' => AccreditationAgreement::snapshot($form->developer, $form),
+                    'agreed_name' => trim($data['agreed_name']),
+                    'agreed_at' => now(),
+                    'agreed_ip' => $request->ip(),
+                ]);
+            }
 
             foreach (array_keys(AccreditationDocument::KINDS) as $kind) {
                 $file = $request->file("documents.{$kind}");

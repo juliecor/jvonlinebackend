@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -45,6 +46,8 @@ class Realty extends Model
         return [
             'invited_at' => 'datetime',
             'registered_at' => 'datetime',
+            // A developer's details for its broker's accreditation agreement (see AccreditationAgreement).
+            'agreement_settings' => 'array',
         ];
     }
 
@@ -151,6 +154,22 @@ class Realty extends Model
         return $this->hasMany(RealtyAccreditation::class, 'developer_id');
     }
 
+    /** A broker's own accreditation: the accepted form, with its period. */
+    public function accreditation(): HasOne
+    {
+        return $this->hasOne(RealtyAccreditation::class, 'realty_id')->where('status', RealtyAccreditation::STATUS_APPROVED);
+    }
+
+    /**
+     * May this realty sell? A developer always; a broker while its accreditation runs (one accepted
+     * before accreditations had an end date runs until the developer sets one, and a broker set up
+     * without a form on file is not stopped).
+     */
+    public function isAccredited(): bool
+    {
+        return ! $this->isBroker() || $this->accreditation === null || $this->accreditation->isActive();
+    }
+
     /** Offers sold through this broker. */
     public function brokerOffers(): HasMany
     {
@@ -197,6 +216,12 @@ class Realty extends Model
             'kind' => $this->kind,
             // A broker's pages wear its developer's name and logo ("Accredited by Johndorf").
             'developer' => $this->developer_id ? $this->developer?->only(['name', 'slug']) + ['logo_url' => $this->developer?->logo_url] : null,
+            // A broker's accreditation: until when, and whether it still runs (new offers stop when it doesn't).
+            'accreditation' => $this->isBroker() ? [
+                'active' => $this->isAccredited(),
+                'until' => $this->accreditation?->accredited_until?->toDateString(),
+                'ended' => $this->accreditation?->ended_at !== null,
+            ] : null,
         ];
     }
 }

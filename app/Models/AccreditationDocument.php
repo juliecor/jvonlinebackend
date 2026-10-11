@@ -23,6 +23,9 @@ class AccreditationDocument extends Model
      *
      * @var array<string, array{name: string, label: string, required_for: string|null}>
      */
+    /** The signed and notarized agreement a realty uploads once accepted (not one of the form's documents). */
+    public const SIGNED_AGREEMENT = 'signed_agreement';
+
     public const KINDS = [
         'board_resolution' => [
             'name' => 'Board/Partnership Resolution',

@@ -247,6 +247,11 @@ class OfferController extends Controller
     public function store(Request $request): JsonResponse
     {
         $user = $request->user();
+        // An accredited realty sells only while its accreditation runs; offers already sent go on.
+        if (! $user->realty->isAccredited()) {
+            $until = $user->realty->accreditation?->accredited_until;
+            abort(403, 'Your accreditation with '.($user->realty->developer?->name ?? 'the developer').($until ? ' ended on '.$until->format('M j, Y') : ' has ended').'. Ask them to renew it to make new offers.');
+        }
         $custom = $request->boolean('custom');
         $data = $request->validate([
             'unit_id' => ['required', 'integer'],

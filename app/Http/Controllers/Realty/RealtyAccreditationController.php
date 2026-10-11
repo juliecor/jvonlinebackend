@@ -9,13 +9,16 @@ use App\Models\AccreditationDocument;
 use App\Models\Realty;
 use App\Models\RealtyAccreditation;
 use App\Models\User;
+use App\Support\AccreditationAgreement;
 use App\Support\QuietMail;
 use Carbon\CarbonInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -31,9 +34,11 @@ class RealtyAccreditationController extends Controller
         $forms = fn (string $status) => $developer->accreditations()->where('status', $status);
 
         $brokers = $developer->brokers()->withCount(['agents', 'brokerOffers as offers_count'])->orderBy('name')->get();
-        $accreditationIds = RealtyAccreditation::whereIn('realty_id', $brokers->pluck('id'))->pluck('id', 'realty_id');
+        $accepted = RealtyAccreditation::whereIn('realty_id', $brokers->pluck('id'))->where('status', RealtyAccreditation::STATUS_APPROVED)->get()->keyBy('realty_id');
 
         return response()->json([
+            // Until the agreement details are filled in, realties send the form without agreeing to anything.
+            'agreement_ready' => AccreditationAgreement::ready($developer),
             'pending' => $forms(RealtyAccreditation::STATUS_SUBMITTED)->withCount('documents')->orderBy('submitted_at')->get()->map(fn (RealtyAccreditation $a) => [
                 'id' => $a->id,
                 'firm_name' => $a->firm_name,
@@ -53,7 +58,8 @@ class RealtyAccreditationController extends Controller
                 'agents_count' => $r->agents_count,
                 'offers_count' => $r->offers_count,
                 'accredited_at' => $r->registered_at,
-                'accreditation_id' => $accreditationIds[$r->id] ?? null,
+                'accreditation_id' => $accepted[$r->id]?->id,
+                'period' => ($a = $accepted[$r->id] ?? null) ? $this->period($a) : null,
             ]),
             'invited' => $forms(RealtyAccreditation::STATUS_INVITED)->with('inviter:id,name')->latest()->get()->map(fn (RealtyAccreditation $a) => [
                 'id' => $a->id,
@@ -135,7 +141,7 @@ class RealtyAccreditationController extends Controller
             'documents' => $form->documents->map(fn (AccreditationDocument $d) => [
                 'id' => $d->id,
                 'kind' => $d->kind,
-                'label' => AccreditationDocument::KINDS[$d->kind]['label'] ?? $d->kind,
+                'label' => $d->kind === AccreditationDocument::SIGNED_AGREEMENT ? 'Signed and notarized accreditation agreement' : (AccreditationDocument::KINDS[$d->kind]['label'] ?? $d->kind),
                 'original_name' => $d->original_name,
                 'mime' => $d->mime,
                 'size' => $d->size,
@@ -146,6 +152,11 @@ class RealtyAccreditationController extends Controller
             'realty' => $form->realty ? ['id' => $form->realty->id, 'name' => $form->realty->name, 'slug' => $form->realty->slug, 'login_url' => $form->realty->loginUrl()] : null,
             // Still holding the mailed temporary password: "Resend login details" is available.
             'login_pending' => (bool) $admin?->must_change_password,
+            // The agreement they agreed to online (with the dates once accepted), and the accreditation period.
+            'agreed' => $form->agreed_at ? ['name' => $form->agreed_name, 'at' => $form->agreed_at] : null,
+            'agreement' => $form->agreement ? AccreditationAgreement::document($form->agreement, $form->accredited_from?->toDateString(), $form->accredited_until?->toDateString()) : null,
+            'period' => $form->status === RealtyAccreditation::STATUS_APPROVED ? $this->period($form) : null,
+            'signed_copy_days' => AccreditationAgreement::settings($request->user()->realty)['signed_copy_days'],
         ]);
     }
 
@@ -175,8 +186,13 @@ class RealtyAccreditationController extends Controller
         $reviewer = $request->user();
         $developer = $reviewer->realty;
         $found = $this->own($request, $accreditation);
+        // How long it runs: a year (the default), to December 31, or a date the admin picks.
+        $term = $request->validate($this->termRules());
+        $from = now('Asia/Manila')->startOfDay();
+        $until = AccreditationAgreement::until($term['term'] ?? '1y', $from, $term['until'] ?? null);
+        $days = AccreditationAgreement::settings($developer)['signed_copy_days'];
 
-        [$realty, $admin, $password] = DB::transaction(function () use ($found, $reviewer, $developer) {
+        [$realty, $admin, $password] = DB::transaction(function () use ($found, $reviewer, $developer, $from, $until, $days) {
             $form = RealtyAccreditation::whereKey($found->id)->lockForUpdate()->firstOrFail();
             abort_unless($form->status === RealtyAccreditation::STATUS_SUBMITTED, 409, 'This form is not waiting for review.');
             if (User::where('email', $form->login_email)->exists()) {
@@ -206,12 +222,109 @@ class RealtyAccreditationController extends Controller
                 'reviewed_at' => now(),
                 'review_note' => null,
                 'realty_id' => $realty->id,
+                'accredited_from' => $from->toDateString(),
+                'accredited_until' => $until->toDateString(),
+                // The signed and notarized agreement comes after: printed with these dates.
+                'signed_copy_due' => $from->copy()->addDays($days)->toDateString(),
+                'signed_copy_status' => 'missing',
             ]);
 
             return [$realty, $admin, $password];
         });
 
         return response()->json($this->loginSent($realty->setRelation('developer', $developer), $admin, $password), 201);
+    }
+
+    /**
+     * Renew or extend: a new last day, counted from the later of today and the current last day
+     * (so renewing early doesn't lose days). An accreditation that was ended early starts again.
+     */
+    public function term(Request $request, int $accreditation): JsonResponse
+    {
+        $form = $this->own($request, $accreditation);
+        abort_unless($form->status === RealtyAccreditation::STATUS_APPROVED, 409, 'This realty was not accepted.');
+        $data = $request->validate(['term' => ['required', Rule::in(AccreditationAgreement::TERMS)]] + $this->termRules());
+        $today = RealtyAccreditation::today();
+        $base = $form->ended_at === null && $form->accredited_until?->gte($today) ? $form->accredited_until->copy()->addDay() : $today;
+        $until = AccreditationAgreement::until($data['term'], $base, $data['until'] ?? null);
+        abort_if($until->lt($today), 422, 'Choose a last day from today on.');
+
+        $form->update([
+            'accredited_from' => $form->ended_at !== null || $form->accredited_from === null ? $today->toDateString() : $form->accredited_from->toDateString(),
+            'accredited_until' => $until->toDateString(),
+            'ended_at' => null,
+            'end_note' => null,
+            'expiry_reminded_at' => null,
+            'ended_notified_at' => null,
+        ]);
+
+        return response()->json($this->period($form->fresh()));
+    }
+
+    /** End the accreditation now (the agreement lets the developer end it): the realty can't make new offers from today. */
+    public function end(Request $request, int $accreditation): JsonResponse
+    {
+        $form = $this->own($request, $accreditation);
+        abort_unless($form->status === RealtyAccreditation::STATUS_APPROVED, 409, 'This realty was not accepted.');
+        $data = $request->validate(['note' => ['required', 'string', 'max:300']], ['note.required' => 'Say why, for the record.']);
+        $form->update(['ended_at' => now(), 'end_note' => $data['note']]);
+
+        return response()->json($this->period($form->fresh()));
+    }
+
+    /** The signed and notarized copy the realty uploaded: accept it, or send it back with what to fix. */
+    public function checkSignedCopy(Request $request, int $accreditation): JsonResponse
+    {
+        $form = $this->own($request, $accreditation);
+        abort_unless($form->signed_copy_status === 'submitted', 409, 'There is no signed copy waiting to be checked.');
+        $data = $request->validate([
+            'verdict' => ['required', Rule::in(['verified', 'returned'])],
+            'note' => ['required_if:verdict,returned', 'nullable', 'string', 'max:300'],
+        ], ['note.required_if' => 'Say what to fix, e.g. "Page 2 has no signature".']);
+        $form->update([
+            'signed_copy_status' => $data['verdict'],
+            'signed_copy_note' => $data['verdict'] === 'returned' ? $data['note'] : null,
+            'signed_copy_checked_by' => $request->user()->id,
+            'signed_copy_checked_at' => now(),
+        ]);
+
+        return response()->json($this->period($form->fresh()));
+    }
+
+    /**
+     * An accepted accreditation's period and signed copy, as the pages show it.
+     *
+     * @return array<string, mixed>
+     */
+    private function period(RealtyAccreditation $form): array
+    {
+        $copy = $form->relationLoaded('documents') ? $form->documents->firstWhere('kind', AccreditationDocument::SIGNED_AGREEMENT) : $form->documents()->where('kind', AccreditationDocument::SIGNED_AGREEMENT)->latest('id')->first();
+
+        return [
+            'state' => $form->periodState(),
+            'from' => $form->accredited_from?->toDateString(),
+            'until' => $form->accredited_until?->toDateString(),
+            'days_left' => $form->daysLeft(),
+            'ended_at' => $form->ended_at,
+            'end_note' => $form->end_note,
+            'signed_copy' => [
+                'status' => $form->signed_copy_status,
+                'due' => $form->signed_copy_due?->toDateString(),
+                'overdue' => in_array($form->signed_copy_status, ['missing', 'returned'], true) && $form->signed_copy_due?->lt(RealtyAccreditation::today()),
+                'note' => $form->signed_copy_note,
+                'document_id' => $copy?->id,
+                'uploaded_at' => $copy?->created_at,
+            ],
+        ];
+    }
+
+    /** @return array<string, array<int, mixed>> */
+    private function termRules(): array
+    {
+        return [
+            'term' => ['sometimes', Rule::in(AccreditationAgreement::TERMS)],
+            'until' => ['required_if:term,custom', 'nullable', 'date', 'after_or_equal:today'],
+        ];
     }
 
     /** Turn it down, with a reason the staff can look back on. Nothing is emailed. */
@@ -294,7 +407,7 @@ class RealtyAccreditationController extends Controller
         return response()->json(['deleted' => $broker->id]);
     }
 
-    /** @param \Illuminate\Support\Collection<int, RealtyAccreditation> $forms */
+    /** @param Collection<int, RealtyAccreditation> $forms */
     private function removeForms($forms): void
     {
         $forms->each->load('documents');

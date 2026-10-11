@@ -10,8 +10,10 @@ use App\Http\Controllers\AgentJoinController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicOfferController;
 use App\Http\Controllers\PublicRealtyController;
+use App\Http\Controllers\Realty\AccreditationAgreementController;
 use App\Http\Controllers\Realty\AgentController;
 use App\Http\Controllers\Realty\AssistantController;
+use App\Http\Controllers\Realty\MyAccreditationController;
 use App\Http\Controllers\Realty\OfferController;
 use App\Http\Controllers\Realty\OverviewController;
 use App\Http\Controllers\Realty\PaymentPlanController;
@@ -135,6 +137,9 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
                 Route::delete('/agents/{agent}', [AgentController::class, 'destroy'])->whereNumber('agent');
             });
             Route::delete('/offers/{offer}', [OfferController::class, 'destroy'])->whereNumber('offer')->middleware('section:offers');
+            // An accredited realty's own accreditation: its period, the agreement to print, the signed copy.
+            Route::get('/accreditation', [MyAccreditationController::class, 'show']);
+            Route::post('/accreditation/signed-copy', [MyAccreditationController::class, 'upload'])->middleware('throttle:offer-upload');
             // Team > Staff: a full admin's own staff accounts and what each may use.
             Route::middleware('section:staff')->group(function () {
                 Route::get('/staff', [StaffController::class, 'index']);
@@ -159,6 +164,12 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
                 Route::post('/realties/accreditations/{accreditation}/resend-login', [RealtyAccreditationController::class, 'resendLogin'])->whereNumber('accreditation');
                 Route::delete('/realties/accreditations/{accreditation}', [RealtyAccreditationController::class, 'destroy'])->whereNumber('accreditation');
                 Route::delete('/realties/{realty}', [RealtyAccreditationController::class, 'destroyBroker'])->whereNumber('realty');
+                // The Broker's Accreditation Agreement and each accredited realty's period.
+                Route::get('/realties/agreement', [AccreditationAgreementController::class, 'show']);
+                Route::post('/realties/agreement', [AccreditationAgreementController::class, 'update']);
+                Route::post('/realties/accreditations/{accreditation}/term', [RealtyAccreditationController::class, 'term'])->whereNumber('accreditation');
+                Route::post('/realties/accreditations/{accreditation}/end', [RealtyAccreditationController::class, 'end'])->whereNumber('accreditation');
+                Route::post('/realties/accreditations/{accreditation}/signed-copy', [RealtyAccreditationController::class, 'checkSignedCopy'])->whereNumber('accreditation');
             });
             Route::post('/offers/{id}/approval', [OfferController::class, 'approval'])->whereNumber('id')->middleware('section:approvals');
             Route::post('/offers/{id}/unit-status', [OfferController::class, 'unitStatus'])->whereNumber('id')->middleware('section:offers');

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 /**
@@ -22,6 +23,10 @@ use Illuminate\Support\Str;
     'representative_name', 'place_of_birth', 'date_of_birth', 'citizenship', 'gender', 'civil_status', 'landline', 'mobile', 'login_email', 'facebook',
     'years_in_real_estate', 'years_firm_operating', 'salespersons',
     'reviewed_by', 'reviewed_at', 'review_note', 'realty_id',
+    'agreement_version', 'agreement', 'agreed_name', 'agreed_at', 'agreed_ip',
+    'accredited_from', 'accredited_until', 'ended_at', 'end_note',
+    'signed_copy_due', 'signed_copy_status', 'signed_copy_note', 'signed_copy_checked_by', 'signed_copy_checked_at',
+    'expiry_reminded_at', 'ended_notified_at',
 ])]
 #[Hidden(['token_hash', 'submitted_ip'])]
 class RealtyAccreditation extends Model
@@ -61,7 +66,53 @@ class RealtyAccreditation extends Model
             // Government ID numbers: recoverable for the reviewer, never readable straight from the database.
             'tin_company' => 'encrypted',
             'tin_personal' => 'encrypted',
+            'agreement' => 'array',
+            'agreed_at' => 'datetime',
+            'accredited_from' => 'date:Y-m-d',
+            'accredited_until' => 'date:Y-m-d',
+            'ended_at' => 'datetime',
+            'signed_copy_due' => 'date:Y-m-d',
+            'signed_copy_checked_at' => 'datetime',
+            'expiry_reminded_at' => 'datetime',
+            'ended_notified_at' => 'datetime',
         ];
+    }
+
+    /** Days before the end when the reminders go out and the period shows as ending soon. */
+    public const ENDING_SOON_DAYS = 30;
+
+    /** An accepted accreditation that hasn't ended early or run past its last day. */
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_APPROVED && $this->ended_at === null
+            && ($this->accredited_until === null || ! $this->accredited_until->lt(self::today()));
+    }
+
+    /**
+     * Where an accepted accreditation stands: "active", "ending" (within 30 days), "expired" (ran out),
+     * "ended" (the developer ended it early) or "open" (accepted before periods existed: no end set).
+     */
+    public function periodState(): string
+    {
+        return match (true) {
+            $this->ended_at !== null => 'ended',
+            $this->accredited_until === null => 'open',
+            $this->accredited_until->lt(self::today()) => 'expired',
+            $this->daysLeft() <= self::ENDING_SOON_DAYS => 'ending',
+            default => 'active',
+        };
+    }
+
+    /** Days until the last day (0 on it), or null without an end date. */
+    public function daysLeft(): ?int
+    {
+        return $this->accredited_until ? (int) self::today()->diffInDays($this->accredited_until, false) : null;
+    }
+
+    /** Today's date in the Philippines, at midnight like the stored dates (so a date compares to a date). */
+    public static function today(): Carbon
+    {
+        return Carbon::parse(now('Asia/Manila')->toDateString());
     }
 
     public function developer(): BelongsTo
