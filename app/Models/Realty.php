@@ -216,12 +216,21 @@ class Realty extends Model
             'kind' => $this->kind,
             // A broker's pages wear its developer's name and logo ("Accredited by Johndorf").
             'developer' => $this->developer_id ? $this->developer?->only(['name', 'slug']) + ['logo_url' => $this->developer?->logo_url] : null,
-            // A broker's accreditation: until when, and whether it still runs (new offers stop when it doesn't).
-            'accreditation' => $this->isBroker() ? [
-                'active' => $this->isAccredited(),
-                'until' => $this->accreditation?->accredited_until?->toDateString(),
-                'ended' => $this->accreditation?->ended_at !== null,
-            ] : null,
         ];
+    }
+
+    /**
+     * A broker's accreditation for its own people (never on public pages): until when, and whether
+     * it still runs (new offers stop when it doesn't). Null for a developer.
+     *
+     * @return array{active: bool, until: ?string, ended: bool}|null
+     */
+    public function accreditationSummary(): ?array
+    {
+        return $this->isBroker() ? [
+            'active' => $this->isAccredited(),
+            'until' => $this->accreditation?->accredited_until?->toDateString(),
+            'ended' => $this->accreditation?->ended_at !== null,
+        ] : null;
     }
 }

@@ -154,7 +154,10 @@ class RealtyAccreditationController extends Controller
             'login_pending' => (bool) $admin?->must_change_password,
             // The agreement they agreed to online (with the dates once accepted), and the accreditation period.
             'agreed' => $form->agreed_at ? ['name' => $form->agreed_name, 'at' => $form->agreed_at] : null,
-            'agreement' => $form->agreement ? AccreditationAgreement::document($form->agreement, $form->accredited_from?->toDateString(), $form->accredited_until?->toDateString()) : null,
+            // A form sent before the agreement was set up prints from today's details.
+            'agreement' => $form->agreement || AccreditationAgreement::ready($form->developer)
+                ? AccreditationAgreement::document($form->agreement ?? AccreditationAgreement::snapshot($form->developer, $form), $form->accredited_from?->toDateString(), $form->accredited_until?->toDateString())
+                : null,
             'period' => $form->status === RealtyAccreditation::STATUS_APPROVED ? $this->period($form) : null,
             'signed_copy_days' => AccreditationAgreement::settings($request->user()->realty)['signed_copy_days'],
         ]);

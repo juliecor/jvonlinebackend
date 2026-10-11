@@ -148,7 +148,7 @@ class AuthController extends Controller
             // Set while an accepted realty still has the temporary password it was mailed.
             'must_change_password' => (bool) $user->must_change_password,
             'realty_id' => $user->realty_id,
-            'realty' => $user->realty?->publicArray(),
+            'realty' => $user->realty ? $user->realty->publicArray() + ['accreditation' => $user->realty->accreditationSummary()] : null,
             // The dashboard sections this person may use ("staff" = manage staff accounts); empty for agents.
             'access' => $user->access(),
         ];

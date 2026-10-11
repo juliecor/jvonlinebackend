@@ -58,7 +58,7 @@ class AccreditationAgreementTest extends TestCase
         $this->post("/api/accreditation/{$token}", $this->answers() + ['agree' => '1', 'agreed_name' => ' abby  cruz ', 'documents' => $this->files()], ['Accept' => 'application/json'])->assertCreated();
 
         $form = RealtyAccreditation::firstWhere('login_email', 'abby@abc.example');
-        $this->assertSame('abby  cruz', $form->agreed_name);
+        $this->assertSame('abby cruz', $form->agreed_name);
         $this->assertSame(['name' => 'Abby Cruz', 'firm' => 'ABC Realty', 'address' => '12 Colon Street, Cebu City', 'citizenship' => 'Filipino'], $form->agreement['broker']);
         $this->assertSame([['classification' => 'PRC Licensed Broker', 'rate' => '5%']], $form->agreement['commission']);
     }

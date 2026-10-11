@@ -66,7 +66,7 @@ class AccreditationController extends Controller
                 $form->update([
                     'agreement_version' => AccreditationAgreement::VERSION,
                     'agreement' => AccreditationAgreement::snapshot($form->developer, $form),
-                    'agreed_name' => trim($data['agreed_name']),
+                    'agreed_name' => preg_replace('/\s+/', ' ', trim($data['agreed_name'])),
                     'agreed_at' => now(),
                     'agreed_ip' => $request->ip(),
                 ]);
