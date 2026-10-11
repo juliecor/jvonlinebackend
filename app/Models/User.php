@@ -47,6 +47,7 @@ class User extends Authenticatable
         'realties' => 'Realty Company Invitation: invite and accredit realties',
         'requirements' => 'Buyer requirements: what buyers have to send',
         'ai' => 'Johndorf AI',
+        'tasks' => 'Tasks: create tasks and give them to anyone in the realty',
     ];
 
     /** Sections only a developer (Johndorf) has; an accredited realty sells, it doesn't edit the inventory. */

@@ -120,7 +120,7 @@ class StaffTest extends TestCase
         $broker = Realty::create(['name' => 'ABC Realty', 'slug' => 'abc-realty', 'kind' => Realty::KIND_BROKER, 'developer_id' => $this->realty->id, 'status' => Realty::STATUS_ACTIVE, 'registered_at' => now()]);
         $admin = User::factory()->create(['role' => User::ROLE_REALTY, 'realty_id' => $broker->id]);
 
-        $this->api('get', '/api/realty/staff', $admin->createToken('web')->plainTextToken)->assertOk()->assertJsonPath('sections', ['offers', 'agents']);
+        $this->api('get', '/api/realty/staff', $admin->createToken('web')->plainTextToken)->assertOk()->assertJsonPath('sections', ['offers', 'agents', 'tasks']);
         $this->api('post', '/api/realty/staff', $admin->createToken('web')->plainTextToken, ['name' => 'X', 'email' => 'x@example.com', 'password' => 'start-pass-1', 'access' => 'sections', 'sections' => ['projects']])->assertJsonValidationErrors('sections.0');
     }
 

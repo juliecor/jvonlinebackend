@@ -21,6 +21,7 @@ use App\Http\Controllers\Realty\ProjectUpdateController;
 use App\Http\Controllers\Realty\RealtyAccreditationController;
 use App\Http\Controllers\Realty\RequirementTypeController;
 use App\Http\Controllers\Realty\StaffController;
+use App\Http\Controllers\Realty\TaskController;
 use App\Http\Controllers\Realty\UnitController;
 use App\Http\Controllers\Realty\UnitTypeController;
 use Illuminate\Support\Facades\Route;
@@ -93,6 +94,20 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
                 Route::post('/offers/{id}/terms', [OfferController::class, 'terms'])->whereNumber('id');
                 Route::post('/offers/{id}/login', [OfferController::class, 'login'])->whereNumber('id');
             });
+        });
+        // Tasks: everyone has their own board; managers (Tasks section) give tasks out.
+        Route::middleware('realty.member')->group(function () {
+            Route::get('/tasks', [TaskController::class, 'index']);
+            Route::get('/tasks/options', [TaskController::class, 'options']);
+            Route::get('/tasks/{task}', [TaskController::class, 'show'])->whereNumber('task');
+            Route::post('/tasks', [TaskController::class, 'store']);
+            Route::post('/tasks/{task}', [TaskController::class, 'update'])->whereNumber('task');
+            Route::post('/tasks/{task}/status', [TaskController::class, 'status'])->whereNumber('task');
+            Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->whereNumber('task');
+            Route::post('/tasks/{task}/comments', [TaskController::class, 'comment'])->whereNumber('task');
+            Route::post('/tasks/{task}/files', [TaskController::class, 'upload'])->whereNumber('task')->middleware('throttle:offer-upload');
+            Route::get('/tasks/{task}/files/{file}', [TaskController::class, 'download'])->whereNumber(['task', 'file']);
+            Route::delete('/tasks/{task}/files/{file}', [TaskController::class, 'deleteFile'])->whereNumber(['task', 'file']);
         });
         // The developer's team: staff and agents of Johndorf, not of a broker.
         Route::middleware('realty.member:any,developer')->group(function () {

@@ -7,6 +7,7 @@ use App\Models\Offer;
 use App\Models\OfferDocument;
 use App\Models\OfferResponse;
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -39,6 +40,9 @@ class OverviewController extends Controller
                 'agents_pending' => $realty->agentApplications()->where('status', User::STATUS_PENDING)->count(),
                 'agents_invited' => $realty->agentInvitations()->whereNull('accepted_at')->where('expires_at', '>', now())->count(),
                 'staff' => $realty->users()->where('role', User::ROLE_REALTY)->count(),
+                // This person's open tasks, and how many are past their due date (the sidebar's Tasks count).
+                'my_tasks' => Task::where('realty_id', $realty->id)->where('assignee_id', $user->id)->where('status', '!=', 'done')->count(),
+                'my_tasks_overdue' => Task::where('realty_id', $realty->id)->where('assignee_id', $user->id)->where('status', '!=', 'done')->whereDate('due_on', '<', now('Asia/Manila')->toDateString())->count(),
                 'projects' => $realty->inventoryProjects()->count(),
                 'public_projects' => $realty->inventoryProjects()->where('is_public', true)->count(),
                 'new_responses' => OfferResponse::whereIn('offer_id', $visibleOffers()->select('offers.id'))->whereNull('seen_at')->count(),
