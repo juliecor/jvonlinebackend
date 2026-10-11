@@ -244,10 +244,23 @@ class RealtyAccreditationTest extends TestCase
         $this->assertSame('1985-04-12', $form->date_of_birth->toDateString());
         $this->assertNotNull($form->submitted_at);
         $this->assertSame('127.0.0.1', $form->submitted_ip);
+        $this->assertNotNull($form->privacy_accepted_at);
         $this->assertNotSame('123-456-789-000', $form->getRawOriginal('tin_company'), 'TINs are stored encrypted.');
         $this->assertNotSame('987-654-321-000', $form->getRawOriginal('tin_personal'), 'TINs are stored encrypted.');
         $this->assertSame(['board_resolution', 'sec_registration'], $form->documents()->orderBy('id')->pluck('kind')->all());
         $form->documents->each(fn (AccreditationDocument $d) => Storage::disk(AccreditationDocument::disk())->assertExists($d->path));
+    }
+
+    public function test_the_form_is_not_sent_without_agreeing_to_the_data_privacy_notice(): void
+    {
+        [$form, $token] = RealtyAccreditation::issue($this->johndorf, 'broker@example.com', $this->admin);
+        $answers = $this->answers();
+        unset($answers['privacy']);
+
+        $this->post("/api/accreditation/{$token}", $answers + ['documents' => $this->corporationFiles()], ['Accept' => 'application/json'])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['privacy' => 'Tick the box to agree to the data privacy notice.']);
+        $this->assertSame(RealtyAccreditation::STATUS_INVITED, $form->fresh()->status);
     }
 
     public function test_a_sole_proprietor_needs_the_dti_registration_and_no_company_tin(): void
@@ -854,6 +867,7 @@ class RealtyAccreditationTest extends TestCase
             'years_in_real_estate' => 8,
             'years_firm_operating' => 5,
             'salespersons' => 12,
+            'privacy' => '1',
         ];
     }
 

@@ -53,9 +53,9 @@ class AccreditationAgreementTest extends TestCase
         $this->assertStringContainsString('under the group of __________', $agreement['terms'][0]['text']);
         $this->assertSame(30, $agreement['signed_copy_days']);
 
-        $this->post("/api/accreditation/{$token}", $this->answers() + ['documents' => $this->files()], ['Accept' => 'application/json'])->assertJsonValidationErrors(['agree', 'agreed_name']);
-        $this->post("/api/accreditation/{$token}", $this->answers() + ['agree' => '1', 'agreed_name' => 'Someone Else', 'documents' => $this->files()], ['Accept' => 'application/json'])->assertJsonValidationErrors('agreed_name');
-        $this->post("/api/accreditation/{$token}", $this->answers() + ['agree' => '1', 'agreed_name' => ' abby  cruz ', 'documents' => $this->files()], ['Accept' => 'application/json'])->assertCreated();
+        $this->post("/api/accreditation/{$token}", $this->answers() + ['privacy' => '1', 'documents' => $this->files()], ['Accept' => 'application/json'])->assertJsonValidationErrors(['agree', 'agreed_name']);
+        $this->post("/api/accreditation/{$token}", $this->answers() + ['privacy' => '1', 'agree' => '1', 'agreed_name' => 'Someone Else', 'documents' => $this->files()], ['Accept' => 'application/json'])->assertJsonValidationErrors('agreed_name');
+        $this->post("/api/accreditation/{$token}", $this->answers() + ['privacy' => '1', 'agree' => '1', 'agreed_name' => ' abby  cruz ', 'documents' => $this->files()], ['Accept' => 'application/json'])->assertCreated();
 
         $form = RealtyAccreditation::firstWhere('login_email', 'abby@abc.example');
         $this->assertSame('abby cruz', $form->agreed_name);

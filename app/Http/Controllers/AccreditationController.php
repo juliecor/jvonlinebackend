@@ -38,10 +38,11 @@ class AccreditationController extends Controller
     {
         $accreditation = $this->usable($token);
         $agreement = AccreditationAgreement::ready($accreditation->developer);
-        $data = $request->validate($this->rules($request) + ($agreement ? [
+        $data = $request->validate($this->rules($request) + ['privacy' => ['accepted']] + ($agreement ? [
             'agree' => ['accepted'],
             'agreed_name' => ['required', 'string', 'max:120'],
         ] : []), $this->messages() + [
+            'privacy.accepted' => 'Tick the box to agree to the data privacy notice.',
             'agree.accepted' => 'Tick the box to agree to the accreditation agreement.',
             'agreed_name.required' => 'Type your full name to sign the agreement.',
         ]);
@@ -49,7 +50,7 @@ class AccreditationController extends Controller
         if ($agreement && mb_strtolower(preg_replace('/\s+/', ' ', trim($data['agreed_name']))) !== mb_strtolower(preg_replace('/\s+/', ' ', trim($data['representative_name'])))) {
             throw ValidationException::withMessages(['agreed_name' => 'Type the representative\'s full name exactly as above: '.trim($data['representative_name']).'.']);
         }
-        $fields = collect($data)->except(['documents', 'agree', 'agreed_name'])->all();
+        $fields = collect($data)->except(['documents', 'privacy', 'agree', 'agreed_name'])->all();
 
         DB::transaction(function () use ($request, $accreditation, $fields, $agreement, $data) {
             // Two clicks on Submit must not file it twice.
@@ -60,6 +61,8 @@ class AccreditationController extends Controller
                 'status' => RealtyAccreditation::STATUS_SUBMITTED,
                 'submitted_at' => now(),
                 'submitted_ip' => $request->ip(),
+                // They agreed to the data privacy notice (the form can't be sent without it).
+                'privacy_accepted_at' => now(),
             ]);
             // What they agreed to, as it stood today, and the typed signature.
             if ($agreement) {
