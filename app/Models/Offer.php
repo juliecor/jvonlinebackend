@@ -420,7 +420,12 @@ class Offer extends Model
                 'area_sqm' => $unit->area_sqm !== null ? (float) $unit->area_sqm : null,
                 'floor_plan_url' => $unit->floor_plan_url,
                 'highlights' => $unit->buyer_notes,
+                'block' => $unit->block,
+                'lot' => $unit->lot,
+                'lot_area_sqm' => $unit->lot_area_sqm !== null ? (float) $unit->lot_area_sqm : null,
             ],
+            // Where the home is on the site plan, when its lot is drawn there (no prices of other lots).
+            'site_map' => $unit->site_row_id ? $project->siteMap(public: true) + ['highlight' => $unit->id] : null,
             'model' => $model ? ['name' => $model->name, 'specs' => $model->specs, 'images' => $model->images] : null,
             'agent' => $this->agent ? ['name' => $this->agent->name, 'email' => $this->agent->email] : null,
             // The firm that sold it, when it isn't the developer's own team.

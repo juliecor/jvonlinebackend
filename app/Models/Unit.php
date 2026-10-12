@@ -10,16 +10,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['realty_id', 'project_id', 'name', 'unit_type', 'category', 'floor', 'area_sqm', 'price', 'status', 'status_offer_id', 'status_by_id', 'status_at', 'floor_plan_path', 'notes', 'buyer_notes'])]
+#[Fillable(['realty_id', 'project_id', 'name', 'block', 'lot', 'site_row_id', 'row_index', 'lot_area_sqm', 'tags', 'unit_type', 'category', 'floor', 'area_sqm', 'price', 'status', 'status_offer_id', 'status_by_id', 'status_at', 'floor_plan_path', 'notes', 'buyer_notes'])]
 class Unit extends Model
 {
     public const STATUSES = ['available', 'reserved', 'sold'];
+
+    /** What makes a lot special, shown on the site map and the lot's details. */
+    public const TAGS = ['corner' => 'Corner lot', 'park' => 'Near the park', 'end' => 'End unit'];
 
     protected $appends = ['floor_plan_url'];
 
     protected function casts(): array
     {
-        return ['area_sqm' => 'decimal:2', 'price' => 'decimal:2', 'status_at' => 'datetime'];
+        return ['area_sqm' => 'decimal:2', 'lot_area_sqm' => 'decimal:2', 'price' => 'decimal:2', 'status_at' => 'datetime', 'tags' => 'array', 'row_index' => 'integer'];
     }
 
     /** The offer this unit is reserved or sold through (its buyer and agent). */

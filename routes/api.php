@@ -23,6 +23,7 @@ use App\Http\Controllers\Realty\ProjectPageController;
 use App\Http\Controllers\Realty\ProjectUpdateController;
 use App\Http\Controllers\Realty\RealtyAccreditationController;
 use App\Http\Controllers\Realty\RequirementTypeController;
+use App\Http\Controllers\Realty\SiteMapController;
 use App\Http\Controllers\Realty\StaffController;
 use App\Http\Controllers\Realty\TaskController;
 use App\Http\Controllers\Realty\UnitController;
@@ -192,6 +193,12 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
                 Route::post('/projects/{project}/units', [UnitController::class, 'store']);
                 Route::post('/units/{unit}', [UnitController::class, 'update']);
                 Route::delete('/units/{unit}', [UnitController::class, 'destroy']);
+                // The clickable site plan: rows of lots drawn on it.
+                Route::post('/projects/{project}/site-map/image', [SiteMapController::class, 'image']);
+                Route::post('/projects/{project}/site-map/rows', [SiteMapController::class, 'storeRow']);
+                Route::post('/site-rows/{row}', [SiteMapController::class, 'updateRow']);
+                Route::post('/site-rows/{row}/apply', [SiteMapController::class, 'applyToRow']);
+                Route::delete('/site-rows/{row}', [SiteMapController::class, 'destroyRow']);
                 Route::post('/projects/{project}/plans', [PaymentPlanController::class, 'store']);
                 Route::post('/plans/{plan}', [PaymentPlanController::class, 'update']);
                 Route::delete('/plans/{plan}', [PaymentPlanController::class, 'destroy']);

@@ -8,6 +8,7 @@ use App\Models\Unit;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 /** Units inside a project — what is actually for sale. Staff only. */
 class UnitController extends Controller
@@ -64,6 +65,11 @@ class UnitController extends Controller
     {
         return $request->validate([
             'name' => ['required', 'string', 'max:120'],
+            'block' => ['sometimes', 'nullable', 'string', 'max:20'],
+            'lot' => ['sometimes', 'nullable', 'string', 'max:20'],
+            'lot_area_sqm' => ['sometimes', 'nullable', 'numeric', 'min:0'],
+            'tags' => ['sometimes', 'nullable', 'array'],
+            'tags.*' => ['string', Rule::in(array_keys(Unit::TAGS))],
             'unit_type' => ['nullable', 'string', 'max:120'],
             'category' => ['nullable', 'string', 'max:60'],
             'floor' => ['nullable', 'string', 'max:120'],
