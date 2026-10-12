@@ -1,0 +1,5258 @@
+{
+    "project": "arvesa-village",
+    "image": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/arvesa-village/plan-1.jpg",
+    "exported_at": "2026-10-12T03:32:55+00:00",
+    "rows": [
+        {
+            "block": "1",
+            "first_lot": 17,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46191,
+                    0.6116
+                ],
+                [
+                    0.45361,
+                    0.6116
+                ],
+                [
+                    0.45015,
+                    0.61343
+                ],
+                [
+                    0.44873,
+                    0.61791
+                ],
+                [
+                    0.44873,
+                    0.64187
+                ],
+                [
+                    0.46191,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 82,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 18,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.46191,
+                    0.6116
+                ],
+                [
+                    0.48193,
+                    0.6116
+                ],
+                [
+                    0.48193,
+                    0.64187
+                ],
+                [
+                    0.46191,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 20,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.48193,
+                    0.6116
+                ],
+                [
+                    0.50879,
+                    0.6116
+                ],
+                [
+                    0.50879,
+                    0.64187
+                ],
+                [
+                    0.48193,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "21",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 22,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.50879,
+                    0.6116
+                ],
+                [
+                    0.52881,
+                    0.6116
+                ],
+                [
+                    0.52881,
+                    0.64187
+                ],
+                [
+                    0.50879,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "22",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "23",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 24,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.52881,
+                    0.6116
+                ],
+                [
+                    0.55566,
+                    0.6116
+                ],
+                [
+                    0.55566,
+                    0.64187
+                ],
+                [
+                    0.52881,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "24",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "25",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 26,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.55566,
+                    0.6116
+                ],
+                [
+                    0.5752,
+                    0.6116
+                ],
+                [
+                    0.5752,
+                    0.64187
+                ],
+                [
+                    0.55566,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "26",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "27",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 28,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.5752,
+                    0.6116
+                ],
+                [
+                    0.60254,
+                    0.6116
+                ],
+                [
+                    0.60254,
+                    0.64187
+                ],
+                [
+                    0.5752,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "28",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "29",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 30,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.60254,
+                    0.6116
+                ],
+                [
+                    0.63184,
+                    0.6116
+                ],
+                [
+                    0.63184,
+                    0.64187
+                ],
+                [
+                    0.60254,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "30",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "31",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "32",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 33,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.63184,
+                    0.6116
+                ],
+                [
+                    0.64038,
+                    0.6116
+                ],
+                [
+                    0.64385,
+                    0.61343
+                ],
+                [
+                    0.64526,
+                    0.61791
+                ],
+                [
+                    0.64526,
+                    0.64187
+                ],
+                [
+                    0.63184,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "33",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 82,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 16,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46191,
+                    0.6715
+                ],
+                [
+                    0.45361,
+                    0.6715
+                ],
+                [
+                    0.45015,
+                    0.66967
+                ],
+                [
+                    0.44873,
+                    0.6652
+                ],
+                [
+                    0.44873,
+                    0.64187
+                ],
+                [
+                    0.46191,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 82,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 14,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.48193,
+                    0.6715
+                ],
+                [
+                    0.46191,
+                    0.6715
+                ],
+                [
+                    0.46191,
+                    0.64187
+                ],
+                [
+                    0.48193,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 12,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.50879,
+                    0.6715
+                ],
+                [
+                    0.48193,
+                    0.6715
+                ],
+                [
+                    0.48193,
+                    0.64187
+                ],
+                [
+                    0.50879,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 10,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.52881,
+                    0.6715
+                ],
+                [
+                    0.50879,
+                    0.6715
+                ],
+                [
+                    0.50879,
+                    0.64187
+                ],
+                [
+                    0.52881,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 8,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.55566,
+                    0.6715
+                ],
+                [
+                    0.52881,
+                    0.6715
+                ],
+                [
+                    0.52881,
+                    0.64187
+                ],
+                [
+                    0.55566,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 6,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.5752,
+                    0.6715
+                ],
+                [
+                    0.55566,
+                    0.6715
+                ],
+                [
+                    0.55566,
+                    0.64187
+                ],
+                [
+                    0.5752,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 4,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.60254,
+                    0.6715
+                ],
+                [
+                    0.5752,
+                    0.6715
+                ],
+                [
+                    0.5752,
+                    0.64187
+                ],
+                [
+                    0.60254,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 2,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.62207,
+                    0.6715
+                ],
+                [
+                    0.60254,
+                    0.6715
+                ],
+                [
+                    0.60254,
+                    0.64187
+                ],
+                [
+                    0.62207,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.62207,
+                    0.6715
+                ],
+                [
+                    0.62646,
+                    0.6715
+                ],
+                [
+                    0.63037,
+                    0.67119
+                ],
+                [
+                    0.63232,
+                    0.66898
+                ],
+                [
+                    0.6333,
+                    0.66583
+                ],
+                [
+                    0.63525,
+                    0.66204
+                ],
+                [
+                    0.6377,
+                    0.65889
+                ],
+                [
+                    0.64111,
+                    0.65637
+                ],
+                [
+                    0.64404,
+                    0.65259
+                ],
+                [
+                    0.64526,
+                    0.64817
+                ],
+                [
+                    0.64526,
+                    0.64187
+                ],
+                [
+                    0.62207,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 110,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 18,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46191,
+                    0.52585
+                ],
+                [
+                    0.45361,
+                    0.52585
+                ],
+                [
+                    0.45015,
+                    0.52768
+                ],
+                [
+                    0.44873,
+                    0.53216
+                ],
+                [
+                    0.44873,
+                    0.55612
+                ],
+                [
+                    0.46191,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 82,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 19,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.46191,
+                    0.52585
+                ],
+                [
+                    0.48193,
+                    0.52585
+                ],
+                [
+                    0.48193,
+                    0.55612
+                ],
+                [
+                    0.46191,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 21,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.48193,
+                    0.52585
+                ],
+                [
+                    0.50879,
+                    0.52585
+                ],
+                [
+                    0.50879,
+                    0.55612
+                ],
+                [
+                    0.48193,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "21",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "22",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 23,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.50879,
+                    0.52585
+                ],
+                [
+                    0.52881,
+                    0.52585
+                ],
+                [
+                    0.52881,
+                    0.55612
+                ],
+                [
+                    0.50879,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "23",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "24",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 25,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.52881,
+                    0.52585
+                ],
+                [
+                    0.55566,
+                    0.52585
+                ],
+                [
+                    0.55566,
+                    0.55612
+                ],
+                [
+                    0.52881,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "25",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "26",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 27,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.55566,
+                    0.52585
+                ],
+                [
+                    0.5752,
+                    0.52585
+                ],
+                [
+                    0.5752,
+                    0.55612
+                ],
+                [
+                    0.55566,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "27",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "28",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 29,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.5752,
+                    0.52585
+                ],
+                [
+                    0.60254,
+                    0.52585
+                ],
+                [
+                    0.60254,
+                    0.55612
+                ],
+                [
+                    0.5752,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "29",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "30",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 31,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.60254,
+                    0.52585
+                ],
+                [
+                    0.63184,
+                    0.52585
+                ],
+                [
+                    0.63184,
+                    0.55612
+                ],
+                [
+                    0.60254,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "31",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "32",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "33",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 34,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.63184,
+                    0.52585
+                ],
+                [
+                    0.64038,
+                    0.52585
+                ],
+                [
+                    0.64385,
+                    0.52768
+                ],
+                [
+                    0.64526,
+                    0.53216
+                ],
+                [
+                    0.64526,
+                    0.55612
+                ],
+                [
+                    0.63184,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "34",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 82,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 17,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46191,
+                    0.58575
+                ],
+                [
+                    0.45361,
+                    0.58575
+                ],
+                [
+                    0.45015,
+                    0.58392
+                ],
+                [
+                    0.44873,
+                    0.57945
+                ],
+                [
+                    0.44873,
+                    0.55612
+                ],
+                [
+                    0.46191,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 82,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 15,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.48193,
+                    0.58575
+                ],
+                [
+                    0.46191,
+                    0.58575
+                ],
+                [
+                    0.46191,
+                    0.55612
+                ],
+                [
+                    0.48193,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 13,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.50879,
+                    0.58575
+                ],
+                [
+                    0.48193,
+                    0.58575
+                ],
+                [
+                    0.48193,
+                    0.55612
+                ],
+                [
+                    0.50879,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 11,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.52881,
+                    0.58575
+                ],
+                [
+                    0.50879,
+                    0.58575
+                ],
+                [
+                    0.50879,
+                    0.55612
+                ],
+                [
+                    0.52881,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 9,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.55566,
+                    0.58575
+                ],
+                [
+                    0.52881,
+                    0.58575
+                ],
+                [
+                    0.52881,
+                    0.55612
+                ],
+                [
+                    0.55566,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 7,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.5752,
+                    0.58575
+                ],
+                [
+                    0.55566,
+                    0.58575
+                ],
+                [
+                    0.55566,
+                    0.55612
+                ],
+                [
+                    0.5752,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 5,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.60254,
+                    0.58575
+                ],
+                [
+                    0.5752,
+                    0.58575
+                ],
+                [
+                    0.5752,
+                    0.55612
+                ],
+                [
+                    0.60254,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 2,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.63184,
+                    0.58575
+                ],
+                [
+                    0.60254,
+                    0.58575
+                ],
+                [
+                    0.60254,
+                    0.55612
+                ],
+                [
+                    0.63184,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.63184,
+                    0.58575
+                ],
+                [
+                    0.64038,
+                    0.58575
+                ],
+                [
+                    0.64385,
+                    0.58392
+                ],
+                [
+                    0.64526,
+                    0.57945
+                ],
+                [
+                    0.64526,
+                    0.55612
+                ],
+                [
+                    0.63184,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 82,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 17,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46191,
+                    0.43726
+                ],
+                [
+                    0.45361,
+                    0.43726
+                ],
+                [
+                    0.45015,
+                    0.43909
+                ],
+                [
+                    0.44873,
+                    0.44357
+                ],
+                [
+                    0.44873,
+                    0.46847
+                ],
+                [
+                    0.46191,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 87,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 18,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.46191,
+                    0.43726
+                ],
+                [
+                    0.48193,
+                    0.43726
+                ],
+                [
+                    0.48193,
+                    0.46847
+                ],
+                [
+                    0.46191,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 20,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.48193,
+                    0.43726
+                ],
+                [
+                    0.50879,
+                    0.43726
+                ],
+                [
+                    0.50879,
+                    0.46847
+                ],
+                [
+                    0.48193,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "21",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 22,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.50879,
+                    0.43726
+                ],
+                [
+                    0.52881,
+                    0.43726
+                ],
+                [
+                    0.52881,
+                    0.46847
+                ],
+                [
+                    0.50879,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "22",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "23",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 24,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.52881,
+                    0.43726
+                ],
+                [
+                    0.55566,
+                    0.43726
+                ],
+                [
+                    0.55566,
+                    0.46847
+                ],
+                [
+                    0.52881,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "24",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "25",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 26,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.55566,
+                    0.43726
+                ],
+                [
+                    0.5752,
+                    0.43726
+                ],
+                [
+                    0.5752,
+                    0.46847
+                ],
+                [
+                    0.55566,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "26",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "27",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 28,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.58936,
+                    0.43726
+                ],
+                [
+                    0.5752,
+                    0.43726
+                ],
+                [
+                    0.5752,
+                    0.46847
+                ],
+                [
+                    0.58936,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "28",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 16,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46191,
+                    0.50063
+                ],
+                [
+                    0.45361,
+                    0.50063
+                ],
+                [
+                    0.45015,
+                    0.4988
+                ],
+                [
+                    0.44873,
+                    0.49433
+                ],
+                [
+                    0.44873,
+                    0.46847
+                ],
+                [
+                    0.46191,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 87,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 14,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.48193,
+                    0.50063
+                ],
+                [
+                    0.46191,
+                    0.50063
+                ],
+                [
+                    0.46191,
+                    0.46847
+                ],
+                [
+                    0.48193,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 12,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.50879,
+                    0.50063
+                ],
+                [
+                    0.48193,
+                    0.50063
+                ],
+                [
+                    0.48193,
+                    0.46847
+                ],
+                [
+                    0.50879,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 10,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.52881,
+                    0.50063
+                ],
+                [
+                    0.50879,
+                    0.50063
+                ],
+                [
+                    0.50879,
+                    0.46847
+                ],
+                [
+                    0.52881,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 8,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.55566,
+                    0.50063
+                ],
+                [
+                    0.52881,
+                    0.50063
+                ],
+                [
+                    0.52881,
+                    0.46847
+                ],
+                [
+                    0.55566,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 6,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.5752,
+                    0.50063
+                ],
+                [
+                    0.55566,
+                    0.50063
+                ],
+                [
+                    0.55566,
+                    0.46847
+                ],
+                [
+                    0.5752,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 4,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.60254,
+                    0.50063
+                ],
+                [
+                    0.5752,
+                    0.50063
+                ],
+                [
+                    0.5752,
+                    0.46847
+                ],
+                [
+                    0.60254,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 3,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.6123,
+                    0.50063
+                ],
+                [
+                    0.60254,
+                    0.50063
+                ],
+                [
+                    0.60254,
+                    0.46847
+                ],
+                [
+                    0.6123,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.62207,
+                    0.50063
+                ],
+                [
+                    0.6123,
+                    0.50063
+                ],
+                [
+                    0.6123,
+                    0.46847
+                ],
+                [
+                    0.62207,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.62207,
+                    0.50063
+                ],
+                [
+                    0.64062,
+                    0.50063
+                ],
+                [
+                    0.64355,
+                    0.49874
+                ],
+                [
+                    0.64526,
+                    0.49433
+                ],
+                [
+                    0.64526,
+                    0.48045
+                ],
+                [
+                    0.64307,
+                    0.47667
+                ],
+                [
+                    0.63574,
+                    0.46847
+                ],
+                [
+                    0.62207,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 13,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.30273,
+                    0.6116
+                ],
+                [
+                    0.29346,
+                    0.6116
+                ],
+                [
+                    0.28999,
+                    0.61343
+                ],
+                [
+                    0.28857,
+                    0.61791
+                ],
+                [
+                    0.28809,
+                    0.64187
+                ],
+                [
+                    0.30273,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 14,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.30273,
+                    0.6116
+                ],
+                [
+                    0.32227,
+                    0.6116
+                ],
+                [
+                    0.32227,
+                    0.64187
+                ],
+                [
+                    0.30273,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 16,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.32227,
+                    0.6116
+                ],
+                [
+                    0.34961,
+                    0.6116
+                ],
+                [
+                    0.34961,
+                    0.64187
+                ],
+                [
+                    0.32227,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 18,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.34961,
+                    0.6116
+                ],
+                [
+                    0.36865,
+                    0.6116
+                ],
+                [
+                    0.36865,
+                    0.64187
+                ],
+                [
+                    0.34961,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 20,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.36865,
+                    0.6116
+                ],
+                [
+                    0.396,
+                    0.6116
+                ],
+                [
+                    0.396,
+                    0.64187
+                ],
+                [
+                    0.36865,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "21",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 22,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.396,
+                    0.6116
+                ],
+                [
+                    0.41553,
+                    0.6116
+                ],
+                [
+                    0.41553,
+                    0.64187
+                ],
+                [
+                    0.396,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "22",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "23",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 24,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41553,
+                    0.6116
+                ],
+                [
+                    0.4248,
+                    0.6116
+                ],
+                [
+                    0.42827,
+                    0.61343
+                ],
+                [
+                    0.42969,
+                    0.61791
+                ],
+                [
+                    0.42969,
+                    0.64187
+                ],
+                [
+                    0.41553,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "24",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.30273,
+                    0.6715
+                ],
+                [
+                    0.29248,
+                    0.6715
+                ],
+                [
+                    0.28901,
+                    0.66967
+                ],
+                [
+                    0.2876,
+                    0.6652
+                ],
+                [
+                    0.28809,
+                    0.64187
+                ],
+                [
+                    0.30273,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 10,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.32227,
+                    0.6715
+                ],
+                [
+                    0.30273,
+                    0.6715
+                ],
+                [
+                    0.30273,
+                    0.64187
+                ],
+                [
+                    0.32227,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 8,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.34961,
+                    0.6715
+                ],
+                [
+                    0.32227,
+                    0.6715
+                ],
+                [
+                    0.32227,
+                    0.64187
+                ],
+                [
+                    0.34961,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 6,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.36865,
+                    0.6715
+                ],
+                [
+                    0.34961,
+                    0.6715
+                ],
+                [
+                    0.34961,
+                    0.64187
+                ],
+                [
+                    0.36865,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 4,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.396,
+                    0.6715
+                ],
+                [
+                    0.36865,
+                    0.6715
+                ],
+                [
+                    0.36865,
+                    0.64187
+                ],
+                [
+                    0.396,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 84,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 2,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.41553,
+                    0.6715
+                ],
+                [
+                    0.396,
+                    0.6715
+                ],
+                [
+                    0.396,
+                    0.64187
+                ],
+                [
+                    0.41553,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41553,
+                    0.6715
+                ],
+                [
+                    0.4248,
+                    0.6715
+                ],
+                [
+                    0.42827,
+                    0.66967
+                ],
+                [
+                    0.42969,
+                    0.6652
+                ],
+                [
+                    0.42969,
+                    0.64187
+                ],
+                [
+                    0.41553,
+                    0.64187
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 13,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.30664,
+                    0.52585
+                ],
+                [
+                    0.29639,
+                    0.52585
+                ],
+                [
+                    0.29292,
+                    0.52768
+                ],
+                [
+                    0.2915,
+                    0.53216
+                ],
+                [
+                    0.29102,
+                    0.55612
+                ],
+                [
+                    0.30664,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 14,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.30664,
+                    0.52585
+                ],
+                [
+                    0.3457,
+                    0.52585
+                ],
+                [
+                    0.3457,
+                    0.55612
+                ],
+                [
+                    0.30664,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 18,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.3457,
+                    0.52585
+                ],
+                [
+                    0.37549,
+                    0.52585
+                ],
+                [
+                    0.37549,
+                    0.55612
+                ],
+                [
+                    0.3457,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 20,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.38477,
+                    0.52585
+                ],
+                [
+                    0.37549,
+                    0.52585
+                ],
+                [
+                    0.37549,
+                    0.55612
+                ],
+                [
+                    0.38477,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 21,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.38477,
+                    0.52585
+                ],
+                [
+                    0.41455,
+                    0.52585
+                ],
+                [
+                    0.41455,
+                    0.55612
+                ],
+                [
+                    0.38477,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "21",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "22",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "23",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 24,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41455,
+                    0.52585
+                ],
+                [
+                    0.4248,
+                    0.52585
+                ],
+                [
+                    0.42827,
+                    0.52768
+                ],
+                [
+                    0.42969,
+                    0.53216
+                ],
+                [
+                    0.42969,
+                    0.55612
+                ],
+                [
+                    0.41455,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "24",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.30664,
+                    0.58575
+                ],
+                [
+                    0.29541,
+                    0.58575
+                ],
+                [
+                    0.29194,
+                    0.58392
+                ],
+                [
+                    0.29053,
+                    0.57945
+                ],
+                [
+                    0.29102,
+                    0.55612
+                ],
+                [
+                    0.30664,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 8,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.3457,
+                    0.58575
+                ],
+                [
+                    0.30664,
+                    0.58575
+                ],
+                [
+                    0.30664,
+                    0.55612
+                ],
+                [
+                    0.3457,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 6,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.37549,
+                    0.58575
+                ],
+                [
+                    0.3457,
+                    0.58575
+                ],
+                [
+                    0.3457,
+                    0.55612
+                ],
+                [
+                    0.37549,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.38477,
+                    0.58575
+                ],
+                [
+                    0.37549,
+                    0.58575
+                ],
+                [
+                    0.37549,
+                    0.55612
+                ],
+                [
+                    0.38477,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 2,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.41455,
+                    0.58575
+                ],
+                [
+                    0.38477,
+                    0.58575
+                ],
+                [
+                    0.38477,
+                    0.55612
+                ],
+                [
+                    0.41455,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 60,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41455,
+                    0.58575
+                ],
+                [
+                    0.4248,
+                    0.58575
+                ],
+                [
+                    0.42827,
+                    0.58392
+                ],
+                [
+                    0.42969,
+                    0.57945
+                ],
+                [
+                    0.42969,
+                    0.55612
+                ],
+                [
+                    0.41455,
+                    0.55612
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 13,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.30908,
+                    0.43726
+                ],
+                [
+                    0.29932,
+                    0.43726
+                ],
+                [
+                    0.29585,
+                    0.43909
+                ],
+                [
+                    0.29443,
+                    0.44357
+                ],
+                [
+                    0.29419,
+                    0.46847
+                ],
+                [
+                    0.30908,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 14,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.30908,
+                    0.43726
+                ],
+                [
+                    0.34814,
+                    0.43726
+                ],
+                [
+                    0.34814,
+                    0.46847
+                ],
+                [
+                    0.30908,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 18,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.34814,
+                    0.43726
+                ],
+                [
+                    0.37598,
+                    0.43726
+                ],
+                [
+                    0.37598,
+                    0.46847
+                ],
+                [
+                    0.34814,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 20,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.37598,
+                    0.43726
+                ],
+                [
+                    0.41504,
+                    0.43726
+                ],
+                [
+                    0.41504,
+                    0.46847
+                ],
+                [
+                    0.37598,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "21",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "22",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "23",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 24,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41504,
+                    0.43726
+                ],
+                [
+                    0.4248,
+                    0.43726
+                ],
+                [
+                    0.42827,
+                    0.43909
+                ],
+                [
+                    0.42969,
+                    0.44357
+                ],
+                [
+                    0.42969,
+                    0.46847
+                ],
+                [
+                    0.41504,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "24",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.30908,
+                    0.50063
+                ],
+                [
+                    0.29883,
+                    0.50063
+                ],
+                [
+                    0.29536,
+                    0.4988
+                ],
+                [
+                    0.29395,
+                    0.49433
+                ],
+                [
+                    0.29419,
+                    0.46847
+                ],
+                [
+                    0.30908,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 8,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.34814,
+                    0.50063
+                ],
+                [
+                    0.30908,
+                    0.50063
+                ],
+                [
+                    0.30908,
+                    0.46847
+                ],
+                [
+                    0.34814,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 6,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.37598,
+                    0.50063
+                ],
+                [
+                    0.34814,
+                    0.50063
+                ],
+                [
+                    0.34814,
+                    0.46847
+                ],
+                [
+                    0.37598,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 2,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.41504,
+                    0.50063
+                ],
+                [
+                    0.37598,
+                    0.50063
+                ],
+                [
+                    0.37598,
+                    0.46847
+                ],
+                [
+                    0.41504,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41504,
+                    0.50063
+                ],
+                [
+                    0.4248,
+                    0.50063
+                ],
+                [
+                    0.42827,
+                    0.4988
+                ],
+                [
+                    0.42969,
+                    0.49433
+                ],
+                [
+                    0.42969,
+                    0.46847
+                ],
+                [
+                    0.41504,
+                    0.46847
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31348,
+                    0.34868
+                ],
+                [
+                    0.30225,
+                    0.34868
+                ],
+                [
+                    0.29878,
+                    0.3505
+                ],
+                [
+                    0.29736,
+                    0.35498
+                ],
+                [
+                    0.29712,
+                    0.3802
+                ],
+                [
+                    0.31348,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 13,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.31348,
+                    0.34868
+                ],
+                [
+                    0.3335,
+                    0.34868
+                ],
+                [
+                    0.3335,
+                    0.3802
+                ],
+                [
+                    0.31348,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 15,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.34277,
+                    0.34868
+                ],
+                [
+                    0.3335,
+                    0.34868
+                ],
+                [
+                    0.3335,
+                    0.3802
+                ],
+                [
+                    0.34277,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 16,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.34277,
+                    0.34868
+                ],
+                [
+                    0.37451,
+                    0.34868
+                ],
+                [
+                    0.37451,
+                    0.3802
+                ],
+                [
+                    0.34277,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 18,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.37451,
+                    0.34868
+                ],
+                [
+                    0.39355,
+                    0.34868
+                ],
+                [
+                    0.39355,
+                    0.3802
+                ],
+                [
+                    0.37451,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 20,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.39355,
+                    0.34868
+                ],
+                [
+                    0.41357,
+                    0.34868
+                ],
+                [
+                    0.41357,
+                    0.3802
+                ],
+                [
+                    0.39355,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "21",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 22,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41357,
+                    0.34868
+                ],
+                [
+                    0.4248,
+                    0.34868
+                ],
+                [
+                    0.42827,
+                    0.3505
+                ],
+                [
+                    0.42969,
+                    0.35498
+                ],
+                [
+                    0.42969,
+                    0.3802
+                ],
+                [
+                    0.41357,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "22",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 11,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31348,
+                    0.41173
+                ],
+                [
+                    0.30176,
+                    0.41173
+                ],
+                [
+                    0.29829,
+                    0.4099
+                ],
+                [
+                    0.29688,
+                    0.40542
+                ],
+                [
+                    0.29712,
+                    0.3802
+                ],
+                [
+                    0.31348,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 9,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.3335,
+                    0.41173
+                ],
+                [
+                    0.31348,
+                    0.41173
+                ],
+                [
+                    0.31348,
+                    0.3802
+                ],
+                [
+                    0.3335,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 8,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.34277,
+                    0.41173
+                ],
+                [
+                    0.3335,
+                    0.41173
+                ],
+                [
+                    0.3335,
+                    0.3802
+                ],
+                [
+                    0.34277,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 6,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.37451,
+                    0.41173
+                ],
+                [
+                    0.34277,
+                    0.41173
+                ],
+                [
+                    0.34277,
+                    0.3802
+                ],
+                [
+                    0.37451,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 100,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 100,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 4,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.39355,
+                    0.41173
+                ],
+                [
+                    0.37451,
+                    0.41173
+                ],
+                [
+                    0.37451,
+                    0.3802
+                ],
+                [
+                    0.39355,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 2,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.41357,
+                    0.41173
+                ],
+                [
+                    0.39355,
+                    0.41173
+                ],
+                [
+                    0.39355,
+                    0.3802
+                ],
+                [
+                    0.41357,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41357,
+                    0.41173
+                ],
+                [
+                    0.4248,
+                    0.41173
+                ],
+                [
+                    0.42827,
+                    0.4099
+                ],
+                [
+                    0.42969,
+                    0.40542
+                ],
+                [
+                    0.42969,
+                    0.3802
+                ],
+                [
+                    0.41357,
+                    0.3802
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31348,
+                    0.25977
+                ],
+                [
+                    0.30566,
+                    0.25977
+                ],
+                [
+                    0.3022,
+                    0.2616
+                ],
+                [
+                    0.30078,
+                    0.26608
+                ],
+                [
+                    0.30029,
+                    0.2913
+                ],
+                [
+                    0.31348,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 82,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 13,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.31348,
+                    0.25977
+                ],
+                [
+                    0.3335,
+                    0.25977
+                ],
+                [
+                    0.3335,
+                    0.2913
+                ],
+                [
+                    0.31348,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 15,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.34277,
+                    0.25977
+                ],
+                [
+                    0.3335,
+                    0.25977
+                ],
+                [
+                    0.3335,
+                    0.2913
+                ],
+                [
+                    0.34277,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 16,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.34277,
+                    0.25977
+                ],
+                [
+                    0.37451,
+                    0.25977
+                ],
+                [
+                    0.37451,
+                    0.2913
+                ],
+                [
+                    0.34277,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 102,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 102,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 18,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.37451,
+                    0.25977
+                ],
+                [
+                    0.39355,
+                    0.25977
+                ],
+                [
+                    0.39355,
+                    0.2913
+                ],
+                [
+                    0.37451,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 20,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.39355,
+                    0.25977
+                ],
+                [
+                    0.39746,
+                    0.25977
+                ],
+                [
+                    0.40234,
+                    0.26293
+                ],
+                [
+                    0.4126,
+                    0.27238
+                ],
+                [
+                    0.42285,
+                    0.2831
+                ],
+                [
+                    0.42676,
+                    0.28752
+                ],
+                [
+                    0.42969,
+                    0.2913
+                ],
+                [
+                    0.39355,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 11,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31348,
+                    0.32282
+                ],
+                [
+                    0.30469,
+                    0.32282
+                ],
+                [
+                    0.30122,
+                    0.321
+                ],
+                [
+                    0.2998,
+                    0.31652
+                ],
+                [
+                    0.30029,
+                    0.2913
+                ],
+                [
+                    0.31348,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 9,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.3335,
+                    0.32282
+                ],
+                [
+                    0.31348,
+                    0.32282
+                ],
+                [
+                    0.31348,
+                    0.2913
+                ],
+                [
+                    0.3335,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 8,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.34277,
+                    0.32282
+                ],
+                [
+                    0.3335,
+                    0.32282
+                ],
+                [
+                    0.3335,
+                    0.2913
+                ],
+                [
+                    0.34277,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 6,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.37451,
+                    0.32282
+                ],
+                [
+                    0.34277,
+                    0.32282
+                ],
+                [
+                    0.34277,
+                    0.2913
+                ],
+                [
+                    0.37451,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 102,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 102,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 4,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.39355,
+                    0.32282
+                ],
+                [
+                    0.37451,
+                    0.32282
+                ],
+                [
+                    0.37451,
+                    0.2913
+                ],
+                [
+                    0.39355,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 2,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.41357,
+                    0.32282
+                ],
+                [
+                    0.39355,
+                    0.32282
+                ],
+                [
+                    0.39355,
+                    0.2913
+                ],
+                [
+                    0.41357,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": 63,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41357,
+                    0.32282
+                ],
+                [
+                    0.4248,
+                    0.32282
+                ],
+                [
+                    0.42827,
+                    0.321
+                ],
+                [
+                    0.42969,
+                    0.31652
+                ],
+                [
+                    0.42969,
+                    0.2913
+                ],
+                [
+                    0.41357,
+                    0.2913
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Townhouse",
+                    "lot_area_sqm": null,
+                    "area_sqm": 64.85,
+                    "price": null,
+                    "tags": [
+                        "end"
+                    ]
+                }
+            ]
+        }
+    ]
+}

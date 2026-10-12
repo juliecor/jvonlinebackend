@@ -1,0 +1,6285 @@
+{
+    "project": "montierra",
+    "image": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/montierra/plan-1.jpg",
+    "exported_at": "2026-10-12T03:26:18+00:00",
+    "rows": [
+        {
+            "block": "1",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.21533,
+                    0.15815
+                ],
+                [
+                    0.22778,
+                    0.15815
+                ],
+                [
+                    0.22778,
+                    0.19717
+                ],
+                [
+                    0.22266,
+                    0.1951
+                ],
+                [
+                    0.21875,
+                    0.19337
+                ],
+                [
+                    0.21533,
+                    0.19199
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": null,
+                    "lot_area_sqm": 87,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.22778,
+                    0.15815
+                ],
+                [
+                    0.23643,
+                    0.15815
+                ],
+                [
+                    0.23643,
+                    0.19302
+                ],
+                [
+                    0.2334,
+                    0.19441
+                ],
+                [
+                    0.23047,
+                    0.19613
+                ],
+                [
+                    0.22778,
+                    0.19717
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 62,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 3,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.23643,
+                    0.15815
+                ],
+                [
+                    0.24487,
+                    0.15815
+                ],
+                [
+                    0.24487,
+                    0.19026
+                ],
+                [
+                    0.23643,
+                    0.19302
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 55,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 4,
+            "lot_count": 31,
+            "corners": [
+                [
+                    0.24487,
+                    0.18992
+                ],
+                [
+                    0.54492,
+                    0.18992
+                ],
+                [
+                    0.54492,
+                    0.15794
+                ],
+                [
+                    0.24487,
+                    0.15794
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "24",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 22,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 23,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 24,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 25,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 26,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 27,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 28,
+                    "lot": "32",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 29,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 30,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 36,
+            "lot_count": 5,
+            "corners": [
+                [
+                    0.57065,
+                    0.18992
+                ],
+                [
+                    0.62739,
+                    0.18992
+                ],
+                [
+                    0.62739,
+                    0.15794
+                ],
+                [
+                    0.57065,
+                    0.15794
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 87,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "38",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "39",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "40",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 41,
+            "lot_count": 20,
+            "corners": [
+                [
+                    0.62739,
+                    0.18992
+                ],
+                [
+                    0.82153,
+                    0.18992
+                ],
+                [
+                    0.82153,
+                    0.15794
+                ],
+                [
+                    0.62739,
+                    0.15794
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "41",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "42",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "43",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "44",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "45",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "46",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "47",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "48",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "49",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "50",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "51",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "52",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "53",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "54",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "55",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "56",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "57",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "58",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "59",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "60",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 61,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.82153,
+                    0.15794
+                ],
+                [
+                    0.83667,
+                    0.15794
+                ],
+                [
+                    0.83667,
+                    0.19233
+                ],
+                [
+                    0.8335,
+                    0.19095
+                ],
+                [
+                    0.82959,
+                    0.19006
+                ],
+                [
+                    0.82153,
+                    0.18992
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "61",
+                    "unit_type": null,
+                    "lot_area_sqm": 97,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 2,
+            "lot_count": 30,
+            "corners": [
+                [
+                    0.24976,
+                    0.2172
+                ],
+                [
+                    0.54468,
+                    0.2172
+                ],
+                [
+                    0.54468,
+                    0.24931
+                ],
+                [
+                    0.24976,
+                    0.24931
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 22,
+                    "lot": "24",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 23,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 24,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 25,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 26,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 27,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 28,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 29,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 33,
+            "lot_count": 26,
+            "corners": [
+                [
+                    0.54468,
+                    0.28177
+                ],
+                [
+                    0.2915,
+                    0.28177
+                ],
+                [
+                    0.2915,
+                    0.24931
+                ],
+                [
+                    0.54468,
+                    0.24931
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "35",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "38",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "39",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "40",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "41",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "42",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "43",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "44",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "45",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "46",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "47",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "48",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "49",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "50",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "51",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "52",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "53",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "54",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 22,
+                    "lot": "55",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 23,
+                    "lot": "56",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 24,
+                    "lot": "57",
+                    "unit_type": null,
+                    "lot_area_sqm": 57,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 25,
+                    "lot": "58",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 59,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.2915,
+                    0.28177
+                ],
+                [
+                    0.24976,
+                    0.28177
+                ],
+                [
+                    0.24976,
+                    0.24931
+                ],
+                [
+                    0.2915,
+                    0.24931
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "59",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "60",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "61",
+                    "unit_type": null,
+                    "lot_area_sqm": 55,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "62",
+                    "unit_type": null,
+                    "lot_area_sqm": 83,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 2,
+            "lot_count": 26,
+            "corners": [
+                [
+                    0.5708,
+                    0.2172
+                ],
+                [
+                    0.83643,
+                    0.2172
+                ],
+                [
+                    0.83643,
+                    0.24931
+                ],
+                [
+                    0.5708,
+                    0.24931
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 95,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 22,
+                    "lot": "24",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 23,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 24,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 25,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 95,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 29,
+            "lot_count": 26,
+            "corners": [
+                [
+                    0.83643,
+                    0.28177
+                ],
+                [
+                    0.5708,
+                    0.28177
+                ],
+                [
+                    0.5708,
+                    0.24931
+                ],
+                [
+                    0.83643,
+                    0.24931
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 95,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "32",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "35",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "38",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "39",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "40",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "41",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "42",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "43",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "44",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "45",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "46",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "47",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "48",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "49",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "50",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 22,
+                    "lot": "51",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 23,
+                    "lot": "52",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 24,
+                    "lot": "53",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 25,
+                    "lot": "54",
+                    "unit_type": null,
+                    "lot_area_sqm": 95,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 2,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.27563,
+                    0.30331
+                ],
+                [
+                    0.29834,
+                    0.30331
+                ],
+                [
+                    0.29834,
+                    0.33564
+                ],
+                [
+                    0.27563,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 4,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.29834,
+                    0.30331
+                ],
+                [
+                    0.30674,
+                    0.30331
+                ],
+                [
+                    0.30674,
+                    0.33564
+                ],
+                [
+                    0.29834,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.30674,
+                    0.30331
+                ],
+                [
+                    0.3208,
+                    0.30331
+                ],
+                [
+                    0.3208,
+                    0.33564
+                ],
+                [
+                    0.30674,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.3208,
+                    0.30331
+                ],
+                [
+                    0.33364,
+                    0.30331
+                ],
+                [
+                    0.33364,
+                    0.33564
+                ],
+                [
+                    0.3208,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 90,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 7,
+            "lot_count": 16,
+            "corners": [
+                [
+                    0.33364,
+                    0.30331
+                ],
+                [
+                    0.53066,
+                    0.30331
+                ],
+                [
+                    0.53066,
+                    0.33564
+                ],
+                [
+                    0.33364,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 23,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.53066,
+                    0.30331
+                ],
+                [
+                    0.54468,
+                    0.30331
+                ],
+                [
+                    0.54468,
+                    0.33564
+                ],
+                [
+                    0.53066,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 25,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.53062,
+                    0.36782
+                ],
+                [
+                    0.54468,
+                    0.36782
+                ],
+                [
+                    0.54468,
+                    0.33564
+                ],
+                [
+                    0.53062,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 26,
+            "lot_count": 16,
+            "corners": [
+                [
+                    0.53062,
+                    0.36782
+                ],
+                [
+                    0.3335,
+                    0.36782
+                ],
+                [
+                    0.3335,
+                    0.33564
+                ],
+                [
+                    0.53062,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "32",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "35",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "38",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "39",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "40",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "41",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 42,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.3208,
+                    0.36782
+                ],
+                [
+                    0.3335,
+                    0.36782
+                ],
+                [
+                    0.3335,
+                    0.33564
+                ],
+                [
+                    0.3208,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "42",
+                    "unit_type": null,
+                    "lot_area_sqm": 90,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 43,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.30679,
+                    0.36782
+                ],
+                [
+                    0.3208,
+                    0.36782
+                ],
+                [
+                    0.3208,
+                    0.33564
+                ],
+                [
+                    0.30679,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "43",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 44,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.29834,
+                    0.36782
+                ],
+                [
+                    0.30679,
+                    0.36782
+                ],
+                [
+                    0.30679,
+                    0.33564
+                ],
+                [
+                    0.29834,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "44",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 45,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.28955,
+                    0.36782
+                ],
+                [
+                    0.29834,
+                    0.36782
+                ],
+                [
+                    0.29834,
+                    0.33564
+                ],
+                [
+                    0.28955,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "45",
+                    "unit_type": null,
+                    "lot_area_sqm": 66,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 46,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.27563,
+                    0.33564
+                ],
+                [
+                    0.28955,
+                    0.33564
+                ],
+                [
+                    0.28955,
+                    0.36913
+                ],
+                [
+                    0.28564,
+                    0.37106
+                ],
+                [
+                    0.28174,
+                    0.37141
+                ],
+                [
+                    0.27832,
+                    0.36982
+                ],
+                [
+                    0.27637,
+                    0.36775
+                ],
+                [
+                    0.27563,
+                    0.36602
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "46",
+                    "unit_type": null,
+                    "lot_area_sqm": 84,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 2,
+            "lot_count": 22,
+            "corners": [
+                [
+                    0.5708,
+                    0.30331
+                ],
+                [
+                    0.83643,
+                    0.30331
+                ],
+                [
+                    0.83643,
+                    0.33564
+                ],
+                [
+                    0.5708,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 25,
+            "lot_count": 22,
+            "corners": [
+                [
+                    0.83643,
+                    0.36782
+                ],
+                [
+                    0.5708,
+                    0.36782
+                ],
+                [
+                    0.5708,
+                    0.33564
+                ],
+                [
+                    0.83643,
+                    0.33564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "32",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "35",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "38",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "39",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "40",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "41",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "42",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "43",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "44",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "45",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "46",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 2,
+            "lot_count": 20,
+            "corners": [
+                [
+                    0.29453,
+                    0.38978
+                ],
+                [
+                    0.54468,
+                    0.38978
+                ],
+                [
+                    0.54468,
+                    0.42175
+                ],
+                [
+                    0.29453,
+                    0.42175
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 87,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 91,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 23,
+            "lot_count": 17,
+            "corners": [
+                [
+                    0.54468,
+                    0.45407
+                ],
+                [
+                    0.33354,
+                    0.45407
+                ],
+                [
+                    0.33354,
+                    0.42175
+                ],
+                [
+                    0.54468,
+                    0.42175
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 91,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "24",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "32",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "35",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "38",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "39",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 40,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.32021,
+                    0.42175
+                ],
+                [
+                    0.33354,
+                    0.42175
+                ],
+                [
+                    0.33354,
+                    0.45407
+                ],
+                [
+                    0.32568,
+                    0.45407
+                ],
+                [
+                    0.32202,
+                    0.45166
+                ],
+                [
+                    0.32021,
+                    0.44717
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "40",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 2,
+            "lot_count": 22,
+            "corners": [
+                [
+                    0.5708,
+                    0.38978
+                ],
+                [
+                    0.83643,
+                    0.38978
+                ],
+                [
+                    0.83643,
+                    0.42175
+                ],
+                [
+                    0.5708,
+                    0.42175
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 25,
+            "lot_count": 22,
+            "corners": [
+                [
+                    0.83643,
+                    0.45407
+                ],
+                [
+                    0.5708,
+                    0.45407
+                ],
+                [
+                    0.5708,
+                    0.42175
+                ],
+                [
+                    0.83643,
+                    0.42175
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "32",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "35",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "38",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "39",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "40",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "41",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "42",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "43",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "44",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "45",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 21,
+                    "lot": "46",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 2,
+            "lot_count": 17,
+            "corners": [
+                [
+                    0.32969,
+                    0.4866
+                ],
+                [
+                    0.53066,
+                    0.4866
+                ],
+                [
+                    0.53066,
+                    0.51865
+                ],
+                [
+                    0.32969,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 19,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.53066,
+                    0.4866
+                ],
+                [
+                    0.54468,
+                    0.4866
+                ],
+                [
+                    0.54468,
+                    0.51865
+                ],
+                [
+                    0.53066,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 98,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 21,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.53062,
+                    0.5511
+                ],
+                [
+                    0.54468,
+                    0.5511
+                ],
+                [
+                    0.54468,
+                    0.51865
+                ],
+                [
+                    0.53062,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 98,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 22,
+            "lot_count": 6,
+            "corners": [
+                [
+                    0.53062,
+                    0.5511
+                ],
+                [
+                    0.46201,
+                    0.5511
+                ],
+                [
+                    0.46201,
+                    0.51865
+                ],
+                [
+                    0.53062,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "24",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 28,
+            "lot_count": 10,
+            "corners": [
+                [
+                    0.46201,
+                    0.5511
+                ],
+                [
+                    0.33652,
+                    0.5511
+                ],
+                [
+                    0.33652,
+                    0.51865
+                ],
+                [
+                    0.46201,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "32",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "35",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 93,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 2,
+            "lot_count": 21,
+            "corners": [
+                [
+                    0.5708,
+                    0.4866
+                ],
+                [
+                    0.82334,
+                    0.4866
+                ],
+                [
+                    0.82334,
+                    0.51865
+                ],
+                [
+                    0.5708,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 23,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.82334,
+                    0.4866
+                ],
+                [
+                    0.83643,
+                    0.4866
+                ],
+                [
+                    0.83643,
+                    0.51865
+                ],
+                [
+                    0.82334,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 25,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.82334,
+                    0.5511
+                ],
+                [
+                    0.83643,
+                    0.5511
+                ],
+                [
+                    0.83643,
+                    0.51865
+                ],
+                [
+                    0.82334,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 26,
+            "lot_count": 21,
+            "corners": [
+                [
+                    0.82334,
+                    0.5511
+                ],
+                [
+                    0.5708,
+                    0.5511
+                ],
+                [
+                    0.5708,
+                    0.51865
+                ],
+                [
+                    0.82334,
+                    0.51865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "30",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "31",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "32",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "33",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "34",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "35",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "36",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "37",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "38",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "39",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "40",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 15,
+                    "lot": "41",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 16,
+                    "lot": "42",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 17,
+                    "lot": "43",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 18,
+                    "lot": "44",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 19,
+                    "lot": "45",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 20,
+                    "lot": "46",
+                    "unit_type": null,
+                    "lot_area_sqm": 82,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 2,
+            "lot_count": 6,
+            "corners": [
+                [
+                    0.36562,
+                    0.57838
+                ],
+                [
+                    0.43828,
+                    0.57838
+                ],
+                [
+                    0.43828,
+                    0.6105
+                ],
+                [
+                    0.36562,
+                    0.6105
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 84,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 8,
+            "lot_count": 9,
+            "corners": [
+                [
+                    0.43828,
+                    0.57838
+                ],
+                [
+                    0.54468,
+                    0.57838
+                ],
+                [
+                    0.54468,
+                    0.6105
+                ],
+                [
+                    0.43828,
+                    0.6105
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 18,
+            "lot_count": 11,
+            "corners": [
+                [
+                    0.54468,
+                    0.64261
+                ],
+                [
+                    0.4126,
+                    0.64261
+                ],
+                [
+                    0.4126,
+                    0.6105
+                ],
+                [
+                    0.54468,
+                    0.6105
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 54,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "24",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "26",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "27",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "28",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 29,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.39893,
+                    0.6105
+                ],
+                [
+                    0.4126,
+                    0.6105
+                ],
+                [
+                    0.4126,
+                    0.64261
+                ],
+                [
+                    0.40479,
+                    0.64261
+                ],
+                [
+                    0.40088,
+                    0.64019
+                ],
+                [
+                    0.39893,
+                    0.63536
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "29",
+                    "unit_type": null,
+                    "lot_area_sqm": 86,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "11",
+            "first_lot": 3,
+            "lot_count": 15,
+            "corners": [
+                [
+                    0.63184,
+                    0.57818
+                ],
+                [
+                    0.82485,
+                    0.57818
+                ],
+                [
+                    0.82485,
+                    0.61851
+                ],
+                [
+                    0.63184,
+                    0.61851
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 104,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "11",
+            "first_lot": 18,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.82485,
+                    0.57818
+                ],
+                [
+                    0.83008,
+                    0.57818
+                ],
+                [
+                    0.83325,
+                    0.57942
+                ],
+                [
+                    0.83545,
+                    0.58184
+                ],
+                [
+                    0.83691,
+                    0.58529
+                ],
+                [
+                    0.83755,
+                    0.58909
+                ],
+                [
+                    0.83755,
+                    0.61851
+                ],
+                [
+                    0.82485,
+                    0.61851
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 103,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 1,
+            "lot_count": 2,
+            "corners": [
+                [
+                    0.8583,
+                    0.2096
+                ],
+                [
+                    0.8583,
+                    0.24523
+                ],
+                [
+                    0.8811,
+                    0.24523
+                ],
+                [
+                    0.8811,
+                    0.2096
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": null,
+                    "lot_area_sqm": 87,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 3,
+            "lot_count": 12,
+            "corners": [
+                [
+                    0.8583,
+                    0.24523
+                ],
+                [
+                    0.8583,
+                    0.4634
+                ],
+                [
+                    0.8811,
+                    0.4634
+                ],
+                [
+                    0.8811,
+                    0.24523
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 16,
+            "lot_count": 6,
+            "corners": [
+                [
+                    0.8583,
+                    0.48239
+                ],
+                [
+                    0.8583,
+                    0.59599
+                ],
+                [
+                    0.8811,
+                    0.59599
+                ],
+                [
+                    0.8811,
+                    0.48239
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": 93,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": 96,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "13",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.26899,
+                    0.41506
+                ],
+                [
+                    0.27393,
+                    0.43267
+                ],
+                [
+                    0.25293,
+                    0.4451
+                ],
+                [
+                    0.24756,
+                    0.4261
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 87,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "13",
+            "first_lot": 3,
+            "lot_count": 13,
+            "corners": [
+                [
+                    0.26899,
+                    0.41506
+                ],
+                [
+                    0.20483,
+                    0.19682
+                ],
+                [
+                    0.1834,
+                    0.20787
+                ],
+                [
+                    0.24756,
+                    0.4261
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.29946,
+                    0.52141
+                ],
+                [
+                    0.3043,
+                    0.53936
+                ],
+                [
+                    0.28452,
+                    0.55787
+                ],
+                [
+                    0.27627,
+                    0.5404
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": null,
+                    "lot_area_sqm": 105,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 3,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.3043,
+                    0.53936
+                ],
+                [
+                    0.33267,
+                    0.60021
+                ],
+                [
+                    0.31289,
+                    0.61865
+                ],
+                [
+                    0.28452,
+                    0.55787
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": null,
+                    "lot_area_sqm": 83,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "4",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "5",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "6",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.33267,
+                    0.60021
+                ],
+                [
+                    0.3396,
+                    0.61568
+                ],
+                [
+                    0.32324,
+                    0.64088
+                ],
+                [
+                    0.31289,
+                    0.61865
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": null,
+                    "lot_area_sqm": 98,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 8,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.3396,
+                    0.61568
+                ],
+                [
+                    0.34878,
+                    0.62341
+                ],
+                [
+                    0.33716,
+                    0.65214
+                ],
+                [
+                    0.32324,
+                    0.64088
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": null,
+                    "lot_area_sqm": 98,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 9,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.34878,
+                    0.62341
+                ],
+                [
+                    0.39326,
+                    0.65946
+                ],
+                [
+                    0.38198,
+                    0.68729
+                ],
+                [
+                    0.33716,
+                    0.65214
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": null,
+                    "lot_area_sqm": 84,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "10",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "11",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "12",
+                    "unit_type": null,
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 13,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.39326,
+                    0.65946
+                ],
+                [
+                    0.40322,
+                    0.66747
+                ],
+                [
+                    0.39766,
+                    0.69959
+                ],
+                [
+                    0.38198,
+                    0.68729
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": null,
+                    "lot_area_sqm": 93,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 14,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.40356,
+                    0.6645
+                ],
+                [
+                    0.41431,
+                    0.6645
+                ],
+                [
+                    0.41431,
+                    0.70456
+                ],
+                [
+                    0.40396,
+                    0.70456
+                ],
+                [
+                    0.39766,
+                    0.69959
+                ],
+                [
+                    0.40322,
+                    0.66747
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 15,
+            "lot_count": 11,
+            "corners": [
+                [
+                    0.41431,
+                    0.6645
+                ],
+                [
+                    0.55005,
+                    0.6645
+                ],
+                [
+                    0.55005,
+                    0.70456
+                ],
+                [
+                    0.41431,
+                    0.70456
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "15",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "16",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "17",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "18",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "19",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "20",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "21",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "22",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "23",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "24",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "25",
+                    "unit_type": null,
+                    "lot_area_sqm": null,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        }
+    ]
+}

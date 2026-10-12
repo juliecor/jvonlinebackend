@@ -1,0 +1,5986 @@
+{
+    "project": "villa-castena",
+    "image": "https://filipinohomes123.s3.ap-southeast-1.amazonaws.com/jvconline/johndorf/projects/villa-castena/plan-1.jpg",
+    "exported_at": "2026-10-12T03:47:54+00:00",
+    "rows": [
+        {
+            "block": "1",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.20156,
+                    0.54121
+                ],
+                [
+                    0.21797,
+                    0.54537
+                ],
+                [
+                    0.21543,
+                    0.573
+                ],
+                [
+                    0.19951,
+                    0.56885
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 73,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 3,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.19614,
+                    0.59145
+                ],
+                [
+                    0.19966,
+                    0.56837
+                ],
+                [
+                    0.21504,
+                    0.57252
+                ],
+                [
+                    0.21401,
+                    0.58594
+                ],
+                [
+                    0.21299,
+                    0.59936
+                ],
+                [
+                    0.19668,
+                    0.59601
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 71,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 4,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.19517,
+                    0.6008
+                ],
+                [
+                    0.19731,
+                    0.59553
+                ],
+                [
+                    0.2126,
+                    0.59968
+                ],
+                [
+                    0.21055,
+                    0.62572
+                ],
+                [
+                    0.20259,
+                    0.62364
+                ],
+                [
+                    0.19468,
+                    0.62157
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 69,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.19175,
+                    0.63858
+                ],
+                [
+                    0.19272,
+                    0.62963
+                ],
+                [
+                    0.19482,
+                    0.62188
+                ],
+                [
+                    0.21016,
+                    0.62524
+                ],
+                [
+                    0.20913,
+                    0.63818
+                ],
+                [
+                    0.20811,
+                    0.6512
+                ],
+                [
+                    0.2043,
+                    0.6512
+                ],
+                [
+                    0.19229,
+                    0.64712
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.19229,
+                    0.64744
+                ],
+                [
+                    0.20771,
+                    0.6516
+                ],
+                [
+                    0.20566,
+                    0.67764
+                ],
+                [
+                    0.19023,
+                    0.67348
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.18735,
+                    0.68482
+                ],
+                [
+                    0.18994,
+                    0.6738
+                ],
+                [
+                    0.20576,
+                    0.67716
+                ],
+                [
+                    0.20449,
+                    0.69018
+                ],
+                [
+                    0.20322,
+                    0.70319
+                ],
+                [
+                    0.18735,
+                    0.69984
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 8,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.18745,
+                    0.69936
+                ],
+                [
+                    0.20332,
+                    0.70351
+                ],
+                [
+                    0.20078,
+                    0.73035
+                ],
+                [
+                    0.18438,
+                    0.7262
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 72,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 9,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.18452,
+                    0.72652
+                ],
+                [
+                    0.20088,
+                    0.73067
+                ],
+                [
+                    0.19731,
+                    0.75998
+                ],
+                [
+                    0.18096,
+                    0.75327
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 78,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "1",
+            "first_lot": 10,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.18062,
+                    0.75375
+                ],
+                [
+                    0.1834,
+                    0.75375
+                ],
+                [
+                    0.19702,
+                    0.7595
+                ],
+                [
+                    0.19243,
+                    0.78946
+                ],
+                [
+                    0.17554,
+                    0.7853
+                ],
+                [
+                    0.17808,
+                    0.76957
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 88,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 11,
+            "lot_count": 8,
+            "corners": [
+                [
+                    0.21318,
+                    0.7389
+                ],
+                [
+                    0.23237,
+                    0.53115
+                ],
+                [
+                    0.24922,
+                    0.5353
+                ],
+                [
+                    0.23003,
+                    0.74305
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "11",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "12",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "13",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "14",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "15",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "16",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 67,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "17",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "18",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 67,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 1,
+            "lot_count": 8,
+            "corners": [
+                [
+                    0.26616,
+                    0.53946
+                ],
+                [
+                    0.24697,
+                    0.74728
+                ],
+                [
+                    0.23003,
+                    0.74305
+                ],
+                [
+                    0.24922,
+                    0.5353
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 67,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "3",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "4",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "5",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "6",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 69,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 10,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.21328,
+                    0.7393
+                ],
+                [
+                    0.23018,
+                    0.74345
+                ],
+                [
+                    0.22866,
+                    0.75879
+                ],
+                [
+                    0.22715,
+                    0.77412
+                ],
+                [
+                    0.22041,
+                    0.775
+                ],
+                [
+                    0.21289,
+                    0.77173
+                ],
+                [
+                    0.21128,
+                    0.76821
+                ],
+                [
+                    0.21079,
+                    0.76318
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 84,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "2",
+            "first_lot": 9,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.22988,
+                    0.74329
+                ],
+                [
+                    0.24678,
+                    0.74744
+                ],
+                [
+                    0.24526,
+                    0.76661
+                ],
+                [
+                    0.24316,
+                    0.77165
+                ],
+                [
+                    0.24106,
+                    0.7734
+                ],
+                [
+                    0.22734,
+                    0.7742
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 73,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 8,
+            "lot_count": 6,
+            "corners": [
+                [
+                    0.26069,
+                    0.74042
+                ],
+                [
+                    0.27515,
+                    0.58403
+                ],
+                [
+                    0.29736,
+                    0.58954
+                ],
+                [
+                    0.28291,
+                    0.74593
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 94,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 90,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "10",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 90,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "11",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 90,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "12",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 90,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "13",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 90,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.26064,
+                    0.74089
+                ],
+                [
+                    0.28291,
+                    0.74585
+                ],
+                [
+                    0.28086,
+                    0.77101
+                ],
+                [
+                    0.26284,
+                    0.77181
+                ],
+                [
+                    0.26016,
+                    0.76917
+                ],
+                [
+                    0.25864,
+                    0.76246
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 96,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.32119,
+                    0.55399
+                ],
+                [
+                    0.33101,
+                    0.55655
+                ],
+                [
+                    0.33706,
+                    0.56805
+                ],
+                [
+                    0.33604,
+                    0.58738
+                ],
+                [
+                    0.31914,
+                    0.58403
+                ],
+                [
+                    0.32017,
+                    0.56901
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 70,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31924,
+                    0.58355
+                ],
+                [
+                    0.33613,
+                    0.5869
+                ],
+                [
+                    0.33359,
+                    0.61374
+                ],
+                [
+                    0.31719,
+                    0.61038
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 3,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31729,
+                    0.6099
+                ],
+                [
+                    0.33369,
+                    0.61326
+                ],
+                [
+                    0.33213,
+                    0.6393
+                ],
+                [
+                    0.31523,
+                    0.63594
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 4,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31484,
+                    0.63626
+                ],
+                [
+                    0.33223,
+                    0.63962
+                ],
+                [
+                    0.33018,
+                    0.66565
+                ],
+                [
+                    0.31328,
+                    0.6623
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31338,
+                    0.66182
+                ],
+                [
+                    0.32979,
+                    0.66518
+                ],
+                [
+                    0.32822,
+                    0.69201
+                ],
+                [
+                    0.31133,
+                    0.68866
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 68,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "3",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.31094,
+                    0.68818
+                ],
+                [
+                    0.32832,
+                    0.69153
+                ],
+                [
+                    0.32627,
+                    0.71917
+                ],
+                [
+                    0.30938,
+                    0.71502
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 71,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "4",
+            "first_lot": 2,
+            "lot_count": 12,
+            "corners": [
+                [
+                    0.33887,
+                    0.76102
+                ],
+                [
+                    0.53247,
+                    0.74964
+                ],
+                [
+                    0.53247,
+                    0.77764
+                ],
+                [
+                    0.33887,
+                    0.78858
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 72,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 8,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.34365,
+                    0.70088
+                ],
+                [
+                    0.35142,
+                    0.59665
+                ],
+                [
+                    0.36846,
+                    0.6
+                ],
+                [
+                    0.36064,
+                    0.70431
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "10",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "11",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 2,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.38525,
+                    0.60335
+                ],
+                [
+                    0.37749,
+                    0.70767
+                ],
+                [
+                    0.36064,
+                    0.70431
+                ],
+                [
+                    0.36846,
+                    0.6
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.34365,
+                    0.70096
+                ],
+                [
+                    0.36055,
+                    0.70431
+                ],
+                [
+                    0.35854,
+                    0.73722
+                ],
+                [
+                    0.35679,
+                    0.73906
+                ],
+                [
+                    0.34331,
+                    0.73906
+                ],
+                [
+                    0.34116,
+                    0.73458
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 94,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.36074,
+                    0.70415
+                ],
+                [
+                    0.37764,
+                    0.70751
+                ],
+                [
+                    0.3751,
+                    0.73562
+                ],
+                [
+                    0.37192,
+                    0.73826
+                ],
+                [
+                    0.3582,
+                    0.73826
+                ],
+                [
+                    0.35947,
+                    0.72125
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 83,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.35342,
+                    0.57196
+                ],
+                [
+                    0.36191,
+                    0.56126
+                ],
+                [
+                    0.36699,
+                    0.56126
+                ],
+                [
+                    0.37129,
+                    0.56302
+                ],
+                [
+                    0.36826,
+                    0.60016
+                ],
+                [
+                    0.35137,
+                    0.59681
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "5",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.371,
+                    0.56278
+                ],
+                [
+                    0.38516,
+                    0.56526
+                ],
+                [
+                    0.38682,
+                    0.56709
+                ],
+                [
+                    0.38784,
+                    0.57141
+                ],
+                [
+                    0.38535,
+                    0.60335
+                ],
+                [
+                    0.36846,
+                    0.6
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 96,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 8,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.39106,
+                    0.70256
+                ],
+                [
+                    0.39883,
+                    0.59824
+                ],
+                [
+                    0.41582,
+                    0.6016
+                ],
+                [
+                    0.40801,
+                    0.70591
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "10",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "11",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 2,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.43271,
+                    0.60495
+                ],
+                [
+                    0.42495,
+                    0.70935
+                ],
+                [
+                    0.40801,
+                    0.70591
+                ],
+                [
+                    0.41582,
+                    0.6016
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.3895,
+                    0.71997
+                ],
+                [
+                    0.39102,
+                    0.70256
+                ],
+                [
+                    0.40791,
+                    0.70591
+                ],
+                [
+                    0.40688,
+                    0.72085
+                ],
+                [
+                    0.40586,
+                    0.73586
+                ],
+                [
+                    0.39419,
+                    0.73666
+                ],
+                [
+                    0.39209,
+                    0.7349
+                ],
+                [
+                    0.3895,
+                    0.72987
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 81,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.40811,
+                    0.70575
+                ],
+                [
+                    0.425,
+                    0.70911
+                ],
+                [
+                    0.42397,
+                    0.7258
+                ],
+                [
+                    0.42295,
+                    0.73083
+                ],
+                [
+                    0.41934,
+                    0.73506
+                ],
+                [
+                    0.40557,
+                    0.73586
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 71,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.40024,
+                    0.57772
+                ],
+                [
+                    0.40181,
+                    0.5726
+                ],
+                [
+                    0.40444,
+                    0.57005
+                ],
+                [
+                    0.40996,
+                    0.57005
+                ],
+                [
+                    0.41816,
+                    0.5726
+                ],
+                [
+                    0.41689,
+                    0.58714
+                ],
+                [
+                    0.41563,
+                    0.60176
+                ],
+                [
+                    0.39873,
+                    0.5984
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 75,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "6",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.41787,
+                    0.57236
+                ],
+                [
+                    0.42954,
+                    0.57404
+                ],
+                [
+                    0.43164,
+                    0.5758
+                ],
+                [
+                    0.43423,
+                    0.58083
+                ],
+                [
+                    0.43423,
+                    0.58914
+                ],
+                [
+                    0.43271,
+                    0.60495
+                ],
+                [
+                    0.41582,
+                    0.6016
+                ],
+                [
+                    0.41685,
+                    0.58698
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 74,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 7,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.43931,
+                    0.69249
+                ],
+                [
+                    0.44517,
+                    0.6143
+                ],
+                [
+                    0.46211,
+                    0.61765
+                ],
+                [
+                    0.4563,
+                    0.69585
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "9",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 2,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.47905,
+                    0.62109
+                ],
+                [
+                    0.47319,
+                    0.6992
+                ],
+                [
+                    0.4563,
+                    0.69585
+                ],
+                [
+                    0.46211,
+                    0.61765
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.43936,
+                    0.69217
+                ],
+                [
+                    0.45625,
+                    0.69553
+                ],
+                [
+                    0.45371,
+                    0.73267
+                ],
+                [
+                    0.43906,
+                    0.73347
+                ],
+                [
+                    0.43687,
+                    0.72987
+                ],
+                [
+                    0.43809,
+                    0.71102
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 101,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.45645,
+                    0.69617
+                ],
+                [
+                    0.47334,
+                    0.69952
+                ],
+                [
+                    0.47085,
+                    0.72915
+                ],
+                [
+                    0.46914,
+                    0.73187
+                ],
+                [
+                    0.45342,
+                    0.73267
+                ],
+                [
+                    0.45493,
+                    0.71446
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 90,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 10,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.44761,
+                    0.58235
+                ],
+                [
+                    0.44927,
+                    0.57971
+                ],
+                [
+                    0.45137,
+                    0.57883
+                ],
+                [
+                    0.4645,
+                    0.58131
+                ],
+                [
+                    0.4645,
+                    0.58994
+                ],
+                [
+                    0.46201,
+                    0.61773
+                ],
+                [
+                    0.44512,
+                    0.61438
+                ],
+                [
+                    0.44639,
+                    0.5984
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 93,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "7",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46475,
+                    0.58195
+                ],
+                [
+                    0.47891,
+                    0.58442
+                ],
+                [
+                    0.48062,
+                    0.58626
+                ],
+                [
+                    0.4811,
+                    0.59625
+                ],
+                [
+                    0.4791,
+                    0.62093
+                ],
+                [
+                    0.46221,
+                    0.61757
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 93,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 7,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.48677,
+                    0.69561
+                ],
+                [
+                    0.49258,
+                    0.61725
+                ],
+                [
+                    0.50942,
+                    0.62061
+                ],
+                [
+                    0.50356,
+                    0.69896
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "9",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 2,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.52627,
+                    0.62396
+                ],
+                [
+                    0.52046,
+                    0.70232
+                ],
+                [
+                    0.50356,
+                    0.69896
+                ],
+                [
+                    0.50942,
+                    0.62061
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.48472,
+                    0.71757
+                ],
+                [
+                    0.48672,
+                    0.69537
+                ],
+                [
+                    0.50361,
+                    0.69872
+                ],
+                [
+                    0.50107,
+                    0.73027
+                ],
+                [
+                    0.4874,
+                    0.73107
+                ],
+                [
+                    0.48472,
+                    0.72756
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 94,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.50381,
+                    0.69856
+                ],
+                [
+                    0.52021,
+                    0.70192
+                ],
+                [
+                    0.5187,
+                    0.72596
+                ],
+                [
+                    0.51602,
+                    0.72947
+                ],
+                [
+                    0.50127,
+                    0.73027
+                ],
+                [
+                    0.50254,
+                    0.71446
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 84,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 10,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.49399,
+                    0.59353
+                ],
+                [
+                    0.49717,
+                    0.58842
+                ],
+                [
+                    0.51138,
+                    0.59089
+                ],
+                [
+                    0.51138,
+                    0.59952
+                ],
+                [
+                    0.50938,
+                    0.62093
+                ],
+                [
+                    0.49248,
+                    0.61757
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 65,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "8",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.51162,
+                    0.59153
+                ],
+                [
+                    0.52583,
+                    0.59401
+                ],
+                [
+                    0.52798,
+                    0.5976
+                ],
+                [
+                    0.52646,
+                    0.62412
+                ],
+                [
+                    0.50908,
+                    0.62077
+                ],
+                [
+                    0.51035,
+                    0.60615
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 65,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.54385,
+                    0.59984
+                ],
+                [
+                    0.54702,
+                    0.59641
+                ],
+                [
+                    0.55107,
+                    0.59641
+                ],
+                [
+                    0.5647,
+                    0.60383
+                ],
+                [
+                    0.55967,
+                    0.63251
+                ],
+                [
+                    0.55845,
+                    0.6345
+                ],
+                [
+                    0.54941,
+                    0.62915
+                ],
+                [
+                    0.54033,
+                    0.6238
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 100,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.5644,
+                    0.60359
+                ],
+                [
+                    0.5667,
+                    0.60359
+                ],
+                [
+                    0.57983,
+                    0.61022
+                ],
+                [
+                    0.57524,
+                    0.6393
+                ],
+                [
+                    0.56309,
+                    0.63682
+                ],
+                [
+                    0.55937,
+                    0.63243
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 3,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.58003,
+                    0.60982
+                ],
+                [
+                    0.59546,
+                    0.61653
+                ],
+                [
+                    0.59038,
+                    0.64633
+                ],
+                [
+                    0.58613,
+                    0.6472
+                ],
+                [
+                    0.58066,
+                    0.64473
+                ],
+                [
+                    0.575,
+                    0.6397
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 4,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.59517,
+                    0.61701
+                ],
+                [
+                    0.61357,
+                    0.6254
+                ],
+                [
+                    0.60645,
+                    0.65367
+                ],
+                [
+                    0.59058,
+                    0.64704
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.61323,
+                    0.62692
+                ],
+                [
+                    0.6145,
+                    0.62588
+                ],
+                [
+                    0.63213,
+                    0.64313
+                ],
+                [
+                    0.62251,
+                    0.67053
+                ],
+                [
+                    0.61772,
+                    0.66789
+                ],
+                [
+                    0.6062,
+                    0.65399
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 100,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.63193,
+                    0.64329
+                ],
+                [
+                    0.6458,
+                    0.65591
+                ],
+                [
+                    0.63667,
+                    0.68243
+                ],
+                [
+                    0.63389,
+                    0.68155
+                ],
+                [
+                    0.62178,
+                    0.67157
+                ],
+                [
+                    0.62686,
+                    0.65743
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.63657,
+                    0.68163
+                ],
+                [
+                    0.64561,
+                    0.65687
+                ],
+                [
+                    0.65947,
+                    0.66949
+                ],
+                [
+                    0.65034,
+                    0.69609
+                ],
+                [
+                    0.64268,
+                    0.69185
+                ],
+                [
+                    0.63711,
+                    0.6861
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 8,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.65918,
+                    0.67069
+                ],
+                [
+                    0.66099,
+                    0.67069
+                ],
+                [
+                    0.67363,
+                    0.68307
+                ],
+                [
+                    0.66357,
+                    0.7111
+                ],
+                [
+                    0.66221,
+                    0.7111
+                ],
+                [
+                    0.6501,
+                    0.69704
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 10,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.67949,
+                    0.73011
+                ],
+                [
+                    0.69517,
+                    0.71358
+                ],
+                [
+                    0.70376,
+                    0.73339
+                ],
+                [
+                    0.70376,
+                    0.73554
+                ],
+                [
+                    0.68984,
+                    0.75184
+                ],
+                [
+                    0.68809,
+                    0.75184
+                ],
+                [
+                    0.68403,
+                    0.74601
+                ],
+                [
+                    0.68057,
+                    0.73706
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 11,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.68872,
+                    0.75176
+                ],
+                [
+                    0.70444,
+                    0.73514
+                ],
+                [
+                    0.71318,
+                    0.75695
+                ],
+                [
+                    0.70532,
+                    0.76565
+                ],
+                [
+                    0.69746,
+                    0.77436
+                ],
+                [
+                    0.6938,
+                    0.76917
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.69712,
+                    0.77484
+                ],
+                [
+                    0.71323,
+                    0.75671
+                ],
+                [
+                    0.72183,
+                    0.77652
+                ],
+                [
+                    0.72183,
+                    0.77947
+                ],
+                [
+                    0.70669,
+                    0.79601
+                ],
+                [
+                    0.69712,
+                    0.777
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 13,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.70684,
+                    0.79561
+                ],
+                [
+                    0.7147,
+                    0.7869
+                ],
+                [
+                    0.72251,
+                    0.77827
+                ],
+                [
+                    0.73125,
+                    0.80008
+                ],
+                [
+                    0.7167,
+                    0.81733
+                ],
+                [
+                    0.71543,
+                    0.81733
+                ],
+                [
+                    0.71089,
+                    0.8099
+                ],
+                [
+                    0.70737,
+                    0.80096
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "9",
+            "first_lot": 14,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.71606,
+                    0.81725
+                ],
+                [
+                    0.73062,
+                    0.80088
+                ],
+                [
+                    0.73188,
+                    0.80088
+                ],
+                [
+                    0.7394,
+                    0.81805
+                ],
+                [
+                    0.7394,
+                    0.82165
+                ],
+                [
+                    0.73413,
+                    0.83442
+                ],
+                [
+                    0.72886,
+                    0.8472
+                ],
+                [
+                    0.72358,
+                    0.84026
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 94,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 3,
+            "lot_count": 5,
+            "corners": [
+                [
+                    0.24346,
+                    0.50056
+                ],
+                [
+                    0.32334,
+                    0.52117
+                ],
+                [
+                    0.32578,
+                    0.49625
+                ],
+                [
+                    0.24585,
+                    0.47564
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "5",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "6",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 71,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.22891,
+                    0.47013
+                ],
+                [
+                    0.2376,
+                    0.47141
+                ],
+                [
+                    0.24629,
+                    0.47268
+                ],
+                [
+                    0.24375,
+                    0.50032
+                ],
+                [
+                    0.229,
+                    0.49696
+                ],
+                [
+                    0.2269,
+                    0.49177
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 72,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 9,
+            "lot_count": 12,
+            "corners": [
+                [
+                    0.34336,
+                    0.48882
+                ],
+                [
+                    0.3667,
+                    0.17604
+                ],
+                [
+                    0.35098,
+                    0.17292
+                ],
+                [
+                    0.32764,
+                    0.4857
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "10",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "11",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "12",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "13",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "14",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "15",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "16",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "17",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "18",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "19",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "20",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 8,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.32554,
+                    0.49465
+                ],
+                [
+                    0.32764,
+                    0.4861
+                ],
+                [
+                    0.34297,
+                    0.48866
+                ],
+                [
+                    0.34146,
+                    0.51589
+                ],
+                [
+                    0.33433,
+                    0.5242
+                ],
+                [
+                    0.32354,
+                    0.52173
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 89,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "10",
+            "first_lot": 21,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.35142,
+                    0.14808
+                ],
+                [
+                    0.35396,
+                    0.13155
+                ],
+                [
+                    0.35537,
+                    0.13155
+                ],
+                [
+                    0.3688,
+                    0.14704
+                ],
+                [
+                    0.3668,
+                    0.17604
+                ],
+                [
+                    0.35093,
+                    0.17348
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "21",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 95,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "11",
+            "first_lot": 2,
+            "lot_count": 8,
+            "corners": [
+                [
+                    0.35908,
+                    0.49417
+                ],
+                [
+                    0.37466,
+                    0.28554
+                ],
+                [
+                    0.39165,
+                    0.2889
+                ],
+                [
+                    0.37607,
+                    0.4976
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "11",
+            "first_lot": 12,
+            "lot_count": 8,
+            "corners": [
+                [
+                    0.4085,
+                    0.29225
+                ],
+                [
+                    0.39292,
+                    0.50096
+                ],
+                [
+                    0.37607,
+                    0.4976
+                ],
+                [
+                    0.39165,
+                    0.2889
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "13",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "14",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "15",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "16",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "17",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "18",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "19",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "11",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.35928,
+                    0.49409
+                ],
+                [
+                    0.37617,
+                    0.49744
+                ],
+                [
+                    0.37466,
+                    0.51725
+                ],
+                [
+                    0.37314,
+                    0.53706
+                ],
+                [
+                    0.36431,
+                    0.5345
+                ],
+                [
+                    0.35728,
+                    0.51973
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 91,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "11",
+            "first_lot": 20,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.37588,
+                    0.49728
+                ],
+                [
+                    0.39277,
+                    0.50064
+                ],
+                [
+                    0.39028,
+                    0.53586
+                ],
+                [
+                    0.38755,
+                    0.53938
+                ],
+                [
+                    0.37334,
+                    0.5369
+                ],
+                [
+                    0.37461,
+                    0.51709
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "20",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 101,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "11",
+            "first_lot": 10,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.37778,
+                    0.24058
+                ],
+                [
+                    0.38042,
+                    0.23538
+                ],
+                [
+                    0.3832,
+                    0.23538
+                ],
+                [
+                    0.39473,
+                    0.24848
+                ],
+                [
+                    0.3917,
+                    0.28866
+                ],
+                [
+                    0.3748,
+                    0.2853
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 122,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "11",
+            "first_lot": 11,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.39443,
+                    0.24976
+                ],
+                [
+                    0.39585,
+                    0.24976
+                ],
+                [
+                    0.4082,
+                    0.2635
+                ],
+                [
+                    0.4103,
+                    0.26781
+                ],
+                [
+                    0.40879,
+                    0.29177
+                ],
+                [
+                    0.40303,
+                    0.29177
+                ],
+                [
+                    0.39141,
+                    0.2885
+                ],
+                [
+                    0.39292,
+                    0.26909
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "11",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 86,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 2,
+            "lot_count": 7,
+            "corners": [
+                [
+                    0.40503,
+                    0.51494
+                ],
+                [
+                    0.41865,
+                    0.33267
+                ],
+                [
+                    0.4356,
+                    0.33602
+                ],
+                [
+                    0.42202,
+                    0.51837
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 11,
+            "lot_count": 7,
+            "corners": [
+                [
+                    0.45254,
+                    0.33938
+                ],
+                [
+                    0.43892,
+                    0.52173
+                ],
+                [
+                    0.42202,
+                    0.51837
+                ],
+                [
+                    0.4356,
+                    0.33602
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "11",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "12",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "13",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "14",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "15",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "16",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "17",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.40366,
+                    0.52987
+                ],
+                [
+                    0.40518,
+                    0.51486
+                ],
+                [
+                    0.42207,
+                    0.51821
+                ],
+                [
+                    0.42002,
+                    0.54585
+                ],
+                [
+                    0.40581,
+                    0.54337
+                ],
+                [
+                    0.40366,
+                    0.53978
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 72,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 18,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.42026,
+                    0.53626
+                ],
+                [
+                    0.42227,
+                    0.51805
+                ],
+                [
+                    0.43047,
+                    0.51973
+                ],
+                [
+                    0.43867,
+                    0.52141
+                ],
+                [
+                    0.43765,
+                    0.54289
+                ],
+                [
+                    0.43657,
+                    0.54633
+                ],
+                [
+                    0.43442,
+                    0.54896
+                ],
+                [
+                    0.42026,
+                    0.54649
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 72,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 9,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.42173,
+                    0.28922
+                ],
+                [
+                    0.42393,
+                    0.2857
+                ],
+                [
+                    0.42759,
+                    0.2857
+                ],
+                [
+                    0.43867,
+                    0.298
+                ],
+                [
+                    0.43564,
+                    0.33578
+                ],
+                [
+                    0.41875,
+                    0.33243
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 115,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "12",
+            "first_lot": 10,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.43843,
+                    0.2988
+                ],
+                [
+                    0.45376,
+                    0.31637
+                ],
+                [
+                    0.45273,
+                    0.33898
+                ],
+                [
+                    0.43535,
+                    0.33562
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 79,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "13",
+            "first_lot": 2,
+            "lot_count": 5,
+            "corners": [
+                [
+                    0.45244,
+                    0.51653
+                ],
+                [
+                    0.46216,
+                    0.38618
+                ],
+                [
+                    0.47915,
+                    0.38954
+                ],
+                [
+                    0.46943,
+                    0.51997
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "13",
+            "first_lot": 9,
+            "lot_count": 5,
+            "corners": [
+                [
+                    0.49604,
+                    0.39289
+                ],
+                [
+                    0.48633,
+                    0.52332
+                ],
+                [
+                    0.46943,
+                    0.51997
+                ],
+                [
+                    0.47915,
+                    0.38954
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "10",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "11",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "12",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "13",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 68,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "13",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.45254,
+                    0.51645
+                ],
+                [
+                    0.46943,
+                    0.51981
+                ],
+                [
+                    0.46689,
+                    0.55543
+                ],
+                [
+                    0.45273,
+                    0.55296
+                ],
+                [
+                    0.45059,
+                    0.55032
+                ],
+                [
+                    0.45005,
+                    0.54673
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 93,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "13",
+            "first_lot": 14,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46714,
+                    0.54665
+                ],
+                [
+                    0.46963,
+                    0.51965
+                ],
+                [
+                    0.48604,
+                    0.523
+                ],
+                [
+                    0.48525,
+                    0.53738
+                ],
+                [
+                    0.48452,
+                    0.55168
+                ],
+                [
+                    0.4835,
+                    0.55591
+                ],
+                [
+                    0.4813,
+                    0.55855
+                ],
+                [
+                    0.46714,
+                    0.55607
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": "One-Storey Duplex",
+                    "lot_area_sqm": 93,
+                    "area_sqm": 29,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "13",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.46567,
+                    0.33874
+                ],
+                [
+                    0.46841,
+                    0.33522
+                ],
+                [
+                    0.47207,
+                    0.33602
+                ],
+                [
+                    0.48213,
+                    0.34752
+                ],
+                [
+                    0.4791,
+                    0.3893
+                ],
+                [
+                    0.46221,
+                    0.38594
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 124,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "13",
+            "first_lot": 8,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.48184,
+                    0.34832
+                ],
+                [
+                    0.49614,
+                    0.36334
+                ],
+                [
+                    0.49771,
+                    0.36685
+                ],
+                [
+                    0.49619,
+                    0.39249
+                ],
+                [
+                    0.4793,
+                    0.38994
+                ],
+                [
+                    0.48057,
+                    0.36909
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "One-Storey Single Attached",
+                    "lot_area_sqm": 88,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.50034,
+                    0.54752
+                ],
+                [
+                    0.50186,
+                    0.53083
+                ],
+                [
+                    0.51177,
+                    0.53251
+                ],
+                [
+                    0.52168,
+                    0.53419
+                ],
+                [
+                    0.51963,
+                    0.56661
+                ],
+                [
+                    0.50601,
+                    0.56414
+                ],
+                [
+                    0.50298,
+                    0.56246
+                ],
+                [
+                    0.50083,
+                    0.55903
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 96,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 2,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.50381,
+                    0.50447
+                ],
+                [
+                    0.52305,
+                    0.50783
+                ],
+                [
+                    0.52358,
+                    0.51637
+                ],
+                [
+                    0.52207,
+                    0.53466
+                ],
+                [
+                    0.51191,
+                    0.53259
+                ],
+                [
+                    0.50176,
+                    0.53051
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 3,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.50576,
+                    0.47812
+                ],
+                [
+                    0.52559,
+                    0.48227
+                ],
+                [
+                    0.52354,
+                    0.50831
+                ],
+                [
+                    0.50371,
+                    0.50495
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 4,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.50771,
+                    0.45256
+                ],
+                [
+                    0.52749,
+                    0.45591
+                ],
+                [
+                    0.52749,
+                    0.46374
+                ],
+                [
+                    0.52549,
+                    0.48275
+                ],
+                [
+                    0.51558,
+                    0.48067
+                ],
+                [
+                    0.50566,
+                    0.47859
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.50815,
+                    0.44361
+                ],
+                [
+                    0.50967,
+                    0.4262
+                ],
+                [
+                    0.51958,
+                    0.42827
+                ],
+                [
+                    0.52949,
+                    0.43035
+                ],
+                [
+                    0.52793,
+                    0.45639
+                ],
+                [
+                    0.50815,
+                    0.45304
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.51157,
+                    0.3988
+                ],
+                [
+                    0.5126,
+                    0.39457
+                ],
+                [
+                    0.51523,
+                    0.39113
+                ],
+                [
+                    0.51992,
+                    0.39113
+                ],
+                [
+                    0.5314,
+                    0.40423
+                ],
+                [
+                    0.52988,
+                    0.43003
+                ],
+                [
+                    0.51973,
+                    0.42835
+                ],
+                [
+                    0.50957,
+                    0.42668
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 100,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.53115,
+                    0.40647
+                ],
+                [
+                    0.53301,
+                    0.40543
+                ],
+                [
+                    0.55254,
+                    0.42835
+                ],
+                [
+                    0.54546,
+                    0.44569
+                ],
+                [
+                    0.54033,
+                    0.45407
+                ],
+                [
+                    0.52861,
+                    0.44161
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 100,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 8,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.54326,
+                    0.4492
+                ],
+                [
+                    0.55239,
+                    0.42843
+                ],
+                [
+                    0.56572,
+                    0.44273
+                ],
+                [
+                    0.56016,
+                    0.45591
+                ],
+                [
+                    0.55464,
+                    0.46909
+                ],
+                [
+                    0.55288,
+                    0.46909
+                ],
+                [
+                    0.5498,
+                    0.46573
+                ],
+                [
+                    0.54482,
+                    0.45679
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 9,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.56499,
+                    0.44385
+                ],
+                [
+                    0.5668,
+                    0.44385
+                ],
+                [
+                    0.57891,
+                    0.45791
+                ],
+                [
+                    0.57334,
+                    0.47165
+                ],
+                [
+                    0.56772,
+                    0.4853
+                ],
+                [
+                    0.55439,
+                    0.47021
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 10,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.57817,
+                    0.45903
+                ],
+                [
+                    0.57993,
+                    0.45903
+                ],
+                [
+                    0.59302,
+                    0.4722
+                ],
+                [
+                    0.58491,
+                    0.50208
+                ],
+                [
+                    0.57427,
+                    0.49377
+                ],
+                [
+                    0.56758,
+                    0.48538
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 92,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 11,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.5853,
+                    0.49944
+                ],
+                [
+                    0.59282,
+                    0.47236
+                ],
+                [
+                    0.60771,
+                    0.48331
+                ],
+                [
+                    0.60361,
+                    0.49824
+                ],
+                [
+                    0.59956,
+                    0.51318
+                ],
+                [
+                    0.5853,
+                    0.50319
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.59995,
+                    0.50982
+                ],
+                [
+                    0.60747,
+                    0.48283
+                ],
+                [
+                    0.62583,
+                    0.49369
+                ],
+                [
+                    0.62021,
+                    0.50783
+                ],
+                [
+                    0.61465,
+                    0.52196
+                ],
+                [
+                    0.59995,
+                    0.51366
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 88,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 13,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.62559,
+                    0.49401
+                ],
+                [
+                    0.64106,
+                    0.50304
+                ],
+                [
+                    0.64268,
+                    0.50567
+                ],
+                [
+                    0.64321,
+                    0.51014
+                ],
+                [
+                    0.63726,
+                    0.52556
+                ],
+                [
+                    0.6313,
+                    0.54097
+                ],
+                [
+                    0.63003,
+                    0.54097
+                ],
+                [
+                    0.61396,
+                    0.52372
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 122,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 14,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.60581,
+                    0.54337
+                ],
+                [
+                    0.61382,
+                    0.52372
+                ],
+                [
+                    0.61509,
+                    0.52372
+                ],
+                [
+                    0.63052,
+                    0.54081
+                ],
+                [
+                    0.63052,
+                    0.54289
+                ],
+                [
+                    0.62251,
+                    0.56254
+                ],
+                [
+                    0.62075,
+                    0.56254
+                ],
+                [
+                    0.60581,
+                    0.54625
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "14",
+            "first_lot": 15,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.58921,
+                    0.5849
+                ],
+                [
+                    0.60454,
+                    0.54609
+                ],
+                [
+                    0.6063,
+                    0.54609
+                ],
+                [
+                    0.62173,
+                    0.56238
+                ],
+                [
+                    0.62173,
+                    0.56446
+                ],
+                [
+                    0.60933,
+                    0.59449
+                ],
+                [
+                    0.60469,
+                    0.59449
+                ],
+                [
+                    0.58921,
+                    0.58714
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 129,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "15",
+            "first_lot": 1,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.625,
+                    0.60447
+                ],
+                [
+                    0.65244,
+                    0.53546
+                ],
+                [
+                    0.66924,
+                    0.55327
+                ],
+                [
+                    0.6418,
+                    0.62236
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 91,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "15",
+            "first_lot": 6,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.68599,
+                    0.57109
+                ],
+                [
+                    0.65859,
+                    0.64018
+                ],
+                [
+                    0.6418,
+                    0.62236
+                ],
+                [
+                    0.66924,
+                    0.55327
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 87,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "15",
+            "first_lot": 4,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.65864,
+                    0.51917
+                ],
+                [
+                    0.66074,
+                    0.51653
+                ],
+                [
+                    0.66387,
+                    0.51653
+                ],
+                [
+                    0.68003,
+                    0.52644
+                ],
+                [
+                    0.66929,
+                    0.55319
+                ],
+                [
+                    0.65254,
+                    0.53578
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 85,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "15",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.66978,
+                    0.55136
+                ],
+                [
+                    0.67979,
+                    0.52676
+                ],
+                [
+                    0.69634,
+                    0.53666
+                ],
+                [
+                    0.69741,
+                    0.54105
+                ],
+                [
+                    0.69688,
+                    0.54457
+                ],
+                [
+                    0.68638,
+                    0.57157
+                ],
+                [
+                    0.67808,
+                    0.56294
+                ],
+                [
+                    0.66978,
+                    0.55423
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 108,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "16",
+            "first_lot": 1,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.67324,
+                    0.65184
+                ],
+                [
+                    0.7019,
+                    0.57963
+                ],
+                [
+                    0.71875,
+                    0.59752
+                ],
+                [
+                    0.69009,
+                    0.66973
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 81,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 100,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "16",
+            "first_lot": 6,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.74194,
+                    0.59912
+                ],
+                [
+                    0.71577,
+                    0.66502
+                ],
+                [
+                    0.69902,
+                    0.6472
+                ],
+                [
+                    0.7252,
+                    0.58131
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "16",
+            "first_lot": 4,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.70249,
+                    0.57772
+                ],
+                [
+                    0.7144,
+                    0.54928
+                ],
+                [
+                    0.71855,
+                    0.54928
+                ],
+                [
+                    0.73423,
+                    0.55919
+                ],
+                [
+                    0.72671,
+                    0.57804
+                ],
+                [
+                    0.71919,
+                    0.59688
+                ],
+                [
+                    0.71792,
+                    0.59688
+                ],
+                [
+                    0.70249,
+                    0.58059
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 127,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "16",
+            "first_lot": 5,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.73398,
+                    0.5595
+                ],
+                [
+                    0.75005,
+                    0.56861
+                ],
+                [
+                    0.75166,
+                    0.57556
+                ],
+                [
+                    0.74263,
+                    0.59848
+                ],
+                [
+                    0.74136,
+                    0.59848
+                ],
+                [
+                    0.72529,
+                    0.58123
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 90,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "16",
+            "first_lot": 9,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.69829,
+                    0.64752
+                ],
+                [
+                    0.70005,
+                    0.64752
+                ],
+                [
+                    0.70786,
+                    0.65615
+                ],
+                [
+                    0.71562,
+                    0.66478
+                ],
+                [
+                    0.70952,
+                    0.68131
+                ],
+                [
+                    0.70693,
+                    0.68554
+                ],
+                [
+                    0.70322,
+                    0.68554
+                ],
+                [
+                    0.69014,
+                    0.66909
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "17",
+            "first_lot": 2,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.72461,
+                    0.69097
+                ],
+                [
+                    0.75952,
+                    0.60296
+                ],
+                [
+                    0.77642,
+                    0.62085
+                ],
+                [
+                    0.74146,
+                    0.70887
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "17",
+            "first_lot": 8,
+            "lot_count": 4,
+            "corners": [
+                [
+                    0.79302,
+                    0.63882
+                ],
+                [
+                    0.75488,
+                    0.73482
+                ],
+                [
+                    0.73818,
+                    0.71709
+                ],
+                [
+                    0.77632,
+                    0.62109
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 80,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 109,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "17",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.71616,
+                    0.71102
+                ],
+                [
+                    0.72417,
+                    0.69145
+                ],
+                [
+                    0.72544,
+                    0.69145
+                ],
+                [
+                    0.74087,
+                    0.70775
+                ],
+                [
+                    0.74087,
+                    0.71062
+                ],
+                [
+                    0.72905,
+                    0.7405
+                ],
+                [
+                    0.72671,
+                    0.74337
+                ],
+                [
+                    0.71567,
+                    0.71542
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 106,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "17",
+            "first_lot": 6,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.76011,
+                    0.6016
+                ],
+                [
+                    0.7686,
+                    0.58203
+                ],
+                [
+                    0.77227,
+                    0.58203
+                ],
+                [
+                    0.78774,
+                    0.59097
+                ],
+                [
+                    0.78774,
+                    0.59401
+                ],
+                [
+                    0.78223,
+                    0.60759
+                ],
+                [
+                    0.77671,
+                    0.62109
+                ],
+                [
+                    0.76011,
+                    0.60375
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 95,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "17",
+            "first_lot": 12,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.72739,
+                    0.74305
+                ],
+                [
+                    0.73794,
+                    0.71677
+                ],
+                [
+                    0.75454,
+                    0.73411
+                ],
+                [
+                    0.75454,
+                    0.73618
+                ],
+                [
+                    0.7437,
+                    0.76358
+                ],
+                [
+                    0.74062,
+                    0.76781
+                ],
+                [
+                    0.73784,
+                    0.76781
+                ],
+                [
+                    0.72739,
+                    0.74505
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 116,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "17",
+            "first_lot": 7,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.78818,
+                    0.59145
+                ],
+                [
+                    0.80317,
+                    0.60048
+                ],
+                [
+                    0.80532,
+                    0.60312
+                ],
+                [
+                    0.80532,
+                    0.60998
+                ],
+                [
+                    0.7939,
+                    0.63842
+                ],
+                [
+                    0.79214,
+                    0.63842
+                ],
+                [
+                    0.77656,
+                    0.62117
+                ],
+                [
+                    0.78237,
+                    0.60631
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Duplex",
+                    "lot_area_sqm": 117,
+                    "area_sqm": null,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "18",
+            "first_lot": 2,
+            "lot_count": 15,
+            "corners": [
+                [
+                    0.38804,
+                    0.20911
+                ],
+                [
+                    0.58589,
+                    0.43403
+                ],
+                [
+                    0.59717,
+                    0.40751
+                ],
+                [
+                    0.39937,
+                    0.18259
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "2",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "3",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "4",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 3,
+                    "lot": "5",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 4,
+                    "lot": "6",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 5,
+                    "lot": "7",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 6,
+                    "lot": "8",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 7,
+                    "lot": "9",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 8,
+                    "lot": "10",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 9,
+                    "lot": "11",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 10,
+                    "lot": "12",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 11,
+                    "lot": "13",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 12,
+                    "lot": "14",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 13,
+                    "lot": "15",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 14,
+                    "lot": "16",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "18",
+            "first_lot": 19,
+            "lot_count": 3,
+            "corners": [
+                [
+                    0.62051,
+                    0.46318
+                ],
+                [
+                    0.66548,
+                    0.49034
+                ],
+                [
+                    0.67236,
+                    0.4599
+                ],
+                [
+                    0.62739,
+                    0.43267
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "19",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 1,
+                    "lot": "20",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                },
+                {
+                    "index": 2,
+                    "lot": "21",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 80,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "18",
+            "first_lot": 1,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.38076,
+                    0.1619
+                ],
+                [
+                    0.38223,
+                    0.1619
+                ],
+                [
+                    0.39907,
+                    0.18139
+                ],
+                [
+                    0.39907,
+                    0.18347
+                ],
+                [
+                    0.38862,
+                    0.20871
+                ],
+                [
+                    0.38735,
+                    0.20871
+                ],
+                [
+                    0.38086,
+                    0.20136
+                ],
+                [
+                    0.37827,
+                    0.19625
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "1",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 87,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "18",
+            "first_lot": 17,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.58628,
+                    0.43227
+                ],
+                [
+                    0.59673,
+                    0.40791
+                ],
+                [
+                    0.59805,
+                    0.40791
+                ],
+                [
+                    0.60952,
+                    0.42101
+                ],
+                [
+                    0.60952,
+                    0.42388
+                ],
+                [
+                    0.60107,
+                    0.45072
+                ],
+                [
+                    0.59971,
+                    0.45072
+                ],
+                [
+                    0.58628,
+                    0.43522
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "17",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 83,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "block": "18",
+            "first_lot": 18,
+            "lot_count": 1,
+            "corners": [
+                [
+                    0.60938,
+                    0.42228
+                ],
+                [
+                    0.61162,
+                    0.42228
+                ],
+                [
+                    0.6272,
+                    0.43211
+                ],
+                [
+                    0.62061,
+                    0.46286
+                ],
+                [
+                    0.61069,
+                    0.45703
+                ],
+                [
+                    0.60078,
+                    0.45128
+                ]
+            ],
+            "lots": [
+                {
+                    "index": 0,
+                    "lot": "18",
+                    "unit_type": "Two-Storey Single Attached",
+                    "lot_area_sqm": 100,
+                    "area_sqm": 44,
+                    "price": null,
+                    "tags": []
+                }
+            ]
+        }
+    ]
+}
