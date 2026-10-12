@@ -69,6 +69,8 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
     Route::get('/account', [AccountController::class, 'show']);
     Route::patch('/account', [AccountController::class, 'update'])->middleware('throttle:login');
     Route::post('/account/password', [AccountController::class, 'password'])->middleware('throttle:login');
+    Route::post('/account/photo', [AccountController::class, 'photo']);
+    Route::delete('/account/photo', [AccountController::class, 'removePhoto']);
 
     // jvconline admin
     Route::prefix('admin')->middleware('admin')->group(function () {

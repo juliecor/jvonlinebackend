@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
@@ -13,7 +14,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 /**
  * Each person's own account, whoever they are (platform admin, super admin,
- * realty admin, agent): their name, email and phone, and their password.
+ * realty admin, agent): their name, email and phone, their profile photo, and their password.
  * Only those columns are ever saved, so a super admin previewing a realty
  * (role and realty swapped in memory) keeps their real role.
  */
@@ -73,11 +74,45 @@ class AccountController extends Controller
         return response()->json(['message' => 'Password changed. Other devices were signed out.']);
     }
 
+    /** A new profile photo; the old one's file is deleted. */
+    public function photo(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $request->validate(['photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120']], [
+            'photo.image' => 'Choose a photo (JPG, PNG or WebP).',
+            'photo.mimes' => 'Choose a photo (JPG, PNG or WebP).',
+            'photo.max' => 'The photo can be up to 5 MB.',
+        ]);
+        $old = $user->photo_path;
+        $user->forceFill(['photo_path' => $request->file('photo')->store("users/{$user->id}", config('filesystems.uploads'))])->save();
+        $this->forget($old);
+
+        return response()->json($this->details($user));
+    }
+
+    /** Back to initials. */
+    public function removePhoto(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $this->forget($user->photo_path);
+        $user->forceFill(['photo_path' => null])->save();
+
+        return response()->json($this->details($user));
+    }
+
+    private function forget(?string $path): void
+    {
+        if ($path && ! str_starts_with($path, '/') && ! str_starts_with($path, 'http')) {
+            Storage::disk(config('filesystems.uploads'))->delete($path);
+        }
+    }
+
     /** @return array<string, mixed> */
     private function details(User $user): array
     {
         return [
             'name' => $user->name,
+            'photo_url' => $user->photoUrl(),
             'email' => $user->email,
             'phone' => $user->phone,
             'role' => $user->role,

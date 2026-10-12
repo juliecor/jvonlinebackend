@@ -142,6 +142,7 @@ class AuthController extends Controller
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
+            'photo_url' => $user->photoUrl(),
             'role' => $user->role,
             'is_superadmin' => $user->isSuperAdmin(),
             'status' => $user->status,

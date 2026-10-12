@@ -99,6 +99,12 @@ class User extends Authenticatable
         return $this->role === self::ROLE_ADMIN;
     }
 
+    /** The profile photo's address, or null for initials instead. photo_path is set only by AccountController. */
+    public function photoUrl(): ?string
+    {
+        return Project::publicUrl($this->photo_path);
+    }
+
     /** Platform admins who can also switch into any realty's dashboard as its admin or an agent. */
     public function isSuperAdmin(): bool
     {
