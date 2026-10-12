@@ -81,6 +81,15 @@ class SiteMapTest extends TestCase
             ->assertJsonValidationErrors(['first_lot' => 'Block 4 lots 9, 10 are already on the map.']);
         $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '5', 'corners' => $this->corners, 'first_lot' => 9, 'lot_count' => 5])->assertCreated();
         $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '6', 'corners' => [[0, 0], [2, 0], [1, 1], [0, 1]], 'first_lot' => 1, 'lot_count' => 2])->assertJsonValidationErrors('corners.1.0');
+
+        // A row that bends: three points on the road side and three at the back. Half a pair is refused.
+        $bent = [[0.1, 0.6], [0.5, 0.6], [0.5, 0.9], [0.4, 0.9], [0.4, 0.7], [0.1, 0.7]];
+        $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '7', 'corners' => $bent, 'first_lot' => 1, 'lot_count' => 6])
+            ->assertCreated()->assertJsonPath('rows.2.corners.5.1', 0.7);
+        $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '8', 'corners' => array_slice($bent, 0, 5), 'first_lot' => 1, 'lot_count' => 2])
+            ->assertJsonValidationErrors(['corners' => 'straight across']);
+        $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '8', 'corners' => array_fill(0, SiteRow::MAX_CORNERS + 2, [0.5, 0.5]), 'first_lot' => 1, 'lot_count' => 2])
+            ->assertJsonValidationErrors('corners');
     }
 
     public function test_a_row_can_be_moved_given_values_and_taken_off_keeping_lots_with_offers(): void

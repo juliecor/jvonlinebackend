@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\SiteRow;
 use App\Models\Unit;
+use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -182,7 +183,11 @@ class SiteMapController extends Controller
     private function rowRules(): array
     {
         return [
-            'corners' => ['required', 'array', 'size:4'],
+            'corners' => ['required', 'array', 'min:4', 'max:'.SiteRow::MAX_CORNERS, function (string $attribute, mixed $value, Closure $fail) {
+                if (is_array($value) && count($value) % 2) {
+                    $fail('Every point on the road side needs one straight across from it at the back.');
+                }
+            }],
             'corners.*' => ['required', 'array', 'size:2'],
             'corners.*.*' => ['required', 'numeric', 'between:-0.05,1.05'],
         ];
