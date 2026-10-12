@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['realty_id', 'project_id', 'name', 'block', 'lot', 'site_row_id', 'row_index', 'lot_area_sqm', 'tags', 'unit_type', 'category', 'floor', 'area_sqm', 'price', 'status', 'status_offer_id', 'status_by_id', 'status_at', 'floor_plan_path', 'notes', 'buyer_notes'])]
+#[Fillable(['realty_id', 'project_id', 'name', 'block', 'lot', 'site_row_id', 'row_index', 'lot_area_sqm', 'tags', 'photo_paths', 'unit_type', 'category', 'floor', 'area_sqm', 'price', 'status', 'status_offer_id', 'status_by_id', 'status_at', 'floor_plan_path', 'notes', 'buyer_notes'])]
 class Unit extends Model
 {
     public const STATUSES = ['available', 'reserved', 'sold'];
@@ -18,11 +18,14 @@ class Unit extends Model
     /** What makes a lot special, shown on the site map and the lot's details. */
     public const TAGS = ['corner' => 'Corner lot', 'park' => 'Near the park', 'end' => 'End unit'];
 
-    protected $appends = ['floor_plan_url'];
+    /** How many photos one lot keeps. */
+    public const MAX_PHOTOS = 12;
+
+    protected $appends = ['floor_plan_url', 'photo_urls'];
 
     protected function casts(): array
     {
-        return ['area_sqm' => 'decimal:2', 'lot_area_sqm' => 'decimal:2', 'price' => 'decimal:2', 'status_at' => 'datetime', 'tags' => 'array', 'row_index' => 'integer'];
+        return ['area_sqm' => 'decimal:2', 'lot_area_sqm' => 'decimal:2', 'price' => 'decimal:2', 'status_at' => 'datetime', 'tags' => 'array', 'row_index' => 'integer', 'photo_paths' => 'array'];
     }
 
     /** The offer this unit is reserved or sold through (its buyer and agent). */
@@ -78,7 +81,7 @@ class Unit extends Model
             : ($names ? UnitType::where('project_id', $this->project_id)->whereIn('name', $names)->first() : null);
         $render = collect($model?->images ?? [])->first(fn (string $url) => $url !== $this->floor_plan_url);
 
-        return $render ?? $project?->hero_urls[0] ?? $project?->cover_url ?? $this->floor_plan_url;
+        return $this->photo_urls[0] ?? $render ?? $project?->hero_urls[0] ?? $project?->cover_url ?? $this->floor_plan_url;
     }
 
     /** Uploads live on the uploads disk (local or S3); a path starting with "/" or "http" (images shipped with the frontend) is used as-is. */
@@ -92,6 +95,29 @@ class Unit extends Model
         }
 
         return Storage::disk(config('filesystems.uploads'))->url($path);
+    }
+
+    /** The lot's own photos, as URLs. */
+    protected function photoUrls(): Attribute
+    {
+        return Attribute::get(fn () => array_values(array_filter(array_map(fn ($p) => self::publicUrl($p), $this->photo_paths ?? []))));
+    }
+
+    /**
+     * Deletes uploaded photo files no lot of the project uses any more (a row's photo is shared by its lots).
+     *
+     * @param  array<int, string>  $paths
+     */
+    public static function forgetPhotos(int $projectId, array $paths): void
+    {
+        foreach (array_unique($paths) as $path) {
+            if (str_starts_with($path, '/') || str_starts_with($path, 'http')) {
+                continue;
+            }
+            if (! self::where('project_id', $projectId)->whereJsonContains('photo_paths', $path)->exists()) {
+                Storage::disk(config('filesystems.uploads'))->delete($path);
+            }
+        }
     }
 
     protected function floorPlanUrl(): Attribute

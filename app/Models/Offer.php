@@ -423,6 +423,8 @@ class Offer extends Model
                 'block' => $unit->block,
                 'lot' => $unit->lot,
                 'lot_area_sqm' => $unit->lot_area_sqm !== null ? (float) $unit->lot_area_sqm : null,
+                // Photos of this very house or lot, shown before the model's pictures.
+                'photos' => $unit->photo_urls,
             ],
             // Where the home is on the site plan, when its lot is drawn there (no prices of other lots).
             'site_map' => $unit->site_row_id ? $project->siteMap(public: true) + ['highlight' => $unit->id] : null,

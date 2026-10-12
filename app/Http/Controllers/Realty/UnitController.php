@@ -57,6 +57,7 @@ class UnitController extends Controller
             Storage::disk(config('filesystems.uploads'))->delete($unit->floor_plan_path);
         }
         $unit->delete();
+        Unit::forgetPhotos($unit->project_id, $unit->photo_paths ?? []);
 
         return response()->json(['deleted' => $unit->id]);
     }

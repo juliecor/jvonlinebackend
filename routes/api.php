@@ -199,6 +199,9 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
                 Route::post('/site-rows/{row}', [SiteMapController::class, 'updateRow']);
                 Route::post('/site-rows/{row}/apply', [SiteMapController::class, 'applyToRow']);
                 Route::delete('/site-rows/{row}', [SiteMapController::class, 'destroyRow']);
+                Route::post('/site-rows/{row}/photos', [SiteMapController::class, 'addRowPhotos']);
+                Route::post('/units/{unit}/photos', [SiteMapController::class, 'addLotPhotos']);
+                Route::post('/units/{unit}/photos/remove', [SiteMapController::class, 'removeLotPhoto']);
                 Route::post('/projects/{project}/plans', [PaymentPlanController::class, 'store']);
                 Route::post('/plans/{plan}', [PaymentPlanController::class, 'update']);
                 Route::delete('/plans/{plan}', [PaymentPlanController::class, 'destroy']);

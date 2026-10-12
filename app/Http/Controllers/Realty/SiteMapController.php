@@ -8,6 +8,7 @@ use App\Models\SiteRow;
 use App\Models\Unit;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
@@ -97,6 +98,7 @@ class SiteMapController extends Controller
     {
         $project = $this->ownRow($request, $row);
         $kept = 0;
+        $photos = $row->units->flatMap(fn (Unit $u) => $u->photo_paths ?? [])->all();
         DB::transaction(function () use ($row, &$kept) {
             foreach ($row->units()->withCount('offers')->get() as $unit) {
                 if ($unit->offers_count > 0) {
@@ -112,8 +114,68 @@ class SiteMapController extends Controller
             }
             $row->delete();
         });
+        Unit::forgetPhotos($project->id, $photos);
 
         return response()->json(['kept' => $kept, 'site_map' => $project->siteMap()]);
+    }
+
+    /** Photos of one lot (the actual house or lot). */
+    public function addLotPhotos(Request $request, Unit $unit): JsonResponse
+    {
+        abort_unless($unit->realty_id === $request->user()->realty_id, 404);
+        $files = $this->photoFiles($request);
+        $paths = $unit->photo_paths ?? [];
+        abort_if(count($paths) + count($files) > Unit::MAX_PHOTOS, 422, 'A lot keeps up to '.Unit::MAX_PHOTOS.' photos. Remove some first.');
+        foreach ($files as $file) {
+            $paths[] = $file->store("projects/{$unit->project_id}/lots", config('filesystems.uploads'));
+        }
+        $unit->update(['photo_paths' => $paths]);
+
+        return response()->json(['photos' => $unit->photo_urls]);
+    }
+
+    /** Take one photo off a lot (by its URL); the file goes once no lot uses it. */
+    public function removeLotPhoto(Request $request, Unit $unit): JsonResponse
+    {
+        abort_unless($unit->realty_id === $request->user()->realty_id, 404);
+        $url = $request->validate(['url' => ['required', 'string']])['url'];
+        $gone = array_values(array_filter($unit->photo_paths ?? [], fn ($p) => Unit::publicUrl($p) === $url));
+        $unit->update(['photo_paths' => array_values(array_diff($unit->photo_paths ?? [], $gone))]);
+        Unit::forgetPhotos($unit->project_id, $gone);
+
+        return response()->json(['photos' => $unit->photo_urls]);
+    }
+
+    /** The same photos on every lot of a row (each file stored once). Lots that are full are skipped. */
+    public function addRowPhotos(Request $request, SiteRow $row): JsonResponse
+    {
+        $project = $this->ownRow($request, $row);
+        $files = $this->photoFiles($request);
+        $paths = array_map(fn ($f) => $f->store("projects/{$project->id}/lots", config('filesystems.uploads')), $files);
+        $skipped = 0;
+        foreach ($row->units as $unit) {
+            $mine = $unit->photo_paths ?? [];
+            if (count($mine) + count($paths) > Unit::MAX_PHOTOS) {
+                $skipped++;
+
+                continue;
+            }
+            $unit->update(['photo_paths' => [...$mine, ...$paths]]);
+        }
+        Unit::forgetPhotos($project->id, $paths);
+
+        return response()->json(['skipped' => $skipped, 'site_map' => $project->siteMap()]);
+    }
+
+    /** @return array<int, UploadedFile> */
+    private function photoFiles(Request $request): array
+    {
+        $request->validate(['photos' => ['required', 'array', 'min:1', 'max:'.Unit::MAX_PHOTOS], 'photos.*' => ['image', 'max:8192']], [
+            'photos.*.image' => 'Upload photos (JPG, PNG or WebP).',
+            'photos.*.max' => 'Each photo can be up to 8 MB.',
+        ]);
+
+        return $request->file('photos');
     }
 
     /** @return array<string, array<int, mixed>> */

@@ -9,6 +9,8 @@ use App\Models\SiteRow;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -140,6 +142,52 @@ class SiteMapTest extends TestCase
         $this->assertSame($unit->id, $buyer['site_map']['highlight']);
         $this->assertSame(['1', '3', 42.0], [$buyer['unit']['block'], $buyer['unit']['lot'], $buyer['unit']['lot_area_sqm']]);
         $this->assertNull($buyer['site_map']['lots'][0]['price']);
+    }
+
+    public function test_lots_get_photos_one_by_one_or_a_whole_row_at_once(): void
+    {
+        $disk = Storage::fake(config('filesystems.uploads'));
+        Sanctum::actingAs($this->admin);
+        $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '1', 'corners' => $this->corners, 'first_lot' => 1, 'lot_count' => 3])->assertCreated();
+        $row = SiteRow::firstOrFail();
+        [$one, $two] = Unit::orderBy('row_index')->take(2)->get();
+
+        // A row's photo is stored once and shared by its lots.
+        $this->post("/api/realty/site-rows/{$row->id}/photos", ['photos' => [UploadedFile::fake()->image('model.jpg')]], ['Accept' => 'application/json'])->assertOk()->assertJsonPath('skipped', 0)->assertJsonCount(1, 'site_map.lots.0.photos');
+        $shared = $one->fresh()->photo_paths[0];
+        $this->assertSame($shared, $two->fresh()->photo_paths[0]);
+        $this->assertCount(1, $disk->allFiles());
+
+        // A lot's own photo comes after; it shows on the lot first only by order of upload.
+        $photos = $this->post("/api/realty/units/{$one->id}/photos", ['photos' => [UploadedFile::fake()->image('house.jpg')]], ['Accept' => 'application/json'])->assertOk()->json('photos');
+        $this->assertCount(2, $photos);
+        $this->post("/api/realty/units/{$one->id}/photos", ['photos' => [UploadedFile::fake()->create('notes.pdf', 10, 'application/pdf')]], ['Accept' => 'application/json'])->assertJsonValidationErrors('photos.0');
+
+        // Removing the shared photo from one lot keeps the file for the others; from the last lot, the file goes.
+        $sharedUrl = $photos[0];
+        $this->postJson("/api/realty/units/{$one->id}/photos/remove", ['url' => $sharedUrl])->assertOk()->assertJsonCount(1, 'photos');
+        $disk->assertExists($shared);
+        foreach (Unit::where('id', '!=', $one->id)->get() as $u) {
+            $this->postJson("/api/realty/units/{$u->id}/photos/remove", ['url' => $sharedUrl])->assertOk();
+        }
+        $disk->assertMissing($shared);
+
+        // Taking the row off the map deletes its lots' photos.
+        $this->deleteJson("/api/realty/site-rows/{$row->id}")->assertOk();
+        $this->assertSame([], $disk->allFiles());
+    }
+
+    public function test_the_buyer_and_the_website_see_the_lots_photos(): void
+    {
+        Storage::fake(config('filesystems.uploads'));
+        Sanctum::actingAs($this->admin);
+        $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '1', 'corners' => $this->corners, 'first_lot' => 1, 'lot_count' => 1])->assertCreated();
+        $unit = Unit::firstOrFail();
+        $this->post("/api/realty/units/{$unit->id}/photos", ['photos' => [UploadedFile::fake()->image('house.jpg')]], ['Accept' => 'application/json'])->assertOk();
+
+        $this->getJson('/api/realties/johndorf/projects/tierranava-opol')->assertJsonCount(1, 'site_map.lots.0.photos');
+        $offer = Offer::create(['realty_id' => $this->johndorf->id, 'project_id' => $this->project->id, 'unit_id' => $unit->id, 'agent_id' => $this->admin->id, 'code' => Offer::newCode(), 'buyer_name' => 'Rosa', 'purchase_date' => now()->toDateString(), 'price' => 1, 'schedule' => [], 'status' => 'active']);
+        $this->assertCount(1, $offer->publicArray()['unit']['photos']);
     }
 
     public function test_only_johndorfs_admins_with_projects_draw_on_the_map(): void

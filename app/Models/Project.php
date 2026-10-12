@@ -86,6 +86,7 @@ class Project extends Model
                 'floor_area' => $u->area_sqm,
                 'price' => $public ? null : $u->price,
                 'tags' => array_values(array_intersect(array_keys(Unit::TAGS), $u->tags ?? [])),
+                'photos' => $u->photo_urls,
             ])->values()->all(),
         ];
     }
