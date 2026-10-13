@@ -59,6 +59,10 @@ Route::middleware('throttle:invite-link')->group(function () {
     Route::post('/join/{token}', [AgentJoinController::class, 'store']);
 });
 
+// The open accreditation form on a developer's website (jvconline.ph/accreditation): no invite needed.
+Route::get('/realties/{realty}/accreditation', [AccreditationController::class, 'openShow'])->middleware('throttle:invite-link');
+Route::post('/realties/{realty}/accreditation', [AccreditationController::class, 'openStore'])->middleware('throttle:accreditation-form');
+
 Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/auth/me', [AuthController::class, 'me']);

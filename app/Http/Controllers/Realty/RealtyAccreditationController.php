@@ -47,6 +47,7 @@ class RealtyAccreditationController extends Controller
                 'business_type' => $a->business_type,
                 'representative_name' => $a->representative_name,
                 'email' => $a->login_email,
+                'source' => $a->source,
                 'submitted_at' => $a->submitted_at,
                 'documents_count' => $a->documents_count,
             ]),
@@ -75,6 +76,7 @@ class RealtyAccreditationController extends Controller
                 'id' => $a->id,
                 'firm_name' => $a->firm_name,
                 'email' => $a->login_email ?? $a->email,
+                'source' => $a->source,
                 'review_note' => $a->review_note,
                 'reviewed_at' => $a->reviewed_at,
             ]),
@@ -134,6 +136,8 @@ class RealtyAccreditationController extends Controller
             'id' => $form->id,
             'status' => $form->status,
             'invited_email' => $form->email,
+            // "website": sent from the developer's website, without an invite.
+            'source' => $form->source,
             'submitted_at' => $form->submitted_at,
             'details' => collect($form->only([
                 'business_type', 'firm_name', 'residential_address', 'tin_company', 'tin_personal', 'prc_number', 'prc_valid_until', 'hlurb_number', 'hlurb_issued_at',

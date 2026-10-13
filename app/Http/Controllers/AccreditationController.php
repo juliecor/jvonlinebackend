@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccreditationDocument;
+use App\Models\Realty;
 use App\Models\RealtyAccreditation;
 use App\Support\AccreditationAgreement;
 use Illuminate\Http\JsonResponse;
@@ -12,8 +13,9 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 /**
- * The accreditation form a realty reaches from its invite email (jvconline.ph/accreditation/<token>).
- * The token is the credential, so nothing here needs a login; the developer's staff review what is sent.
+ * The accreditation form a realty fills in: from its invite email (jvconline.ph/accreditation/<token>, the token is
+ * the credential), or open to anyone on the developer's website (jvconline.ph/accreditation). Nothing here needs a
+ * login; the developer's staff review what is sent.
  */
 class AccreditationController extends Controller
 {
@@ -21,16 +23,9 @@ class AccreditationController extends Controller
     {
         $accreditation = $this->usable($token);
 
-        return response()->json([
-            'developer' => $accreditation->developer->publicArray(),
+        return response()->json($this->formFor($accreditation->developer) + [
             'email' => $accreditation->email,
             'expires_at' => $accreditation->expires_at,
-            'documents' => AccreditationDocument::forForm(),
-            'civil_statuses' => RealtyAccreditation::CIVIL_STATUSES,
-            // The agreement the realty agrees to before sending the form (null until the developer has set it up).
-            'agreement' => AccreditationAgreement::ready($accreditation->developer) ? AccreditationAgreement::draft($accreditation->developer) + [
-                'signed_copy_days' => AccreditationAgreement::settings($accreditation->developer)['signed_copy_days'],
-            ] : null,
         ]);
     }
 
@@ -38,7 +33,78 @@ class AccreditationController extends Controller
     {
         $accreditation = $this->usable($token);
         $agreement = AccreditationAgreement::ready($accreditation->developer);
-        $data = $request->validate($this->rules($request) + ['privacy' => ['accepted']] + ($agreement ? [
+        $data = $this->validated($request, $agreement);
+
+        DB::transaction(function () use ($request, $accreditation, $agreement, $data) {
+            // Two clicks on Submit must not file it twice.
+            $form = RealtyAccreditation::whereKey($accreditation->id)->lockForUpdate()->firstOrFail();
+            abort_unless($form->isUsable(), 410, 'This form was already submitted.');
+
+            $this->fill($form, $request, $data, $agreement);
+        });
+
+        return response()->json(['ok' => true], 201);
+    }
+
+    /** The open form on the developer's website: the same questions, without an invite. */
+    public function openShow(string $realty): JsonResponse
+    {
+        return response()->json($this->formFor($this->developer($realty)) + ['email' => null]);
+    }
+
+    public function openStore(Request $request, string $realty): JsonResponse
+    {
+        $developer = $this->developer($realty);
+        $agreement = AccreditationAgreement::ready($developer);
+        // Honeypot: hidden from people, filled in by bots.
+        $data = $this->validated($request, $agreement, ['website' => ['nullable', 'max:0']]);
+        $email = mb_strtolower($data['login_email']);
+
+        // One form per email at a time: the staff decide on the one they have before another comes in.
+        $waiting = $developer->accreditations()->where('status', RealtyAccreditation::STATUS_SUBMITTED)
+            ->where(fn ($q) => $q->where('login_email', $email)->orWhere('email', $email))->exists();
+        if ($waiting) {
+            throw ValidationException::withMessages(['login_email' => "A form with this email is already waiting for review at {$developer->name}."]);
+        }
+
+        DB::transaction(function () use ($request, $developer, $agreement, $data, $email) {
+            // An invite to the same email that was never filled in: this form takes its place, so its link stops working.
+            $developer->accreditations()->where('status', RealtyAccreditation::STATUS_INVITED)->where('email', $email)->delete();
+
+            $form = $developer->accreditations()->create([
+                'source' => RealtyAccreditation::SOURCE_WEBSITE,
+                'email' => $email,
+                'status' => RealtyAccreditation::STATUS_INVITED,
+            ]);
+            $this->fill($form, $request, ['login_email' => $email] + $data, $agreement);
+        });
+
+        return response()->json(['ok' => true], 201);
+    }
+
+    /** What the form shows: the developer's brand, the documents to attach and the agreement, if it is set up. */
+    private function formFor(Realty $developer): array
+    {
+        return [
+            'developer' => $developer->publicArray(),
+            'documents' => AccreditationDocument::forForm(),
+            'civil_statuses' => RealtyAccreditation::CIVIL_STATUSES,
+            // The agreement the realty agrees to before sending the form (null until the developer has set it up).
+            'agreement' => AccreditationAgreement::ready($developer) ? AccreditationAgreement::draft($developer) + [
+                'signed_copy_days' => AccreditationAgreement::settings($developer)['signed_copy_days'],
+            ] : null,
+        ];
+    }
+
+    /**
+     * The answers, checked; with the agreement set up, the typed name that signs it.
+     *
+     * @param  array<string, array<int, mixed>>  $extra
+     * @return array<string, mixed>
+     */
+    private function validated(Request $request, bool $agreement, array $extra = []): array
+    {
+        $data = $request->validate($this->rules($request) + ['privacy' => ['accepted']] + $extra + ($agreement ? [
             'agree' => ['accepted'],
             'agreed_name' => ['required', 'string', 'max:120'],
         ] : []), $this->messages() + [
@@ -50,47 +116,44 @@ class AccreditationController extends Controller
         if ($agreement && mb_strtolower(preg_replace('/\s+/', ' ', trim($data['agreed_name']))) !== mb_strtolower(preg_replace('/\s+/', ' ', trim($data['representative_name'])))) {
             throw ValidationException::withMessages(['agreed_name' => 'Type the representative\'s full name exactly as above: '.trim($data['representative_name']).'.']);
         }
-        $fields = collect($data)->except(['documents', 'privacy', 'agree', 'agreed_name'])->all();
 
-        DB::transaction(function () use ($request, $accreditation, $fields, $agreement, $data) {
-            // Two clicks on Submit must not file it twice.
-            $form = RealtyAccreditation::whereKey($accreditation->id)->lockForUpdate()->firstOrFail();
-            abort_unless($form->isUsable(), 410, 'This form was already submitted.');
+        return $data;
+    }
 
-            $form->update($fields + [
-                'status' => RealtyAccreditation::STATUS_SUBMITTED,
-                'submitted_at' => now(),
-                'submitted_ip' => $request->ip(),
-                // They agreed to the data privacy notice (the form can't be sent without it).
-                'privacy_accepted_at' => now(),
+    /** Files the answers and documents on the form: it now waits for the developer's staff. Call inside a transaction. */
+    private function fill(RealtyAccreditation $form, Request $request, array $data, bool $agreement): void
+    {
+        $form->update(collect($data)->except(['documents', 'privacy', 'agree', 'agreed_name', 'website'])->all() + [
+            'status' => RealtyAccreditation::STATUS_SUBMITTED,
+            'submitted_at' => now(),
+            'submitted_ip' => $request->ip(),
+            // They agreed to the data privacy notice (the form can't be sent without it).
+            'privacy_accepted_at' => now(),
+        ]);
+        // What they agreed to, as it stood today, and the typed signature.
+        if ($agreement) {
+            $form->update([
+                'agreement_version' => AccreditationAgreement::VERSION,
+                'agreement' => AccreditationAgreement::snapshot($form->developer, $form),
+                'agreed_name' => preg_replace('/\s+/', ' ', trim($data['agreed_name'])),
+                'agreed_at' => now(),
+                'agreed_ip' => $request->ip(),
             ]);
-            // What they agreed to, as it stood today, and the typed signature.
-            if ($agreement) {
-                $form->update([
-                    'agreement_version' => AccreditationAgreement::VERSION,
-                    'agreement' => AccreditationAgreement::snapshot($form->developer, $form),
-                    'agreed_name' => preg_replace('/\s+/', ' ', trim($data['agreed_name'])),
-                    'agreed_at' => now(),
-                    'agreed_ip' => $request->ip(),
-                ]);
-            }
+        }
 
-            foreach (array_keys(AccreditationDocument::KINDS) as $kind) {
-                $file = $request->file("documents.{$kind}");
-                if ($file === null) {
-                    continue;
-                }
-                $form->documents()->create([
-                    'kind' => $kind,
-                    'path' => $file->store("accreditations/{$form->id}", AccreditationDocument::disk()),
-                    'original_name' => mb_substr($file->getClientOriginalName(), 0, 250),
-                    'mime' => (string) $file->getMimeType(),
-                    'size' => (int) $file->getSize(),
-                ]);
+        foreach (array_keys(AccreditationDocument::KINDS) as $kind) {
+            $file = $request->file("documents.{$kind}");
+            if ($file === null) {
+                continue;
             }
-        });
-
-        return response()->json(['ok' => true], 201);
+            $form->documents()->create([
+                'kind' => $kind,
+                'path' => $file->store("accreditations/{$form->id}", AccreditationDocument::disk()),
+                'original_name' => mb_substr($file->getClientOriginalName(), 0, 250),
+                'mime' => (string) $file->getMimeType(),
+                'size' => (int) $file->getSize(),
+            ]);
+        }
     }
 
     /**
@@ -167,5 +230,14 @@ class AccreditationController extends Controller
         abort_if($accreditation->expires_at->isPast(), 410, "This link has expired. Ask {$accreditation->developer->name} for a new one.");
 
         return $accreditation;
+    }
+
+    /** A developer that takes accreditation forms on its website. */
+    private function developer(string $slug): Realty
+    {
+        $developer = Realty::where('slug', $slug)->where('kind', Realty::KIND_DEVELOPER)->where('status', Realty::STATUS_ACTIVE)->first();
+        abort_if($developer === null, 404, 'This form does not exist.');
+
+        return $developer;
     }
 }

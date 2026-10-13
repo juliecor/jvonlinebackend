@@ -388,6 +388,158 @@ class RealtyAccreditationTest extends TestCase
         $this->assertSame('broker@example.com', $form->email);
     }
 
+    // ----- the open form on the website (no invite) -----
+
+    public function test_the_open_form_shows_johndorfs_brand_and_the_document_rows(): void
+    {
+        $this->getJson('/api/realties/johndorf/accreditation')
+            ->assertOk()
+            ->assertJsonPath('developer.name', 'Johndorf Ventures Corporation')
+            ->assertJsonPath('developer.accent_color', '#b4241c')
+            ->assertJsonPath('email', null)
+            ->assertJsonPath('agreement', null)
+            ->assertJsonPath('documents.0.kind', 'board_resolution')
+            ->assertJsonPath('civil_statuses', RealtyAccreditation::CIVIL_STATUSES);
+    }
+
+    public function test_only_an_active_developer_has_an_open_form(): void
+    {
+        $this->broker('Leuterio Realty');
+        Realty::create(['name' => 'Closed Developer', 'slug' => 'closed-dev', 'status' => Realty::STATUS_INVITED]);
+
+        foreach (['leuterio-realty', 'closed-dev', 'nobody'] as $slug) {
+            $this->getJson("/api/realties/{$slug}/accreditation")->assertNotFound()->assertJsonPath('message', 'This form does not exist.');
+            $this->post("/api/realties/{$slug}/accreditation", $this->answers(), ['Accept' => 'application/json'])->assertNotFound();
+        }
+        $this->assertSame(0, RealtyAccreditation::count());
+    }
+
+    public function test_a_realty_sends_the_form_from_the_website_and_it_waits_for_review(): void
+    {
+        Storage::fake(AccreditationDocument::disk());
+
+        $this->post('/api/realties/johndorf/accreditation', ['login_email' => 'Abby@ABC.example', 'website' => ''] + $this->answers() + ['documents' => $this->corporationFiles()], ['Accept' => 'application/json'])
+            ->assertCreated()
+            ->assertJsonPath('ok', true);
+
+        $form = RealtyAccreditation::sole();
+        $this->assertSame($this->johndorf->id, $form->developer_id);
+        $this->assertSame(RealtyAccreditation::SOURCE_WEBSITE, $form->source);
+        $this->assertSame(RealtyAccreditation::STATUS_SUBMITTED, $form->status);
+        $this->assertSame('abby@abc.example', $form->login_email);
+        $this->assertSame('abby@abc.example', $form->email);
+        $this->assertNull($form->invited_by);
+        $this->assertNull($form->getRawOriginal('token_hash'));
+        $this->assertNull($form->expires_at);
+        $this->assertSame('ABC Realty', $form->firm_name);
+        $this->assertNotNull($form->privacy_accepted_at);
+        $this->assertSame(['board_resolution', 'sec_registration'], $form->documents()->orderBy('id')->pluck('kind')->all());
+        $form->documents->each(fn (AccreditationDocument $d) => Storage::disk(AccreditationDocument::disk())->assertExists($d->path));
+
+        Sanctum::actingAs($this->admin);
+        $this->getJson('/api/realty/realties')
+            ->assertOk()
+            ->assertJsonPath('pending.0.id', $form->id)
+            ->assertJsonPath('pending.0.source', 'website')
+            ->assertJsonCount(0, 'invited');
+        $this->getJson("/api/realty/realties/accreditations/{$form->id}")->assertOk()->assertJsonPath('source', 'website');
+        $this->getJson('/api/realty/overview')->assertOk()->assertJsonPath('stats.realties_pending', 1);
+    }
+
+    public function test_a_form_with_the_hidden_field_filled_in_is_refused(): void
+    {
+        Storage::fake(AccreditationDocument::disk());
+
+        $this->post('/api/realties/johndorf/accreditation', $this->answers() + ['website' => 'https://spam.example', 'documents' => $this->corporationFiles()], ['Accept' => 'application/json'])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors('website');
+        $this->assertSame(0, RealtyAccreditation::count());
+    }
+
+    public function test_the_same_email_cannot_send_a_second_form_while_one_waits_for_review(): void
+    {
+        Storage::fake(AccreditationDocument::disk());
+        $this->post('/api/realties/johndorf/accreditation', $this->answers() + ['documents' => $this->corporationFiles()], ['Accept' => 'application/json'])->assertCreated();
+
+        $this->post('/api/realties/johndorf/accreditation', ['login_email' => 'ABBY@abc.example'] + $this->answers() + ['documents' => $this->corporationFiles()], ['Accept' => 'application/json'])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['login_email' => 'A form with this email is already waiting for review at Johndorf Ventures Corporation.']);
+        $this->assertSame(1, RealtyAccreditation::count());
+
+        // Inviting that email now points the staff to the form they already have.
+        Sanctum::actingAs($this->admin);
+        $this->postJson('/api/realty/realties/invite', ['email' => 'abby@abc.example'])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['email' => 'This email already sent in its form. Review it under Pending review.']);
+    }
+
+    public function test_a_form_from_the_website_replaces_an_open_invite_to_the_same_email(): void
+    {
+        Storage::fake(AccreditationDocument::disk());
+        [$invite, $token] = RealtyAccreditation::issue($this->johndorf, 'abby@abc.example', $this->admin);
+
+        $this->post('/api/realties/johndorf/accreditation', $this->answers() + ['documents' => $this->corporationFiles()], ['Accept' => 'application/json'])->assertCreated();
+
+        $this->assertModelMissing($invite);
+        $this->getJson("/api/accreditation/{$token}")->assertNotFound();
+        $this->assertSame(RealtyAccreditation::SOURCE_WEBSITE, RealtyAccreditation::sole()->source);
+    }
+
+    public function test_an_email_that_already_has_an_account_cannot_send_the_open_form(): void
+    {
+        User::factory()->create(['email' => 'abby@abc.example']);
+
+        $this->post('/api/realties/johndorf/accreditation', $this->answers() + ['documents' => $this->corporationFiles()], ['Accept' => 'application/json'])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['login_email' => 'There is already an account with this email.']);
+    }
+
+    public function test_once_the_agreement_is_set_up_the_open_form_is_signed_with_the_representatives_name(): void
+    {
+        Storage::fake(AccreditationDocument::disk());
+        Sanctum::actingAs($this->admin);
+        $this->postJson('/api/realty/realties/agreement', [
+            'representative_name' => 'Maria Santos', 'office_address' => 'Cebu City', 'commission' => [['classification' => 'PRC Licensed Broker', 'rate' => '5%']], 'signed_copy_days' => 30,
+        ])->assertOk();
+
+        $this->assertSame(30, $this->getJson('/api/realties/johndorf/accreditation')->json('agreement.signed_copy_days'));
+        $this->post('/api/realties/johndorf/accreditation', $this->answers() + ['documents' => $this->corporationFiles()], ['Accept' => 'application/json'])
+            ->assertJsonValidationErrors(['agree', 'agreed_name']);
+        $this->post('/api/realties/johndorf/accreditation', $this->answers() + ['agree' => '1', 'agreed_name' => 'Abby Cruz', 'documents' => $this->corporationFiles()], ['Accept' => 'application/json'])
+            ->assertCreated();
+
+        $form = RealtyAccreditation::sole();
+        $this->assertSame('Abby Cruz', $form->agreed_name);
+        $this->assertSame('ABC Realty', $form->agreement['broker']['firm']);
+    }
+
+    public function test_johndorfs_admin_accepts_a_form_from_the_website(): void
+    {
+        Mail::fake();
+        Storage::fake(AccreditationDocument::disk());
+        $this->post('/api/realties/johndorf/accreditation', $this->answers() + ['documents' => $this->corporationFiles()], ['Accept' => 'application/json'])->assertCreated();
+        $form = RealtyAccreditation::sole();
+
+        Sanctum::actingAs($this->admin);
+        $this->postJson("/api/realty/realties/accreditations/{$form->id}/approve")->assertCreated();
+
+        $form = $form->fresh();
+        $this->assertSame(RealtyAccreditation::STATUS_APPROVED, $form->status);
+        $this->assertSame('ABC Realty', $form->realty->name);
+        $this->assertSame($this->johndorf->id, $form->realty->developer_id);
+        $this->assertTrue(User::where('email', 'abby@abc.example')->where('realty_id', $form->realty_id)->exists());
+        Mail::assertSent(AccreditationApprovedMail::class, fn (AccreditationApprovedMail $m) => $m->hasTo('abby@abc.example'));
+    }
+
+    public function test_the_open_form_takes_a_few_tries_a_minute(): void
+    {
+        foreach (range(1, 5) as $try) {
+            $this->postJson('/api/realties/johndorf/accreditation', [])->assertUnprocessable();
+        }
+
+        $this->postJson('/api/realties/johndorf/accreditation', [])->assertTooManyRequests();
+    }
+
     // ----- the review -----
 
     public function test_johndorfs_admin_sees_the_whole_picture_in_team_realties(): void

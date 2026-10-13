@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
  * creates the broker realty and its first admin.
  */
 #[Fillable([
-    'developer_id', 'invited_by', 'email', 'token_hash', 'expires_at', 'status', 'submitted_at', 'submitted_ip',
+    'developer_id', 'invited_by', 'source', 'email', 'token_hash', 'expires_at', 'status', 'submitted_at', 'submitted_ip',
     'business_type', 'firm_name', 'residential_address', 'tin_company', 'tin_personal', 'prc_number', 'prc_valid_until', 'hlurb_number', 'hlurb_issued_at',
     'representative_name', 'place_of_birth', 'date_of_birth', 'citizenship', 'gender', 'civil_status', 'landline', 'mobile', 'login_email', 'facebook',
     'years_in_real_estate', 'years_firm_operating', 'salespersons',
@@ -43,6 +43,10 @@ class RealtyAccreditation extends Model
     public const STATUS_APPROVED = 'approved';   // accepted: the broker realty exists
 
     public const STATUS_REJECTED = 'rejected';
+
+    public const SOURCE_INVITE = 'invite';       // sent in through an emailed link
+
+    public const SOURCE_WEBSITE = 'website';     // sent in from the developer's website, without an invite (no link, no expiry)
 
     public const TYPE_CORPORATION = 'corporation';
 
@@ -181,7 +185,7 @@ class RealtyAccreditation extends Model
     /** The form can still be filled in: sent, not yet submitted, not expired. */
     public function isUsable(): bool
     {
-        return $this->status === self::STATUS_INVITED && $this->expires_at->isFuture();
+        return $this->status === self::STATUS_INVITED && $this->expires_at?->isFuture() === true;
     }
 
     /** The link in the email: the accreditation form on the public site. */
