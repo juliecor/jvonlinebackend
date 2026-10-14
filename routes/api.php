@@ -23,11 +23,13 @@ use App\Http\Controllers\Realty\ProjectPageController;
 use App\Http\Controllers\Realty\ProjectUpdateController;
 use App\Http\Controllers\Realty\RealtyAccreditationController;
 use App\Http\Controllers\Realty\RequirementTypeController;
+use App\Http\Controllers\Realty\ReservationAdminController;
 use App\Http\Controllers\Realty\SiteMapController;
 use App\Http\Controllers\Realty\StaffController;
 use App\Http\Controllers\Realty\TaskController;
 use App\Http\Controllers\Realty\UnitController;
 use App\Http\Controllers\Realty\UnitTypeController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 // Called by the Next.js server, never straight from the browser.
@@ -45,7 +47,13 @@ Route::middleware('throttle:offer-upload')->group(function () {
     Route::post('/offers/{code}/details', [PublicOfferController::class, 'details']);
     Route::post('/offers/{code}/documents', [PublicOfferController::class, 'upload']);
     Route::post('/offers/{code}/documents/{document}/remove', [PublicOfferController::class, 'removeDocument'])->whereNumber('document');
+    // Reserving the home: proof of a bank/GCash payment, or an online payment through PayMongo.
+    Route::post('/offers/{code}/reservation/proof', [ReservationController::class, 'proof']);
+    Route::post('/offers/{code}/reservation/checkout', [ReservationController::class, 'checkout']);
+    Route::get('/offers/{code}/reservation', [ReservationController::class, 'status']);
 });
+// PayMongo calls this when a reservation fee is paid (checked by its signature).
+Route::post('/webhooks/paymongo', [ReservationController::class, 'webhook']);
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
 
 // The public check for a certificate of accreditation (jvconline.ph/verify/<code>).
@@ -102,6 +110,7 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
                 Route::post('/offers/{offer}/void', [OfferController::class, 'void'])->whereNumber('offer');
                 Route::post('/offers/{offer}/extend', [OfferController::class, 'extend'])->whereNumber('offer');
                 Route::get('/offers/{id}/documents/{document}', [OfferController::class, 'document'])->whereNumber(['id', 'document']);
+                Route::get('/offers/{id}/reservation/proof', [ReservationAdminController::class, 'proof'])->whereNumber('id');
                 Route::post('/offers/{id}/remind', [OfferController::class, 'remind'])->whereNumber('id');
                 Route::post('/offers/{id}/send', [OfferController::class, 'send'])->whereNumber('id');
                 Route::post('/offers/{id}/terms', [OfferController::class, 'terms'])->whereNumber('id');
@@ -184,6 +193,10 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             });
             Route::post('/offers/{id}/approval', [OfferController::class, 'approval'])->whereNumber('id')->middleware('section:approvals');
             Route::post('/offers/{id}/unit-status', [OfferController::class, 'unitStatus'])->whereNumber('id')->middleware('section:offers');
+            // A buyer's reservation: the developer's admins confirm or send it back, and see the proof.
+            Route::post('/offers/{id}/reservation/confirm', [ReservationAdminController::class, 'confirm'])->whereNumber('id')->middleware('section:offers');
+            Route::post('/offers/{id}/reservation/decline', [ReservationAdminController::class, 'decline'])->whereNumber('id')->middleware('section:offers');
+            Route::match(['get', 'post'], '/reservation-settings', [ReservationAdminController::class, 'settings'])->middleware('section:requirements');
             Route::middleware('section:requirements')->group(function () {
                 Route::get('/requirements', [RequirementTypeController::class, 'index']);
                 Route::post('/requirements', [RequirementTypeController::class, 'store']);

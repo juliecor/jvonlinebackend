@@ -82,6 +82,7 @@ class OfferController extends Controller
             'approved_by' => $offer->approver?->name,
             'approved_at' => $offer->approved_at,
             'plan_name' => $offer->paymentPlan?->name,
+            'reservation' => ReservationAdminController::adminArray($offer),
             // The project's official plans on the same price and date, so the approver can compare.
             'official_plans' => $offer->custom_milestones === null ? [] : PaymentPlan::where('project_id', $offer->project_id)->orderBy('id')->get()
                 ->map(fn (PaymentPlan $p) => ['name' => $p->name, 'schedule' => Offer::buildSchedule((float) $offer->price, $p->milestones, $offer->purchase_date, $offer->project?->completion_date)])->values(),
@@ -234,6 +235,8 @@ class OfferController extends Controller
             'new_responses' => $o->responses->whereNull('seen_at')->count(),
             'latest_response' => $latest ? ['kind' => $latest->kind, 'label' => OfferResponse::LABELS[$latest->kind] ?? $latest->kind, 'at' => $latest->created_at] : null,
             'custom' => $o->custom_milestones !== null,
+            // Where the buyer's reservation stands (null: no fee was set).
+            'reservation_status' => $o->reservation_fee === null ? null : ($o->reservation_status ?? 'none'),
             'approval_status' => $o->approval_status,
             'approval_note' => $o->approval_note,
         ];
@@ -265,6 +268,8 @@ class OfferController extends Controller
             'approval_reason' => ['nullable', 'string', 'max:500'],
             // How long the buyer can open it, in hours (up to 90 days). Left out: it never expires.
             'valid_hours' => ['nullable', 'integer', 'min:1', 'max:2160'],
+            // What the buyer pays on the offer page to hold the home; left out, the page has no Reserve step.
+            'reservation_fee' => ['nullable', 'numeric', 'min:1', 'max:10000000'],
         ] + self::loginRules() + ($custom ? Milestones::rules('custom_milestones') : []), ['buyer_email.required' => "Enter the buyer's email to send them the offer."] + self::loginMessages());
 
         // Units, plans and the buyer's checklist belong to the developer; a broker sells them.
@@ -307,6 +312,7 @@ class OfferController extends Controller
             'purchase_date' => $purchase->toDateString(),
             'expires_at' => ! empty($data['valid_hours']) ? now()->addHours((int) $data['valid_hours']) : null,
             'price' => $price,
+            'reservation_fee' => $data['reservation_fee'] ?? null,
             'schedule' => Offer::buildSchedule((float) $price, $milestones, $purchase, $unit->project->completion_date),
             'fee_notes' => $unit->project->fee_notes,
             'custom_milestones' => $custom ? $milestones : null,

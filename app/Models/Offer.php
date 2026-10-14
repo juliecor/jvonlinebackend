@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\PayMongo;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -14,7 +15,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /** One unit + one payment plan, prepared by an agent for one buyer. The code is the public link. */
-#[Fillable(['realty_id', 'broker_realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'access_username', 'access_password', 'purchase_date', 'expires_at', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval'])]
+#[Fillable(['realty_id', 'broker_realty_id', 'project_id', 'unit_id', 'payment_plan_id', 'agent_id', 'code', 'buyer_name', 'buyer_email', 'buyer_phone', 'access_username', 'access_password', 'purchase_date', 'expires_at', 'price', 'schedule', 'fee_notes', 'status', 'buyer_details', 'details_submitted_at', 'offer_emailed_at', 'last_reminded_at', 'reminders_sent', 'custom_milestones', 'approval_status', 'approval_reason', 'approval_note', 'approved_by', 'approved_at', 'email_on_approval', 'reservation_fee', 'reservation_status', 'reservation_method', 'reservation_proof_path', 'reservation_reference', 'reservation_checkout_id', 'reservation_note', 'reservation_requested_at', 'reservation_paid_at', 'reservation_confirmed_at', 'reservation_confirmed_by'])]
 #[Hidden(['access_password'])]
 class Offer extends Model
 {
@@ -25,6 +26,7 @@ class Offer extends Model
             'buyer_details' => 'array', 'details_submitted_at' => 'datetime', 'offer_emailed_at' => 'datetime', 'last_reminded_at' => 'datetime',
             'custom_milestones' => 'array', 'approved_at' => 'datetime', 'email_on_approval' => 'boolean',
             'access_password' => 'encrypted', 'expires_at' => 'datetime',
+            'reservation_fee' => 'decimal:2', 'reservation_requested_at' => 'datetime', 'reservation_paid_at' => 'datetime', 'reservation_confirmed_at' => 'datetime',
         ];
     }
 
@@ -192,6 +194,45 @@ class Offer extends Model
     public function isExpired(): bool
     {
         return $this->expires_at !== null && $this->expires_at->isPast();
+    }
+
+    public function reservationConfirmer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'reservation_confirmed_by');
+    }
+
+    /** The reservation is in the developer's hands: proof sent, or paid online, and not yet confirmed or declined. */
+    public function reservationWaiting(): bool
+    {
+        return in_array($this->reservation_status, ['pending', 'paid'], true);
+    }
+
+    /**
+     * The reservation as the buyer sees it: the fee, where it stands, and how to pay (online when PayMongo
+     * is set up, else the developer's bank or GCash details). Null when the agent set no fee.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function reservationArray(): ?array
+    {
+        if ($this->reservation_fee === null) {
+            return null;
+        }
+        $this->loadMissing('realty');
+
+        return [
+            'fee' => (float) $this->reservation_fee,
+            'status' => $this->reservation_status,
+            'method' => $this->reservation_method,
+            'reference' => $this->reservation_reference,
+            'note' => $this->reservation_note,
+            'has_proof' => $this->reservation_proof_path !== null,
+            'requested_at' => $this->reservation_requested_at,
+            'paid_at' => $this->reservation_paid_at,
+            'confirmed_at' => $this->reservation_confirmed_at,
+            'online' => PayMongo::enabled(),
+            'instructions' => $this->realty->payment_instructions,
+        ];
     }
 
     /** Active and, if it has custom terms, approved: the buyer can open and act on it. */
@@ -436,6 +477,8 @@ class Offer extends Model
             'requirements' => $this->requirementList(),
             'details_submitted_at' => $this->details_submitted_at,
             'buyer_contact' => ['email' => $this->buyer_email, 'phone' => $this->buyer_phone],
+            // Reserving the home: the fee and how to pay it, once the agent set one.
+            'reservation' => $this->reservationArray(),
         ];
     }
 }

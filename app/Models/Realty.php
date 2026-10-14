@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-#[Fillable(['name', 'slug', 'kind', 'developer_id', 'email', 'contact_name', 'phone', 'address', 'about', 'status', 'logo_path', 'accent_color', 'invited_at', 'registered_at'])]
+#[Fillable(['name', 'slug', 'kind', 'developer_id', 'email', 'contact_name', 'phone', 'address', 'about', 'payment_instructions', 'status', 'logo_path', 'accent_color', 'invited_at', 'registered_at'])]
 class Realty extends Model
 {
     public const STATUS_INVITED = 'invited'; // invite sent, form not yet filled

@@ -22,6 +22,12 @@ return [
         'transcribe_model' => env('OPENAI_TRANSCRIBE_MODEL', 'gpt-4o-mini-transcribe'),
     ],
 
+    // Reservation fees paid online (GCash, Maya, cards). Off until the secret key is set.
+    'paymongo' => [
+        'secret' => env('PAYMONGO_SECRET_KEY'),
+        'webhook_secret' => env('PAYMONGO_WEBHOOK_SECRET'),
+    ],
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],
