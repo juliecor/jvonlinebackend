@@ -43,8 +43,12 @@ class ProjectController extends Controller
         // and never Johndorf's internal notes on a unit.
         $staff = $user->isDeveloperStaff();
         $broker = $user->isBrokerMember();
-        $project->units->each(function (Unit $unit) use ($staff, $broker, $user, $project) {
+        $models = $project->modelPrices();
+        $project->units->each(function (Unit $unit) use ($staff, $broker, $user, $project, $models) {
             $unit->setAttribute('status_detail', $unit->statusDetail($staff, ! $broker || (bool) $unit->statusOffer?->isVisibleTo($user)));
+            // What it can be offered at: its own price, else its house model's.
+            $unit->setAttribute('offer_price', $unit->offerPrice($models));
+            $unit->setAttribute('price_from_model', $unit->price === null && $unit->offerPrice($models) !== null);
             $unit->setAttribute('photo', $unit->photo($project->unitTypes, $project));
             $unit->unsetRelation('statusOffer')->unsetRelation('statusBy');
             if ($broker) {

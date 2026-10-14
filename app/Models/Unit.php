@@ -84,6 +84,25 @@ class Unit extends Model
         return $this->photo_urls[0] ?? $render ?? $project?->hero_urls[0] ?? $project?->cover_url ?? $this->floor_plan_url;
     }
 
+    /**
+     * What this unit is offered at: its own price, else (for a lot on the site map) its house model's price.
+     * `$models` is Project::modelPrices(), passed in when many units are priced at once.
+     *
+     * @param  array<string, string>|null  $models
+     */
+    public function offerPrice(?array $models = null): ?string
+    {
+        if ($this->price !== null) {
+            return $this->price;
+        }
+        if ($this->site_row_id === null || $this->unit_type === null) {
+            return null;
+        }
+        $models ??= $this->project->modelPrices();
+
+        return $models[$this->unit_type] ?? null;
+    }
+
     /** Uploads live on the uploads disk (local or S3); a path starting with "/" or "http" (images shipped with the frontend) is used as-is. */
     public static function publicUrl(?string $path): ?string
     {

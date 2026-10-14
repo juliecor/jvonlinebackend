@@ -92,6 +92,28 @@ class SiteMapTest extends TestCase
             ->assertJsonValidationErrors('corners');
     }
 
+    public function test_a_lot_without_its_own_price_is_offered_at_its_house_models_price(): void
+    {
+        Sanctum::actingAs($this->admin);
+        // The project's model unit (not on the map) carries the model's price.
+        Unit::create(['realty_id' => $this->johndorf->id, 'project_id' => $this->project->id, 'name' => 'Two-Storey Townhouse', 'unit_type' => 'Two-Storey Townhouse', 'category' => 'Residential', 'price' => 3300000, 'status' => 'available']);
+        $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '2', 'corners' => $this->corners, 'first_lot' => 1, 'lot_count' => 2, 'unit_type' => 'Two-Storey Townhouse'])->assertCreated();
+        $lot = Unit::where('block', '2')->where('lot', '1')->firstOrFail();
+        Unit::where('block', '2')->where('lot', '2')->update(['price' => 3500000]);
+
+        $this->getJson("/api/realty/projects/{$this->project->id}")
+            ->assertJsonPath('site_map.lots.0.price', '3300000.00')->assertJsonPath('site_map.lots.0.price_from_model', true)
+            ->assertJsonPath('site_map.lots.1.price', '3500000.00')->assertJsonPath('site_map.lots.1.price_from_model', false);
+        $unit = collect($this->getJson("/api/realty/projects/{$this->project->id}")->json('units'))->firstWhere('id', $lot->id);
+        $this->assertSame(['3300000.00', true, null], [$unit['offer_price'], $unit['price_from_model'], $unit['price']]);
+
+        $this->postJson('/api/realty/offers', ['unit_id' => $lot->id, 'buyer_name' => 'Rosa', 'purchase_date' => now()->toDateString(), 'access_username' => 'rosa', 'access_password' => 'Rosa1234'])
+            ->assertCreated();
+        $this->assertSame('3300000.00', Offer::firstOrFail()->price);
+        // The website still shows no prices.
+        $this->getJson("/api/projects/{$this->project->slug}")->assertJsonPath('site_map.lots.0.price', null)->assertJsonMissingPath('site_map.lots.0.price_from_model');
+    }
+
     public function test_a_row_can_be_moved_given_values_and_taken_off_keeping_lots_with_offers(): void
     {
         Sanctum::actingAs($this->admin);

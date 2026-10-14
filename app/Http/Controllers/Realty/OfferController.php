@@ -273,7 +273,9 @@ class OfferController extends Controller
         if ($unit->status !== 'available' || $unit->project->status !== 'active') {
             return response()->json(['message' => 'This unit is not open for offers.', 'errors' => ['unit_id' => ['This unit is not open for offers.']]], 422);
         }
-        if ($unit->price === null) {
+        // A lot without its own price is offered at its house model's price.
+        $price = $unit->offerPrice();
+        if ($price === null) {
             return response()->json(['message' => 'This unit has no price yet, so it cannot be offered.', 'errors' => ['unit_id' => ['This unit has no price yet.']]], 422);
         }
         $plan = null;
@@ -304,8 +306,8 @@ class OfferController extends Controller
             'access_password' => $data['access_password'],
             'purchase_date' => $purchase->toDateString(),
             'expires_at' => ! empty($data['valid_hours']) ? now()->addHours((int) $data['valid_hours']) : null,
-            'price' => $unit->price,
-            'schedule' => Offer::buildSchedule((float) $unit->price, $milestones, $purchase, $unit->project->completion_date),
+            'price' => $price,
+            'schedule' => Offer::buildSchedule((float) $price, $milestones, $purchase, $unit->project->completion_date),
             'fee_notes' => $unit->project->fee_notes,
             'custom_milestones' => $custom ? $milestones : null,
             'approval_status' => $custom ? ($staff ? 'approved' : 'pending') : null,

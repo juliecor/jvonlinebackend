@@ -70,6 +70,7 @@ class Project extends Model
         }
         $rows = $this->relationLoaded('siteRows') ? $this->siteRows : $this->siteRows()->get();
         $lots = Unit::where('project_id', $this->id)->whereNotNull('site_row_id')->orderBy('site_row_id')->orderBy('row_index')->get();
+        $models = $public ? [] : $this->modelPrices();
 
         return [
             'image' => $image,
@@ -84,11 +85,24 @@ class Project extends Model
                 'model' => $u->unit_type,
                 'lot_area' => $u->lot_area_sqm,
                 'floor_area' => $u->area_sqm,
-                'price' => $public ? null : $u->price,
+                'price' => $public ? null : $u->offerPrice($models),
+                'price_from_model' => ! $public && $u->price === null && isset($models[$u->unit_type]),
                 'tags' => array_values(array_intersect(array_keys(Unit::TAGS), $u->tags ?? [])),
                 'photos' => $u->photo_urls,
             ])->values()->all(),
         ];
+    }
+
+    /**
+     * The price of each house model: the project's model unit (one not drawn on the site map) of that type,
+     * when it has a price. A lot without its own price is offered at its model's price.
+     *
+     * @return array<string, string>
+     */
+    public function modelPrices(): array
+    {
+        return Unit::where('project_id', $this->id)->whereNull('site_row_id')->whereNotNull('unit_type')->whereNotNull('price')
+            ->orderBy('id')->get(['unit_type', 'price'])->reverse()->pluck('price', 'unit_type')->all();
     }
 
     public function unitTypes(): HasMany
