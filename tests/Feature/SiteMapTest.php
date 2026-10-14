@@ -111,7 +111,22 @@ class SiteMapTest extends TestCase
             ->assertCreated();
         $this->assertSame('3300000.00', Offer::firstOrFail()->price);
         // The website still shows no prices.
-        $this->getJson("/api/projects/{$this->project->slug}")->assertJsonPath('site_map.lots.0.price', null)->assertJsonMissingPath('site_map.lots.0.price_from_model');
+        $this->getJson("/api/realties/johndorf/projects/{$this->project->slug}")->assertJsonPath('site_map.lots.0.price', null)->assertJsonMissingPath('site_map.lots.0.price_from_model');
+    }
+
+    public function test_the_dashboard_map_says_who_holds_a_reserved_lot_but_the_website_never_does(): void
+    {
+        Sanctum::actingAs($this->admin);
+        $this->postJson("/api/realty/projects/{$this->project->id}/site-map/rows", ['block' => '1', 'corners' => $this->corners, 'first_lot' => 1, 'lot_count' => 2, 'price' => 2000000])->assertCreated();
+        $lot = Unit::where('block', '1')->where('lot', '2')->firstOrFail();
+        $this->postJson('/api/realty/offers', ['unit_id' => $lot->id, 'buyer_name' => 'Rosa Cruz', 'purchase_date' => now()->toDateString(), 'access_username' => 'rosa', 'access_password' => 'Rosa1234'])->assertCreated();
+        $offer = Offer::firstOrFail();
+        $this->postJson("/api/realty/offers/{$offer->id}/unit-status", ['status' => 'reserved'])->assertOk();
+
+        $this->getJson("/api/realty/projects/{$this->project->id}")
+            ->assertJsonPath('site_map.lots.1.status', 'reserved')->assertJsonPath('site_map.lots.1.holder.buyer', 'Rosa Cruz')->assertJsonPath('site_map.lots.1.holder.offer_id', $offer->id)
+            ->assertJsonPath('site_map.lots.0.holder', null);
+        $this->getJson("/api/realties/johndorf/projects/{$this->project->slug}")->assertJsonPath('site_map.lots.1.status', 'reserved')->assertJsonPath('site_map.lots.1.holder', null);
     }
 
     public function test_a_row_can_be_moved_given_values_and_taken_off_keeping_lots_with_offers(): void

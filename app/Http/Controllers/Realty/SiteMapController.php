@@ -28,7 +28,7 @@ class SiteMapController extends Controller
         abort_if($path === null, 422, 'Choose one of the project\'s site plans. Upload a new one in the Website tab.');
         $project->update(['site_map_path' => $path]);
 
-        return response()->json($project->siteMap());
+        return response()->json($project->siteMap(viewer: $request->user()));
     }
 
     /** A new row of lots: the row, and a unit for every lot in it (or the existing unit of that name). */
@@ -41,7 +41,7 @@ class SiteMapController extends Controller
         ]);
         SiteRow::draw($project, $data);
 
-        return response()->json($project->fresh()->siteMap(), 201);
+        return response()->json($project->fresh()->siteMap(viewer: $request->user()), 201);
     }
 
     /** Move a row's corners (a better fit on the drawing). */
@@ -50,7 +50,7 @@ class SiteMapController extends Controller
         $project = $this->ownRow($request, $row);
         $row->update($request->validate(SiteRow::cornerRules()));
 
-        return response()->json($project->siteMap());
+        return response()->json($project->siteMap(viewer: $request->user()));
     }
 
     /** Give every lot in the row the same model, areas, price or category (only the fields sent). */
@@ -62,7 +62,7 @@ class SiteMapController extends Controller
         abort_if($values === [], 422, 'Choose at least one thing to change.');
         $row->units()->update($values);
 
-        return response()->json($project->siteMap());
+        return response()->json($project->siteMap(viewer: $request->user()));
     }
 
     /** Take a row off the map: its lots go, except those with offers, which stay as units off the map. */
@@ -88,7 +88,7 @@ class SiteMapController extends Controller
         });
         Unit::forgetPhotos($project->id, $photos);
 
-        return response()->json(['kept' => $kept, 'site_map' => $project->siteMap()]);
+        return response()->json(['kept' => $kept, 'site_map' => $project->siteMap(viewer: $request->user())]);
     }
 
     /** Photos of one lot (the actual house or lot). */
@@ -136,7 +136,7 @@ class SiteMapController extends Controller
         }
         Unit::forgetPhotos($project->id, $paths);
 
-        return response()->json(['skipped' => $skipped, 'site_map' => $project->siteMap()]);
+        return response()->json(['skipped' => $skipped, 'site_map' => $project->siteMap(viewer: $request->user())]);
     }
 
     /** @return array<int, UploadedFile> */

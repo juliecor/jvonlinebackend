@@ -62,15 +62,18 @@ class Project extends Model
      *
      * @return array{image: string, rows: array<int, array<string, mixed>>, lots: array<int, array<string, mixed>>}|null
      */
-    public function siteMap(bool $public = false): ?array
+    public function siteMap(bool $public = false, ?User $viewer = null): ?array
     {
         $image = self::publicUrl($this->site_map_path ?? ($this->site_plan_paths[0] ?? null));
         if (! $image) {
             return null;
         }
         $rows = $this->relationLoaded('siteRows') ? $this->siteRows : $this->siteRows()->get();
-        $lots = Unit::where('project_id', $this->id)->whereNotNull('site_row_id')->orderBy('site_row_id')->orderBy('row_index')->get();
+        $lots = Unit::where('project_id', $this->id)->whereNotNull('site_row_id')->orderBy('site_row_id')->orderBy('row_index')
+            ->with($viewer ? ['statusOffer:id,realty_id,broker_realty_id,code,buyer_name,agent_id', 'statusOffer.agent:id,name', 'statusBy:id,name'] : [])->get();
         $models = $public ? [] : $this->modelPrices();
+        // Who holds a reserved or sold lot: the developer's own people see the buyer; a broker only its own firm's sale.
+        $broker = $viewer?->isBrokerMember() ?? false;
 
         return [
             'image' => $image,
@@ -86,9 +89,10 @@ class Project extends Model
                 'lot_area' => $u->lot_area_sqm,
                 'floor_area' => $u->area_sqm,
                 'price' => $public ? null : $u->offerPrice($models),
-                'price_from_model' => ! $public && $u->price === null && isset($models[$u->unit_type]),
+                ...($public ? [] : ['price_from_model' => $u->price === null && isset($models[$u->unit_type])]),
                 'tags' => array_values(array_intersect(array_keys(Unit::TAGS), $u->tags ?? [])),
                 'photos' => $u->photo_urls,
+                'holder' => $viewer ? $u->statusDetail(! $broker, ! $broker || (bool) $u->statusOffer?->isVisibleTo($viewer)) : null,
             ])->values()->all(),
         ];
     }

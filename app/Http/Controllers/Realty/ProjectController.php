@@ -57,7 +57,7 @@ class ProjectController extends Controller
         });
 
         // The clickable site plan (rows of lots and each lot's status), when the project has a plan image.
-        $project->setAttribute('site_map', $project->siteMap());
+        $project->setAttribute('site_map', $project->siteMap(viewer: $user));
 
         return response()->json($project);
     }
