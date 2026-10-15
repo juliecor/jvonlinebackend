@@ -65,6 +65,18 @@ class SiteMapTransferTest extends TestCase
         $this->artisan('site-map:import', ['project' => 'astana-davao', '--file' => $this->file])->expectsOutputToContain('Drew 0 rows (0 lots) on Astana Davao; 2 rows were already on the map.')->assertExitCode(0);
         $this->assertSame(2, SiteRow::count());
         $this->assertSame(5, Unit::count());
+
+        // --update: a corrected file brings sizes and tags up to date on the live map, without touching prices or statuses.
+        $saved = json_decode((string) file_get_contents($this->file), true);
+        $saved['rows'][0]['lots'][1]['tags'] = ['corner'];
+        $saved['rows'][0]['lots'][1]['lot_area_sqm'] = 60;
+        $saved['rows'][0]['lots'][1]['price'] = 1;
+        file_put_contents($this->file, json_encode($saved));
+        Unit::where('block', '4')->where('lot', '2')->update(['status' => 'reserved']);
+        $this->artisan('site-map:import', ['project' => 'astana-davao', '--file' => $this->file, '--update' => true])->expectsOutputToContain('1 lots already on the map were brought up to date')->assertExitCode(0);
+        $lot2 = Unit::where('block', '4')->where('lot', '2')->firstOrFail();
+        $this->assertSame([['corner'], '60.00', '2500000.00', 'reserved'], [$lot2->tags, $lot2->lot_area_sqm, Unit::where('block', '4')->where('lot', '1')->value('price'), $lot2->status]);
+        $this->assertNull($lot2->price);
     }
 
     public function test_a_dry_run_saves_nothing_and_bad_rows_are_reported(): void

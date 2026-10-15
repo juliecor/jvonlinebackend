@@ -22,7 +22,8 @@ class ImportSiteMap extends Command
         {project : The project\'s web address, e.g. astana-davao}
         {--realty=johndorf : The developer\'s web address}
         {--file= : The saved map (default database/seeders/data/site-maps/{project}.json)}
-        {--dry-run : Check the file and say what would happen, without saving anything}';
+        {--dry-run : Check the file and say what would happen, without saving anything}
+        {--update : For rows already on the map, bring each lot\'s model, sizes and tags up to date from the file (never its price, status or photos)}';
 
     protected $description = 'Draw a project\'s site map from a file saved by site-map:export';
 
@@ -59,7 +60,7 @@ class ImportSiteMap extends Command
             return self::FAILURE;
         }
 
-        $drawn = $lots = $skipped = 0;
+        $drawn = $lots = $skipped = $updated = 0;
         $problems = [];
         foreach ($map['rows'] as $i => $row) {
             $where = 'Row '.($i + 1).(isset($row['block']) ? " (Block {$row['block']})" : '');
@@ -73,7 +74,11 @@ class ImportSiteMap extends Command
             $numbers = array_map('strval', range($data['first_lot'], $data['first_lot'] + $data['lot_count'] - 1));
             $onMap = Unit::where('project_id', $project->id)->whereNotNull('site_row_id')->where('block', trim($data['block']))->whereIn('lot', $numbers)->count();
             if ($onMap === count($numbers)) {
-                $skipped++;
+                if ($this->option('update')) {
+                    $updated += $this->refresh($project, $data, $row['lots'] ?? []);
+                } else {
+                    $skipped++;
+                }
 
                 continue;
             }
@@ -105,11 +110,40 @@ class ImportSiteMap extends Command
         }
 
         $this->option('dry-run') ? DB::rollBack() : DB::commit();
-        $this->info(($this->option('dry-run') ? 'Dry run, nothing saved. Would draw' : 'Drew')." {$drawn} rows ({$lots} lots) on {$project->name}".($skipped ? "; {$skipped} rows were already on the map." : '.'));
+        $this->info(($this->option('dry-run') ? 'Dry run, nothing saved. Would draw' : 'Drew')." {$drawn} rows ({$lots} lots) on {$project->name}".($skipped ? "; {$skipped} rows were already on the map" : '').($updated ? "; {$updated} lots already on the map were brought up to date" : '').'.');
         foreach ($problems as $problem) {
             $this->warn($problem);
         }
 
         return $problems ? self::FAILURE : self::SUCCESS;
+    }
+
+    /**
+     * Lots already on the map get the file's model, sizes and tags; their price, status and photos stay.
+     *
+     * @param  array<string, mixed>  $data
+     * @param  array<int, array<string, mixed>>  $lots
+     */
+    private function refresh(Project $project, array $data, array $lots): int
+    {
+        $n = 0;
+        foreach ($lots as $lot) {
+            $unit = Unit::where('project_id', $project->id)->whereNotNull('site_row_id')->where('block', trim($data['block']))->where('lot', (string) ($lot['lot'] ?? ''))->first();
+            if (! $unit) {
+                continue;
+            }
+            $values = array_filter([
+                'unit_type' => $lot['unit_type'] ?? null,
+                'lot_area_sqm' => $lot['lot_area_sqm'] ?? null,
+                'area_sqm' => $lot['area_sqm'] ?? null,
+                'tags' => isset($lot['tags']) ? array_values(array_intersect(array_keys(Unit::TAGS), (array) $lot['tags'])) : null,
+            ], fn ($v) => $v !== null);
+            if ($values && collect($values)->contains(fn ($v, $k) => $unit->{$k} != $v)) {
+                $unit->update($values);
+                $n++;
+            }
+        }
+
+        return $n;
     }
 }
