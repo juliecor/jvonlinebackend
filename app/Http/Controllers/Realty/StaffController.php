@@ -188,6 +188,7 @@ class StaffController extends Controller
             'name' => $u->name,
             'email' => $u->email,
             'phone' => $u->phone,
+            'photo' => $u->photoUrl(),
             'full_admin' => $u->permissions === null,
             'sections' => $u->permissions ?? User::sectionsFor($me->realty),
             'status' => $u->status,

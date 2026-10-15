@@ -49,6 +49,16 @@ class StaffTest extends TestCase
         $this->assertNotNull(User::where('email', 'dina@example.com')->value('last_login_at'));
     }
 
+    public function test_the_list_shows_each_persons_photo(): void
+    {
+        $this->owner->forceFill(['photo_path' => 'users/photos/owner.jpg'])->save();
+        User::factory()->create(['role' => User::ROLE_REALTY, 'realty_id' => $this->realty->id, 'name' => 'No Photo', 'permissions' => ['offers']]);
+
+        $staff = collect($this->asOwner('get', '/api/realty/staff')->assertOk()->json('staff'))->keyBy('name');
+        $this->assertStringEndsWith('users/photos/owner.jpg', $staff['Johndorf Admin']['photo']);
+        $this->assertNull($staff['No Photo']['photo']);
+    }
+
     public function test_a_new_account_chooses_its_own_password_first_by_default(): void
     {
         $this->asOwner('post', '/api/realty/staff', ['name' => 'New Person', 'email' => 'new@example.com', 'password' => 'start-pass-1', 'access' => 'full'])->assertCreated()->assertJsonPath('must_change_password', true);
