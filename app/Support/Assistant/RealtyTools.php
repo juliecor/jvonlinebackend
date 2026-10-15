@@ -146,6 +146,19 @@ class RealtyTools
                 'buyer' => $text("Buyer's name, or part of it."),
                 'project' => $text('Project name, or part of it.'),
             ]),
+            $tool('confirm_reservation', "Put a Confirm button under your answer for a buyer's reservation that is waiting (paid online, or proof of a bank/GCash payment sent). The person presses it; only then is the lot reserved for the buyer and the buyer emailed. Developer admins only. Use it when asked to confirm, approve or accept a reservation.", [
+                'offer' => $text("The offer code or the buyer's name."),
+            ]),
+            $tool('prepare_offer', 'Prepare a new sales offer: puts a card under your answer with the lot or unit, the buyer and the fee filled in, and an "Open New offer" button that opens the form with all of it typed in; the person checks it and creates the offer there. Use it when asked to make, create, draft or send an offer for a buyer. Needs an available lot or unit with a price (check with search_lots or search_units first when unsure).', [
+                'project' => $text('Project name, or part of it.'),
+                'block' => $text('Block, for a lot on the site map.'),
+                'lot' => $text('Lot number, for a lot on the site map.'),
+                'unit' => $text('Unit name, or part of it, for a unit that has no block and lot (e.g. "Bldg J · Unit 101").'),
+                'buyer_name' => $text("The buyer's full name."),
+                'buyer_email' => $text("The buyer's email, if given."),
+                'buyer_phone' => $text("The buyer's mobile number, if given."),
+                'reservation_fee' => $number('The reservation fee in pesos, if given.'),
+            ]),
             $tool('attention_today', 'Everything that needs the person now, in one lookup: new buyer answers nobody opened yet, buyer files to review, custom terms to approve (or sent back), interested buyers still missing requirements, buyers who opened their offer often but never answered, links not opened 3+ days after sending, agent applications, units reserved or sold in the last 7 days, and reservations (paid or with proof sent) waiting for an admin to confirm. Only for those general questions: "what needs my attention", "what should I do today", "any updates", "good morning", "summary of today". For a specific question (who hasn\'t answered, who is missing documents) use list_offers.'),
         ];
     }
@@ -159,7 +172,7 @@ class RealtyTools
     public function call(string $name, array $args): array
     {
         // A staff member only learns about what their account includes (see User::SECTIONS).
-        $needs = ['list_offers' => 'offers', 'offer_details' => 'offers', 'buyer_responses' => 'offers', 'show_offers' => 'offers', 'reservations' => 'offers', 'list_agents' => 'agents'];
+        $needs = ['list_offers' => 'offers', 'offer_details' => 'offers', 'buyer_responses' => 'offers', 'show_offers' => 'offers', 'reservations' => 'offers', 'confirm_reservation' => 'offers', 'prepare_offer' => 'offers', 'list_agents' => 'agents'];
         if (isset($needs[$name]) && ! $this->user->canUse($needs[$name])) {
             return ['error' => 'This account has no access to '.($needs[$name] === 'offers' ? 'offers and buyers' : 'the agents').'. Say so, and that their admin can add it.'];
         }
@@ -181,6 +194,8 @@ class RealtyTools
             'search_lots' => $this->searchLots($args),
             'show_map' => $this->showMap($args),
             'reservations' => $this->reservations($args),
+            'confirm_reservation' => $this->confirmReservation($args),
+            'prepare_offer' => $this->prepareOffer($args),
             default => ['error' => "There is no tool called {$name}."],
         };
     }
@@ -1100,6 +1115,97 @@ class RealtyTools
                 'dashboard_url' => $this->url("offers/{$o->id}"),
             ], fn ($v) => $v !== null))->all(),
             'how_it_works' => "The buyer pays the fee on their offer page (online, or by bank/GCash with a photo of the proof). Johndorf's admins open the receipt on the offer page and confirm, which marks the lot reserved for that buyer; or send it back with a reason.",
+        ];
+    }
+
+    /**
+     * A Confirm button for a waiting reservation. Nothing changes here: the person presses the button.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function confirmReservation(array $args): array
+    {
+        if (! $this->user->isDeveloperStaff()) {
+            return ['error' => "Only the developer's admins confirm reservations. Say who can, and link the offer page."];
+        }
+        $needle = $this->text($args, 'offer');
+        if (! $needle) {
+            return ['error' => 'Say which offer: its code or the buyer\'s name.'];
+        }
+        $matches = $this->offers()->where('status', 'active')->whereNotNull('reservation_fee')->where(fn ($q) => $q->where('code', strtoupper($needle))->orWhere('buyer_name', 'like', "%{$needle}%"))->with(['unit:id,name', 'project:id,name'])->latest()->limit(6)->get();
+        if ($matches->isEmpty()) {
+            return ['error' => "No offer with a reservation found for \"{$needle}\"."];
+        }
+        if ($matches->count() > 1 && ! $matches->contains('code', strtoupper($needle))) {
+            return ['several_match' => $matches->map(fn (Offer $o) => ['code' => $o->code, 'buyer' => $o->buyer_name, 'unit' => $o->unit?->name, 'reservation' => $this->reservationLine($o)])->all()];
+        }
+        $offer = $matches->firstWhere('code', strtoupper($needle)) ?? $matches->first();
+        if (! $offer->reservationWaiting()) {
+            return ['error' => "Nothing to confirm on {$offer->buyer_name}'s offer: ".$this->reservationLine($offer).'.', 'dashboard_url' => $this->url("offers/{$offer->id}")];
+        }
+        $this->card(['type' => 'action', 'kind' => 'confirm_reservation', 'id' => $offer->id]);
+
+        return [
+            'button_shown' => "Confirm reservation for {$offer->buyer_name} ({$offer->unit?->name}, {$offer->project?->name}): ".$this->reservationLine($offer),
+            'note' => 'The card under your answer has the Confirm button. Say what pressing it does (the lot is reserved for the buyer and they get an email) and that nothing happens until they press it. Never say it is done.',
+        ];
+    }
+
+    /**
+     * A new offer, filled in: the card opens the New offer form with the lot, buyer and fee typed in.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function prepareOffer(array $args): array
+    {
+        if (! $this->user->realty->isAccredited()) {
+            return ['error' => "This realty's accreditation has ended, so no new offers can be made until the developer renews it."];
+        }
+        $project = null;
+        if ($name = $this->text($args, 'project')) {
+            $project = $this->findProject($name);
+            if (! $project instanceof Project) {
+                return $project;
+            }
+        }
+        $block = $this->text($args, 'block');
+        $lot = $this->text($args, 'lot');
+        $unitName = $this->text($args, 'unit');
+        if (! $block && ! $lot && ! $unitName) {
+            return ['error' => 'Say which lot (block and lot) or unit the offer is for.'];
+        }
+        $units = Unit::where('realty_id', $this->realty()->id)
+            ->when($project, fn ($q) => $q->where('project_id', $project->id))
+            ->when($block, fn ($q) => $q->where('block', ltrim(preg_replace('/^\s*block\s*/i', '', $block))))
+            ->when($lot, fn ($q) => $q->where('lot', ltrim(preg_replace('/^\s*lot\s*/i', '', $lot))))
+            ->when($unitName && ! $block && ! $lot, fn ($q) => $q->where('name', 'like', "%{$unitName}%"))
+            ->with('project:id,name,status')->limit(6)->get();
+        if ($units->isEmpty()) {
+            return ['error' => 'No such lot or unit'.($project ? " in {$project->name}" : '').'. Check with search_lots or search_units.'];
+        }
+        if ($units->count() > 1) {
+            return ['several_match' => $units->map(fn (Unit $u) => ['id' => $u->id, 'name' => $u->name, 'project' => $u->project?->name, 'status' => $u->status])->all(), 'note' => 'Ask which one, or give the project.'];
+        }
+        $unit = $units->first();
+        if ($unit->status !== 'available') {
+            return ['error' => "{$unit->name} in {$unit->project?->name} is {$unit->status}, so it can't be offered."];
+        }
+        if ($unit->project?->status !== 'active') {
+            return ['error' => "{$unit->project?->name} is archived, so it isn't open for offers."];
+        }
+        $price = $unit->offerPrice();
+        if ($price === null) {
+            return ['error' => "{$unit->name} has no price yet (and its house model has none), so it can't be offered. The developer's admin sets prices in the project's Site map tab.", 'dashboard_url' => $this->url("projects/{$unit->project_id}#site-map")];
+        }
+        $buyer = $this->text($args, 'buyer_name');
+        $fee = isset($args['reservation_fee']) && (float) $args['reservation_fee'] > 0 ? (float) $args['reservation_fee'] : null;
+        $this->card(['type' => 'action', 'kind' => 'new_offer', 'id' => $unit->id, 'buyer' => $buyer, 'email' => $this->text($args, 'buyer_email'), 'phone' => $this->text($args, 'buyer_phone'), 'fee' => $fee]);
+
+        return [
+            'card_shown' => array_filter(['unit' => $unit->name, 'project' => $unit->project?->name, 'price' => (float) $price, 'price_is_the_models' => $unit->price === null ? true : null, 'buyer' => $buyer, 'reservation_fee' => $fee]),
+            'note' => 'The card under your answer has an "Open New offer" button that opens the form with all of this typed in; the person picks the payment terms, checks it and creates the offer there. Say so in a sentence. Never say the offer was made or sent.',
         ];
     }
 

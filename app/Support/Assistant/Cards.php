@@ -21,7 +21,7 @@ use Illuminate\Support\Collection;
 class Cards
 {
     /** At most this many cards of each kind under one answer. */
-    public const MAX = ['unit' => 6, 'offer' => 6, 'project' => 6, 'payment' => 3, 'map' => 2];
+    public const MAX = ['unit' => 6, 'offer' => 6, 'project' => 6, 'payment' => 3, 'map' => 2, 'action' => 3];
 
     /**
      * The list with one more card, unless it's already there or that kind is full.
@@ -33,7 +33,7 @@ class Cards
     public static function add(array $refs, array $ref): array
     {
         $same = collect($refs)->where('type', $ref['type']);
-        $there = $ref['type'] === 'payment' ? $same->contains(fn (array $r) => $r == $ref) : $same->contains('id', $ref['id']);
+        $there = in_array($ref['type'], ['payment', 'action'], true) ? $same->contains(fn (array $r) => $r == $ref) : $same->contains('id', $ref['id']);
         // A second map of the same project replaces the first (its marked lots are the newer ask).
         if ($ref['type'] === 'map' && $there) {
             return collect($refs)->map(fn (array $r) => $r['type'] === 'map' && $r['id'] === $ref['id'] ? $ref : $r)->all();
@@ -82,6 +82,7 @@ class Cards
             'project' => ($p = $projects->get((int) ($r['id'] ?? 0))) ? self::project($p) : null,
             'payment' => self::payment($r, $units, $projects),
             'map' => ($p = $maps->get((int) ($r['id'] ?? 0))) ? self::map($p, $r, $user) : null,
+            'action' => self::action($r, $user),
         })->filter()->values()->all();
     }
 
@@ -141,6 +142,55 @@ class Cards
             // The buyer's link, once the buyer can open it.
             'url' => $o->status === 'active' && ! $o->awaitingApproval() ? Offer::url($o->code) : null,
         ];
+    }
+
+    /**
+     * Something the AI set up for the person to do with one press: confirm a waiting reservation, or open
+     * the New offer form filled in. Drawn from the live data, so a reservation already confirmed says so.
+     *
+     * @param  array<string, mixed>  $r
+     * @return array<string, mixed>|null
+     */
+    private static function action(array $r, User $user): ?array
+    {
+        if (($r['kind'] ?? null) === 'confirm_reservation') {
+            $o = Offer::visibleTo($user)->whereNotNull('reservation_fee')->with(['unit:id,name', 'project:id,name'])->find((int) ($r['id'] ?? 0));
+            if (! $o) {
+                return null;
+            }
+
+            return [
+                'type' => 'action',
+                'kind' => 'confirm_reservation',
+                'offer' => ['id' => $o->id, 'code' => $o->code, 'buyer' => $o->buyer_name, 'unit' => $o->unit?->name, 'project' => $o->project?->name],
+                'fee' => (float) $o->reservation_fee,
+                'how' => $o->reservation_status === 'paid' ? 'paid online' : ($o->reservation_method === 'proof' ? 'proof of a bank/GCash payment sent' : 'not paid yet'),
+                'reference' => $o->reservation_reference,
+                'status' => $o->reservation_status,
+                'can_confirm' => $user->isDeveloperStaff() && $o->reservationWaiting(),
+            ];
+        }
+        if (($r['kind'] ?? null) === 'new_offer') {
+            $u = Unit::where('realty_id', $user->realty_id)->with('project:id,name,status')->find((int) ($r['id'] ?? 0));
+            if (! $u) {
+                return null;
+            }
+
+            return [
+                'type' => 'action',
+                'kind' => 'new_offer',
+                'unit' => ['id' => $u->id, 'name' => $u->name, 'status' => $u->status],
+                'project' => ['id' => $u->project_id, 'name' => $u->project?->name],
+                'price' => ($p = $u->offerPrice()) !== null ? (float) $p : null,
+                'buyer' => $r['buyer'] ?? null,
+                'email' => $r['email'] ?? null,
+                'phone' => $r['phone'] ?? null,
+                'fee' => isset($r['fee']) ? (float) $r['fee'] : null,
+                'can_offer' => $u->status === 'available' && $u->offerPrice() !== null && $u->project?->status === 'active',
+            ];
+        }
+
+        return null;
     }
 
     /**

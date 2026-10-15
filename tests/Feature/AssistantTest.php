@@ -445,4 +445,32 @@ class AssistantTest extends TestCase
         $this->assertSame(0, $theirs->call('reservations', ['state' => 'all'])['total']);
         $this->assertNull(collect(Cards::for($other, [['type' => 'map', 'id' => $astana->id, 'lots' => []]])[0]['map']['lots'])->firstWhere('id', $lot43->id)['holder']['buyer']);
     }
+
+    public function test_the_ai_sets_up_a_confirm_button_and_a_filled_in_offer_but_changes_nothing_itself(): void
+    {
+        $astana = Project::create(['realty_id' => $this->realty->id, 'name' => 'Astana Davao', 'slug' => 'astana-davao', 'status' => 'active', 'site_plan_paths' => ['https://cdn.example.com/astana/plan-1.jpg']]);
+        Unit::create(['realty_id' => $this->realty->id, 'project_id' => $astana->id, 'name' => 'Two-Storey Townhouse', 'unit_type' => 'Two-Storey Townhouse', 'category' => 'Residential', 'price' => 3300000, 'status' => 'available']);
+        SiteRow::draw($astana, ['block' => '2', 'corners' => [[0.1, 0.2], [0.5, 0.2], [0.5, 0.3], [0.1, 0.3]], 'first_lot' => 41, 'lot_count' => 3, 'unit_type' => 'Two-Storey Townhouse']);
+        $lot43 = Unit::where('block', '2')->where('lot', '43')->firstOrFail();
+        $offer = Offer::create(['realty_id' => $this->realty->id, 'project_id' => $astana->id, 'unit_id' => $lot43->id, 'agent_id' => $this->agent->id, 'code' => Offer::newCode(), 'buyer_name' => 'Rosa Cruz', 'purchase_date' => now()->toDateString(), 'price' => 3300000, 'schedule' => [], 'status' => 'active', 'reservation_fee' => 10000, 'reservation_status' => 'pending', 'reservation_method' => 'proof', 'reservation_requested_at' => now()]);
+
+        // Confirm: the admin gets a button (and the lot stays available until it is pressed); the agent gets a refusal.
+        $tools = new RealtyTools($this->admin);
+        $this->assertStringContainsString('Confirm reservation for Rosa Cruz', $tools->call('confirm_reservation', ['offer' => 'Rosa'])['button_shown']);
+        $this->assertSame('available', $lot43->fresh()->status);
+        $card = Cards::for($this->admin, $tools->shownCards())[0];
+        $this->assertSame(['action', 'confirm_reservation', 'Rosa Cruz', 'proof of a bank/GCash payment sent', true], [$card['type'], $card['kind'], $card['offer']['buyer'], $card['how'], $card['can_confirm']]);
+        $this->assertArrayHasKey('error', (new RealtyTools($this->agent))->call('confirm_reservation', ['offer' => 'Rosa']));
+
+        // Prepare an offer: a filled-in card for an available lot (at its model's price); nothing for a reserved one.
+        $tools = new RealtyTools($this->agent);
+        $prep = $tools->call('prepare_offer', ['project' => 'Astana', 'block' => '2', 'lot' => '41', 'buyer_name' => 'Ben Lim', 'reservation_fee' => 15000, 'buyer_phone' => '09170000000']);
+        $this->assertSame(['Block 2 · Lot 41', 3300000.0, 'Ben Lim', 15000.0], [$prep['card_shown']['unit'], $prep['card_shown']['price'], $prep['card_shown']['buyer'], $prep['card_shown']['reservation_fee']]);
+        $card = Cards::for($this->agent, $tools->shownCards())[0];
+        $this->assertSame(['new_offer', 'Block 2 · Lot 41', 'Ben Lim', 15000.0, '09170000000', true], [$card['kind'], $card['unit']['name'], $card['buyer'], $card['fee'], $card['phone'], $card['can_offer']]);
+        $this->assertSame(0, Offer::where('buyer_name', 'Ben Lim')->count());
+        $lot43->update(['status' => 'reserved', 'status_offer_id' => $offer->id]);
+        $this->assertStringContainsString('is reserved', $tools->call('prepare_offer', ['project' => 'Astana', 'block' => '2', 'lot' => '43'])['error']);
+        $this->assertArrayHasKey('error', $tools->call('prepare_offer', ['buyer_name' => 'Ben Lim']));
+    }
 }
