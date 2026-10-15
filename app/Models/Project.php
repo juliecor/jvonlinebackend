@@ -92,7 +92,8 @@ class Project extends Model
                 ...($public ? [] : ['price_from_model' => $u->price === null && isset($models[$u->unit_type])]),
                 'tags' => array_values(array_intersect(array_keys(Unit::TAGS), $u->tags ?? [])),
                 'photos' => $u->photo_urls,
-                'holder' => $viewer ? $u->statusDetail(! $broker, ! $broker || (bool) $u->statusOffer?->isVisibleTo($viewer)) : null,
+                // The buyer's name: the developer's staff see it; an agent only for their own buyer; a broker only its own firm's.
+                'holder' => $viewer ? $u->statusDetail(! $broker && ($viewer->role !== User::ROLE_AGENT || $u->statusOffer?->agent_id === $viewer->id), ! $broker || (bool) $u->statusOffer?->isVisibleTo($viewer)) : null,
             ])->values()->all(),
         ];
     }

@@ -21,7 +21,7 @@ use Illuminate\Support\Collection;
 class Cards
 {
     /** At most this many cards of each kind under one answer. */
-    public const MAX = ['unit' => 6, 'offer' => 6, 'project' => 6, 'payment' => 3];
+    public const MAX = ['unit' => 6, 'offer' => 6, 'project' => 6, 'payment' => 3, 'map' => 2];
 
     /**
      * The list with one more card, unless it's already there or that kind is full.
@@ -34,6 +34,10 @@ class Cards
     {
         $same = collect($refs)->where('type', $ref['type']);
         $there = $ref['type'] === 'payment' ? $same->contains(fn (array $r) => $r == $ref) : $same->contains('id', $ref['id']);
+        // A second map of the same project replaces the first (its marked lots are the newer ask).
+        if ($ref['type'] === 'map' && $there) {
+            return collect($refs)->map(fn (array $r) => $r['type'] === 'map' && $r['id'] === $ref['id'] ? $ref : $r)->all();
+        }
         if ($there || $same->count() >= self::MAX[$ref['type']]) {
             return $refs;
         }
@@ -58,6 +62,7 @@ class Cards
         $units = Unit::where('realty_id', $user->realty_id)->whereIn('id', [...$ids('unit'), ...$ids('payment', 'unit')])->with('project')->get()->keyBy('id');
         $offers = Offer::where('realty_id', $user->realty_id)->when($user->role === User::ROLE_AGENT, fn ($q) => $q->where('agent_id', $user->id))
             ->whereIn('id', $user->canUse('offers') ? $ids('offer') : [])->with(['project', 'unit', 'agent:id,name', 'responses', 'documents'])->get()->keyBy('id');
+        $maps = Project::where('realty_id', $user->realty_id)->whereIn('id', $ids('map'))->get()->keyBy('id');
         $projects = Project::where('realty_id', $user->realty_id)->whereIn('id', [...$ids('project'), ...$ids('payment', 'project')])
             ->withCount([
                 'units',
@@ -76,6 +81,7 @@ class Cards
             'offer' => ($o = $offers->get((int) ($r['id'] ?? 0))) ? self::offer($o, $models, $types, $user) : null,
             'project' => ($p = $projects->get((int) ($r['id'] ?? 0))) ? self::project($p) : null,
             'payment' => self::payment($r, $units, $projects),
+            'map' => ($p = $maps->get((int) ($r['id'] ?? 0))) ? self::map($p, $r, $user) : null,
         })->filter()->values()->all();
     }
 
@@ -131,8 +137,34 @@ class Cards
             'requirements' => $o->requirementSummary($types),
             'approval_status' => $o->approval_status,
             'unit_status' => $o->unit && $o->unit->status_offer_id === $o->id && $o->unit->status !== 'available' ? $o->unit->status : null,
+            'reservation_status' => $o->reservation_fee === null ? null : ($o->reservation_status ?? 'none'),
             // The buyer's link, once the buyer can open it.
             'url' => $o->status === 'active' && ! $o->awaitingApproval() ? Offer::url($o->code) : null,
+        ];
+    }
+
+    /**
+     * A project's site map with some lots marked (the dashboard's map: statuses, and who holds a lot for those allowed).
+     *
+     * @param  array<string, mixed>  $ref
+     * @return array<string, mixed>|null
+     */
+    private static function map(Project $p, array $ref, User $user): ?array
+    {
+        $map = $p->siteMap(viewer: $user);
+        if ($map === null || $map['lots'] === []) {
+            return null;
+        }
+        $known = collect($map['lots'])->pluck('id')->flip();
+        $lots = array_values(array_filter(array_map('intval', (array) ($ref['lots'] ?? [])), fn (int $id) => $known->has($id)));
+
+        return [
+            'type' => 'map',
+            'id' => $p->id,
+            'project' => ['id' => $p->id, 'name' => $p->name, 'location' => $p->location],
+            'map' => $map,
+            'lots' => array_slice($lots, 0, 12),
+            'model_photos' => $p->unitTypes()->get()->mapWithKeys(fn (UnitType $t) => [$t->name => $t->images ?? []])->all(),
         ];
     }
 

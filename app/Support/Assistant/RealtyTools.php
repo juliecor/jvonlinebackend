@@ -124,7 +124,29 @@ class RealtyTools
                 ],
                 'purchase_date' => $text('YYYY-MM-DD. Today if left out.'),
             ]),
-            $tool('attention_today', 'Everything that needs the person now, in one lookup: new buyer answers nobody opened yet, buyer files to review, custom terms to approve (or sent back), interested buyers still missing requirements, buyers who opened their offer often but never answered, links not opened 3+ days after sending, agent applications, and units reserved or sold in the last 7 days. Only for those general questions: "what needs my attention", "what should I do today", "any updates", "good morning", "summary of today". For a specific question (who hasn\'t answered, who is missing documents) use list_offers.'),
+            $tool('search_lots', 'Lots on the projects\' site maps (block and lot numbers): find where a buyer\'s home is, which lots are available, reserved or sold, corner or end lots, lots by size, or what a block holds. Returns counts by status (and by block for one project) and up to 25 lots with ids for show_map. For houses sold by name rather than block and lot, use search_units instead.', [
+                'project' => $text('Project name, or part of it.'),
+                'block' => $text('Block, e.g. "2" or "4".'),
+                'lot' => $text('Lot number, e.g. "43".'),
+                'status' => ['type' => 'string', 'enum' => ['available', 'reserved', 'sold']],
+                'tag' => ['type' => 'string', 'enum' => ['corner', 'park', 'end'], 'description' => 'corner lot, near the park, end unit.'],
+                'model' => $text('House model, e.g. "Townhouse".'),
+                'min_lot_area' => $number('Smallest lot area in sqm.'),
+                'max_lot_area' => $number('Largest lot area in sqm.'),
+                'buyer' => $text("A buyer's name: the lots reserved or sold to them, or on their sales offers."),
+                'changed_in_days' => ['type' => 'integer', 'description' => 'Only lots reserved or sold in the last N days (e.g. "sold this month" → 30).'],
+                'sort' => ['type' => 'string', 'enum' => ['block_lot', 'area_large', 'area_small', 'price_low', 'price_high']],
+            ]),
+            $tool('show_map', 'Show a project\'s site map under your answer, with the given lots marked and the first one zoomed in on (and a card beside it with its photos, size and model). Use it whenever someone asks where a lot or a buyer\'s home is, to show which lots are available in a block, or when you present a few specific lots. Without lot ids it shows the whole map coloured by status.', [
+                'project' => $text('Project name, or part of it.'),
+                'lot_ids' => ['type' => 'array', 'items' => ['type' => 'integer'], 'description' => 'Lot ids from search_lots, up to 12. The first one is zoomed in on.'],
+            ]),
+            $tool('reservations', "Buyers' reservations: the reservation fee on each offer and where it stands. to_confirm: the buyer paid (online) or sent proof of a bank/GCash payment and an admin has to confirm; confirmed: the home is reserved for them; declined: sent back to the buyer; unpaid: a fee was set but nothing paid yet. Use it for any question about reservations, reservation fees or proof of payment.", [
+                'state' => ['type' => 'string', 'enum' => ['to_confirm', 'confirmed', 'declined', 'unpaid', 'all']],
+                'buyer' => $text("Buyer's name, or part of it."),
+                'project' => $text('Project name, or part of it.'),
+            ]),
+            $tool('attention_today', 'Everything that needs the person now, in one lookup: new buyer answers nobody opened yet, buyer files to review, custom terms to approve (or sent back), interested buyers still missing requirements, buyers who opened their offer often but never answered, links not opened 3+ days after sending, agent applications, units reserved or sold in the last 7 days, and reservations (paid or with proof sent) waiting for an admin to confirm. Only for those general questions: "what needs my attention", "what should I do today", "any updates", "good morning", "summary of today". For a specific question (who hasn\'t answered, who is missing documents) use list_offers.'),
         ];
     }
 
@@ -137,7 +159,7 @@ class RealtyTools
     public function call(string $name, array $args): array
     {
         // A staff member only learns about what their account includes (see User::SECTIONS).
-        $needs = ['list_offers' => 'offers', 'offer_details' => 'offers', 'buyer_responses' => 'offers', 'show_offers' => 'offers', 'list_agents' => 'agents'];
+        $needs = ['list_offers' => 'offers', 'offer_details' => 'offers', 'buyer_responses' => 'offers', 'show_offers' => 'offers', 'reservations' => 'offers', 'list_agents' => 'agents'];
         if (isset($needs[$name]) && ! $this->user->canUse($needs[$name])) {
             return ['error' => 'This account has no access to '.($needs[$name] === 'offers' ? 'offers and buyers' : 'the agents').'. Say so, and that their admin can add it.'];
         }
@@ -156,6 +178,9 @@ class RealtyTools
             'list_agents' => $this->listAgents(),
             'compute_payments' => $this->computePayments($args),
             'attention_today' => $this->attention(),
+            'search_lots' => $this->searchLots($args),
+            'show_map' => $this->showMap($args),
+            'reservations' => $this->reservations($args),
             default => ['error' => "There is no tool called {$name}."],
         };
     }
@@ -188,6 +213,8 @@ class RealtyTools
             'new_buyer_responses' => OfferResponse::whereNull('seen_at')->whereIn('offer_id', (clone $offers)->select('id'))->count(),
             'buyer_files_to_review' => OfferDocument::where('status', 'pending')->whereIn('offer_id', (clone $offers)->where('status', 'active')->select('id'))->count(),
             'custom_terms_waiting_for_approval' => (clone $offers)->where('status', 'active')->where('approval_status', 'pending')->count(),
+            'reservations_waiting_for_an_admin_to_confirm' => (clone $offers)->where('status', 'active')->whereIn('reservation_status', ['pending', 'paid'])->count(),
+            'lots_drawn_on_site_maps' => Unit::where('realty_id', $realty->id)->whereNotNull('site_row_id')->count(),
             'agents' => $this->isAgent() ? null : $realty->agents()->count(),
             'agent_applications_waiting' => $this->isAgent() ? null : $realty->agentApplications()->where('status', User::STATUS_PENDING)->count(),
         ];
@@ -609,6 +636,7 @@ class RealtyTools
             'still_missing' => $missing,
             'custom_terms' => $o->approval_status,
             'unit_status' => $o->unit && $o->unit->status_offer_id === $o->id ? $o->unit->status : null,
+            'reservation' => $this->reservationLine($o),
             // For messages to the buyer. A login's username and password are never given out here.
             'buyer_link' => match (true) {
                 $o->status !== 'active' => 'none: the offer is void',
@@ -903,10 +931,15 @@ class RealtyTools
 
         $approvals = $agent ? collect() : $terms('pending');
         $sentBack = $agent ? $terms('rejected') : collect();
+        // Reservation fees paid (online) or with proof sent: the developer's admins confirm them.
+        $reservations = (clone $active)->whereIn('reservation_status', ['pending', 'paid'])->where(fn ($q) => $q->where('reservation_status', 'paid')->orWhere('reservation_method', 'proof'))
+            ->with(['unit:id,name', 'project:id,name', 'agent:id,name'])->oldest('reservation_requested_at')->get()
+            ->map(fn (Offer $o) => $row($o, ['unit' => $o->unit?->name, 'project' => $o->project?->name, 'fee' => (float) $o->reservation_fee, 'how' => $o->reservation_status === 'paid' ? 'paid online' : 'proof of bank/GCash payment sent', 'since' => $day($o->reservation_paid_at ?? $o->reservation_requested_at), 'to_do' => $agent ? "Johndorf's admin confirms it on the offer page" : 'open the receipt and confirm on the offer page']));
 
         return array_filter([
             'today' => now('Asia/Manila')->format('l, M j, Y'),
-            'total_things_to_do' => $answers->count() + $files->count() + $approvals->count() + $sentBack->count() + $missing->count() + $quiet->count() + $unopened->count() + $applications->count(),
+            'total_things_to_do' => $answers->count() + $files->count() + $approvals->count() + $sentBack->count() + $missing->count() + $quiet->count() + $unopened->count() + $applications->count() + ($agent ? 0 : $reservations->count()),
+            'reservations_waiting_for_an_admin_to_confirm' => $list($reservations),
             'new_buyer_answers_not_opened_yet' => $list($answers),
             'buyer_files_to_review' => $list($files),
             'custom_terms_waiting_for_your_approval' => $agent ? null : $list($approvals),
@@ -917,6 +950,175 @@ class RealtyTools
             'agent_applications_waiting' => $agent ? null : $list($applications) + ['dashboard_url' => $this->url('agents')],
             'good_news_reserved_or_sold_last_7_days' => $list($deals),
         ], fn ($v) => $v !== null);
+    }
+
+    /**
+     * Lots drawn on the site maps, by block and lot: where a buyer's home is, what is still available, corner
+     * lots, sizes. Counts by status (and by block within one project), and up to 25 lots for show_map.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function searchLots(array $args): array
+    {
+        $project = null;
+        if ($name = $this->text($args, 'project')) {
+            $project = $this->findProject($name);
+            if (! $project instanceof Project) {
+                return $project;
+            }
+        }
+        $buyer = $this->text($args, 'buyer');
+        $buyerUnits = $buyer === null ? null : $this->offers()->where('buyer_name', 'like', "%{$buyer}%")->pluck('unit_id')->unique()->values();
+        if ($buyerUnits !== null && $buyerUnits->isEmpty()) {
+            return ['error' => "No offer found for a buyer called \"{$buyer}\"".($this->isAgent() ? ' among your offers.' : '.')];
+        }
+        $days = (int) ($args['changed_in_days'] ?? 0);
+        $query = Unit::where('realty_id', $this->realty()->id)->whereNotNull('site_row_id')
+            ->when($project, fn ($q) => $q->where('project_id', $project->id))
+            ->when($this->text($args, 'block'), fn ($q, $b) => $q->where('block', ltrim(preg_replace('/^\s*block\s*/i', '', $b))))
+            ->when($this->text($args, 'lot'), fn ($q, $l) => $q->where('lot', ltrim(preg_replace('/^\s*lot\s*/i', '', $l))))
+            ->when(in_array($args['status'] ?? null, Unit::STATUSES, true), fn ($q) => $q->where('status', $args['status']))
+            ->when(isset(Unit::TAGS[$args['tag'] ?? '']), fn ($q) => $q->whereJsonContains('tags', $args['tag']))
+            ->when($this->text($args, 'model'), fn ($q, $m) => $q->where('unit_type', 'like', "%{$m}%"))
+            ->when(isset($args['min_lot_area']), fn ($q) => $q->where('lot_area_sqm', '>=', (float) $args['min_lot_area']))
+            ->when(isset($args['max_lot_area']), fn ($q) => $q->where('lot_area_sqm', '<=', (float) $args['max_lot_area']))
+            ->when($buyerUnits, fn ($q) => $q->whereIn('id', $buyerUnits))
+            ->when($days > 0, fn ($q) => $q->whereIn('status', ['reserved', 'sold'])->where('status_at', '>=', now()->subDays($days)));
+        $total = (clone $query)->count();
+        $byStatus = (clone $query)->selectRaw('status, count(*) as n')->groupBy('status')->pluck('n', 'status');
+        $byBlock = $project ? (clone $query)->selectRaw('block, status, count(*) as n')->groupBy('block', 'status')->get()->groupBy('block')
+            ->map(fn (Collection $rows) => ['available' => (int) $rows->firstWhere('status', 'available')?->n, 'reserved' => (int) $rows->firstWhere('status', 'reserved')?->n, 'sold' => (int) $rows->firstWhere('status', 'sold')?->n])
+            ->sortKeys(SORT_NATURAL)->all() : null;
+        $sort = $args['sort'] ?? 'block_lot';
+        $lots = $query->with(['project:id,name', 'statusOffer:id,buyer_name,agent_id'])
+            ->when($sort === 'area_large', fn ($q) => $q->orderByDesc('lot_area_sqm'))
+            ->when($sort === 'area_small', fn ($q) => $q->orderBy('lot_area_sqm'))
+            ->when(in_array($sort, ['price_low', 'price_high']), fn ($q) => $q->orderByRaw('price is null')->orderBy('price', $sort === 'price_high' ? 'desc' : 'asc'))
+            ->orderBy('project_id')->orderByRaw('cast(block as unsigned), block')->orderByRaw('cast(lot as unsigned), lot')
+            ->limit(self::MAX_ROWS)->get();
+        $models = $lots->pluck('project_id')->unique()->mapWithKeys(fn ($id) => [$id => Project::find($id)?->modelPrices() ?? []]);
+        $projects = $lots->pluck('project_id')->unique();
+        // A handful of lots in one project: put them on the map by themselves.
+        if ($total > 0 && $total <= 12 && $projects->count() === 1) {
+            $this->card(['type' => 'map', 'id' => $projects->first(), 'lots' => $lots->pluck('id')->all()]);
+        }
+
+        return [
+            'total_matching' => $total,
+            'by_status' => ['available' => (int) ($byStatus['available'] ?? 0), 'reserved' => (int) ($byStatus['reserved'] ?? 0), 'sold' => (int) ($byStatus['sold'] ?? 0)],
+            'by_block' => $byBlock,
+            'showing' => $lots->count(),
+            'shown_on_map' => $total > 0 && $total <= 12 && $projects->count() === 1 ? 'yes: the map under your answer marks these lots, zoomed in on the first. Introduce it in a sentence.' : null,
+            'lots' => $lots->map(fn (Unit $u) => array_filter([
+                'id' => $u->id,
+                'name' => $u->name,
+                'project' => $u->project?->name,
+                'block' => $u->block,
+                'lot' => $u->lot,
+                'house_model' => $u->unit_type,
+                'lot_area_sqm' => $u->lot_area_sqm !== null ? (float) $u->lot_area_sqm : null,
+                'floor_area_sqm' => $u->area_sqm !== null ? (float) $u->area_sqm : null,
+                'price' => ($p = $u->offerPrice($models[$u->project_id] ?? [])) !== null ? (float) $p : null,
+                'price_is_the_models' => $u->price === null && $p !== null ? true : null,
+                'status' => $u->status,
+                'held_by_buyer' => $u->status !== 'available' && $u->statusOffer && $this->canSeeOfferOf($u->statusOffer->agent_id) ? $u->statusOffer->buyer_name : null,
+                'since' => $u->status !== 'available' ? $u->status_at?->format('M j, Y') : null,
+                'special' => array_values(array_map(fn ($t) => Unit::TAGS[$t], array_intersect(array_keys(Unit::TAGS), $u->tags ?? []))) ?: null,
+                'dashboard_url' => $this->url("projects/{$u->project_id}#site-map"),
+            ], fn ($v) => $v !== null))->all(),
+        ];
+    }
+
+    /**
+     * The project's site map under the answer, with lots marked.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function showMap(array $args): array
+    {
+        $project = $this->findProject($this->text($args, 'project'));
+        if (! $project instanceof Project) {
+            return $project;
+        }
+        if (! $project->siteRows()->exists()) {
+            return ['error' => "{$project->name} has no lots drawn on its site map yet."];
+        }
+        $ids = array_values(array_unique(array_filter(array_map('intval', (array) ($args['lot_ids'] ?? [])))));
+        $found = Unit::where('project_id', $project->id)->whereNotNull('site_row_id')->whereIn('id', $ids)->pluck('name', 'id');
+        $lots = array_values(array_filter($ids, fn (int $id) => $found->has($id)));
+        $this->card(['type' => 'map', 'id' => $project->id, 'lots' => array_slice($lots, 0, 12)]);
+
+        return [
+            'shown_on_map' => $project->name,
+            'marked_lots' => array_map(fn (int $id) => $found[$id], array_slice($lots, 0, 12)),
+            'note' => 'The map is under your answer, coloured by status, with the marked lots outlined and the first zoomed in on with its photos and details beside it. Introduce it in a sentence; don\'t describe the map.',
+        ];
+    }
+
+    /**
+     * Buyers' reservations: the fee on each offer and where it stands.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function reservations(array $args): array
+    {
+        $project = null;
+        if ($name = $this->text($args, 'project')) {
+            $project = $this->findProject($name);
+            if (! $project instanceof Project) {
+                return $project;
+            }
+        }
+        $state = $args['state'] ?? 'all';
+        $offers = $this->offers()->whereNotNull('reservation_fee')
+            ->when($project, fn ($q) => $q->where('project_id', $project->id))
+            ->when($this->text($args, 'buyer'), fn ($q, $b) => $q->where('buyer_name', 'like', "%{$b}%"))
+            ->when($state === 'to_confirm', fn ($q) => $q->where('status', 'active')->whereIn('reservation_status', ['pending', 'paid']))
+            ->when($state === 'confirmed', fn ($q) => $q->where('reservation_status', 'confirmed'))
+            ->when($state === 'declined', fn ($q) => $q->where('reservation_status', 'declined'))
+            ->when($state === 'unpaid', fn ($q) => $q->where('status', 'active')->whereNull('reservation_status'))
+            ->with(['unit:id,name', 'project:id,name', 'agent:id,name', 'reservationConfirmer:id,name'])->latest('reservation_requested_at')->latest()->limit(self::MAX_ROWS)->get();
+
+        return [
+            'total' => $offers->count(),
+            'shown_as_cards' => $offers->count() > 0 && $offers->count() <= Cards::MAX['offer'] ? $this->cardsFor('offer', $offers->pluck('id')->all()) : null,
+            'reservations' => $offers->map(fn (Offer $o) => array_filter([
+                'buyer' => $o->buyer_name,
+                'offer' => $o->code,
+                'unit' => $o->unit?->name,
+                'project' => $o->project?->name,
+                'agent' => $this->isAgent() ? null : $o->agent?->name,
+                'fee' => (float) $o->reservation_fee,
+                'where_it_stands' => $this->reservationLine($o),
+                'reference' => $o->reservation_reference,
+                'buyer_note' => $o->reservation_status !== 'declined' ? $this->blankContacts($o->reservation_note) : null,
+                'sent_back_because' => $o->reservation_status === 'declined' ? $o->reservation_note : null,
+                'confirmed_by' => $o->reservationConfirmer?->name,
+                'dashboard_url' => $this->url("offers/{$o->id}"),
+            ], fn ($v) => $v !== null))->all(),
+            'how_it_works' => "The buyer pays the fee on their offer page (online, or by bank/GCash with a photo of the proof). Johndorf's admins open the receipt on the offer page and confirm, which marks the lot reserved for that buyer; or send it back with a reason.",
+        ];
+    }
+
+    /** "₱10,000 · proof of payment sent Oct 14, 2026, waiting for an admin to confirm", or null when no fee was set. */
+    private function reservationLine(Offer $o): ?string
+    {
+        if ($o->reservation_fee === null) {
+            return null;
+        }
+        $fee = '₱'.number_format((float) $o->reservation_fee);
+        $day = fn ($at) => $at?->timezone('Asia/Manila')->format('M j, Y');
+
+        return match ($o->reservation_status) {
+            'confirmed' => "{$fee} · confirmed on ".$day($o->reservation_confirmed_at).': the home is reserved for the buyer',
+            'paid' => "{$fee} · paid online on ".$day($o->reservation_paid_at).', waiting for an admin to confirm',
+            'pending' => $o->reservation_method === 'proof' ? "{$fee} · proof of a bank/GCash payment sent on ".$day($o->reservation_requested_at).', waiting for an admin to confirm' : "{$fee} · the buyer started paying online but hasn't finished",
+            'declined' => "{$fee} · sent back to the buyer".($o->reservation_note ? " ({$o->reservation_note})" : ''),
+            default => "{$fee} reservation fee set; the buyer hasn't paid yet",
+        };
     }
 
     /** @return Builder<Offer> The offers this person may see: the realty's, or an agent's own. */

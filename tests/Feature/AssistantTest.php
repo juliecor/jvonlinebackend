@@ -10,6 +10,7 @@ use App\Models\PaymentPlan;
 use App\Models\Project;
 use App\Models\Realty;
 use App\Models\RequirementType;
+use App\Models\SiteRow;
 use App\Models\Unit;
 use App\Models\User;
 use App\Support\Assistant\Cards;
@@ -396,5 +397,52 @@ class AssistantTest extends TestCase
             'schedule' => [],
             'status' => 'active',
         ]);
+    }
+
+    public function test_lots_on_the_site_map_can_be_searched_and_shown_on_a_map_with_who_holds_them(): void
+    {
+        $astana = Project::create(['realty_id' => $this->realty->id, 'name' => 'Astana Davao', 'slug' => 'astana-davao', 'status' => 'active', 'site_plan_paths' => ['https://cdn.example.com/astana/plan-1.jpg']]);
+        Unit::create(['realty_id' => $this->realty->id, 'project_id' => $astana->id, 'name' => 'Two-Storey Townhouse', 'unit_type' => 'Two-Storey Townhouse', 'category' => 'Residential', 'price' => 3300000, 'status' => 'available']);
+        $row = SiteRow::draw($astana, ['block' => '2', 'corners' => [[0.1, 0.2], [0.5, 0.2], [0.5, 0.3], [0.1, 0.3]], 'first_lot' => 41, 'lot_count' => 4, 'unit_type' => 'Two-Storey Townhouse', 'lot_area_sqm' => 50]);
+        $lot43 = Unit::where('block', '2')->where('lot', '43')->firstOrFail();
+        $lot43->update(['tags' => ['corner'], 'lot_area_sqm' => 75]);
+        $offer = Offer::create(['realty_id' => $this->realty->id, 'project_id' => $astana->id, 'unit_id' => $lot43->id, 'agent_id' => $this->agent->id, 'code' => Offer::newCode(), 'buyer_name' => 'Rosa Cruz', 'purchase_date' => now()->toDateString(), 'price' => 3300000, 'schedule' => [], 'status' => 'active', 'reservation_fee' => 10000, 'reservation_status' => 'pending', 'reservation_method' => 'proof', 'reservation_requested_at' => now()]);
+        $lot43->update(['status' => 'reserved', 'status_offer_id' => $offer->id, 'status_by_id' => $this->admin->id, 'status_at' => now()]);
+
+        $tools = new RealtyTools($this->admin);
+        $all = $tools->call('search_lots', ['project' => 'Astana']);
+        $this->assertSame(4, $all['total_matching']);
+        $this->assertSame(['available' => 3, 'reserved' => 1, 'sold' => 0], $all['by_status']);
+        $this->assertSame(['available' => 3, 'reserved' => 1, 'sold' => 0], $all['by_block']['2']);
+        // A buyer's lot: found by name, held by them, priced at the model's price, on the map by itself.
+        $rosa = $tools->call('search_lots', ['buyer' => 'Rosa']);
+        $this->assertSame(1, $rosa['total_matching']);
+        $this->assertSame(['Block 2 · Lot 43', 'reserved', 'Rosa Cruz', 3300000.0, true, ['Corner lot']], [$rosa['lots'][0]['name'], $rosa['lots'][0]['status'], $rosa['lots'][0]['held_by_buyer'], $rosa['lots'][0]['price'], $rosa['lots'][0]['price_is_the_models'], $rosa['lots'][0]['special']]);
+        $this->assertSame([['type' => 'map', 'id' => $astana->id, 'lots' => [$lot43->id]]], $tools->shownCards());
+        $this->assertSame(1, $tools->call('search_lots', ['tag' => 'corner'])['total_matching']);
+        $this->assertSame(1, $tools->call('search_lots', ['changed_in_days' => 7])['total_matching']);
+        $this->assertSame(3, $tools->call('search_lots', ['project' => 'Astana', 'status' => 'available'])['total_matching']);
+
+        // The map card carries the dashboard's map: statuses, the marked lot, and who holds it for the admin.
+        $card = Cards::for($this->admin, [['type' => 'map', 'id' => $astana->id, 'lots' => [$lot43->id]]])[0];
+        $this->assertSame(['map', 'Astana Davao', [$lot43->id], 4], [$card['type'], $card['project']['name'], $card['lots'], count($card['map']['lots'])]);
+        $this->assertSame('Rosa Cruz', collect($card['map']['lots'])->firstWhere('id', $lot43->id)['holder']['buyer']);
+
+        // show_map by itself, and the reservation tool.
+        $shown = $tools->call('show_map', ['project' => 'Astana', 'lot_ids' => [$lot43->id, 999999]]);
+        $this->assertSame(['Block 2 · Lot 43'], $shown['marked_lots']);
+        $res = $tools->call('reservations', ['state' => 'to_confirm']);
+        $this->assertSame(1, $res['total']);
+        $this->assertStringContainsString('proof of a bank/GCash payment sent', $res['reservations'][0]['where_it_stands']);
+        $this->assertArrayHasKey('reservations_waiting_for_an_admin_to_confirm', $tools->call('attention_today', []));
+        $this->assertSame(1, $tools->call('attention_today', [])['reservations_waiting_for_an_admin_to_confirm']['count']);
+        $this->assertSame(1, $tools->call('overview', [])['reservations_waiting_for_an_admin_to_confirm']);
+
+        // Another agent never learns who holds the lot, nor sees Rosa's reservation.
+        $other = User::factory()->create(['role' => User::ROLE_AGENT, 'realty_id' => $this->realty->id]);
+        $theirs = new RealtyTools($other);
+        $this->assertArrayNotHasKey('held_by_buyer', $theirs->call('search_lots', ['block' => '2', 'lot' => '43'])['lots'][0]);
+        $this->assertSame(0, $theirs->call('reservations', ['state' => 'all'])['total']);
+        $this->assertNull(collect(Cards::for($other, [['type' => 'map', 'id' => $astana->id, 'lots' => []]])[0]['map']['lots'])->firstWhere('id', $lot43->id)['holder']['buyer']);
     }
 }

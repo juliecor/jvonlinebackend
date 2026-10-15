@@ -194,6 +194,8 @@ class AssistantController extends Controller
                         'offer' => "the offer {$c['code']} for {$c['buyer']}",
                         'project' => "the project {$c['name']} (id {$c['id']})",
                         'payment' => 'payments for '.($c['unit']['name'] ?? 'a price of '.number_format($c['price'], 2)).' with '.$c['terms'],
+                        'map' => "the site map of {$c['project']['name']}".($c['lots'] ? ' with '.count($c['lots']).' lot'.(count($c['lots']) === 1 ? '' : 's').' marked' : ''),
+                        default => $c['type'],
                     })->implode('; ').'.'];
                 }
             }
