@@ -21,6 +21,7 @@ use App\Http\Controllers\Realty\PaymentPlanController;
 use App\Http\Controllers\Realty\ProjectController;
 use App\Http\Controllers\Realty\ProjectPageController;
 use App\Http\Controllers\Realty\ProjectUpdateController;
+use App\Http\Controllers\Realty\QuotationController;
 use App\Http\Controllers\Realty\RealtyAccreditationController;
 use App\Http\Controllers\Realty\ReportController;
 use App\Http\Controllers\Realty\RequirementTypeController;
@@ -100,6 +101,8 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
     Route::prefix('realty')->group(function () {
         Route::middleware('realty.member')->group(function () {
             Route::get('/overview', OverviewController::class);
+            // A quotation (sample computation) for a buyer, to print or save as a PDF. Nothing is saved.
+            Route::post('/quotation', QuotationController::class);
             Route::get('/projects', [ProjectController::class, 'index']);
             Route::get('/projects/{project}', [ProjectController::class, 'show']);
             // Staff need the Offers section; agents always reach their own offers.

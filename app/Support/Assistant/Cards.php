@@ -297,10 +297,11 @@ class Cards
             'unit' => $unit ? ['id' => $unit->id, 'name' => $unit->name] : null,
             'project' => $project ? ['id' => $project->id, 'name' => $project->name] : null,
             'price' => $price,
-            'price_now' => $unit && $unit->price !== null && abs((float) $unit->price - $price) >= 0.01 ? (float) $unit->price : null,
+            'price_now' => $unit && ($now = $unit->offerPrice()) !== null && abs((float) $now - $price) >= 0.01 ? (float) $now : null,
             'terms' => (string) ($r['terms'] ?? 'Custom terms'),
             'plan_id' => isset($r['plan']) ? (int) $r['plan'] : null,
             'purchase_date' => $date->toDateString(),
+            'buyer' => is_string($r['buyer'] ?? null) ? $r['buyer'] : null,
             'payments' => collect($schedule)->map(fn (array $row) => [
                 'label' => $row['label'],
                 'percent' => round((float) $row['percent'], 2),
@@ -312,7 +313,7 @@ class Cards
                 'last_month' => isset($row['installments']) ? end($row['installments'])['amount'] : null,
             ])->all(),
             'milestones' => $milestones,
-            'can_offer' => $unit !== null && $unit->status === 'available' && $unit->price !== null && $project?->status === 'active',
+            'can_offer' => $unit !== null && $unit->status === 'available' && $unit->offerPrice() !== null && $project?->status === 'active',
         ];
     }
 }

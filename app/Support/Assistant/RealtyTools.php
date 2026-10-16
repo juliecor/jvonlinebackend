@@ -102,7 +102,7 @@ class RealtyTools
                 'kind' => ['type' => 'string', 'enum' => ['interested', 'question', 'not_interested']],
             ]),
             $tool('list_agents', "The realty's agents: how many, who is active, who applied and waits for approval, unused invite links, and each agent's offers and buyer responses. Realty admins only."),
-            $tool('compute_payments', "Work out a buyer's payments in pesos for a unit (or a price): with one of the project's payment plans, or with custom terms (e.g. a ₱20,000 reservation fee, 20% down over 24 months, the rest on turnover). Same math as the offers, so the amounts match what the buyer would see. Use it for every how-much, monthly, down payment or what-if question; never do payment math yourself.", [
+            $tool('compute_payments', "Work out a buyer's payments in pesos for a unit (or a price): with one of the project's payment plans, or with custom terms (e.g. a ₱20,000 reservation fee, 20% down over 24 months, the rest on turnover). Same math as the offers, so the amounts match what the buyer would see. Use it for every how-much, monthly, down payment or what-if question, and for a quotation or sample computation for a buyer: its card has a Quotation PDF button (a buyer-ready page with the home, the price and every payment). Never do payment math yourself.", [
                 'unit' => $text('The unit name, or part of it, e.g. "Block 24 · Lot 27".'),
                 'project' => $text('The project: needed for its plans, or when a unit name is in several projects.'),
                 'price' => $number('A price in pesos, when there is no unit.'),
@@ -125,6 +125,7 @@ class RealtyTools
                     ],
                 ],
                 'purchase_date' => $text('YYYY-MM-DD. Today if left out.'),
+                'buyer_name' => $text("The buyer's name, for a quotation made for them."),
             ]),
             $tool('search_lots', 'Lots on the projects\' site maps (block and lot numbers): find where a buyer\'s home is, which lots are available, reserved or sold, corner or end lots, lots by size, or what a block holds. Returns counts by status (and by block for one project) and up to 25 lots with ids for show_map. For houses sold by name rather than block and lot, use search_units instead.', [
                 'project' => $text('Project name, or part of it.'),
@@ -699,7 +700,8 @@ class RealtyTools
             }
             $project ??= $unit->project;
         }
-        $price = $unit ? ($unit->price !== null ? (float) $unit->price : null) : (isset($args['price']) ? (float) $args['price'] : null);
+        // A lot without its own price goes at its house model's price, the same as a new offer.
+        $price = $unit ? (($p = $unit->offerPrice()) !== null ? (float) $p : null) : (isset($args['price']) ? (float) $args['price'] : null);
         if (! $price || $price <= 0) {
             return ['error' => $unit ? "{$unit->name} has no price yet." : 'Say which unit, or give a price.'];
         }
@@ -726,12 +728,13 @@ class RealtyTools
         $purchase = $date && preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) ? Carbon::parse($date, 'Asia/Manila') : now('Asia/Manila')->startOfDay();
         $schedule = Offer::buildSchedule($price, $milestones, $purchase, $project?->completion_date);
         $day = fn (?string $d) => $d ? Carbon::parse($d)->format('M j, Y') : null;
-        $this->card(['type' => 'payment', 'unit' => $unit?->id, 'project' => $project?->id, 'price' => $price, 'plan' => $planId, 'terms' => $terms, 'milestones' => array_values($milestones), 'date' => $purchase->toDateString()]);
+        $this->card(array_filter(['type' => 'payment', 'unit' => $unit?->id, 'project' => $project?->id, 'price' => $price, 'plan' => $planId, 'terms' => $terms, 'milestones' => array_values($milestones), 'date' => $purchase->toDateString(), 'buyer' => $this->text($args, 'buyer_name')], fn ($v) => $v !== null));
 
         return [
             'unit' => $unit?->name,
             'project' => $project?->name,
             'price' => $price,
+            'price_is_the_models' => $unit && $unit->price === null ? true : null,
             'terms' => $terms,
             'purchase_date' => $purchase->format('M j, Y'),
             'payments' => collect($schedule)->map(fn (array $r) => array_filter([
@@ -748,7 +751,7 @@ class RealtyTools
                 ] : null,
             ], fn ($v) => $v !== null))->all(),
             'total' => round(array_sum(array_column($schedule, 'amount')), 2),
-            'note' => 'Worked out like the offers: the last payment of each part takes the centavo rounding. A card with this schedule (and a "Make offer with these terms" button for an available unit) shows under your answer: give the key amounts in a sentence or two, no need to list every payment.',
+            'note' => 'Worked out like the offers: the last payment of each part takes the centavo rounding. A card with this schedule shows under your answer, with a Quotation PDF button (a buyer-ready page to print or send) and, for an available unit, "Make offer with these terms": give the key amounts in a sentence or two, no need to list every payment.',
         ];
     }
 
