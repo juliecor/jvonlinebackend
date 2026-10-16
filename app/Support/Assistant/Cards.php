@@ -9,6 +9,7 @@ use App\Models\RequirementType;
 use App\Models\Unit;
 use App\Models\UnitType;
 use App\Models\User;
+use App\Support\Reports\SalesReport;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -21,7 +22,7 @@ use Illuminate\Support\Collection;
 class Cards
 {
     /** At most this many cards of each kind under one answer. */
-    public const MAX = ['unit' => 6, 'offer' => 6, 'project' => 6, 'payment' => 3, 'map' => 2, 'action' => 3];
+    public const MAX = ['unit' => 6, 'offer' => 6, 'project' => 6, 'payment' => 3, 'map' => 2, 'action' => 3, 'report' => 1];
 
     /**
      * The list with one more card, unless it's already there or that kind is full.
@@ -33,7 +34,7 @@ class Cards
     public static function add(array $refs, array $ref): array
     {
         $same = collect($refs)->where('type', $ref['type']);
-        $there = in_array($ref['type'], ['payment', 'action'], true) ? $same->contains(fn (array $r) => $r == $ref) : $same->contains('id', $ref['id']);
+        $there = in_array($ref['type'], ['payment', 'action', 'report'], true) ? $same->contains(fn (array $r) => $r == $ref) : $same->contains('id', $ref['id']);
         // A second map of the same project replaces the first (its marked lots are the newer ask).
         if ($ref['type'] === 'map' && $there) {
             return collect($refs)->map(fn (array $r) => $r['type'] === 'map' && $r['id'] === $ref['id'] ? $ref : $r)->all();
@@ -83,6 +84,7 @@ class Cards
             'payment' => self::payment($r, $units, $projects),
             'map' => ($p = $maps->get((int) ($r['id'] ?? 0))) ? self::map($p, $r, $user) : null,
             'action' => self::action($r, $user),
+            'report' => self::report($r, $user),
         })->filter()->values()->all();
     }
 
@@ -191,6 +193,37 @@ class Cards
         }
 
         return null;
+    }
+
+    /**
+     * A sales report for the dates the AI used, worked out again from the live data: the headline numbers, the
+     * highlights and the top projects and agents. The full report (every offer and deal) is on its page and PDF.
+     *
+     * @param  array<string, mixed>  $r
+     * @return array<string, mixed>|null
+     */
+    private static function report(array $r, User $user): ?array
+    {
+        if (! $user->canUse('offers') || ! is_string($r['from'] ?? null) || ! is_string($r['to'] ?? null)) {
+            return null;
+        }
+        try {
+            $report = SalesReport::for($user, null, $r['from'], $r['to'])->toArray();
+        } catch (\InvalidArgumentException) {
+            return null;
+        }
+
+        return [
+            'type' => 'report',
+            'period' => $report['period'],
+            'scope' => $report['prepared']['scope'],
+            'totals' => $report['totals'],
+            'previous' => $report['previous'],
+            'highlights' => $report['highlights'],
+            'projects' => array_slice($report['projects'], 0, 4),
+            'agents' => array_slice($report['agents'], 0, 4),
+            'counts' => ['projects' => count($report['projects']), 'agents' => count($report['agents']), 'deals' => count($report['deals']), 'offers' => count($report['offers'])],
+        ];
     }
 
     /**

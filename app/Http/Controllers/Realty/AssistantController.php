@@ -196,6 +196,7 @@ class AssistantController extends Controller
                         'payment' => 'payments for '.($c['unit']['name'] ?? 'a price of '.number_format($c['price'], 2)).' with '.$c['terms'],
                         'map' => "the site map of {$c['project']['name']}".($c['lots'] ? ' with '.count($c['lots']).' lot'.(count($c['lots']) === 1 ? '' : 's').' marked' : ''),
                         'action' => $c['kind'] === 'confirm_reservation' ? "a Confirm reservation button for {$c['offer']['buyer']} ({$c['offer']['unit']})".($c['status'] === 'confirmed' ? ', since pressed' : '') : "an Open New offer button for {$c['unit']['name']}".($c['buyer'] ? " and {$c['buyer']}" : ''),
+                        'report' => "a sales report for {$c['period']['label']} ({$c['period']['dates']}) with a Download PDF button",
                         default => $c['type'],
                     })->implode('; ').'.'];
                 }

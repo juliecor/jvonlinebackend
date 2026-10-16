@@ -11,10 +11,12 @@ use App\Models\Realty;
 use App\Models\RequirementType;
 use App\Models\Unit;
 use App\Models\User;
+use App\Support\Reports\SalesReport;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 /**
  * What the dashboard's AI assistant may look up, as OpenAI function tools.
@@ -159,6 +161,11 @@ class RealtyTools
                 'buyer_phone' => $text("The buyer's mobile number, if given."),
                 'reservation_fee' => $number('The reservation fee in pesos, if given.'),
             ]),
+            $tool('make_report', 'A sales report for a period, from the live data: offers sent, buyers opening and answering, homes reserved and sold and their value, reservation fees confirmed, by project and by agent, compared with the period before. Puts the report under your answer as a card with a Download PDF button (a clean printable report). Use it for any report, summary or "how did we do" over a period: this week, last month, this year, or two dates.', [
+                'period' => ['type' => 'string', 'enum' => array_keys(SalesReport::PERIODS), 'description' => 'A named period. Weeks start on Monday; "this week" and "this month" run to today.'],
+                'from' => $text('First day, YYYY-MM-DD, for any other period (e.g. "October 1 to 15" → 2026-10-01).'),
+                'to' => $text('Last day, YYYY-MM-DD.'),
+            ]),
             $tool('attention_today', 'Everything that needs the person now, in one lookup: new buyer answers nobody opened yet, buyer files to review, custom terms to approve (or sent back), interested buyers still missing requirements, buyers who opened their offer often but never answered, links not opened 3+ days after sending, agent applications, units reserved or sold in the last 7 days, and reservations (paid or with proof sent) waiting for an admin to confirm. Only for those general questions: "what needs my attention", "what should I do today", "any updates", "good morning", "summary of today". For a specific question (who hasn\'t answered, who is missing documents) use list_offers.'),
         ];
     }
@@ -172,7 +179,7 @@ class RealtyTools
     public function call(string $name, array $args): array
     {
         // A staff member only learns about what their account includes (see User::SECTIONS).
-        $needs = ['list_offers' => 'offers', 'offer_details' => 'offers', 'buyer_responses' => 'offers', 'show_offers' => 'offers', 'reservations' => 'offers', 'confirm_reservation' => 'offers', 'prepare_offer' => 'offers', 'list_agents' => 'agents'];
+        $needs = ['make_report' => 'offers', 'list_offers' => 'offers', 'offer_details' => 'offers', 'buyer_responses' => 'offers', 'show_offers' => 'offers', 'reservations' => 'offers', 'confirm_reservation' => 'offers', 'prepare_offer' => 'offers', 'list_agents' => 'agents'];
         if (isset($needs[$name]) && ! $this->user->canUse($needs[$name])) {
             return ['error' => 'This account has no access to '.($needs[$name] === 'offers' ? 'offers and buyers' : 'the agents').'. Say so, and that their admin can add it.'];
         }
@@ -196,6 +203,7 @@ class RealtyTools
             'reservations' => $this->reservations($args),
             'confirm_reservation' => $this->confirmReservation($args),
             'prepare_offer' => $this->prepareOffer($args),
+            'make_report' => $this->makeReport($args),
             default => ['error' => "There is no tool called {$name}."],
         };
     }
@@ -1206,6 +1214,38 @@ class RealtyTools
         return [
             'card_shown' => array_filter(['unit' => $unit->name, 'project' => $unit->project?->name, 'price' => (float) $price, 'price_is_the_models' => $unit->price === null ? true : null, 'buyer' => $buyer, 'reservation_fee' => $fee]),
             'note' => 'The card under your answer has an "Open New offer" button that opens the form with all of this typed in; the person picks the payment terms, checks it and creates the offer there. Say so in a sentence. Never say the offer was made or sent.',
+        ];
+    }
+
+    /**
+     * A sales report for a period: the card under the answer has it all and a Download PDF button; the model gets the
+     * numbers and the highlights to write a short summary.
+     *
+     * @param  array<string, mixed>  $args
+     * @return array<string, mixed>
+     */
+    private function makeReport(array $args): array
+    {
+        $period = $this->text($args, 'period');
+        try {
+            $report = SalesReport::for($this->user, $period, $this->text($args, 'from'), $this->text($args, 'to'))->toArray();
+        } catch (InvalidArgumentException $e) {
+            return ['error' => $e->getMessage()];
+        }
+        $p = $report['period'];
+        $this->card(['type' => 'report', 'id' => 1, 'from' => $p['from'], 'to' => $p['to']]);
+        $rows = fn (array $list, array $keys) => array_map(fn (array $r) => array_intersect_key($r, array_flip($keys)), array_slice($list, 0, 5));
+
+        return [
+            'period' => "{$p['label']} ({$p['dates']}), compared with {$p['compared_with']}",
+            'covers' => $report['prepared']['scope'],
+            'totals' => $report['totals'],
+            'period_before' => $report['previous'],
+            'highlights' => $report['highlights'],
+            'top_projects' => $rows($report['projects'], ['name', 'offers', 'interested', 'reserved', 'sold', 'value']),
+            'top_agents' => $this->isAgent() ? null : $rows($report['agents'], ['name', 'offers', 'interested', 'deals', 'value']),
+            'homes_reserved_or_sold' => count($report['deals']),
+            'note' => 'The full report is under your answer as a card with a Download PDF button (a printable report with every offer and deal). Answer with the period in bold, then 3 to 5 short bullets from the highlights and numbers, exactly as given. Don\'t repeat the whole report in a table, and don\'t describe the card.',
         ];
     }
 

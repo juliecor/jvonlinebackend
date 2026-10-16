@@ -22,6 +22,7 @@ use App\Http\Controllers\Realty\ProjectController;
 use App\Http\Controllers\Realty\ProjectPageController;
 use App\Http\Controllers\Realty\ProjectUpdateController;
 use App\Http\Controllers\Realty\RealtyAccreditationController;
+use App\Http\Controllers\Realty\ReportController;
 use App\Http\Controllers\Realty\RequirementTypeController;
 use App\Http\Controllers\Realty\ReservationAdminController;
 use App\Http\Controllers\Realty\SiteMapController;
@@ -103,6 +104,8 @@ Route::middleware(['auth:sanctum', 'view-as'])->group(function () {
             Route::get('/projects/{project}', [ProjectController::class, 'show']);
             // Staff need the Offers section; agents always reach their own offers.
             Route::middleware('section:offers')->group(function () {
+                // A sales report for a period: the page, its PDF and the AI's report card.
+                Route::get('/reports', ReportController::class);
                 Route::get('/offers', [OfferController::class, 'index']);
                 Route::get('/offers/responses', [OfferController::class, 'responses']);
                 Route::get('/offers/{id}', [OfferController::class, 'show'])->whereNumber('id');
